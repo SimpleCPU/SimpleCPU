@@ -1,11 +1,11 @@
 // Declare all the ALU related defines here
 // ALU select signal decoding
-`define ADD     4'b0000
-`define SUB     4'b0001
-`define SHL     4'b0010
-`define LSR     4'b0011
-`define ASR     4'b0100
-`define OR      4'b0101
-`define AND     4'b0110
-`define NOR     4'b0111
-`define XOR     4'b1000
+`define ADD_OP     5'bxx_xx_0
+`define SUB_OP     5'bxx_xx_1
+`define SHL_OP     5'bxx_00_x
+`define LSR_OP     5'bxx_01_x
+`define ASR_OP     5'bxx_10_x
+`define OR_OP      5'b00_xx_x
+`define AND_OP     5'b01_xx_x
+`define NOR_OP     5'b10_xx_x
+`define XOR_OP     5'b11_xx_x
