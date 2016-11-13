@@ -1,5 +1,5 @@
 //Control circuit             
-`include "verilog/mips_defines.v"
+`include "verilog/mips_instr_defines.v"
 
 module control
     (
