@@ -7,9 +7,9 @@ module regfile
         input   wire           reset,
         input   wire           w_en_rf_i,
         input   wire [31:0]    w_data_rf_i,
-        input   wire [31:0]    w_addr_rf_i,
-        input   wire [31:0]    r_addr_p1_rf_i,
-        input   wire [31:0]    r_addr_p2_rf_i,
+        input   wire [4:0]     w_reg_rf_i,
+        input   wire [4:0]     r_reg_p1_rf_i,
+        input   wire [4:0]     r_reg_p2_rf_i,
         output  wire [31:0]    r_data_p1_rf_o,
         output  wire [31:0]    r_data_p2_rf_o
     );
@@ -25,10 +25,10 @@ module regfile
     
     always @ (posedge clk)
         if (w_en_rf_i)
-        reg_file [w_addr_rf_i] <= w_data_rf_i;
+        reg_file [w_reg_rf_i] <= w_data_rf_i;
 
-    assign r_data_p1 = reg_file [r_addr_p1_rf_i];
-    assign r_data_p2 = reg_file [r_addr_p2_rf_i];
+    assign r_data_p1 = reg_file [r_reg_p1_rf_i];
+    assign r_data_p2 = reg_file [r_reg_p2_rf_i];
 
 endmodule
 
