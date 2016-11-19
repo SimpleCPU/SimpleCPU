@@ -45,72 +45,75 @@ module control
     always @ *
     begin
       case (instr_funct_ctl_i)
-          //alu_op_ctl: 
-          //5'bxx_xx_0: ADD 
-          //5'bxx_xx_1: SUB
-          //5'bxx_00_x: shift left 
-          //5'bxx_01_x: logical shift right 
-          //5'bxx_10_x: arithmetic shift right 
-          //5'b00_xx_x: logical OR
-          //5'b01_xx_x: logical AND
-          //5'b10_xx_x: logical NOR
-          //5'b11_xx_x: logical XOR
-          //reg_dst_ctl, jump_ctl, branch_ctl, mem_read_ctl, mem_to_reg_ctl, alu_op_ctl, mem_wr_ctl, alu_src_ctl, reg_wr_ctl
-          `ADD    :   controls = 13'b1_0_0_0_0_xxxx0_0_0_1; // R
-          `ADDU   :   controls = 13'b1_0_0_0_0_xxxx0_0_0_1; // R
-          `AND    :   controls = 13'b1_0_0_0_0_01xxx_0_0_1; // R
-          `DIV    :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `DIVU   :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `JALR   :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `JR     :   controls = 13'b1_0_0_0_0_xxxx0_0_0_1; // R
-          `MFHI   :   controls = 13'b1_0_0_0_0_0xxxx_0_0_1; // R
-          `MFLO   :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `MTHI   :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `MTLO   :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `MULT   :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `MULTU  :   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `NOR    :   controls = 13'b1_0_0_0_0_10xxx_0_0_1; // R
-          `OR     :   controls = 13'b1_0_0_0_0_00xxx_0_0_1; // R
-          `SLL    :   controls = 13'b1_0_0_0_0_xx00x_0_0_1; // R
-          `SLLV   :   controls = 13'b1_0_0_0_0_xx00x_0_0_1; // R
-          `SLT    :   controls = 13'b1_0_0_0_0_xxxx1_0_0_1; // R
-          `SLTU   :   controls = 13'b1_0_0_0_0_xxxx1_0_0_1; // R
-          `SRA    :   controls = 13'b1_0_0_0_0_xx10x_0_0_1; // R
-          `SRAV   :   controls = 13'b1_0_0_0_0_xx10x_0_0_1; // R
-          `SRL    :   controls = 13'b1_0_0_0_0_xx01x_0_0_1; // R
-          `SRLV   :   controls = 13'b1_0_0_0_0_xx01x_0_0_1; // R
-          `SUB    :   controls = 13'b1_0_0_0_0_xxxx1_0_0_1; // R
-          `SUBU   :   controls = 13'b1_0_0_0_0_xxxx1_0_0_1; // R
-          `SYSCALL:   controls = 13'b1_0_0_0_0_xxxxx_0_0_1; // R
-          `XOR    :   controls = 13'b1_0_0_0_0_11xxx_0_0_1; // R
-      endcase
-      case (instr_op_ctl_i)
-        `ADDI   :   controls = 13'b0_0_0_0_0_xxxx0_0_1_1; // I
-        `ADDIU  :   controls = 13'b0_0_0_0_0_xxxx0_0_1_1; // I
-        `ANDI   :   controls = 13'b0_0_0_0_0_01xxx_0_1_1; // I
-        `SLTI   :   controls = 13'b0_0_0_0_0_xxxx1_0_1_1; // I
-        `SLTIU  :   controls = 13'b0_0_0_0_0_xxxx1_0_1_1; // I
-        `ORI    :   controls = 13'b0_0_0_0_0_00xxx_0_1_1; // I
-        `XORI   :   controls = 13'b0_0_0_0_0_11xxx_0_1_1; // I
-        `BEQ    :   controls = 13'b0_0_0_1_0_xxxx1_0_1_0; // I
-        `BGEZ   :   controls = 13'b0_0_0_1_0_xxxx1_0_1_0; // I
-        `BGEZAL :   controls = 13'b0_0_0_1_0_xxxx1_0_1_1; // I
-        `BGTZ   :   controls = 13'b0_0_0_1_0_xxxx0_0_1_0; // I
-        `BLEZ   :   controls = 13'b0_0_0_1_0_xxxx0_0_1_0; // I
-        `BLTZ   :   controls = 13'b0_0_0_1_0_xxxx0_0_1_0; // I
-        `BLTZAL :   controls = 13'b0_0_0_1_0_xxxx0_0_1_1; // I
-        `BNE    :   controls = 13'b0_0_0_1_0_xxxx1_0_1_0; // I
-        `LB     :   controls = 13'b0_0_0_1_1_xxxx0_0_1_1; // I
-        `LBU    :   controls = 13'b0_0_0_1_1_xxxx0_0_1_1; // I
-        `LH     :   controls = 13'b0_0_0_1_1_xxxx0_0_1_1; // I
-        `LHU    :   controls = 13'b0_0_0_1_1_xxxx0_0_1_1; // I
-        `LUI    :   controls = 13'b0_0_0_1_1_xxxx0_0_1_1; // I
-        `LW     :   controls = 13'b0_0_0_1_1_xxxx0_0_1_1; // I
-        `SB     :   controls = 13'b0_0_0_0_0_xxxx0_1_1_0; // I
-        `SH     :   controls = 13'b0_0_0_0_0_xxxx0_1_1_0; // I
-        `SW     :   controls = 13'b0_0_0_0_0_xxxx0_1_1_0; // I
-        `J      :   controls = 13'b0_1_0_0_0_xxxx0_0_1_0; // J
-        `JAL    :   controls = 13'b0_1_0_0_0_xxxx0_0_1_1; // J
+        //alu_op_ctl: 
+        //5'bxx_xx_0: ADD 
+        //5'bxx_xx_1: SUB
+        //5'bxx_00_x: shift left 
+        //5'bxx_01_x: logical shift right 
+        //5'bxx_10_x: arithmetic shift right 
+        //5'b00_xx_x: logical OR
+        //5'b01_xx_x: logical AND
+        //5'b10_xx_x: logical NOR
+        //5'b11_xx_x: logical XOR
+        //reg_dst_ctl, jump_ctl, branch_ctl, mem_read_ctl, mem_to_reg_ctl, alu_op_ctl, mem_wr_ctl, alu_src_ctl, reg_wr_ctl
+        `ADD    :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `ADDU   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `AND    :   controls = 13'b1_0_0_0_0_01000_0_0_1; // R
+        `DIV    :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `DIVU   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `JALR   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `JR     :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `MFHI   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `MFLO   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `MTHI   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `MTLO   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `MULT   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `MULTU  :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `NOR    :   controls = 13'b1_0_0_0_0_10000_0_0_1; // R
+        `OR     :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `SLLV   :   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `SLT    :   controls = 13'b1_0_0_0_0_00001_0_0_1; // R
+        `SLTU   :   controls = 13'b1_0_0_0_0_00001_0_0_1; // R
+        `SRA    :   controls = 13'b1_0_0_0_0_00100_0_0_1; // R
+        `SRAV   :   controls = 13'b1_0_0_0_0_00100_0_0_1; // R
+        `SRL    :   controls = 13'b1_0_0_0_0_00010_0_0_1; // R
+        `SRLV   :   controls = 13'b1_0_0_0_0_00010_0_0_1; // R
+        `SUB    :   controls = 13'b1_0_0_0_0_00001_0_0_1; // R
+        `SUBU   :   controls = 13'b1_0_0_0_0_00001_0_0_1; // R
+        `SYSCALL:   controls = 13'b1_0_0_0_0_00000_0_0_1; // R
+        `XOR    :   controls = 13'b1_0_0_0_0_11000_0_0_1; // R
+        `SLL    :   
+        //reg_dst_ctl, jump_ctl, branch_ctl, mem_read_ctl, mem_to_reg_ctl, alu_op_ctl, mem_wr_ctl, alu_src_ctl, reg_wr_ctl
+                case (instr_op_ctl_i)
+                  `ADDI   :   controls = 13'b0_0_0_0_0_00000_0_1_1; // I
+                  `ADDIU  :   controls = 13'b0_0_0_0_0_00000_0_1_1; // I
+                  `ANDI   :   controls = 13'b0_0_0_0_0_01000_0_1_1; // I
+                  `SLTI   :   controls = 13'b0_0_0_0_0_00001_0_1_1; // I
+                  `SLTIU  :   controls = 13'b0_0_0_0_0_00001_0_1_1; // I
+                  `ORI    :   controls = 13'b0_0_0_0_0_00000_0_1_1; // I
+                  `XORI   :   controls = 13'b0_0_0_0_0_11000_0_1_1; // I
+                  `BEQ    :   controls = 13'b0_0_0_1_0_00001_0_1_0; // I
+                  `BGEZ   :   controls = 13'b0_0_0_1_0_00001_0_1_0; // I
+                  `BGEZAL :   controls = 13'b0_0_0_1_0_00001_0_1_1; // I
+                  `BGTZ   :   controls = 13'b0_0_0_1_0_00000_0_1_0; // I
+                  `BLEZ   :   controls = 13'b0_0_0_1_0_00000_0_1_0; // I
+                  `BLTZ   :   controls = 13'b0_0_0_1_0_00000_0_1_0; // I
+                  `BLTZAL :   controls = 13'b0_0_0_1_0_00000_0_1_1; // I
+                  `BNE    :   controls = 13'b0_0_0_1_0_00001_0_1_0; // I
+                  `LB     :   controls = 13'b0_0_0_1_1_00000_0_1_1; // I
+                  `LBU    :   controls = 13'b0_0_0_1_1_00000_0_1_1; // I
+                  `LH     :   controls = 13'b0_0_0_1_1_00000_0_1_1; // I
+                  `LHU    :   controls = 13'b0_0_0_1_1_00000_0_1_1; // I
+                  `LUI    :   controls = 13'b0_0_0_1_1_00000_0_1_1; // I
+                  `LW     :   controls = 13'b0_0_0_1_1_00000_0_1_1; // I
+                  `SB     :   controls = 13'b0_0_0_0_0_00000_1_1_0; // I
+                  `SH     :   controls = 13'b0_0_0_0_0_00000_1_1_0; // I
+                  `SW     :   controls = 13'b0_0_0_0_0_00000_1_1_0; // I
+                  `J      :   controls = 13'b0_1_0_0_0_00000_0_1_0; // J
+                  `JAL    :   controls = 13'b0_1_0_0_0_00000_0_1_1; // J
+                  default :   controls = 13'b1_0_0_0_0_00000_0_0_1;
+                endcase
+        default :   controls = 13'b1_0_0_0_0_00000_0_0_1;
       endcase
     end
     

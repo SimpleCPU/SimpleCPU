@@ -18,8 +18,8 @@ module instr_mem
 
     always @(posedge clk)
     if (wr_en_imem_ram_i)
-        imem[addr_imem_ram_i << 1] <= wr_instr_imem_ram_i;
+        imem[addr_imem_ram_i & 32'hFFFF_FFFC] <= wr_instr_imem_ram_i;
 
-    assign read_instr = imem[addr_imem_ram_i << 1];
+    assign read_instr = imem[addr_imem_ram_i << 32'hFFFF_FFFC];
 
 endmodule
