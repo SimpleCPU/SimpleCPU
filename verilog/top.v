@@ -30,17 +30,18 @@ module top
     wire        branch_top;
     wire        mem_read_top;
     wire        mem_to_reg_top;
-    wire[4:0]   alu_op_top;
+    wire[5:0]   alu_op_top;
     wire        mem_wr_top;
     wire        alu_src_top;
     wire        reg_wr_top;
+    wire        sign_ext_top;
     wire[31:0]  r_data_p1_top;
     wire[31:0]  r_data_p2_top;
     wire[31:0]  r_data_p2_rf_top;
     wire[31:0]  res_alu_top;
     wire        z_top;
     wire[31:0]  read_data_dmem_ram_top;
-    wire[31:0]  read_data_dmem_top;
+    wire[31:0]  wr_data_rf_top;
 
     pc_reg PC (
         .clk (clk),
@@ -79,6 +80,7 @@ module top
 
     decode D1 (
         .instr_dec_i (instr_top),
+        .sign_ext_i (sign_ext_top),
         .rt_dec_o (rt_top),
         .rs_dec_o (rs_top),
         .rd_dec_o (rd_dec_top),
@@ -94,7 +96,7 @@ module top
         .clk (clk),
         .reset (reset),
         .w_en_rf_i (reg_wr_top),
-        .w_data_rf_i (read_data_dmem_top),
+        .w_data_rf_i (wr_data_rf_top),
         .w_reg_rf_i (rd_top),
         .r_reg_p1_rf_i (rs_top),
         .r_reg_p2_rf_i (rt_top),
@@ -120,7 +122,7 @@ module top
         .read_data_dmem_ram_o (read_data_dmem_ram_top)
     );
 
-    assign read_data_dmem_top = mem_to_reg_top ? read_data_dmem_ram_top : res_alu_top;
+    assign wr_data_rf_top = mem_to_reg_top ? read_data_dmem_ram_top : res_alu_top;
 
     control C1 (
         .instr_op_ctl_i (op_top),
@@ -133,7 +135,8 @@ module top
         .alu_op_ctl_o (alu_op_top),
         .mem_wr_ctl_o (mem_wr_top),
         .alu_src_ctl_o (alu_src_top),
-        .reg_wr_ctl_o (reg_wr_top)
+        .reg_wr_ctl_o (reg_wr_top),
+        .sign_ext_ctl_o (sign_ext_top)
     );
 
 endmodule

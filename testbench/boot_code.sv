@@ -1,5 +1,5 @@
 // Boot Code
-// Sets up all the system/arch registers correctly 
+// Set up all the system/arch registers correctly 
 // Currently only initialises the arch registers
 
 function void boot_code ();

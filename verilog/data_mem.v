@@ -18,8 +18,8 @@ module data_mem
 
     always @(posedge clk)
     if (wr_en_dmem_ram_i)
-        dmem[addr_dmem_ram_i & 32'hFFFF_FFFC] <= wr_data_dmem_ram_i;
+        dmem[(addr_dmem_ram_i & 32'hFFFF_FFFC)>>2] <= wr_data_dmem_ram_i;
 
-    assign read_data = dmem[addr_dmem_ram_i & 32'hFFFF_FFFC];
+    assign read_data = dmem[(addr_dmem_ram_i & 32'hFFFF_FFFC)>>2];
 
 endmodule

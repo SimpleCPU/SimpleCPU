@@ -5,14 +5,13 @@ module alu
     (
         input   wire[31:0]  opr_a_alu_i,
         input   wire[31:0]  opr_b_alu_i,
-        input   wire[4:0]   op_alu_i,
+        input   wire[5:0]   op_alu_i,
         output  wire[31:0]  res_alu_o,
         output  wire        z_alu_o
     );
 
-    reg[31:0]  res_alu;
-    reg        z_alu;
-
+    wire[31:0] res_alu;
+    wire       z_alu;
     wire[31:0] opr_b_negated_alu;
     wire       cin_alu;
     wire[31:0] adder_out_alu;
@@ -24,20 +23,12 @@ module alu
     assign  z_alu_o             = z_alu;
     assign  opr_b_negated_alu   = op_alu_i[0] ? ~opr_b_alu_i : opr_b_alu_i;
     assign  cin_alu             = op_alu_i[0] ? 1'b1 : 1'b0;
+    assign  z_alu               = res_alu ? 1'b0 : 1'b1;
 
-    always @ *
-    case (op_alu_i)
-        `ADD_OP,
-        `SUB_OP : res_alu = adder_out_alu;
-        `SHL_OP,
-        `LSR_OP,
-        `ASR_OP : res_alu = shifter_out_alu;
-        `OR_OP,
-        `AND_OP,
-        `NOR_OP,
-        `XOR_OP : res_alu = logical_out_alu;
-    endcase
-
+    assign res_alu              = ((op_alu_i == `ADD_OP) || (op_alu_i == `SUB_OP)) ?   adder_out_alu :
+                                  ((op_alu_i == `SHL_OP) || (op_alu_i == `LSR_OP) || (op_alu_i == `ASR_OP)) ? shifter_out_alu :
+                                  ((op_alu_i == `OR_OP) || (op_alu_i == `AND_OP) || (op_alu_i == `NOR_OP) || (op_alu_i == `XOR_OP)) ? logical_out_alu :
+                                  31'hxxxx_xxxx;
     adder A1 (
         .op1 (opr_a_alu_i), 
         .op2 (opr_b_negated_alu), 
@@ -56,7 +47,7 @@ module alu
     logical L1 (
         .op1 (opr_a_alu_i),
         .op2 (opr_b_alu_i),
-        .operation (op_alu_i[4:3]),
+        .operation (op_alu_i[5:3]),
         .res (logical_out_alu)
     );
 

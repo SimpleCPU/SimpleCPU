@@ -4,7 +4,7 @@ module logical
     (
         input   wire[31:0]  op1,
         input   wire[31:0]  op2,
-        input   wire[1:0]   operation,
+        input   wire[2:0]   operation,
         output  wire[31:0]  res
     );
 
@@ -14,10 +14,11 @@ module logical
 
     always @ *
     case (operation)
-        2'b00 : res_logical = op1 | op2;
-        2'b01 : res_logical = op1 & op2; 
-        2'b10 : res_logical = ~(op1 | op2);
-        2'b11 : res_logical = op1 ^ op2;
+        3'b001 : res_logical = op1 | op2;
+        3'b010 : res_logical = op1 & op2; 
+        3'b011 : res_logical = ~(op1 | op2);
+        3'b100 : res_logical = op1 ^ op2;
+        default: res_logical = 31'hxxxx_xxxx;
     endcase
 
 endmodule
