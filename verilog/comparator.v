@@ -1,6 +1,4 @@
 //Simple 32-bit comparator
-//Would need to improve this for 
-//fast additions
 
 module comparator 
     (
