@@ -6,12 +6,20 @@ module top_tb ();
 `include "testbench/boot_code.sv"
 import "DPI-C" function void init ();
 import "DPI-C" function void run (int cycles);
-import "DPI-C" function void compare (int pc);/*, int opcode, int rd, int rs, int rt);*/
+import "DPI-C" function void compare (int pc, int instr, int rd, int rs, int rt);
 
     wire[31:0]  pc;
+    wire[31:0]  instr;
+    wire[31:0]  rd;
+    wire[31:0]  rs;
+    wire[31:0]  rt;
     reg clk_tb, reset_tb;
 
-    assign pc   = T1.curr_pc_top;
+    assign pc       = T1.curr_pc_top;
+    assign instr    = T1.instr_top;
+    assign rd       = T1.R1.reg_file[T1.rd_top];
+    assign rs       = T1.R1.reg_file[T1.rs_top];
+    assign rt       = T1.R1.reg_file[T1.rt_top];
 
     top T1 (
         .clk (clk_tb),
@@ -44,7 +52,7 @@ import "DPI-C" function void compare (int pc);/*, int opcode, int rd, int rs, in
     if (~reset_tb)
     begin
         run (1);
-        compare (pc);
+        compare (pc, instr, rd, rs, rt);
     end
 
     always @ (posedge clk_tb)

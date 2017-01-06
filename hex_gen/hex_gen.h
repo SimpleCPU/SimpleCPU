@@ -12,6 +12,8 @@
 
 #include "hex_gen_instr_defines.h"
 
+#define NUM_END_SEQ_INSTR 2
+
 struct CPU_Struct {
     int PC;             /* program counter                  */
     int instr;          /* the hex value of the instruction */

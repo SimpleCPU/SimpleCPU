@@ -10,7 +10,7 @@
 
 void update_cpu (int pc, int instr, int valid) {
     CPU[instr_gen].PC       = pc;
-    CPU[instr_gen-1].instr  = instr;
+    CPU[instr_gen].instr    = instr;
     CPU[instr_gen].valid    = valid;
 }
 
@@ -57,10 +57,15 @@ void gen_i_instr () {
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
 
-    instr_gen++;
-    printf ("I Type instr generated - 0x%8x\t", hex_instr);
+    printf ("I Type instr generated - 0x%8x\t\n", hex_instr);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     print_assembled_i_instr (rand_opcode_idx, rs, rt, imm);
-    update_cpu (CPU[instr_gen-1].PC + 4, hex_instr, 1);
+    if (instr_gen == 0)
+        update_cpu (0, hex_instr, 1);
+    else
+        update_cpu (CPU[instr_gen-1].PC + 4, hex_instr, 1);
+    instr_gen++;
 }
 
 /* R instruction format     */
@@ -96,10 +101,30 @@ void gen_r_instr () {
                 (rt << 16) + (rd << 11) +
                 (shamt << 6) + funct;
 
-    instr_gen++;
-    printf ("R Type instr generated - 0x%.7x\t", hex_instr);
+    printf ("R Type instr generated - 0x%.7x\t\n", hex_instr);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     print_assembled_r_instr (rand_funct_idx, rs, rt, rd);
-    update_cpu (CPU[instr_gen-1].PC + 4, hex_instr, 1);
+    if (instr_gen == 0)
+        update_cpu (0, hex_instr, 1);
+    else
+        update_cpu (CPU[instr_gen-1].PC + 4, hex_instr, 1);
+    instr_gen++;
+}
+
+void gen_end_seq () {
+    //FILE * dump;
+    int opcode = 0x2402000a;
+    update_cpu (CPU[instr_gen-1].PC + 4, opcode, 1);
+    load_instr_opcode ((uint32_t)opcode);
+    run (1);
+    instr_gen++;
+    opcode = 0x0000000c;
+    update_cpu (CPU[instr_gen-1].PC + 4, opcode, 1);
+    load_instr_opcode ((uint32_t)opcode);
+    run (1);
+    //dump = fopen ("dump", "w");
+    //rdump (dump);
 }
 
 void gen_instr_hex (int num_r, int num_i, int num_j) {
@@ -134,14 +159,19 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
                     else break;
         }
     }
+    gen_end_seq ();
 }
 
 void print_to_file (FILE* pc_val, FILE* instr_hex, int n) {
     int i = 0;
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n + NUM_END_SEQ_INSTR; i++) {
         fprintf(pc_val, "%x\n", CPU[i].PC);
         fprintf(instr_hex, "%x\n", CPU[i].instr);
     }
+}
+
+void init () {
+    CPU[0].PC = 0;
 }
 
 int main (int argc, char* argv[]) {
@@ -178,6 +208,8 @@ int main (int argc, char* argv[]) {
         printf ("\t %3d - J-Type instructions\n", num_j);
     }
 
+    init ();
+    init_memory ();
     gen_instr_hex (num_r, num_i, num_j);
     pc_val    = fopen ("pc_values_hex", "w");
     instr_hex = fopen ("instr_hex", "w");

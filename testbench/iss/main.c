@@ -120,7 +120,6 @@ void cycle() {
 extern void run(int num_cycles) {                                      
   int i;
 
-  printf("Simulating for %d cycles...\n", num_cycles);
   for (i = 0; i < num_cycles; i++) {
     if (RUN_BIT == FALSE) {
 	    printf("Simulator halted\n");
@@ -222,6 +221,24 @@ void init_memory() {
         MEM_REGIONS[i].mem = malloc(MEM_REGIONS[i].size);
         memset(MEM_REGIONS[i].mem, 0xdeadbeef, MEM_REGIONS[i].size);
     }
+    CURRENT_STATE.PC = MEM_TEXT_START;
+    prev_pc = MEM_TEXT_START;
+    NEXT_STATE = CURRENT_STATE;
+      
+    RUN_BIT = TRUE;
+}
+
+/**************************************************************/
+/*                                                            */
+/* Procedure : load_instr_opcode                              */
+/*                                                            */
+/* Purpose   : Load instruction opcode into mem               */
+/*                                                            */
+/**************************************************************/
+void load_instr_opcode (uint32_t instr_opcode) {
+    mem_write_32(CURRENT_STATE.PC, instr_opcode);
+    printf("Loaded instr opcode: %x into memory location %x.\n",instr_opcode, 
+                                                                CURRENT_STATE.PC);
 }
 
 /**************************************************************/
@@ -250,9 +267,6 @@ void load_program(char *program_filename) {
     ii += 4;
   }
 
-  CURRENT_STATE.PC = MEM_TEXT_START;
-  prev_pc = MEM_TEXT_START;
-
   printf("Read %d words from program into memory.\n\n", ii/4);
 }
 
@@ -273,9 +287,6 @@ void initialize(char *program_filename, int num_prog_files) {
     load_program(program_filename);
     while(*program_filename++ != '\0');
   }
-  NEXT_STATE = CURRENT_STATE;
-    
-  RUN_BIT = TRUE;
   printf ("Init done\n");
 }
 
@@ -309,4 +320,8 @@ extern void init () {
   int argc = 2;
   char *argv[] = {"instr_hex"};
   sim (argc, argv);
+}
+
+int main () {
+    return 0;
 }

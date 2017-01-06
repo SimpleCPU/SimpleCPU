@@ -26,4 +26,4 @@ void     mem_write_32(uint32_t address, uint32_t value);
 void process_instruction();
 extern void init();
 extern void run(int num_cycles);
-extern void compare (int pc);
+extern void compare (int pc, int instr, int rd, int rs, int rt);

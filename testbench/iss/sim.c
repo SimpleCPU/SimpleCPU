@@ -155,6 +155,8 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             }
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
+        default:
+            printf ("ERROR. Incorrect instruction opcode\n");
     }
 }
 
@@ -368,6 +370,8 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 }
             }
         break;
+        default:
+            printf ("ERROR. Incorrect instruction opcode\n");
     }
 }
 
@@ -397,6 +401,8 @@ void execute_j (unsigned int opcode, int target) {
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
         break;
+        default:
+            printf ("ERROR. Incorrect instruction opcode\n");
             
     }
 }
@@ -424,11 +430,32 @@ void process_instruction() {
         decode_i (instr_opcode);
 }
 
-extern void compare (int pc) {
-    printf ("RTL PC - %x\t Model PC - %x\n", pc, prev_pc);
-    if (prev_pc != pc) {
-        //RUN_BIT = 0;
-        printf ("PC Mismatch\n");
-    }
+extern void compare (int pc, int instr, int rd, int rs, int rt) {
+    printf ("PC:0x%x\tINSTR:0x%.8x\tRD:0x%.8x\tRS:0x%.8x\tRT:0x%.8x\t\n", pc, instr, rd, rs, rt);
+    //if (prev_pc != pc) {
+    //    //RUN_BIT = 0;
+    //    printf ("RTL PC - %x\t Model PC - %x\n", pc, prev_pc);
+    //    printf ("PC Mismatch\n");
+    //}
+    //if (prev_pc != pc) {
+    //    //RUN_BIT = 0;
+    //    printf ("RTL INSTR - %x\t Model INSTR - %x\n", instr, (int) mem_read_32(prev_pc));
+    //    printf ("INSTR Mismatch\n");
+    //}
+    //if (prev_pc != pc) {
+    //    //RUN_BIT = 0;
+    //    printf ("RTL RD - %x\t Model RD - %x\n", pc, );
+    //    printf ("RD Mismatch\n");
+    //}
+    //if (prev_pc != pc) {
+    //    //RUN_BIT = 0;
+    //    printf ("RTL RS - %x\t Model RS - %x\n", pc, prev_pc);
+    //    printf ("RS Mismatch\n");
+    //}
+    //if (prev_pc != pc) {
+    //    //RUN_BIT = 0;
+    //    printf ("RTL RT - %x\t Model RT - %x\n", pc, prev_pc);
+    //    printf ("RT Mismatch\n");
+    //}
     prev_pc = CURRENT_STATE.PC;
 }
