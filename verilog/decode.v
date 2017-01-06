@@ -1,6 +1,4 @@
 //Instruction decoder
-//The following set of instruction is
-//supported 
 
 module decode 
     (
