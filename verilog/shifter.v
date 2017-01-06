@@ -1,6 +1,4 @@
 //Simple 32-bit shifter
-//Would need to improve this for 
-//fast operation
 
 module shifter
     (
