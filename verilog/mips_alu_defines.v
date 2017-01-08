@@ -9,3 +9,4 @@
 `define AND_OP     6'b010_00_0
 `define NOR_OP     6'b011_00_0
 `define XOR_OP     6'b100_00_0
+`define SLT_OP     6'b101_00_1
