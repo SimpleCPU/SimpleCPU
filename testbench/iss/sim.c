@@ -111,6 +111,10 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.REGS[rd] = (CURRENT_STATE.REGS[rs] < CURRENT_STATE.REGS[rt]) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
+        case (0x2b): //SLTU
+            NEXT_STATE.REGS[rd] = (CURRENT_STATE.REGS[rs] < CURRENT_STATE.REGS[rt]) ? 1 : 0;
+            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+        break;
         case (0x18): //MULT
             mul_res = (int64_t)(CURRENT_STATE.REGS[rs] * CURRENT_STATE.REGS[rt]);
             NEXT_STATE.HI = (int32_t)((mul_res>>32) & 0xFFFFFFFF);
@@ -176,6 +180,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
     int sign, mem_content;
     int shift_val;
     uint32_t address;
+    //printf ("I-side instruction\tOpcode is :0x%x\n", opcode);
     switch (opcode) {
         case (0x04): //BEQ
             if (CURRENT_STATE.REGS[rs] == CURRENT_STATE.REGS[rt]) {
@@ -379,7 +384,7 @@ void decode_i (uint32_t instr_opcode) {
     uint32_t rs, rt;
     unsigned int opcode; 
     int imm;
-    opcode = (instr_opcode >> 26)   & 0x1F;
+    opcode = (instr_opcode >> 26)   & 0x3F;
     rs     = (instr_opcode >> 21)   & 0x1F;
     rt     = (instr_opcode >> 16)   & 0x1F;
     imm    = (instr_opcode)         & 0xFFFF;
@@ -430,32 +435,125 @@ void process_instruction() {
         decode_i (instr_opcode);
 }
 
-extern void compare (int pc, int instr, int rd, int rs, int rt) {
+/* The following function checks if the calculated address      */
+/* is a valid address. If the address is valid, the function    */
+/* returns 1.                                                   */
+int check_ls_addr (int rs, int imm) {
+    unsigned int addr = (unsigned)(CURRENT_STATE.REGS[rs] + imm);
+    /* For now just check if the addr > 0   */
+    /* if true, then the instruction is ok  */
+    if ((addr > 0) && (addr < 0x10100000)) {
+        return 1;
+    }
+    else {
+        return 1;
+    }
+}
+
+extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val) {
     printf ("PC:0x%x\tINSTR:0x%.8x\tRD:0x%.8x\tRS:0x%.8x\tRT:0x%.8x\t\n", pc, instr, rd, rs, rt);
-    //if (prev_pc != pc) {
-    //    //RUN_BIT = 0;
-    //    printf ("RTL PC - %x\t Model PC - %x\n", pc, prev_pc);
-    //    printf ("PC Mismatch\n");
-    //}
-    //if (prev_pc != pc) {
-    //    //RUN_BIT = 0;
-    //    printf ("RTL INSTR - %x\t Model INSTR - %x\n", instr, (int) mem_read_32(prev_pc));
-    //    printf ("INSTR Mismatch\n");
-    //}
-    //if (prev_pc != pc) {
-    //    //RUN_BIT = 0;
-    //    printf ("RTL RD - %x\t Model RD - %x\n", pc, );
-    //    printf ("RD Mismatch\n");
-    //}
-    //if (prev_pc != pc) {
-    //    //RUN_BIT = 0;
-    //    printf ("RTL RS - %x\t Model RS - %x\n", pc, prev_pc);
-    //    printf ("RS Mismatch\n");
-    //}
-    //if (prev_pc != pc) {
-    //    //RUN_BIT = 0;
-    //    printf ("RTL RT - %x\t Model RT - %x\n", pc, prev_pc);
-    //    printf ("RT Mismatch\n");
-    //}
+    int instr_model = (int) mem_read_32(prev_pc);
+    int rs_model     = (instr_model >> 21)   & 0x1F;
+    int rt_model     = (instr_model >> 16)   & 0x1F;
+    int rd_model     = (instr_model >> 11)   & 0x1F;
+    int rs_val_model = CURRENT_STATE.REGS[rs_model];
+    int rt_val_model = CURRENT_STATE.REGS[rt_model];
+    int rd_val_model = CURRENT_STATE.REGS[rd_model];
+    if (prev_pc != pc) {
+        //RUN_BIT = 0;
+        printf ("RTL PC - %x\t Model PC - %x\n", pc, prev_pc);
+        printf ("PC Mismatch\n");
+        return 0;
+    }
+    else if (instr != instr_model) {
+        //RUN_BIT = 0;
+        printf ("RTL INSTR - %x\t Model INSTR - %x\n", instr, instr_model);
+        printf ("INSTR Mismatch\n");
+        return 0;
+    }
+    else if (rd != rd_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RD - %x\t Model RD - %x\n", rd, rd_model);
+        printf ("RD Mismatch\n");
+        return 0;
+    }
+    else if (rs != rs_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RS - %x\t Model RS - %x\n", rs, rs_model);
+        printf ("RS Mismatch\n");
+        return 0;
+    }
+    else if (rt != rt_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RT - %x\t Model RT - %x\n", rt, rt_model);
+        printf ("RT Mismatch\n");
+        return 0;
+    }
+    else if (rd_val != rd_val_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RD VAL- %x\t Model RD VAL- %x\n", rd_val, rd_val_model);
+        printf ("RD Value Mismatch\n");
+        return 0;
+    }
+    else if (rs_val != rs_val_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RS VAL- %x\t Model RS VAL- %x\n", rs_val, rs_val_model);
+        printf ("RS Value Mismatch\n");
+        return 0;
+    }
+    else if (rt_val != rt_val_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RT VAL- %x\t Model RT VAL- %x\n", rt_val, rt_val_model);
+        printf ("RT Value Mismatch\n");
+        return 0;
+    }
     prev_pc = CURRENT_STATE.PC;
+    return 1;
+}
+
+extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val) {
+    printf ("PC:0x%x\tINSTR:0x%.8x\tRS:0x%.8x\tRT:0x%.8x\t\n", pc, instr, rs, rt);
+    int instr_model = (int) mem_read_32(prev_pc);
+    int rs_model     = (instr_model >> 21)   & 0x1F;
+    int rt_model     = (instr_model >> 16)   & 0x1F;
+    int rs_val_model = (int) CURRENT_STATE.REGS[rs_model];
+    int rt_val_model = (int) CURRENT_STATE.REGS[rt_model];
+    if (prev_pc != pc) {
+        //RUN_BIT = 0;
+        printf ("RTL PC - %x\t Model PC - %x\n", pc, prev_pc);
+        printf ("PC Mismatch\n");
+        return 0;
+    }
+    else if (instr != instr_model) {
+        //RUN_BIT = 0;
+        printf ("RTL INSTR - %x\t Model INSTR - %x\n", instr, instr_model);
+        printf ("INSTR Mismatch\n");
+        return 0;
+    }
+    else if (rs != rs_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RS - %x\t Model RS - %x\n", rs, rs_model);
+        printf ("RS Mismatch\n");
+        return 0;
+    }
+    else if (rt != rt_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RT - %x\t Model RT - %x\n", rt, rt_model);
+        printf ("RT Mismatch\n");
+        return 0;
+    }
+    else if (rs_val != rs_val_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RS VAL- %x\t Model RS VAL- %x\n", rs_val, rs_val_model);
+        printf ("RS Value Mismatch\n");
+        return 0;
+    }
+    else if (rt_val != rt_val_model) {
+        //RUN_BIT = 0;
+        printf ("RTL RT VAL- %x\t Model RT VAL- %x\n", rt_val, rt_val_model);
+        printf ("RT Value Mismatch\n");
+        return 0;
+    }
+    prev_pc = CURRENT_STATE.PC;
+    return 1;
 }
