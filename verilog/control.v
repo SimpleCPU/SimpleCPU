@@ -62,8 +62,8 @@ module control
         `ADDI   :   controls = 15'b0_0_0_0_0_000000_0_1_1_1; // I
         `ADDIU  :   controls = 15'b0_0_0_0_0_000000_0_1_1_1; // I
         `ANDI   :   controls = 15'b0_0_0_0_0_010000_0_1_1_0; // I
-        `SLTI   :   controls = 15'b0_0_0_0_0_000001_0_1_1_1; // I
-        `SLTIU  :   controls = 15'b0_0_0_0_0_000001_0_1_1_1; // I
+        `SLTI   :   controls = 15'b0_0_0_0_0_101001_0_1_1_1; // I
+        `SLTIU  :   controls = 15'b0_0_0_0_0_101001_0_1_1_1; // I
         `ORI    :   controls = 15'b0_0_0_0_0_001000_0_1_1_0; // I
         `XORI   :   controls = 15'b0_0_0_0_0_100000_0_1_1_0; // I
         `BEQ    :   controls = 15'b0_0_0_1_0_000001_0_1_0_1; // I
@@ -114,8 +114,8 @@ module control
             `NOR    :   controls = 15'b1_0_0_0_0_011000_0_0_1_0; // R
             `OR     :   controls = 15'b1_0_0_0_0_001000_0_0_1_0; // R
             `SLLV   :   controls = 15'b1_0_0_0_0_000010_0_0_1_0; // R
-            `SLT    :   controls = 15'b1_0_0_0_0_000001_0_0_1_0; // R
-            `SLTU   :   controls = 15'b1_0_0_0_0_000001_0_0_1_0; // R
+            `SLT    :   controls = 15'b1_0_0_0_0_101001_0_0_1_0; // R
+            `SLTU   :   controls = 15'b1_0_0_0_0_101001_0_0_1_0; // R
             `SRA    :   controls = 15'b1_0_0_0_0_000110_0_0_1_0; // R
             `SRAV   :   controls = 15'b1_0_0_0_0_000110_0_0_1_0; // R
             `SRL    :   controls = 15'b1_0_0_0_0_000100_0_0_1_0; // R

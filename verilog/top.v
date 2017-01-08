@@ -25,6 +25,9 @@ module top
     wire[5:0]   funct_top;
     wire[25:0]  target_top;
     wire[31:0]  sign_imm_top;
+    wire        is_r_type_top;
+    wire        is_i_type_top;
+    wire        is_j_type_top;
     wire        reg_dst_top;
     wire        jump_top;
     wire        branch_top;
@@ -40,6 +43,7 @@ module top
     wire[31:0]  r_data_p2_rf_top;
     wire[31:0]  res_alu_top;
     wire        z_top;
+    wire        n_top;
     wire[31:0]  read_data_dmem_ram_top;
     wire[31:0]  wr_data_rf_top;
 
@@ -87,7 +91,10 @@ module top
         .op_dec_o (op_top),
         .funct_dec_o (funct_top),
         .target_dec_o (target_top),
-        .sign_imm_dec_o (sign_imm_top)
+        .sign_imm_dec_o (sign_imm_top),
+        .is_r_type_dec_o (is_r_type_top),
+        .is_i_type_dec_o (is_i_type_top),
+        .is_j_type_dec_o (is_j_type_top)
     );
 
     assign rd_top = reg_dst_top ? rd_dec_top : rt_top;
@@ -111,7 +118,8 @@ module top
         .opr_b_alu_i (r_data_p2_top),
         .op_alu_i (alu_op_top),
         .res_alu_o (res_alu_top),
-        .z_alu_o (z_top)
+        .z_alu_o (z_top),
+        .n_alu_o (n_top)
     );
 
     data_mem D_MEM1 (
