@@ -23,8 +23,8 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     int sign_ext = 0;
     int sign = ((imm & 0x8000)>>15);
     if ((opcode == 2) || 
-        (opcode == 3) ||
-        (opcode == 6)
+        (opcode == 4) ||
+        (opcode == 8)
     ) {
         sign_ext = 0;
     }
@@ -47,13 +47,17 @@ void gen_i_instr () {
     int     rs, rt;
     int     hex_instr;
     int     imm;
-    int     rand_opcode_idx = rand()%7;
+    int     rand_opcode_idx = rand()%9;
 
     opcode  = opcode_val_i_type [rand_opcode_idx];
-    imm     = rand() % 65535;   /* 16-bit signal */
     rs      = rand() % 32;
     rt      = rand() % 32;
+IMM:    
+    imm     = rand() % 65535;   /* 16-bit signal */
 
+    if ((opcode == 3) || (opcode == 5)) {
+        if (!(check_ls_addr (rs, imm))) goto IMM;
+    }
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
 
@@ -214,5 +218,5 @@ int main (int argc, char* argv[]) {
     pc_val    = fopen ("pc_values_hex", "w");
     instr_hex = fopen ("instr_hex", "w");
     print_to_file (pc_val, instr_hex, n);
-    return 1;
+    return 0;
 }

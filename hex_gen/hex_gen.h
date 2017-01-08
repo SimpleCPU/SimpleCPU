@@ -54,14 +54,14 @@ const char* funct_str_r_type[13] = {
     "SRL",        "SRLV",       "SUB",
     "SUBU",       "SYSCALL",    "XOR"
 };*/
-const int opcode_val_i_type[7] = {
+const int opcode_val_i_type[9] = {
     ADDI,       ADDIU,      ANDI,
     /*BEQ,        BGEZ,       BGEZAL,
     BGTZ,       BLEZ,       BLTZ,
     BLTZAL,     BNE,        LB,
     LBU,        LH,         LHU,
-    LUI,*/        /*LW,*/         ORI,
-    /*SB,         SH,*/         /*SW,*/
+    LUI,*/        LW,         ORI,
+    /*SB,         SH,*/         SW,
     SLTI,       SLTIU,      XORI
 };
 const char* opcode_str_i_type[9] = {
@@ -70,8 +70,8 @@ const char* opcode_str_i_type[9] = {
     BGTZ,       BLEZ,       BLTZ,
     BLTZAL,     BNE,        LB,
     LBU,        LH,         LHU,
-    LUI,*/        /*"LW",*/         "ORI",
-    /*SB,         SH,*/         /*"SW",*/
+    LUI,*/        "LW",         "ORI",
+    /*SB,         SH,*/         "SW",
     "SLTI",       "SLTIU",      "XORI"
 };
 /*const char* opcode_str_i_type[24] = {
