@@ -11,7 +11,10 @@ add wave -noupdate -expand -group pc -radix hexadecimal /top_tb/T1/next_brn_eq_p
 add wave -noupdate -expand -group instr -radix hexadecimal /top_tb/T1/instr_top
 add wave -noupdate -expand -group instr -radix hexadecimal /top_tb/T1/funct_top
 add wave -noupdate -expand -group instr -radix hexadecimal /top_tb/T1/op_top
-add wave -noupdate /top_tb/T1/sign_ext_top
+add wave -noupdate -expand -group instr /top_tb/T1/sign_ext_top
+add wave -noupdate -expand -group instr /top_tb/T1/is_r_type_top
+add wave -noupdate -expand -group instr /top_tb/T1/is_i_type_top
+add wave -noupdate -expand -group instr /top_tb/T1/is_j_type_top
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/reg_dst_top
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/jump_top
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/branch_top
@@ -23,15 +26,15 @@ add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/reg_wr_t
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/alu_src_top
 add wave -noupdate -expand -group alu -radix hexadecimal /top_tb/T1/r_data_p1_top
 add wave -noupdate -expand -group alu -radix hexadecimal /top_tb/T1/r_data_p2_top
+add wave -noupdate -expand -group alu /top_tb/T1/n_top
 add wave -noupdate -expand -group alu -radix hexadecimal /top_tb/T1/res_alu_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/rd_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/rs_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/rt_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/r_data_p1_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/r_data_p2_rf_top
+add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/wr_data_rf_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/rd_dec_top
-add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/read_data_dmem_top
-add wave -noupdate -radix hexadecimal /top_tb/T1/read_data_dmem_ram_top
 add wave -noupdate -radix hexadecimal /top_tb/T1/sign_imm_top
 add wave -noupdate -radix hexadecimal /top_tb/T1/target_top
 add wave -noupdate -group {alu block} -radix hexadecimal /top_tb/T1/A1/opr_a_alu_i
@@ -44,6 +47,7 @@ add wave -noupdate -group {alu block} -radix hexadecimal /top_tb/T1/A1/carry_out
 add wave -noupdate -group {alu block} -radix hexadecimal /top_tb/T1/A1/shifter_out_alu
 add wave -noupdate -group {alu block} -radix hexadecimal /top_tb/T1/A1/logical_out_alu
 add wave -noupdate -group {alu block} -radix hexadecimal /top_tb/T1/A1/res_alu_o
+add wave -noupdate -group {alu block} /top_tb/T1/A1/n_alu_o
 add wave -noupdate -group {alu block} -radix hexadecimal /top_tb/T1/A1/z_alu_o
 add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/alu_op_ctl_o
 add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/alu_src_ctl_o
@@ -58,8 +62,20 @@ add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/mem_w
 add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/reg_dst_ctl_o
 add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/reg_wr_ctl_o
 add wave -noupdate -group {control block} /top_tb/T1/C1/sign_ext_ctl_o
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/clk
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p1
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p1_rf_o
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p2
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p2_rf_o
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_reg_p1_rf_i
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_reg_p2_rf_i
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/reg_file
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/reset
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_data_rf_i
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_en_rf_i
+add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_reg_rf_i
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {60 ps} 0}
+WaveRestoreCursors {{Cursor 1} {50 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 282
 configure wave -valuecolwidth 187
