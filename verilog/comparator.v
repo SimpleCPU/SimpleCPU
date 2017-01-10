@@ -13,10 +13,9 @@ module comparator
     always @ *
     case (operation)
         3'b000: comp_res = (op1 ==  op2)    ?   1'b1: 1'b0; 
-        3'b001: comp_res = (op1 >=  op2)    ?   1'b1: 1'b0;
         3'b010: comp_res = (op1 >   op2)    ?   1'b1: 1'b0;
-        3'b011: comp_res = (op1 <=  op2)    ?   1'b1: 1'b0;
-        3'b100: comp_res = (op1 <   op2)    ?   1'b1: 1'b0;
+        3'b101, 
+        3'b110: comp_res = (op1 <   op2)    ?   1'b1: 1'b0;
         default: comp_res = 1'bx;
     endcase
 
