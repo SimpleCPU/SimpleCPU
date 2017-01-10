@@ -10,3 +10,4 @@
 `define NOR_OP     6'b011_00_0
 `define XOR_OP     6'b100_00_0
 `define SLT_OP     6'b101_00_1
+`define SLTU_OP    6'b110_00_1
