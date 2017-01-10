@@ -17,16 +17,20 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     wire[31:0]  rd_val;
     wire[31:0]  rs_val;
     wire[31:0]  rt_val;
+    wire[31:0]  rd_val_dest;
+    wire[31:0]  rt_val_dest;
     reg clk_tb, reset_tb;
 
-    assign pc       = T1.curr_pc_top;
-    assign instr    = T1.instr_top;
-    assign rd       = T1.rd_top;
-    assign rs       = T1.rs_top;
-    assign rt       = T1.rt_top;
-    assign rd_val   = T1.R1.reg_file[rd];
-    assign rs_val   = T1.R1.reg_file[rs];
-    assign rt_val   = T1.R1.reg_file[rt];
+    assign pc           = T1.curr_pc_top;
+    assign instr        = T1.instr_top;
+    assign rd           = T1.rd_top;
+    assign rs           = T1.rs_top;
+    assign rt           = T1.rt_top;
+    assign rd_val       = T1.R1.reg_file[rd];
+    assign rs_val       = T1.R1.reg_file[rs];
+    assign rt_val       = T1.R1.reg_file[rt];
+    assign rt_val_dest  = T1.reg_wr_top ? T1.wr_data_rf_top : rt_val;
+    assign rd_val_dest  = T1.reg_wr_top ? T1.wr_data_rf_top : rd_val;
 
     top T1 (
         .clk (clk_tb),
@@ -61,12 +65,12 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         run (1);
         if (T1.is_r_type_top) 
         begin
-            if (!compare_r (pc, instr, rd, rs, rt, T1.wr_data_rf_top, rs_val, rt_val))
+            if (!compare_r (pc, instr, rd, rs, rt, rd_val_dest, rs_val, rt_val))
                 $finish;
         end
         else if (T1.is_i_type_top)
         begin
-            if (!compare_i (pc, instr, rs, rt, rs_val, T1.wr_data_rf_top))
+            if (!compare_i (pc, instr, rs, rt, rs_val, rt_val_dest))
                 $finish;
         end
     end
