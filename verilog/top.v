@@ -126,6 +126,7 @@ module top
         .clk (clk),
         .addr_dmem_ram_i (res_alu_top),
         .wr_data_dmem_ram_i (r_data_p2_rf_top),
+        .wr_strb_dmem_ram_i (4'hF),
         .wr_en_dmem_ram_i (mem_wr_top),
         .read_data_dmem_ram_o (read_data_dmem_ram_top)
     );
