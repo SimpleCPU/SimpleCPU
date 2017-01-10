@@ -62,18 +62,18 @@ add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/mem_w
 add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/reg_dst_ctl_o
 add wave -noupdate -group {control block} -radix hexadecimal /top_tb/T1/C1/reg_wr_ctl_o
 add wave -noupdate -group {control block} /top_tb/T1/C1/sign_ext_ctl_o
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/clk
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p1
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p1_rf_o
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p2
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p2_rf_o
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_reg_p1_rf_i
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_reg_p2_rf_i
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/reg_file
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/reset
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_data_rf_i
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_en_rf_i
-add wave -noupdate -expand -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_reg_rf_i
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/clk
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p1
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p1_rf_o
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p2
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_data_p2_rf_o
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_reg_p1_rf_i
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/r_reg_p2_rf_i
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/reg_file
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/reset
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_data_rf_i
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_en_rf_i
+add wave -noupdate -group {rf block} -radix hexadecimal /top_tb/T1/R1/w_reg_rf_i
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50 ps} 0}
 quietly wave cursor active 1
@@ -91,4 +91,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {110 ps}
+WaveRestoreZoom {96 ps} {206 ps}
