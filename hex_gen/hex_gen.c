@@ -50,13 +50,15 @@ void gen_i_instr () {
     int     rand_opcode_idx = rand()%9;
 
     opcode  = opcode_val_i_type [rand_opcode_idx];
-    rs      = rand() % 32;
     rt      = rand() % 32;
+RS:
+    rs      = rand() % 32;
 IMM:    
     imm     = rand() % 65535;   /* 16-bit signal */
 
-    if ((opcode == 3) || (opcode == 5)) {
-        if (!(check_ls_addr (rs, imm))) goto IMM;
+    if ((rand_opcode_idx == 3) || (rand_opcode_idx == 5)) {
+        if ((check_ls_addr (rs, imm)) == 2) goto RS;
+        if ((check_ls_addr (rs, imm)) == 0) goto IMM;
     }
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
