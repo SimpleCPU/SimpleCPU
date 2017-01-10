@@ -156,7 +156,7 @@ void go() {
 /*             output file.                                    */
 /*                                                             */
 /***************************************************************/
-void mdump(FILE * dumpsim_file, int start, int stop) {          
+void mdump(/*FILE * dumpsim_file,*/ int start, int stop) {          
   int address;
 
   printf("\nMemory content [0x%08x..0x%08x] :\n", start, stop);
@@ -166,11 +166,11 @@ void mdump(FILE * dumpsim_file, int start, int stop) {
   printf("\n");
 
   /* dump the memory contents into the dumpsim file */
-  fprintf(dumpsim_file, "\nMemory content [0x%08x..0x%08x] :\n", start, stop);
-  fprintf(dumpsim_file, "-------------------------------------\n");
-  for (address = start; address <= stop; address += 4)
-    fprintf(dumpsim_file, "  0x%08x (%d) : 0x%08x\n", address, address, mem_read_32(address));
-  fprintf(dumpsim_file, "\n");
+  //fprintf(dumpsim_file, "\nMemory content [0x%08x..0x%08x] :\n", start, stop);
+  //fprintf(dumpsim_file, "-------------------------------------\n");
+  //for (address = start; address <= stop; address += 4)
+  //  fprintf(dumpsim_file, "  0x%08x (%d) : 0x%08x\n", address, address, mem_read_32(address));
+  //fprintf(dumpsim_file, "\n");
 }
 
 /***************************************************************/
@@ -323,5 +323,8 @@ extern void init () {
 }
 
 int main () {
+    init ();
+    go();
+    mdump(0, 0x10010000);
     return 0;
 }
