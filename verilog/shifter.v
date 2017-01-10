@@ -14,9 +14,9 @@ module shifter
 
     always @ *
     case (operation)
-        2'b00: shift_res = (op1 >>  shamt); //logical shift right
-        2'b01: shift_res = (op1 >>> shamt); //arithmetic shift right
-        2'b10: shift_res = (op1 <<  shamt); //logical shift left
+        2'b01: shift_res = (op1 <<  shamt); //logical shift left
+        2'b10: shift_res = (op1 >>  shamt); //logical shift right
+        2'b11: shift_res = (op1 >>> shamt); //arithmetic shift right
         default: shift_res = 31'bx;
     endcase
 
