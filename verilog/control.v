@@ -58,12 +58,12 @@ module control
         //6'b010_00_0: logical AND
         //6'b011_00_0: logical NOR
         //6'b100_00_0: logical XOR
-        //reg_dst_ctl, jump_ctl, branch_ctl, mem_read_ctl, mem_to_reg_ctl, alu_op_ctl, mem_wr_ctl, alu_src_ctl, reg_wr_ctl
+        //reg_dst_ctl, jump_ctl, branch_ctl, mem_read_ctl, mem_to_reg_ctl, alu_op_ctl, mem_wr_ctl, alu_src_ctl, reg_wr_ctl, sign_ext
         `ADDI   :   controls = 15'b0_0_0_0_0_000000_0_1_1_1; // I
         `ADDIU  :   controls = 15'b0_0_0_0_0_000000_0_1_1_1; // I
         `ANDI   :   controls = 15'b0_0_0_0_0_010000_0_1_1_0; // I
         `SLTI   :   controls = 15'b0_0_0_0_0_101001_0_1_1_1; // I
-        `SLTIU  :   controls = 15'b0_0_0_0_0_101001_0_1_1_1; // I
+        `SLTIU  :   controls = 15'b0_0_0_0_0_110001_0_1_1_1; // I
         `ORI    :   controls = 15'b0_0_0_0_0_001000_0_1_1_0; // I
         `XORI   :   controls = 15'b0_0_0_0_0_100000_0_1_1_0; // I
         `BEQ    :   controls = 15'b0_0_0_1_0_000001_0_1_0_1; // I
@@ -115,7 +115,7 @@ module control
             `OR     :   controls = 15'b1_0_0_0_0_001000_0_0_1_0; // R
             `SLLV   :   controls = 15'b1_0_0_0_0_000010_0_0_1_0; // R
             `SLT    :   controls = 15'b1_0_0_0_0_101001_0_0_1_0; // R
-            `SLTU   :   controls = 15'b1_0_0_0_0_101001_0_0_1_0; // R
+            `SLTU   :   controls = 15'b1_0_0_0_0_110001_0_0_1_0; // R
             `SRA    :   controls = 15'b1_0_0_0_0_000110_0_0_1_0; // R
             `SRAV   :   controls = 15'b1_0_0_0_0_000110_0_0_1_0; // R
             `SRL    :   controls = 15'b1_0_0_0_0_000100_0_0_1_0; // R
