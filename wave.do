@@ -15,6 +15,7 @@ add wave -noupdate -expand -group instr /top_tb/T1/sign_ext_top
 add wave -noupdate -expand -group instr /top_tb/T1/is_r_type_top
 add wave -noupdate -expand -group instr /top_tb/T1/is_i_type_top
 add wave -noupdate -expand -group instr /top_tb/T1/is_j_type_top
+add wave -noupdate -expand -group control /top_tb/T1/reg_src_top
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/reg_dst_top
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/jump_top
 add wave -noupdate -expand -group control -radix hexadecimal /top_tb/T1/branch_top
@@ -34,6 +35,7 @@ add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/rt_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/r_data_p1_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/r_data_p2_rf_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/wr_data_rf_top
+add wave -noupdate -expand -group rf /top_tb/T1/rs_dec_top
 add wave -noupdate -expand -group rf -radix hexadecimal /top_tb/T1/rd_dec_top
 add wave -noupdate -radix hexadecimal /top_tb/T1/sign_imm_top
 add wave -noupdate -radix hexadecimal /top_tb/T1/target_top
