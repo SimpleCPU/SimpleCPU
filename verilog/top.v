@@ -20,14 +20,17 @@ module top
     wire[4:0]   rt_top;
     wire[4:0]   rs_top;
     wire[4:0]   rd_top;
+    wire[4:0]   rs_dec_top;
     wire[4:0]   rd_dec_top;
     wire[5:0]   op_top;
     wire[5:0]   funct_top;
+    wire[5:0]   shamt_top;
     wire[25:0]  target_top;
     wire[31:0]  sign_imm_top;
     wire        is_r_type_top;
     wire        is_i_type_top;
     wire        is_j_type_top;
+    wire        reg_src_top;
     wire        reg_dst_top;
     wire        jump_top;
     wire        branch_top;
@@ -35,7 +38,7 @@ module top
     wire        mem_to_reg_top;
     wire[5:0]   alu_op_top;
     wire        mem_wr_top;
-    wire        alu_src_top;
+    wire[1:0]   alu_src_top;
     wire        reg_wr_top;
     wire        sign_ext_top;
     wire[31:0]  r_data_p1_top;
@@ -86,10 +89,11 @@ module top
         .instr_dec_i (instr_top),
         .sign_ext_i (sign_ext_top),
         .rt_dec_o (rt_top),
-        .rs_dec_o (rs_top),
+        .rs_dec_o (rs_dec_top),
         .rd_dec_o (rd_dec_top),
         .op_dec_o (op_top),
         .funct_dec_o (funct_top),
+        .shamt_dec_o (shamt_top),
         .target_dec_o (target_top),
         .sign_imm_dec_o (sign_imm_top),
         .is_r_type_dec_o (is_r_type_top),
@@ -98,6 +102,7 @@ module top
     );
 
     assign rd_top = reg_dst_top ? rd_dec_top : rt_top;
+    assign rs_top = reg_src_top ? rt_top     : rs_dec_top;
 
     regfile R1 (
         .clk (clk),
@@ -111,7 +116,8 @@ module top
         .r_data_p2_rf_o (r_data_p2_rf_top)
     );
 
-    assign r_data_p2_top = alu_src_top ? sign_imm_top : r_data_p2_rf_top;
+    assign r_data_p2_top = alu_src_top[1] ? {{27{1'b0}}, shamt_top} : 
+                           alu_src_top[0] ? sign_imm_top : r_data_p2_rf_top;
 
     alu A1 (
         .opr_a_alu_i (r_data_p1_top),
@@ -131,11 +137,14 @@ module top
         .read_data_dmem_ram_o (read_data_dmem_ram_top)
     );
 
-    assign wr_data_rf_top = mem_to_reg_top ? read_data_dmem_ram_top : res_alu_top;
+    assign wr_data_rf_top = (|rd_top) ? 
+                            (mem_to_reg_top ? read_data_dmem_ram_top : res_alu_top) :
+                            32'h0;
 
     control C1 (
         .instr_op_ctl_i (op_top),
         .instr_funct_ctl_i (funct_top),
+        .reg_src_ctl_o (reg_src_top),
         .reg_dst_ctl_o (reg_dst_top),
         .jump_ctl_o (jump_top),
         .branch_ctl_o (branch_top),

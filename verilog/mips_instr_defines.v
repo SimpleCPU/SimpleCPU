@@ -50,6 +50,6 @@
 `define SRLV    6'b00_0110 // R
 `define SUB     6'b10_0010 // R
 `define SUBU    6'b10_0011 // R
-`define SYSCALL 6'b00_0011 // R
+`define SYSCALL 6'b00_1100 // R
 `define XOR     6'b10_0110 // R
 `define XORI    6'b00_1110 // I
