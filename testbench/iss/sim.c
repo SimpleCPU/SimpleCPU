@@ -350,8 +350,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             imm = (sign) ? (imm | shift_val) : imm;
             address = CURRENT_STATE.REGS[rs] + imm;
             mem_content = mem_read_32((uint32_t)address) ;
-            //printf ("Addr:%x\tmem_content:%x\n", address, mem_content);
-            mdump(0x2000, 0x2016);
+            printf ("Addr:%x\tmem_content:%x\n", address, mem_content);
             NEXT_STATE.REGS[rt] = mem_content;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
