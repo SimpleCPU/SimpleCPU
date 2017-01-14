@@ -45,6 +45,7 @@ CPU_State CURRENT_STATE, NEXT_STATE;
 int RUN_BIT;	/* run bit */
 int INSTRUCTION_COUNT;
 int prev_pc;
+int rt_as_src = 0;
 
 /***************************************************************/
 /*                                                             */
