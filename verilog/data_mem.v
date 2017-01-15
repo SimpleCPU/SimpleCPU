@@ -10,8 +10,8 @@ module data_mem
         output  wire[31:0]  read_data_dmem_ram_o
     );
 
-    parameter data_seg_begin = 32'h0,
-              data_seg_size  = 32'h4040000;
+    parameter data_seg_begin = 32'h2000,
+              data_seg_size  = 32'h4000;
     // Byte Addressable mem
     reg [31:0] dmem [0:data_seg_size];
 
@@ -29,8 +29,8 @@ module data_mem
 
     always @(posedge clk)
     if (wr_en_dmem_ram_i)
-        dmem[(addr_dmem_ram_i)] <= ((wr_data_dmem_ram_i & wr_strb) | (~wr_strb & read_data));
+        dmem[((addr_dmem_ram_i - data_seg_begin)&(~32'h3))>>2] <= ((wr_data_dmem_ram_i & wr_strb) | (~wr_strb & read_data));
 
-    assign read_data = dmem[addr_dmem_ram_i];
+    assign read_data = dmem[((addr_dmem_ram_i - data_seg_begin)&(~32'h3))>>2];
 
 endmodule
