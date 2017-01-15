@@ -511,14 +511,14 @@ int check_ls_addr (int rs, int imm) {
     int shift_val = shift_const(16);
     int sign = (imm & 0x8000)>>15 ? 1 : 0;
     imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = (unsigned)(CURRENT_STATE.REGS[rs] + imm);
-    //printf("RS is %x\tIMM is %x\t ADDR is %x\n", CURRENT_STATE.REGS[rs], imm, addr);
+    unsigned int addr = ((unsigned)CURRENT_STATE.REGS[rs] + (unsigned)imm);
+    printf("RS is %x\tIMM is %x\t ADDR is %x\n", CURRENT_STATE.REGS[rs], imm, addr);
     /* For now just check if the addr > 0   */
     /* if true, then the instruction is ok  */
-    if ((addr > 0) && (addr < 0x10100000)) {
+    if ((addr > MEM_DATA_START) && (addr < (MEM_DATA_START + MEM_DATA_SIZE))) {
         return 1;
     }
-    else if ((unsigned)(CURRENT_STATE.REGS[rs] > 0x10100000)) {
+    else if ((unsigned)(CURRENT_STATE.REGS[rs] > (MEM_DATA_START + MEM_DATA_SIZE))) {
         return 2;
     }
     return 0;

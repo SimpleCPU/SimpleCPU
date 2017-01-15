@@ -10,16 +10,6 @@
 /* Main memory.                                                */
 /***************************************************************/
 
-#define MEM_DATA_START  0x10000000
-#define MEM_DATA_SIZE   0x00100000
-#define MEM_TEXT_START  0x00000000
-#define MEM_TEXT_SIZE   0x00100000
-#define MEM_STACK_START 0x7ff00000
-#define MEM_STACK_SIZE  0x00100000
-#define MEM_KDATA_START 0x90000000
-#define MEM_KDATA_SIZE  0x00100000
-#define MEM_KTEXT_START 0x80000000
-#define MEM_KTEXT_SIZE  0x00100000
 
 typedef struct {
     uint32_t start, size;
