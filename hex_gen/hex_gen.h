@@ -19,8 +19,19 @@ struct CPU_Struct {
     int instr;          /* the hex value of the instruction */
     int valid;          /* whether this entry is valid      */
 } CPU[999];
+typedef struct CPU_State_Struct {
+
+  uint32_t PC;		        /* program counter */
+  uint32_t REGS[32]; /* register file. */
+  uint32_t HI, LO;          /* special regs for mult/div. */
+} CPU_State;
+
+/* Data Structure for Latch */
+
+extern CPU_State CURRENT_STATE;
 int instr_gen = 0;      /* keeps a count of the number of   */
                         /* instructions generated           */
+extern int prev_pc;
 const int funct_val_r_type[13] = {
     ADD,        ADDU,       AND,
     /*DIV,        DIVU,       JALR,*/
@@ -54,9 +65,9 @@ const char* funct_str_r_type[13] = {
     "SRL",        "SRLV",       "SUB",
     "SUBU",       "SYSCALL",    "XOR"
 };*/
-const int opcode_val_i_type[9] = {
+const int opcode_val_i_type[10] = {
     ADDI,       ADDIU,      ANDI,
-    /*BEQ,        BGEZ,       BGEZAL,
+    BEQ,        /*BGEZ,       BGEZAL,
     BGTZ,       BLEZ,       BLTZ,
     BLTZAL,     BNE,        LB,
     LBU,        LH,         LHU,
@@ -64,9 +75,9 @@ const int opcode_val_i_type[9] = {
     /*SB,         SH,*/         SW,
     SLTI,       SLTIU,      XORI
 };
-const char* opcode_str_i_type[9] = {
+const char* opcode_str_i_type[10] = {
     "ADDI",       "ADDIU",      "ANDI",
-    /*BEQ,        BGEZ,       BGEZAL,
+    "BEQ",        /*BGEZ,       BGEZAL,
     BGTZ,       BLEZ,       BLTZ,
     BLTZAL,     BNE,        LB,
     LBU,        LH,         LHU,

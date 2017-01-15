@@ -23,8 +23,8 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     int sign_ext = 0;
     int sign = ((imm & 0x8000)>>15);
     if ((opcode == 2) || 
-        (opcode == 4) ||
-        (opcode == 8)
+        (opcode == 5) ||
+        (opcode == 9)
     ) {
         sign_ext = 0;
     }
@@ -47,7 +47,7 @@ void gen_i_instr () {
     int     rs, rt;
     int     hex_instr;
     int     imm;
-    int     rand_opcode_idx = rand()%9;
+    int     rand_opcode_idx = rand()%10;
 
     opcode  = opcode_val_i_type [rand_opcode_idx];
     rt      = rand() % 32;
@@ -56,9 +56,12 @@ RS:
 IMM:    
     imm     = rand() % 65535;   /* 16-bit signal */
 
-    if ((rand_opcode_idx == 3) || (rand_opcode_idx == 5)) {
+    if ((rand_opcode_idx == 4) || (rand_opcode_idx == 6)) {
         if ((check_ls_addr (rs, imm)) == 2) goto RS;
         if ((check_ls_addr (rs, imm)) == 0) goto IMM;
+    }
+    if ((rand_opcode_idx == 3)) {
+        if ((check_brn_addr (imm)) == 0) goto IMM;
     }
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
@@ -70,7 +73,8 @@ IMM:
     if (instr_gen == 0)
         update_cpu (0, hex_instr, 1);
     else
-        update_cpu (CPU[instr_gen-1].PC + 4, hex_instr, 1);
+        update_cpu (prev_pc, hex_instr, 1);
+    prev_pc = CURRENT_STATE.PC;
     instr_gen++;
 }
 
@@ -114,7 +118,8 @@ void gen_r_instr () {
     if (instr_gen == 0)
         update_cpu (0, hex_instr, 1);
     else
-        update_cpu (CPU[instr_gen-1].PC + 4, hex_instr, 1);
+        update_cpu (prev_pc, hex_instr, 1);
+    prev_pc = CURRENT_STATE.PC;
     instr_gen++;
 }
 
