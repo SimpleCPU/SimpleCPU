@@ -206,6 +206,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
             }
+            else {
+                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            }
         break;
         case (0x05): //BNE
             if (CURRENT_STATE.REGS[rs] != CURRENT_STATE.REGS[rt]) {
@@ -214,6 +217,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm = imm << 2;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
+            }
+            else {
+                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             }
         break;
         case (0x06): //BLEZ
@@ -224,6 +230,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
             }
+            else {
+                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            }
         break;
         case (0x07): //BGTZ
             if ((int32_t)CURRENT_STATE.REGS[rs] > 0) {
@@ -232,6 +241,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm = imm << 2;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
+            }
+            else {
+                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             }
         break;
         case (0x08): //ADDI
@@ -413,6 +425,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                     address = (sign) ? (imm | shift_val) : imm;
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
                 }
+                else {
+                    NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                }
             }
             else if (CURRENT_STATE.REGS[rt] == 1) { //BGEZ
                 if ((int32_t)CURRENT_STATE.REGS[rs] >= 0) {
@@ -421,6 +436,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                     imm = imm << 2;
                     address = (sign) ? (imm | shift_val) : imm;
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
+                }
+                else {
+                    NEXT_STATE.PC = CURRENT_STATE.PC + 4;
                 }
             }
             else if (CURRENT_STATE.REGS[rt] == 0x10) { //BLTZAL
@@ -432,6 +450,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
                     NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
                 }
+                else {
+                    NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                }
             }
             else if (CURRENT_STATE.REGS[rt] == 0x11) { //BGEZAL
                 if ((int32_t)CURRENT_STATE.REGS[rs] >= 0) {
@@ -441,6 +462,9 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                     address = (sign) ? (imm | shift_val) : imm;
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
                     NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
+                }
+                else {
+                    NEXT_STATE.PC = CURRENT_STATE.PC + 4;
                 }
             }
         break;
@@ -520,6 +544,24 @@ int check_ls_addr (int rs, int imm) {
     }
     else if ((unsigned)(CURRENT_STATE.REGS[rs] > (MEM_DATA_START + MEM_DATA_SIZE))) {
         return 2;
+    }
+    return 0;
+}
+
+/* The following function checks if the calculated address      */
+/* is a valid branch address. If the address is valid, the      */
+/* function returns 1.                                          */
+int check_brn_addr (int imm) {
+    int shift_val = shift_const(14);
+    int sign = (imm & 0x8000)>>15 ? 1 : 0;
+    imm = imm << 2;
+    imm = (sign) ? (imm | shift_val) : imm;
+    unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
+    printf("BRN ADDR is %x\n", addr);
+    /* For now just check if the addr > 0   */
+    /* if true, then the instruction is ok  */
+    if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
+        return 1;
     }
     return 0;
 }
