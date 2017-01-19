@@ -47,7 +47,9 @@ void gen_i_instr () {
     int     rs, rt;
     int     hex_instr;
     int     imm;
-    int     rand_opcode_idx = rand()%10;
+    int     rand_opcode_idx;
+    START:
+    rand_opcode_idx = rand()%10;
 
     opcode  = opcode_val_i_type [rand_opcode_idx];
     rt      = rand() % 32;
@@ -61,7 +63,8 @@ IMM:
         if ((check_ls_addr (rs, imm)) == 0) goto IMM;
     }
     if ((rand_opcode_idx == 3)) {
-        if ((check_brn_addr (imm)) == 0) goto IMM;
+        goto START;
+        //if ((check_brn_addr (imm)) == 0) goto IMM;
     }
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
