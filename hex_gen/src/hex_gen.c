@@ -32,7 +32,7 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
         sign_ext = 1;
     }
     if (sign_ext) {
-        imm = (sign) ? imm | 0xFFFF0000 : imm;
+        imm = (sign) ? (imm | 0xFFFF0000) : (unsigned)imm;
     }
     printf ("%4s %s, %s, %x\n", 
             opcode_str_i_type[opcode],
