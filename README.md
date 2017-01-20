@@ -27,6 +27,113 @@ The CPU implementation is carried out in Verilog which is widely used across aca
 Since CPU verification requires that the CPU should work under all possible combinations of instructions available in the instruction set architecture, it becomes a daunting task to cover all these instructions. To avoid this we have written the Hex Generator tool from scracth and using basic C such that students find it more appealing. The tool generates random instruction sequences and dumps the hex value for every generated instruction - thus the name Hex Generator. 
 
 Here's an example simulation of a single cycle 32-bit MIPS CPU running a random instruction sequence along with an instruction set simulator which helps in checking the RTL state as in when each instruction retires. 
+```sh
+perl run.pl 
+make iss
+gcc -fPIC -W -shared -g -m32 -O2 main.c sim.c -o iss.so
+cp iss.so ../../
+rm -rf vsim.wlf wlf* transcript work/
+vlib work
+vlog testbench/* verilog/*
+Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+-- Compiling module top_tb
+-- Compiling module adder
+-- Compiling module alu
+-- Compiling module carry_lookahead_adder
+-- Compiling module carry_lookahead_gen
+-- Compiling module comparator
+-- Compiling module control
+-- Compiling module data_mem
+-- Compiling module decode
+-- Compiling module instr_mem
+-- Compiling module issue
+-- Compiling module logical
+-- Compiling module pc_reg
+-- Compiling module reduced_full_adder
+-- Compiling module regfile
+-- Compiling module shifter
+-- Compiling module top
+
+Top level modules:
+	top_tb
+	issue
+vsim -c top_tb -sv_lib iss -do "onElabError resume;  run -all; exit" | tee sim.logReading /home/rahul/altera/14.0/modelsim_ase/tcl/vsim/pref.tcl 
+
+# 10.1e
+
+ vsim -do {onElabError resume;  run -all; exit} -c -sv_lib iss top_tb 
+ Loading sv_std.std
+ Loading work.top_tb
+ Loading work.top
+ Loading work.pc_reg
+ Loading work.adder
+ Loading work.carry_lookahead_adder
+ Loading work.reduced_full_adder
+ Loading work.carry_lookahead_gen
+ Loading work.instr_mem
+ Loading work.decode
+ Loading work.regfile
+ Loading work.alu
+ Loading work.shifter
+ Loading work.logical
+ Loading work.comparator
+ Loading work.data_mem
+ Loading work.control
+ Loading ./iss.so
+ onElabError resume 
+ resume
+   run -all 
+ ** Warning: (vsim-PLI-3408) Too few data words read on line 13 of file "instr_hex". Expected 1000, found 12.    : testbench/init_imem.sv(7)
+    Time: 0 ps  Iteration: 0  Instance: /top_tb
+ MIPS Simulator
+ 
+ Loading instr_hex
+ Read 12 words from program into memory.
+ 
+ Init done
+ CPU initialised
+ 
+ [RTL]  	PC:00000000	Instr:ae695102	R19:00000000	R9:00000000
+ [MODEL]	PC:00000000	Instr:ae695102	R19:00000000	R9:00000000
+ 
+ [RTL]  	PC:00000004	Instr:ad2c282a	R9:00000000	R12:00000000
+ [MODEL]	PC:00000004	Instr:ad2c282a	R9:00000000	R12:00000000
+ 
+ [RTL]  	PC:00000008	Instr:00dc10e5	R2:00000000	R6:00000000	R28:00000000
+ [MODEL]	PC:00000008	Instr:00dc10e5	R2:00000000	R6:00000000	R28:00000000
+ 
+ [RTL]  	PC:0000000c	Instr:01076ee3	R13:00000000	R8:00000000	R7:00000000
+ [MODEL]	PC:0000000c	Instr:01076ee3	R13:00000000	R8:00000000	R7:00000000
+ 
+ [RTL]  	PC:00000010	Instr:0073fb80	R31:00000000	R19:00000000	R19:00000000
+ [MODEL]	PC:00000010	Instr:0073fb80	R31:00000000	R19:00000000	R19:00000000
+ 
+ [RTL]  	PC:00000014	Instr:3246a1a8	R18:00000000	R6:00000000
+ [MODEL]	PC:00000014	Instr:3246a1a8	R18:00000000	R6:00000000
+ 
+ [RTL]  	PC:00000018	Instr:38bd1535	R5:00000000	R29:00001535
+ [MODEL]	PC:00000018	Instr:38bd1535	R5:00000000	R29:00001535
+ 
+ [RTL]  	PC:0000001c	Instr:028b9780	R18:00000000	R11:00000000	R11:00000000
+ [MODEL]	PC:0000001c	Instr:028b9780	R18:00000000	R11:00000000	R11:00000000
+ 
+ [RTL]  	PC:00000020	Instr:ae9b2012	R20:00000000	R27:00000000
+ [MODEL]	PC:00000020	Instr:ae9b2012	R20:00000000	R27:00000000
+ 
+ [RTL]  	PC:00000024	Instr:03bc3862	R7:00001535	R29:00001535	R28:00000000
+ [MODEL]	PC:00000024	Instr:03bc3862	R7:00001535	R29:00001535	R28:00000000
+ 
+ [RTL]  	PC:00000028	Instr:2402000a	R0:00000000	R2:0000000a
+ [MODEL]	PC:00000028	Instr:2402000a	R0:00000000	R2:0000000a
+ 
+ [RTL]  	PC:0000002c	Instr:0000000c	R0:00000000	R0:00000000	R0:00000000
+ [MODEL]	PC:0000002c	Instr:0000000c	R0:00000000	R0:00000000	R0:00000000
+ 
+ End of simulation reached
+ 
+ ** Note: $finish    : testbench/top_tb.sv(83)
+    Time: 240 ps  Iteration: 1  Instance: /top_tb
+```
 
 <a id="Installation"></a>
 Installation
