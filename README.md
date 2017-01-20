@@ -135,6 +135,8 @@ vsim -c top_tb -sv_lib iss -do "onElabError resume;  run -all; exit" | tee sim.l
     Time: 240 ps  Iteration: 1  Instance: /top_tb
 ```
 
+The entire simulation can be carried out by simply running the "run.pl" perl script. The script compiles the model version and dumps the .so file used by the simulator for C-DPI calls. If there aren't any errors during make, the HDL code is then compiled and simulated. From the above simulation log it is quite evident that both model and RTL are simulating the same set of instructions and as the instruction retires the values are compared to remove any differences between the two implementations. The simulation is finished once the testbench detects the "syscall" instruction with register R2 containing the value 10.
+
 <a id="Installation"></a>
 Installation
 ------------
