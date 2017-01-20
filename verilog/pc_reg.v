@@ -2,10 +2,10 @@
 
 module pc_reg
     (
-        wire        clk,
-        wire        reset,
-        wire[31:0]  next_pc_pc_reg_i,
-        wire[31:0]  next_pc_pc_reg_o
+        input   wire        clk,
+        input   wire        reset,
+        input   wire[31:0]  next_pc_pc_reg_i,
+        output  wire[31:0]  next_pc_pc_reg_o
     );
 
     reg [31:0] next_pc_pc_reg;
