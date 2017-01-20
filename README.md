@@ -143,11 +143,11 @@ Installation
 
 ## Linux
 
-
-Notes
+<a id="Documentation"></a>
+Documentation
 -----
 
-- Files/directories of interest:
+The documentation for every tool is present in the README file. The following files/directories may be of insterest:
   - verilog/README
   - testbench/iss/README
   - hex_gen/README
