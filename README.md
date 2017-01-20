@@ -33,3 +33,11 @@ Installation
 
 ## Linux
 
+
+Notes
+-----
+
+- Files/directories of interest:
+  - verilog/README
+  - testbench/iss/README
+  - hex_gen/README
