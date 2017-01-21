@@ -147,7 +147,7 @@ Installation
 Documentation
 -----
 
-The documentation for every tool is present in the README file. The following files/directories may be of insterest:
+The documentation for every tool is present in the README file. The following files/directories may be of interest:
   - verilog/README
   - testbench/iss/README
   - hex_gen/README
