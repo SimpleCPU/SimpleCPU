@@ -1,6 +1,33 @@
 Hex Generator Tool - 
 
 The hex generator tool is used for generating random instruction sequence tests and supports the following set of instructions - 
+ADD     
+ADDU    
+ADDI    
+ADDIU   
+AND     
+ANDI    
+BEQ     
+JR      
+LW      
+NOR     
+OR      
+ORI     
+SW      
+SLL     
+SLLV    
+SLT     
+SLTI    
+SLTIU   
+SLTU    
+SRA     
+SRAV    
+SRL     
+SRLV    
+SUB         
+SYSCALL 
+XOR     
+XORI
 
 The tool makes use of the already available Instruction Set simulator for generating the instructions. This helps in maintaining the test 
 integrity. The source of the tool is organised in the following manner
