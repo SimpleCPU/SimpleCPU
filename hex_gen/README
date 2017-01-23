@@ -1,3 +1,9 @@
 Hex Generator Tool - 
 
 The hex generator tool is used for generating random instruction sequence tests and supports the following set of instructions - 
+
+The tool makes use of the already available Instruction Set simulator for generating the instructions. This helps in maintaining the test integrity. The source of the tool is organised in the following manner
+Hex_gen/src/ - contains the .c and .h files
+Hex_gen/lib/ - contains the lib files required
+
+Currently,  the tool is designed as a simple C code but there are plans to extend it to be more object oriented in the future and possibly using C++ as the base language. The tool makes use of the available rand function in-order to randomly pick the type of the instruction (this could be either R-type instruction, I-type instruction or J-type instruction). Once the type is known, the opcode and funct field values are then selected randomly and hence the entire instruction hex is generated. Once the hex is generated the same instruction is loaded onto simulator memory (which is pointed by the current PC) and then executed. If the execution goes fine - the instruction is added and proceeds to the next instruction otherwise if the execution fails for some reason, the instruction is re-tried. 
