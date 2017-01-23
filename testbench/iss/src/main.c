@@ -316,6 +316,5 @@ extern void init () {
 int main () {
     init ();
     go();
-    mdump(0, 0x10010000);
     return 0;
 }
