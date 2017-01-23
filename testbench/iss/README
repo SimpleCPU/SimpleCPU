@@ -1,7 +1,60 @@
 Instruction Set Simulator
 
 The instruction set simulator is developed in C and supports the execution of the following instructions - 
-<list the instructions>
+ADD     
+ADDU    
+ADDI    
+ADDIU   
+AND     
+ANDI    
+BEQ     
+BGEZ    
+BGEZAL  
+BGTZ    
+BLEZ    
+BLTZ    
+BLTZAL  
+BNE     
+DIV     
+DIVU    
+J       
+JAL     
+JALR    
+JR      
+LB      
+LBU     
+LH      
+LHU     
+LUI     
+LW      
+MFHI    
+MFLO    
+MTHI    
+MTLO    
+MULT    
+MULTU   
+NOR     
+OR      
+ORI     
+SB      
+SH      
+SW      
+SLL     
+SLLV    
+SLT     
+SLTI    
+SLTIU   
+SLTU    
+SRA     
+SRAV    
+SRL     
+SRLV    
+SUB     
+SUBU    
+SYSCALL 
+XOR     
+XORI    
+
 The simulator provides support for the hex generator tool and also supports the testbench by providing various API calls through DPI support in system verilog. 
 The source code is organised in the following 
 manner: 
