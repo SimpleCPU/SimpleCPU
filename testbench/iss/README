@@ -66,3 +66,9 @@ the execution by evaluating the case statement using  either the opcode field va
 simulator also supports the architecture register  dumps as well as the memory dump for a range of  addresses. These utility functions help in the debugging process. 
 Please go through the source code to understand more about the implementation technique. The current simulator supports MIPS instruction set and support for other 
 instruction set simulators (ARM, x86) is in progress!
+
+Running the generated hex file on the simulator - 
+Inside testbench/iss/ directory:
+  make sim
+  ./sim
+ (Note: Make sure instr_hex file is present inside testbench/iss directory)
