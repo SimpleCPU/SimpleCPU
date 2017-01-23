@@ -40,3 +40,98 @@ using C++ as the base language. The tool makes use of the available rand functio
 values are then selected randomly and hence the entire instruction hex is generated. Once the hex is generated the same instruction is
 loaded onto simulator memory (which is pointed by the current PC) and then executed. If the execution goes fine - the instruction is added
 and proceeds to the next instruction otherwise if the execution fails for some reason, the instruction is re-tried. 
+
+Generating a test - 
+Inside hex_gen directory do - 
+  make
+  ./hex_gen -i <no_of_i_type_instr> -r <no_of_r_type_instr> -j <no_of_j_type_instr>
+  
+ Sample output - 
+  ./hex_gen -i 10 -r 10
+  
+  Generating the hex for the following set of instructions
+	  10 - R-Type instructions
+	  10 - I-Type instructions
+	   0 - J-Type instructions
+RS is 0	IMM is 5102	 ADDR is 5102
+RS is 0	IMM is 5102	 ADDR is 5102
+I Type instr generated - 0xae695102	
+Loaded instr opcode: ae695102 into memory location 0.
+  SW R9, R19, 5102
+RS is 0	IMM is ffffc3b5	 ADDR is ffffc3b5
+RS is 0	IMM is ffffc3b5	 ADDR is ffffc3b5
+RS is 0	IMM is ffff95d5	 ADDR is ffff95d5
+RS is 0	IMM is ffff95d5	 ADDR is ffff95d5
+RS is 0	IMM is 282a	 ADDR is 282a
+RS is 0	IMM is 282a	 ADDR is 282a
+I Type instr generated - 0xad2c282a	
+Loaded instr opcode: ad2c282a into memory location 4.
+  SW R12, R9, 282a
+R Type instr generated - 0x0dc10e5	
+Loaded instr opcode: dc10e5 into memory location 8.
+  OR R2, R6, R28
+R Type instr generated - 0x1076ee3	
+Loaded instr opcode: 1076ee3 into memory location c.
+SUBU R13, R8, R7
+R Type instr generated - 0x073fb80	
+Loaded instr opcode: 73fb80 into memory location 10.
+ SLL R31, R3, R19
+I Type instr generated - 0x3246a1a8	
+Loaded instr opcode: 3246a1a8 into memory location 14.
+ANDI R6, R18, a1a8
+I Type instr generated - 0x38bd1535	
+Loaded instr opcode: 38bd1535 into memory location 18.
+XORI R29, R5, 1535
+R Type instr generated - 0x28b9780	
+Loaded instr opcode: 28b9780 into memory location 1c.
+ SLL R18, R20, R11
+RS is 0	IMM is ffff9647	 ADDR is ffff9647
+RS is 0	IMM is ffff9647	 ADDR is ffff9647
+RS is 0	IMM is ffffb2b9	 ADDR is ffffb2b9
+RS is 0	IMM is ffffb2b9	 ADDR is ffffb2b9
+RS is 0	IMM is ffffcc44	 ADDR is ffffcc44
+RS is 0	IMM is ffffcc44	 ADDR is ffffcc44
+RS is 0	IMM is 2012	 ADDR is 2012
+RS is 0	IMM is 2012	 ADDR is 2012
+I Type instr generated - 0xae9b2012	
+Loaded instr opcode: ae9b2012 into memory location 20.
+  SW R27, R20, 2012
+R Type instr generated - 0x3bc3862	
+Loaded instr opcode: 3bc3862 into memory location 24.
+ SUB R7, R29, R28
+R Type instr generated - 0x0210fa5	
+Loaded instr opcode: 210fa5 into memory location 28.
+  OR R1, R1, R1
+R Type instr generated - 0x03ebfa4	
+Loaded instr opcode: 3ebfa4 into memory location 2c.
+ AND R23, R1, R30
+R Type instr generated - 0x2cfc2e2	
+Loaded instr opcode: 2cfc2e2 into memory location 30.
+ SUB R24, R22, R15
+R Type instr generated - 0x21bdb24	
+Loaded instr opcode: 21bdb24 into memory location 34.
+ AND R27, R16, R27
+R Type instr generated - 0x28cc720	
+Loaded instr opcode: 28cc720 into memory location 38.
+ ADD R24, R20, R12
+I Type instr generated - 0x3342d092	
+Loaded instr opcode: 3342d092 into memory location 3c.
+ANDI R2, R26, d092
+I Type instr generated - 0x355a3901	
+Loaded instr opcode: 355a3901 into memory location 40.
+ ORI R26, R10, 3901
+I Type instr generated - 0x24d13f54	
+Loaded instr opcode: 24d13f54 into memory location 44.
+ADDIU R17, R6, 3f54
+I Type instr generated - 0x203ed3c2	
+Loaded instr opcode: 203ed3c2 into memory location 48.
+ADDI R30, R1, ffffd3c2
+RS is 0	IMM is 4cbc	 ADDR is 4cbc
+RS is 0	IMM is 4cbc	 ADDR is 4cbc
+I Type instr generated - 0x8d1b4cbc	
+Loaded instr opcode: 8d1b4cbc into memory location 4c.
+Addr:4cbc	mem_content:efefefef
+  LW R27, R8, 4cbc
+Loaded instr opcode: 2402000a into memory location 50.
+Loaded instr opcode: c into memory location 54.
+
