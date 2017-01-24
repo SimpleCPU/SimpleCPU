@@ -154,6 +154,8 @@ Get the latest perl module:
 sudo apt-get install perl
 ```
 
+The SimpleCPU project has been tested on Linux (Ubuntu 14.04) only. Though it shouldn't be hard to port the scripts for windows as well.
+
 <a id="Documentation"></a>
 Documentation
 -----
