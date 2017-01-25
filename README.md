@@ -149,6 +149,10 @@ https://www.altera.com/downloads/software/modelsim-starter/121.html
 
 (Note: You need to be enrolled in a university to download the started edition)
 
+You can also download a reduced version of modelsim from the following link:
+```
+https://github.com/SimpleCPU/SimpleCPU/releases/download/v0.0.1/modelsim_reduced.tgz
+```
 Get the latest perl module:
 ```sh
 sudo apt-get install perl
