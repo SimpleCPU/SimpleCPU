@@ -169,3 +169,7 @@ The documentation for every tool is present in the README file. The following fi
   - verilog/README
   - testbench/iss/README
   - hex_gen/README
+
+<a id="Contribute"></a>
+Contribute
+-----
