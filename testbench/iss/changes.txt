@@ -1,7 +1,0 @@
-List of changes done - 
-The following paragraph details the changes made in the simulator. 
-There were a whole lot of changes done in order to have the current implementation support 
-co-simulation along with the RTL. 
-The entire shell related functions were removed as other tools using the simulator would directly use either the run() or the go() functions. 
-
-Various other utility functions were added to provide support for the hex generation tool and the C-DPI calls.
