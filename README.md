@@ -147,7 +147,7 @@ Download the Altera modelsim version (for linux) from their webiste:
 
 https://www.altera.com/downloads/software/modelsim-starter/121.html
 
-(Note: You need to be enrolled in a university to download the started edition)
+(Note: You need to be enrolled in a university to download this edition)
 
 You can also download a reduced version of modelsim:
 ```
