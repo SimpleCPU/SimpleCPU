@@ -153,6 +153,7 @@ You can also download a reduced version of modelsim:
 ```
 wget https://github.com/SimpleCPU/SimpleCPU/releases/download/v0.0.1/modelsim_reduced.tgz
 ```
+(Note: The reduced version supports only the simulation and hence should be used just to qualify the changes done to hex generator or the fast model. This would ensure that the new changes doesn't break the current flow)
 
 Get the latest perl module:
 ```sh
@@ -172,4 +173,7 @@ The documentation for every tool is present in the README file. The following fi
 
 <a id="Contribute"></a>
 Contribute
+-----
+
+Future Work
 -----
