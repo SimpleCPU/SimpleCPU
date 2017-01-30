@@ -160,6 +160,10 @@ Get the latest perl module:
 sudo apt-get install perl
 ```
 
+```sh
+sudo apt-get install libc6-dev-i386
+```
+
 The SimpleCPU project has been tested on Linux (Ubuntu 14.04) only. Though it shouldn't be hard to port the scripts for windows as well. We are working towards testing the project on windows environment as well. 
 
 <a id="Documentation"></a>
