@@ -56,14 +56,14 @@ void print_r (char *inst, int rs, int rt, int rd) {
 /* 25:21    rs              */
 /* 20:16    rt              */
 /* 15:0     immediate       */
-void print_i (char *inst, int rs, int rt, int i) {
+void print_i (char *inst, int rs, int rt, int imm) {
     printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, R%-2d\n", 
             CURRENT_STATE.PC,
             instr_opcode,
             inst,
             rs,
             rt,
-            i
+            imm
     );
 }
 
