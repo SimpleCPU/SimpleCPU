@@ -40,7 +40,7 @@ int shift_const (unsigned int shamt) {
 /* 15:11    rd              */
 /* 10:6     shamt           */
 /* 5:0      funct           */
-void print_r (char *inst, int rs, int rt, int rd) {
+void print_r (char *inst, int rd, int rt, int rs) {
     printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, R%-2d\n", 
             CURRENT_STATE.PC,
             instr_opcode,
@@ -57,7 +57,7 @@ void print_r (char *inst, int rs, int rt, int rd) {
 /* 20:16    rt              */
 /* 15:0     immediate       */
 void print_i (char *inst, int rs, int rt, int imm) {
-    printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, R%-2d\n", 
+    printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, %-2d\n", 
             CURRENT_STATE.PC,
             instr_opcode,
             inst,
@@ -71,7 +71,7 @@ void print_i (char *inst, int rs, int rt, int imm) {
 /* 31:26    opcode          */
 /* 25:0     target          */
 void print_j (char *inst, int target) {
-    printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d\n", 
+    printf ("PC:%.8x\tINSTR:%.8x\t %4s %-2d\n", 
             CURRENT_STATE.PC,
             instr_opcode,
             inst,
