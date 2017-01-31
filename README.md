@@ -153,15 +153,29 @@ You can also download a reduced version of modelsim:
 ```
 wget https://github.com/SimpleCPU/SimpleCPU/releases/download/v0.0.1/modelsim_reduced.tgz
 ```
-(Note: The reduced version supports only the simulation and hence should be used just to qualify the changes done to hex generator or the fast model. This would ensure that the new changes doesn't break the current flow)
+Untar the tarball and set the path in the env variable:
+```sh
+tar -xvf modelsim_reduced.tgz
+export PATH=$PATH:modelsim_reduced/bin
+```
+
+Note: The free version of modelsim supports 32-bit only. To install the dependent 32-bit libraries on a 64-bit linux machine:
+```sh
+sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get install libc6-dev-i386
+sudo apt-get install gcc-multilib g++-multilib \
+lib32z1 lib32stdc++6 lib32gcc1 \
+expat:i386 fontconfig:i386 libfreetype6:i386 libexpat1:i386 libc6:i386 libgtk-3-0:i386 \
+libcanberra0:i386 libpng12-0:i386 libice6:i386 libsm6:i386 libncurses5:i386 zlib1g:i386 \
+libx11-6:i386 libxau6:i386 libxdmcp6:i386 libxext6:i386 libxft2:i386 libxrender1:i386 \
+libxt6:i386 libxtst6:i386
+```
 
 Get the latest perl module:
 ```sh
 sudo apt-get install perl
-```
-
-```sh
-sudo apt-get install libc6-dev-i386
 ```
 
 The SimpleCPU project has been tested on Linux (Ubuntu 14.04) only. Though it shouldn't be hard to port the scripts for windows as well. We are working towards testing the project on windows environment as well. 
