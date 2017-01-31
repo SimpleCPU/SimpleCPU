@@ -271,6 +271,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             }
+            print_i ((char *)"BEQ", rs, rt, imm);
         break;
         case (0x05): //BNE
             if (CURRENT_STATE.REGS[rs] != CURRENT_STATE.REGS[rt]) {
@@ -283,6 +284,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             }
+            print_i ((char *)"BNE", rs, rt, imm);
         break;
         case (0x06): //BLEZ
             if ((int32_t)CURRENT_STATE.REGS[rs] <= 0) {
@@ -318,6 +320,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             imm = (sign) ? (imm | shift_val) : imm;
             NEXT_STATE.REGS[rt] = CURRENT_STATE.REGS[rs] + imm;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"ADDI", rs, rt, imm);
         break;
         case (0x09): //ADDIU
             if (rt == 0) {
@@ -329,6 +332,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             imm = (sign) ? (imm | shift_val) : imm;
             NEXT_STATE.REGS[rt] = CURRENT_STATE.REGS[rs] + imm;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"ADDIU", rs, rt, imm);
         break;
         case (0x0a): //SLTI
             if (rt == 0) {
@@ -340,6 +344,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             imm = (sign) ? (imm | shift_val) : imm;
             NEXT_STATE.REGS[rt] = ((int32_t)CURRENT_STATE.REGS[rs] < (int32_t)imm) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"SLTI", rs, rt, imm);
         break;
         case (0x0b): //SLTIU
             if (rt == 0) {
@@ -351,6 +356,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             imm = (sign) ? (imm | shift_val) : imm;
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] < (uint32_t)imm) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"SLTIU", rs, rt, imm);
         break;
         case (0x0c): //ANDI
             if (rt == 0) {
@@ -359,6 +365,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             }
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] & (uint32_t)imm);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"ANDI", rs, rt, imm);
         break;
         case (0x0d): //ORI
             if (rt == 0) {
@@ -367,6 +374,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             }
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] | (uint32_t)imm);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"ORI", rs, rt, imm);
         break;
         case (0x0e): //XORI
             if (rt == 0) {
@@ -375,6 +383,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             }
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] ^ (uint32_t)imm);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_i ((char *)"XORI", rs, rt, imm);
         break;
         case (0x0f): //LUI
             if (rt == 0) {
@@ -551,15 +560,17 @@ void execute_j (unsigned int opcode, int target) {
     int sign;
     int shift_val;
     uint32_t address;
-    switch (opcode) {
-        case (0x02):
+    switch (opcode) { 
+        case (0x02): //J
             address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
+            print_j ((char *)"J", target);
         break;
-        case (0x03):
+        case (0x03): //JAL
             address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
+            print_j ((char *)"JAL", target);
         break;
         default:
             printf ("ERROR. Incorrect instruction opcode\n");
