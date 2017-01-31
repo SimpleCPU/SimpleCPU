@@ -33,6 +33,24 @@ int shift_const (unsigned int shamt) {
     }
 }
 
+/* R instruction format     */
+/* 31:26    opcode          */
+/* 25:21    rs              */
+/* 20:16    rt              */
+/* 15:11    rd              */
+/* 10:6     shamt           */
+/* 5:0      funct           */
+void print_r (char *inst, int rs, int rt, int rd) {
+    printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, R%-2d\n", 
+            CURRENT_STATE.PC,
+            instr_opcode,
+            inst,
+            rd,
+            rs,
+            rt
+    );
+}
+
 void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsigned int funct) {
     int sign;
     int shift_val;
@@ -52,6 +70,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] << shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            print_r ((char *)"SLL", rd, rt, rs);
         break;
         case (0x02): //SRL
             rt_as_src = 1;
@@ -518,7 +537,7 @@ void process_instruction() {
     /* execute one instruction here. You should use CURRENT_STATE and modify
      * values in NEXT_STATE. You can call mem_read_32() and mem_write_32() to
      * access memory. */
-    uint32_t instr_opcode = mem_read_32(CURRENT_STATE.PC);
+    instr_opcode = mem_read_32(CURRENT_STATE.PC);
     int type = decode_instr_type (instr_opcode);
     if (type == 0)
         decode_r (instr_opcode);
