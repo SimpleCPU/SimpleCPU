@@ -51,6 +51,34 @@ void print_r (char *inst, int rs, int rt, int rd) {
     );
 }
 
+/* I instruction format     */
+/* 31:26    opcode          */
+/* 25:21    rs              */
+/* 20:16    rt              */
+/* 15:0     immediate       */
+void print_i (char *inst, int rs, int rt, int i) {
+    printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, R%-2d\n", 
+            CURRENT_STATE.PC,
+            instr_opcode,
+            inst,
+            rs,
+            rt,
+            i
+    );
+}
+
+/* J instruction format     */
+/* 31:26    opcode          */
+/* 25:0     target          */
+void print_j (char *inst, int target) {
+    printf ("PC:%.8x\tINSTR:%.8x\t %4s R%-2d\n", 
+            CURRENT_STATE.PC,
+            instr_opcode,
+            inst,
+            target
+    );
+}
+
 void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsigned int funct) {
     int sign;
     int shift_val;
