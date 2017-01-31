@@ -1,4 +1,4 @@
-# SimpleCPU(http://simplecpu.github.io/)
+# SimpleCPU(https://simplecpu.github.io/SimpleCPU/)
 An open source CPU design and verification platform for academia 
 
  * [About](#what-is-SimpleCPU)
