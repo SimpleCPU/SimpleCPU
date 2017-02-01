@@ -192,6 +192,7 @@ The documentation for every tool is present in the README file. The following fi
 <a id="Contribute"></a>
 Contribute
 -----
+See [Contributing](CONTRIBUTING.md)
 
 Future Work
 -----
