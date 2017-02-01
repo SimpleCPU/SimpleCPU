@@ -4,7 +4,7 @@ An open source CPU design and verification platform for academia
  * [About](#what-is-SimpleCPU)
  * [Installation](#installation)
  * [Documentation](#documentation)
- * [Contribute](#contribute-to-simplecpu)
+ * [Contribute](#Contribute)
 
 
 <a id="what-is-SimpleCPU"></a>
