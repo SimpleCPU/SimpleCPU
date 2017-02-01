@@ -1,10 +1,10 @@
-# SimpleCPU(https://simplecpu.github.io/SimpleCPU/)
+# [SimpleCPU](https://simplecpu.github.io/SimpleCPU/)
 An open source CPU design and verification platform for academia 
 
  * [About](#what-is-SimpleCPU)
  * [Installation](#installation)
  * [Documentation](#documentation)
- * [Contribute](#contribute-to-simplecpu)
+ * [Contribute](#Contribute)
 
 
 <a id="what-is-SimpleCPU"></a>
@@ -178,6 +178,12 @@ Get the latest perl module:
 sudo apt-get install perl
 ```
 
+Run the simulation (for single cycle MIPS CPU) - 
+```
+perl run.pl
+```
+The entire simulation is carried out by the "run.pl" perl script. The script first compiles the model version and dumps the .so file used by the simulator for C-DPI calls. If there aren't any errors during make, the HDL code is then compiled and simulated.
+
 The SimpleCPU project has been tested on Linux (Ubuntu 14.04) only. Though it shouldn't be hard to port the scripts for windows as well. We are working towards testing the project on windows environment as well. 
 
 <a id="Documentation"></a>
@@ -192,6 +198,7 @@ The documentation for every tool is present in the README file. The following fi
 <a id="Contribute"></a>
 Contribute
 -----
+See [Contributing](CONTRIBUTING.md)
 
 Future Work
 -----
