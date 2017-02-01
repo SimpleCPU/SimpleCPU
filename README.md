@@ -178,6 +178,12 @@ Get the latest perl module:
 sudo apt-get install perl
 ```
 
+Run the simulation (for single cycle MIPS CPU) - 
+```
+perl run.pl
+```
+The entire simulation is carried out by the "run.pl" perl script. The script first compiles the model version and dumps the .so file used by the simulator for C-DPI calls. If there aren't any errors during make, the HDL code is then compiled and simulated.
+
 The SimpleCPU project has been tested on Linux (Ubuntu 14.04) only. Though it shouldn't be hard to port the scripts for windows as well. We are working towards testing the project on windows environment as well. 
 
 <a id="Documentation"></a>
