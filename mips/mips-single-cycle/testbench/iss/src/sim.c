@@ -814,7 +814,6 @@ void execute_j (unsigned int opcode, int target) {
         case (0x02): //J
             address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
-            print_j ((char *)"J", target);
             printf ("\nPC:%.8x\tINSTR:%.8x\t J %-2d", 
             CURRENT_STATE.PC,
             instr_opcode,
@@ -825,7 +824,6 @@ void execute_j (unsigned int opcode, int target) {
             address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
-            print_j ((char *)"JAL", target);
             printf ("\nPC:%.8x\tINSTR:%.8x\t JAL %-2d", 
             CURRENT_STATE.PC,
             instr_opcode,
