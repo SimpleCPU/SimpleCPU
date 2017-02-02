@@ -14,7 +14,7 @@ SimpleCPU is a CPU design and verification platform with a bunch of design and v
 
 SimpleCPU focuses on the fundamentals. Everything has been written from scratch such as ALUs, multipliers, decoders etc. 
 
-Our future goal includes a GUI/CLI tool to help easily build/add-on more blocks to different CPU designs and carry out simulations along with various performance numbers which would help researchers on their projects. 
+Our future goal includes a GUI/CLI tool to help easily build/add-on more blocks to different CPU designs and carry out simulations along with various performance numbers which would help researchers on their projects. Apart from this we would also want SimpleCPU to support different implementations and Instruction Set Architectures. 
 
 Brief Overview
 --------------
@@ -177,6 +177,12 @@ Get the latest perl module:
 ```sh
 sudo apt-get install perl
 ```
+
+Run the simulation (for single cycle MIPS CPU) - 
+```
+perl run.pl
+```
+The entire simulation is carried out by the "run.pl" perl script. The script first compiles the model version and dumps the .so file used by the simulator for C-DPI calls. If there aren't any errors during make, the HDL code is then compiled and simulated.
 
 The SimpleCPU project has been tested on Linux (Ubuntu 14.04) only. Though it shouldn't be hard to port the scripts for windows as well. We are working towards testing the project on windows environment as well. 
 

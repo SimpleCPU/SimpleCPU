@@ -57,7 +57,7 @@ void print_r (char *inst, int rd, int rt, int rs) {
 /* 20:16    rt              */
 /* 15:0     immediate       */
 void print_i (char *inst, int rs, int rt, int imm) {
-    printf ("\nPC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, %-8x\n", 
+    printf ("\nPC:%.8x\tINSTR:%.8x\t %4s R%-2d, R%-2d, 0x%-8x\n", 
             CURRENT_STATE.PC,
             instr_opcode,
             inst,
