@@ -74,7 +74,7 @@ module top
     );
 
     assign next_brn_eq_pc_top = (branch_top & z_top) ? next_beq_pc_top : next_seq_pc_top;
-    assign next_jmp_pc_top = {instr_top[25:0] << 2, next_seq_pc_top[31:28]};
+    assign next_jmp_pc_top = {next_seq_pc_top[31:28], instr_top[25:0] << 2};
     assign next_pc_top = jump_top ? next_jmp_pc_top : next_brn_eq_pc_top;
 
     instr_mem I_MEM1 (
