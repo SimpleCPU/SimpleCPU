@@ -156,7 +156,7 @@ wget https://github.com/SimpleCPU/SimpleCPU/releases/download/v0.0.1/modelsim_re
 Untar the tarball and set the path in the env variable:
 ```sh
 tar -xvf modelsim_reduced.tgz
-export PATH=$PATH:modelsim_reduced/bin
+export PATH=$PATH:<Complete path to modelsim>/modelsim_reduced/linux
 ```
 
 Note: The free version of modelsim supports 32-bit only. To install the dependent 32-bit libraries on a 64-bit linux machine:
