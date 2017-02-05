@@ -95,12 +95,12 @@ const char* opcode_str_i_type[10] = {
     "SB",         "SH",         "SW",
     "SLTI",       "SLTIU",      "XORI"
 };*/
-/*const int opcode_val_j_type[2] = {
+const int opcode_val_j_type[2] = {
     J,          JAL
 };
 const char* opcode_str_j_type[2] = {
     "J",          "JAL"
-};*/
+};
 /*const char* register_str[] = {	
     "$0",       "$at",      "$v0",  
     "$v1",      "$a0",      "$a1",  

@@ -14,6 +14,51 @@ void update_cpu (int pc, int instr, int valid) {
     CPU[instr_gen].valid    = valid;
 }
 
+/* R instruction format     */
+/* 31:26    opcode          */
+/* 25:21    rs              */
+/* 20:16    rt              */
+/* 15:11    rd              */
+/* 10:6     shamt           */
+/* 5:0      funct           */
+void print_assembled_r_instr (int funct, int rs, int rt, int rd) {
+    printf ("%4s %s, %s, %s\n", 
+            funct_str_r_type[funct],
+            register_str[rd],
+            register_str[rs],
+            register_str[rt]
+    );
+}
+
+void gen_r_instr () {
+    int     opcode, shamt, funct;
+    int     rs, rt, rd;
+    int     hex_instr;
+    int     rand_funct_idx = rand()%13;
+
+    opcode  = 0;
+    funct   = funct_val_r_type [rand_funct_idx];
+    shamt   = rand ()%32;
+    rs      = rand ()%32;
+    rt      = rand ()%32;
+    rd      = rand ()%32;
+
+    hex_instr = (opcode << 26) + (rs << 21) +
+                (rt << 16) + (rd << 11) +
+                (shamt << 6) + funct;
+
+    printf ("R Type instr generated - 0x%.7x\t\n", hex_instr);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
+    print_assembled_r_instr (rand_funct_idx, rs, rt, rd);
+    if (instr_gen == 0)
+        update_cpu (0, hex_instr, 1);
+    else
+        update_cpu (prev_pc, hex_instr, 1);
+    prev_pc = CURRENT_STATE.PC;
+    instr_gen++;
+}
+
 /* I instruction format     */
 /* 31:26    opcode          */
 /* 25:21    rs              */
@@ -81,43 +126,34 @@ IMM:
     instr_gen++;
 }
 
-/* R instruction format     */
+/* J instruction format     */
 /* 31:26    opcode          */
-/* 25:21    rs              */
-/* 20:16    rt              */
-/* 15:11    rd              */
-/* 10:6     shamt           */
-/* 5:0      funct           */
-void print_assembled_r_instr (int funct, int rs, int rt, int rd) {
-    printf ("%4s %s, %s, %s\n", 
-            funct_str_r_type[funct],
-            register_str[rd],
-            register_str[rs],
-            register_str[rt]
+/* 25:0     target          */
+void print_assembled_j_instr (int opcode, int target) {
+    printf ("%4s %-8x\n", 
+            opcode_str_j_type[opcode],
+            target
     );
 }
 
-void gen_r_instr () {
-    int     opcode, shamt, funct;
-    int     rs, rt, rd;
+void gen_j_instr () {
+    int     opcode, target;
     int     hex_instr;
-    int     rand_funct_idx = rand()%13;
+    int     rand_opcode_idx = rand()%2;
 
-    opcode  = 0;
-    funct   = funct_val_r_type [rand_funct_idx];
-    shamt   = rand ()%32;
-    rs      = rand ()%32;
-    rt      = rand ()%32;
-    rd      = rand ()%32;
+    opcode  = opcode_val_j_type [rand_opcode_idx];
+TARGET:
+    target   = rand ()%67108863; // random number for 26 bit ie (2^26 - 1)
+    if (check_j_addr (target) == 0)
+    {
+        goto TARGET;
+    }
+    hex_instr = (opcode << 26) + target;
 
-    hex_instr = (opcode << 26) + (rs << 21) +
-                (rt << 16) + (rd << 11) +
-                (shamt << 6) + funct;
-
-    printf ("R Type instr generated - 0x%.7x\t\n", hex_instr);
+    printf ("J Type instr generated - 0x%.7x\t\n", hex_instr);
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
-    print_assembled_r_instr (rand_funct_idx, rs, rt, rd);
+    // print_assembled_j_instr (rand_opcode_idx, target);
     if (instr_gen == 0)
         update_cpu (0, hex_instr, 1);
     else
@@ -146,7 +182,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
     int n = num_r + num_i + num_j;
     int r_gen = 0, i_gen = 0, j_gen = 0;
     for (i = 0; i < n;) {
-        int choice = rand () % 2;
+        int choice = rand () % 3;
         switch (choice) {
             // TODO: Add logic such that exact number 
             // of R, I and J instructions are generated
@@ -165,7 +201,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
                     }
                     else break;
             case 2: if (j_gen < num_j) {
-                        //gen_j_instr ();
+                        gen_j_instr ();
                         j_gen++;
                         i++;
                         break;

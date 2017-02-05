@@ -815,7 +815,7 @@ void execute_j (unsigned int opcode, int target) {
         case (0x02): //J
             address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
-            printf ("\nPC:%.8x\tINSTR:%.8x\t J %-2d", 
+            printf ("\nPC:%.8x\tINSTR:%.8x\t J %-8x\n", 
             CURRENT_STATE.PC,
             instr_opcode,
             NEXT_STATE.PC
@@ -825,7 +825,7 @@ void execute_j (unsigned int opcode, int target) {
             address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
-            printf ("\nPC:%.8x\tINSTR:%.8x\t JAL %-2d", 
+            printf ("\nPC:%.8x\tINSTR:%.8x\t JAL %-8x\n", 
             CURRENT_STATE.PC,
             instr_opcode,
             NEXT_STATE.PC
@@ -890,6 +890,20 @@ int check_brn_addr (int imm) {
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
     printf("BRN ADDR is %x\n", addr);
+    /* For now just check if the addr > 0   */
+    /* if true, then the instruction is ok  */
+    if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
+        return 1;
+    }
+    return 0;
+}
+
+/* The following function checks if the calculated address      */
+/* is a valid address. If the address is valid, the function    */
+/* returns 1.                                                   */
+int check_j_addr (int target) {
+    unsigned int addr = (((((unsigned)CURRENT_STATE.PC  + 4) >> 28) << 28) + ((unsigned)target << 2));
+    // printf("Target is %x\t ADDR is %x\n", target, addr);
     /* For now just check if the addr > 0   */
     /* if true, then the instruction is ok  */
     if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
