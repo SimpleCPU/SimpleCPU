@@ -1,0 +1,92 @@
+// Issue-Execute Pipeline Register
+
+module ex_pipe_reg
+    (
+        input   wire        clk,
+        input   wire        reset,
+        input   wire        clr,
+        input   wire        reg_wr_ex_pipe_reg_i,
+        input   wire        mem_to_reg_ex_pipe_reg_i,
+        input   wire        mem_wr_ex_pipe_reg_i,
+        input   wire[5:0]   alu_op_ex_pipe_reg_i,
+        input   wire        alu_src_ex_pipe_reg_i,
+        input   wire        reg_dst_ex_pipe_reg_i,
+        input   wire[4:0]   rt_ex_pipe_reg_i,
+        input   wire[4:0]   rs_ex_pipe_reg_i,
+        input   wire[4:0]   rd_ex_pipe_reg_i,
+        input   wire[31:0]  r_data_p1_ex_pipe_reg_i,
+        input   wire[31:0]  r_data_p2_ex_pipe_reg_i,
+        input   wire[31:0]  sign_imm_ex_pipe_reg_i,
+        output  wire        reg_wr_ex_pipe_reg_o,
+        output  wire        mem_to_reg_ex_pipe_reg_o,
+        output  wire        mem_wr_ex_pipe_reg_o,
+        output  wire[5:0]   alu_op_ex_pipe_reg_o,
+        output  wire        alu_src_ex_pipe_reg_o,
+        output  wire        reg_dst_ex_pipe_reg_o,
+        output  wire[4:0]   rt_ex_pipe_reg_o,
+        output  wire[4:0]   rs_ex_pipe_reg_o,
+        output  wire[4:0]   rd_ex_pipe_reg_o,
+        output  wire[31:0]  r_data_p1_ex_pipe_reg_o,
+        output  wire[31:0]  r_data_p2_ex_pipe_reg_o,
+        output  wire[31:0]  sign_imm_ex_pipe_reg_o
+    );
+
+    reg        reg_wr_ex_pipe_reg;
+    reg        mem_to_reg_ex_pipe_reg;
+    reg        mem_wr_ex_pipe_reg;
+    reg[5:0]   alu_op_ex_pipe_reg;
+    reg        alu_src_ex_pipe_reg;
+    reg        reg_dst_ex_pipe_reg;
+    reg[4:0]   rt_ex_pipe_reg;
+    reg[4:0]   rs_ex_pipe_reg;
+    reg[4:0]   rd_ex_pipe_reg;
+    reg[31:0]  r_data_p1_ex_pipe_reg;
+    reg[31:0]  r_data_p2_ex_pipe_reg;
+    reg[31:0]  sign_imm_ex_pipe_reg;
+
+    assign reg_wr_ex_pipe_reg_o         =  reg_wr_ex_pipe_reg;
+    assign mem_to_reg_ex_pipe_reg_o     =  mem_to_reg_ex_pipe_reg;
+    assign mem_wr_ex_pipe_reg_o         =  mem_wr_ex_pipe_reg;
+    assign alu_op_ex_pipe_reg_o         =  alu_op_ex_pipe_reg;
+    assign alu_src_ex_pipe_reg_o        =  alu_src_ex_pipe_reg;
+    assign reg_dst_ex_pipe_reg_o        =  reg_dst_ex_pipe_reg;
+    assign rt_ex_pipe_reg_o             =  rt_ex_pipe_reg;
+    assign rs_ex_pipe_reg_o             =  rs_ex_pipe_reg;
+    assign rd_ex_pipe_reg_o             =  rd_ex_pipe_reg;
+    assign r_data_p1_ex_pipe_reg_o      =  r_data_p1_ex_pipe_reg;
+    assign r_data_p2_ex_pipe_reg_o      =  r_data_p2_ex_pipe_reg;
+    assign sign_imm_ex_pipe_reg_o       =  sign_imm_ex_pipe_reg;
+
+    always @(posedge clk or posedge reset)
+    if (reset || clr)
+    begin
+        reg_wr_ex_pipe_reg_o         <=  0;
+        mem_to_reg_ex_pipe_reg_o     <=  0;
+        mem_wr_ex_pipe_reg_o         <=  0;
+        alu_op_ex_pipe_reg_o         <=  0;
+        alu_src_ex_pipe_reg_o        <=  0;
+        reg_dst_ex_pipe_reg_o        <=  0;
+        rt_ex_pipe_reg_o             <=  0;
+        rs_ex_pipe_reg_o             <=  0;
+        rd_ex_pipe_reg_o             <=  0;
+        r_data_p1_ex_pipe_reg_o      <=  0;
+        r_data_p2_ex_pipe_reg_o      <=  0;
+        sign_imm_ex_pipe_reg_o       <=  0;
+    end
+    else
+    begin
+        reg_wr_ex_pipe_reg_o         <=  reg_wr_ex_pipe_reg_i;
+        mem_to_reg_ex_pipe_reg_o     <=  mem_to_reg_ex_pipe_reg_i;
+        mem_wr_ex_pipe_reg_o         <=  mem_wr_ex_pipe_reg_i;
+        alu_op_ex_pipe_reg_o         <=  alu_op_ex_pipe_reg_i;
+        alu_src_ex_pipe_reg_o        <=  alu_src_ex_pipe_reg_i;
+        reg_dst_ex_pipe_reg_o        <=  reg_dst_ex_pipe_reg_i;
+        rt_ex_pipe_reg_o             <=  rt_ex_pipe_reg_i;
+        rs_ex_pipe_reg_o             <=  rs_ex_pipe_reg_i;
+        rd_ex_pipe_reg_o             <=  rd_ex_pipe_reg_i;
+        r_data_p1_ex_pipe_reg_o      <=  r_data_p1_ex_pipe_reg_i;
+        r_data_p2_ex_pipe_reg_o      <=  r_data_p2_ex_pipe_reg_i;
+        sign_imm_ex_pipe_reg_o       <=  sign_imm_ex_pipe_reg_i;
+    end
+
+endmodule
