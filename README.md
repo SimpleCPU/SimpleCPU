@@ -200,5 +200,5 @@ Contribute
 -----
 See [Contributing](CONTRIBUTING.md)
 
-Future Work
+Future Work and Ideas
 -----
