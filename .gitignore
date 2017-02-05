@@ -1,5 +1,11 @@
 *.so
 *.swp
+*.log
 sim
 sim.dSYM
+work
+instr_hex
+pc_values_hex
+dumpsim
+transcript
 .DS_Store
