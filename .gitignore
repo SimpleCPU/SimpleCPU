@@ -1,0 +1,5 @@
+*.so
+*.swp
+sim
+sim.dSYM
+.DS_Store
