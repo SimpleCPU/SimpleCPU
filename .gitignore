@@ -3,6 +3,7 @@
 *.v.swp
 *.c.swp
 *.log
+*.wlf
 sim
 sim.dSYM
 work
