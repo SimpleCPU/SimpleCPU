@@ -14,7 +14,7 @@ SimpleCPU is a CPU design and verification platform with a bunch of design and v
 
 SimpleCPU focuses on the fundamentals. Everything has been written from scratch such as ALUs, multipliers, decoders etc. 
 
-Our future goal includes a GUI/CLI tool to help easily build/add-on more blocks to different CPU designs and carry out simulations along with various performance numbers which would help researchers on their projects. Apart from this we would also want SimpleCPU to support different implementations and Instruction Set Architectures. 
+Our goal is to enable system-designers and researchers to rapidly evaluate new ideas in the field of processor design, memory hierarchy and in-memory computation and other aspects of computer architecture research. We want to enable designers to quickly update the RTL and the models to have a quick as well as a working solution. Along with this SimpleCPU organisation is in contact with many of the universities to adopt SimpleCPU as part of the labs for Computer architecture courses. 
 
 Brief Overview
 --------------
