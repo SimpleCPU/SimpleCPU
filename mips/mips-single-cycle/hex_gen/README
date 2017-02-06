@@ -31,8 +31,10 @@ XORI
 
 The tool makes use of the already available Instruction Set simulator for generating the instructions. This helps in maintaining the test 
 integrity. The source of the tool is organised in the following manner
-Hex_gen/src/ - contains the .c and .h files
-Hex_gen/lib/ - contains the lib files required
+hex_gen/src/       - contains the .c and .h files
+hex_gen/lib/       - contains the lib files required
+hex_gen/tests/     - contains the hex of the instructions to be run either on the model or the RTL
+hex_gen/tests/logs - contains the log files of the corresponding instruction hex files
 
 Currently,  the tool is designed as a simple C code but there are plans to extend it to be more object oriented in the future and possibly
 using C++ as the base language. The tool makes use of the available rand function in-order to randomly pick the type of the instruction
