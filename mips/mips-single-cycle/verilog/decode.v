@@ -9,7 +9,7 @@ module decode
         output  wire[4:0]   rd_dec_o,
         output  wire[5:0]   op_dec_o,
         output  wire[5:0]   funct_dec_o,
-        output  wire[5:0]   shamt_dec_o,
+        output  wire[4:0]   shamt_dec_o,
         output  wire[25:0]  target_dec_o,
         output  wire[31:0]  sign_imm_dec_o,
         output  wire        is_r_type_dec_o,
@@ -25,7 +25,7 @@ module decode
     wire[4:0]   rd_dec;
     wire[5:0]   op_dec;
     wire[5:0]   funct_dec;
-    wire[5:0]   shamt_dec;
+    wire[4:0]   shamt_dec;
     wire[25:0]  target_dec;
     wire[31:0]  sign_imm_dec;
     wire        is_r_type_dec;

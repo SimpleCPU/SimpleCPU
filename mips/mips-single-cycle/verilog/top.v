@@ -24,7 +24,7 @@ module top
     wire[4:0]   rd_dec_top;
     wire[5:0]   op_top;
     wire[5:0]   funct_top;
-    wire[5:0]   shamt_top;
+    wire[4:0]   shamt_top;
     wire[25:0]  target_top;
     wire[31:0]  sign_imm_top;
     wire        is_r_type_top;
