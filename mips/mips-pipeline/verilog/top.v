@@ -43,7 +43,7 @@ module top
     wire[31:0]  r_data_p2_rf_iss_ex;
     wire[31:0]  r_data_p2_iss_ex;
     wire        reg_wr_ex_mem;
-    wire        mem_to_reg_ex_pipe_reg
+    wire        mem_to_reg_ex_pipe_reg;
     wire        mem_wr_ex_mem;
     wire[5:0]   alu_op_ex_mem;
     wire        alu_src_ex_mem;
