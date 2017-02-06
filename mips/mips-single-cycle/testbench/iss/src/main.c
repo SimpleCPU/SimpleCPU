@@ -228,8 +228,6 @@ void init_memory() {
 /**************************************************************/
 void load_instr_opcode (uint32_t instr_opcode) {
     mem_write_32(CURRENT_STATE.PC, instr_opcode);
-    printf("Loaded instr opcode: %x into memory location %x.\n",instr_opcode, 
-                                                                CURRENT_STATE.PC);
 }
 
 /**************************************************************/
@@ -260,7 +258,7 @@ void load_program(char *program_filename, char *pc_filename) {
   while (fscanf(prog, "%x\n", &word) != EOF) {
     if (fscanf (pc_file, "%x\n", &pc_word) != EOF) {
         mem_write_32(pc_word, word);
-        printf ("Loaded %x at %x\n", word, pc_word);
+        //printf ("Loaded %x at %x\n", word, pc_word);
         ii+=4;
     }
     else {
