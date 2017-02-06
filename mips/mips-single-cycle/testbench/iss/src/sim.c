@@ -81,12 +81,12 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.REGS[rd] = (sign == 1) ? NEXT_STATE.REGS[rd] | shift_val: NEXT_STATE.REGS[rd]; 
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t SRA R%-2d, R%-2d, %-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rt,
-            shamt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rt,
+                shamt
+            );
         break;
         case (0x04): //SLLV
             rt_as_src = 1;
@@ -203,45 +203,45 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs] | CURRENT_STATE.REGS[rt];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t OR R%-2d, R%-2d, R%-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rs,
-            rt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rs,
+                rt
+            );
         break;
         case (0x26): //XOR
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs] ^ CURRENT_STATE.REGS[rt];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t XOR R%-2d, R%-2d, R%-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rs,
-            rt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rs,
+                rt
+            );
         break;
         case (0x27): //NOR
             NEXT_STATE.REGS[rd] = ~(CURRENT_STATE.REGS[rs] | CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t NOR R%-2d, R%-2d, R%-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rs,
-            rt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rs,
+                rt
+            );
         break;
         case (0x2a): //SLT
             NEXT_STATE.REGS[rd] = ((signed)CURRENT_STATE.REGS[rs] < (signed)CURRENT_STATE.REGS[rt]) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t SLT R%-2d, R%-2d, R%-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rs,
-            rt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rs,
+                rt
+            );
         break;
         case (0x2b): //SLTU
             NEXT_STATE.REGS[rd] = (CURRENT_STATE.REGS[rs] < CURRENT_STATE.REGS[rt]) ? 1 : 0;
@@ -355,7 +355,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
         default:
-            printf ("ERROR. Incorrect instruction opcode\n");
+            printf ("ERROR. Incorrect R-type instruction opcode\n");
     }
 }
 
@@ -791,7 +791,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
         );
         break;
         default:
-            printf ("ERROR. Incorrect instruction opcode\n");
+            printf ("ERROR. Incorrect I-type instruction opcode\n");
     }
 }
 
@@ -813,26 +813,26 @@ void execute_j (unsigned int opcode, int target) {
     uint32_t address;
     switch (opcode) { 
         case (0x02): //J
-            address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
+            address = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             printf ("\nPC:%.8x\tINSTR:%.8x\t J %-8x\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            NEXT_STATE.PC
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                NEXT_STATE.PC
+            );
         break;
         case (0x03): //JAL
-            address = (CURRENT_STATE.PC & 0xF0000000) | (target<<2);
+            address = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t JAL %-8x\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            NEXT_STATE.PC
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                NEXT_STATE.PC
+            );
         break;
         default:
-            printf ("ERROR. Incorrect instruction opcode\n");
+            printf ("ERROR. Incorrect J-type instruction opcode\n");
             
     }
 }
@@ -851,6 +851,7 @@ void process_instruction() {
      * values in NEXT_STATE. You can call mem_read_32() and mem_write_32() to
      * access memory. */
     instr_opcode = mem_read_32(CURRENT_STATE.PC);
+    //printf ("Instr Read: %-8x from %-8x\n", instr_opcode, CURRENT_STATE.PC);
     int type = decode_instr_type (instr_opcode);
     if (type == 0)
         decode_r (instr_opcode);
@@ -890,22 +891,19 @@ int check_brn_addr (int imm) {
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
     printf("BRN ADDR is %x\n", addr);
-    /* For now just check if the addr > 0   */
-    /* if true, then the instruction is ok  */
     if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
         return 1;
     }
     return 0;
 }
 
-/* The following function checks if the calculated address      */
-/* is a valid address. If the address is valid, the function    */
-/* returns 1.                                                   */
+/* The following function checks if the calculated address           */
+/* is a valid jump address. If the address is valid, the function    */
+/* returns 1.                                                        */
 int check_j_addr (int target) {
+    //unsigned int addr = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
     unsigned int addr = (((((unsigned)CURRENT_STATE.PC  + 4) >> 28) << 28) + ((unsigned)target << 2));
     // printf("Target is %x\t ADDR is %x\n", target, addr);
-    /* For now just check if the addr > 0   */
-    /* if true, then the instruction is ok  */
     if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
         return 1;
     }

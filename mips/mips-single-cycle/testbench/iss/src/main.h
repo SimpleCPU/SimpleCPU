@@ -2,10 +2,10 @@
 
 #define FALSE 0
 #define TRUE  1
-#define MEM_DATA_START  0x00002000
-#define MEM_DATA_SIZE   0x00010000
+#define MEM_DATA_START  0x00001000
+#define MEM_DATA_SIZE   0x00100000
 #define MEM_TEXT_START  0x00000000
-#define MEM_TEXT_SIZE   0x00001000
+#define MEM_TEXT_SIZE   0x00000FFF
 #define MEM_STACK_START 0x7ff00000
 #define MEM_STACK_SIZE  0x00100000
 #define MEM_KDATA_START 0x90000000
@@ -34,7 +34,6 @@ uint32_t instr_opcode;
 uint32_t mem_read_32(uint32_t address);
 void     mem_write_32(uint32_t address, uint32_t value);
 
-/* YOU IMPLEMENT THIS FUNCTION */
 void process_instruction();
 extern void init();
 extern void run(int num_cycles);

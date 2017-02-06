@@ -239,12 +239,16 @@ void load_instr_opcode (uint32_t instr_opcode) {
 /* Purpose   : Load program and service routines into mem.    */
 /*                                                            */
 /**************************************************************/
-void load_program(char *program_filename) {                   
-  FILE * prog;
-  int ii, word;
+void load_program(char *program_filename, char *pc_filename) {                   
+  FILE * prog; 
+  FILE * pc_file;
+  int ii, word, pc_word;
 
   /* Open program file. */
   prog = fopen(program_filename, "r");
+  /* Open PC file. */
+  pc_file = fopen (pc_filename, "r");
+
   if (prog == NULL) {
     printf("Error: Can't open program file %s\n", program_filename);
     exit(-1);
@@ -254,8 +258,14 @@ void load_program(char *program_filename) {
 
   ii = 0;
   while (fscanf(prog, "%x\n", &word) != EOF) {
-    mem_write_32(MEM_TEXT_START + ii, word);
-    ii += 4;
+    if (fscanf (pc_file, "%x\n", &pc_word) != EOF) {
+        mem_write_32(pc_word, word);
+        printf ("Loaded %x at %x\n", word, pc_word);
+        ii+=4;
+    }
+    else {
+        printf ("Incomplete PC File\n");
+    }
   }
 
   printf("Read %d words from program into memory.\n\n", ii/4);
@@ -269,13 +279,13 @@ void load_program(char *program_filename) {
 /*             and set up initial state of the machine.     */
 /*                                                          */
 /************************************************************/
-void initialize(char *program_filename, int num_prog_files) { 
+void initialize(char *program_filename, int num_prog_files, char *pc_filename) { 
   int i;
 
   init_memory();
   for ( i = 0; i < num_prog_files; i++ ) {
     printf ("Loading %s\n", program_filename);
-    load_program(program_filename);
+    load_program(program_filename, pc_filename);
     while(*program_filename++ != '\0');
   }
   printf ("Init done\n");
@@ -290,15 +300,15 @@ int sim(int argc, char *argv[]) {
   FILE * dumpsim_file;
 
   /* Error Checking */
-  if (argc < 1) {
-    printf("Error: usage: %s <program_file_1> <program_file_2> ...\n",
+  if (argc < 2) {
+    printf("Error: usage: %s <program_file> <pc_file> \n",
            argv[0]);
     exit(1);
   }
 
   printf("MIPS Simulator\n\n");
 
-  initialize(argv[0], argc - 1);
+  initialize(argv[0], argc - 2, argv[1]);
 
   if ( (dumpsim_file = fopen( "dumpsim", "w" )) == NULL ) {
     printf("Error: Can't open dumpsim file\n");
@@ -308,8 +318,8 @@ int sim(int argc, char *argv[]) {
 }
 
 extern void init () {
-  int argc = 2;
-  char *argv[] = {"instr_hex"};
+  int argc = 3;
+  char *argv[] = {"instr_hex", "pc_values_hex"};
   sim (argc, argv);
 }
 

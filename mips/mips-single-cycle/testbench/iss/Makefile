@@ -1,10 +1,10 @@
-hex: src/main.c src/sim.c
+hex: src/*.c src/*.h
 	gcc -fPIC -W -shared -g -O2 $^ -o lib$@.so
 
-iss: src/main.c src/sim.c
+iss: src/*.c src/*.h
 	gcc -fPIC -W -shared -g -m32 -O2 $^ -o $@.so
 
-sim: src/main.c src/sim.c
+sim: src/*.c src/*.h
 	gcc -W -g -O2 $^ -o $@
 
 .PHONY: clean
