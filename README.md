@@ -57,9 +57,9 @@ Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
 Top level modules:
 	top_tb
 	issue
-vsim -c top_tb -sv_lib iss -do "onElabError resume;  run -all; exit" | tee sim.logReading /home/rahul/altera/14.0/modelsim_ase/tcl/vsim/pref.tcl 
+vsim -c top_tb -sv_lib iss -do "onElabError resume;  run -all; exit" | tee sim.log
 
-# 10.1e
+Reading /home/rahul/altera/14.0/modelsim_ase/tcl/vsim/pref.tcl # 10.1e
 
  vsim -do {onElabError resume;  run -all; exit} -c -sv_lib iss top_tb 
  Loading sv_std.std
