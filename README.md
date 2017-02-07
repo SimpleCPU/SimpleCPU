@@ -202,3 +202,4 @@ See [Contributing](CONTRIBUTING.md)
 
 Future Work and Ideas
 -----
+See [Future Work](https://github.com/SimpleCPU/SimpleCPU/wiki/Future-Work-and-ideas)
