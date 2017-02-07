@@ -136,6 +136,19 @@ void print_assembled_j_instr (int opcode, int target) {
     );
 }
 
+/* This function checks if there is no already */
+/* generated instruction at the branch/jump    */
+/* target address                              */
+int check_pc (int target) {
+    int     i = 0;
+    for (i = 0; i < instr_gen; i++) {
+        if (CPU[instr_gen].PC == target) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void gen_j_instr () {
     int     opcode, target;
     int     hex_instr;
@@ -144,7 +157,7 @@ void gen_j_instr () {
     opcode  = opcode_val_j_type [rand_opcode_idx];
 TARGET:
     target   = rand ()%0x3FFFFFF; // random number for 26 bit ie (2^26 - 1)
-    if (check_j_addr (target) == 0)
+    if (check_j_addr (target) == 0 || !check_pc (target))
     {
         goto TARGET;
     }
