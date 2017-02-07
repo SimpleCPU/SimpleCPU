@@ -143,7 +143,7 @@ void gen_j_instr () {
 
     opcode  = opcode_val_j_type [rand_opcode_idx];
 TARGET:
-    target   = rand ()%67108863; // random number for 26 bit ie (2^26 - 1)
+    target   = rand ()%0x3FFFFFF; // random number for 26 bit ie (2^26 - 1)
     if (check_j_addr (target) == 0)
     {
         goto TARGET;
