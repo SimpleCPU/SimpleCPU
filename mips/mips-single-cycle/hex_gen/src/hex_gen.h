@@ -19,11 +19,12 @@ struct CPU_Struct {
     int instr;          /* the hex value of the instruction */
     int valid;          /* whether this entry is valid      */
 } CPU[999];
+
 typedef struct CPU_State_Struct {
 
   uint32_t PC;		        /* program counter */
-  uint32_t REGS[32]; /* register file. */
-  uint32_t HI, LO;          /* special regs for mult/div. */
+  uint32_t REGS[32];      /* register file. */
+  uint32_t HI, LO;        /* special regs for mult/div. */
 } CPU_State;
 
 /* Data Structure for Latch */

@@ -904,7 +904,9 @@ int check_j_addr (int target) {
     //unsigned int addr = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
     unsigned int addr = (((((unsigned)CURRENT_STATE.PC  + 4) >> 28) << 28) + ((unsigned)target << 2));
     // printf("Target is %x\t ADDR is %x\n", target, addr);
-    if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
+    // Reducing the range of jump address to avoid
+    // PC from overflowing the memory region
+    if ((addr > MEM_TEXT_START) && (addr < (0xF00))) {
         return 1;
     }
     return 0;
