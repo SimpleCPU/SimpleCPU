@@ -198,7 +198,12 @@ The documentation for every tool is present in the README file. The following fi
 <a id="Contribute"></a>
 Contribute
 -----
-See [Contributing](CONTRIBUTING.md)
+For a detailed summary of all the coding guidelines and [development workflow](https://github.com/SimpleCPU/SimpleCPU/wiki/Development-Workflow), visit our [Wiki page](https://github.com/SimpleCPU/SimpleCPU/wiki).
+
+ - [Report Bugs and Issues](https://github.com/SimpleCPU/SimpleCPU/issues)
+ - Write Tutorials, Examples and Documentation
+
+Also See [Contributing](CONTRIBUTING.md)
 
 Future Work and Ideas
 -----
