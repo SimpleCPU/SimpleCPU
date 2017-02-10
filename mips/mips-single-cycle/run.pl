@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 # compile the ISS first
-chdir 'testbench/iss';
+chdir '../iss';
 print ("make iss\n");
 if (system ("make iss")) {
     print "Make failed..! Exiting!\n";
@@ -11,10 +11,10 @@ if (system ("make iss")) {
 }
 else {
     # Copy the sim.so file to the main directory
-    print ("cp iss.so ../../\n");
-    system ("cp iss.so ../../");
+    print ("cp iss.so ../mips-single-cycle/\n");
+    system ("cp iss.so ../mips-single-cycle/");
     # Compile the RTL
-    chdir "../../";
+    chdir "../mips-single-cycle";
     print ("rm -rf vsim.wlf wlf* transcript work/\n");
     system ("rm -rf vsim.wlf wlf* transcript work/");
     print ("vlib work\n");
