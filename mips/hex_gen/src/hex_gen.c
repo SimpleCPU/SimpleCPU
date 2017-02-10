@@ -108,8 +108,7 @@ IMM:
         if ((check_ls_addr (rs, imm)) == 0) goto IMM;
     }
     if ((rand_opcode_idx == 3)) {
-        goto START;
-        //if ((check_brn_addr (imm)) == 0) goto IMM;
+        if ((check_brn_addr (imm)) == 0) goto IMM;
     }
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
