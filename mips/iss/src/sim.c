@@ -891,7 +891,7 @@ int check_brn_addr (int imm) {
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
     printf("BRN ADDR is %x\n", addr);
-    if ((addr > MEM_TEXT_START) && (addr < (MEM_TEXT_START + MEM_TEXT_SIZE))) {
+    if ((addr > MEM_TEXT_START) && (addr < (0xF00))) {
         return 1;
     }
     return 0;
