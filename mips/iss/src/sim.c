@@ -901,8 +901,7 @@ int check_brn_addr (int imm) {
 /* is a valid jump address. If the address is valid, the function    */
 /* returns 1.                                                        */
 int check_j_addr (int target) {
-    //unsigned int addr = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
-    unsigned int addr = (((((unsigned)CURRENT_STATE.PC  + 4) >> 28) << 28) + ((unsigned)target << 2));
+    unsigned int addr = (unsigned) (((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2));
     // printf("Target is %x\t ADDR is %x\n", target, addr);
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
