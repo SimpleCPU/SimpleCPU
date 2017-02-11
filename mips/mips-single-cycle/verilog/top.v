@@ -1,4 +1,5 @@
 // Top module connecting all the other modules
+//`include "verilog/mips_instr_defines.v"
 
 module top
     (
@@ -38,7 +39,7 @@ module top
     wire        mem_to_reg_top;
     wire[5:0]   alu_op_top;
     wire        mem_wr_top;
-    wire[1:0]   alu_src_top;
+    wire[2:0]   alu_src_top;
     wire        reg_wr_top;
     wire        sign_ext_top;
     wire[31:0]  r_data_p1_top;
@@ -73,7 +74,13 @@ module top
         .carry (next_beq_pc_carry_top)
     );
 
-    assign next_brn_eq_pc_top = (branch_top & z_top) ? next_beq_pc_top : next_seq_pc_top;
+    assign next_brn_eq_pc_top = (branch_top & z_top) |
+                                (branch_top & (rt_top == `BGEZ) | (rt_top == `BGEZAL) & (~n_top | z_top)) |
+                                (branch_top & (rt_top == `BLEZ) & (n_top | z_top)) |
+                                (branch_top & (rt_top == `BGTZ) & (~n_top)) |
+                                (branch_top & (rt_top == `BLTZ) | (rt_top == `BLTZAL) & (n_top)) |
+                                (branch_top & ~z_top)
+                                ? next_beq_pc_top : next_seq_pc_top;
     assign next_jmp_pc_top = {next_seq_pc_top[31:28], instr_top[25:0] << 2};
     assign next_pc_top = jump_top ? next_jmp_pc_top : next_brn_eq_pc_top;
 
