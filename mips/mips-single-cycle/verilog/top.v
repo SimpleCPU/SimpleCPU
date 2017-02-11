@@ -76,8 +76,8 @@ module top
 
     assign next_brn_eq_pc_top = (branch_top & z_top) |
                                 (branch_top & (rt_top == `BGEZ) | (rt_top == `BGEZAL) & (~n_top | z_top)) |
-                                (branch_top & (rt_top == `BLEZ) & (n_top | z_top)) |
-                                (branch_top & (rt_top == `BGTZ) & (~n_top)) |
+                                (branch_top & (op_top == `BLEZ) & (n_top | z_top)) |
+                                (branch_top & (op_top == `BGTZ) & (~n_top)) |
                                 (branch_top & (rt_top == `BLTZ) | (rt_top == `BLTZAL) & (n_top)) |
                                 (branch_top & ~z_top)
                                 ? next_beq_pc_top : next_seq_pc_top;
