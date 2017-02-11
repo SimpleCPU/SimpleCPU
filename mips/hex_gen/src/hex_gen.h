@@ -78,7 +78,7 @@ const int opcode_val_i_type[10] = {
 };
 const char* opcode_str_i_type[10] = {
     "ADDI",       "ADDIU",      "ANDI",
-    "BEQ",        /*BGEZ,       BGEZAL,
+    "BEQ",        BGEZ,       /*BGEZAL,
     BGTZ,       BLEZ,       BLTZ,
     BLTZAL,     BNE,        LB,
     LBU,        LH,         LHU,
