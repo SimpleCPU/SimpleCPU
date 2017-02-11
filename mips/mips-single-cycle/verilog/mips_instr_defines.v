@@ -11,6 +11,8 @@
 `define BLEZ    6'b00_0110 // I
 `define BNE     6'b00_0101 // I
 `define BVAR    6'b00_0001 // I
+// Branch variants use RT to
+// decoding using one opcode value
 `define BLTZ    5'b0_0000  // I
 `define BGEZ    5'b0_0001  // I
 `define BLTZAL  5'b1_0000  // I
