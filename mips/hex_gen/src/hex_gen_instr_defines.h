@@ -9,10 +9,10 @@
 #define BEQ     0x4
 #define BGEZ    0x1
 #define BGEZAL  0x11
+#define BLTZ    0x0
+#define BLTZAL  0x10
 #define BGTZ    0x7
 #define BLEZ    0x6
-#define BLTZ    0x1
-#define BLTZAL  0x1
 #define BNE     0x5
 #define DIV     0x1a
 #define DIVU    0x1b
