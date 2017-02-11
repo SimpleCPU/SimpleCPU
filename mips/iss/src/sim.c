@@ -54,24 +54,24 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] << shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t SLL R%-2d, R%-2d, R%-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rs,
-            rt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rs,
+                rt
+            );
         break;
         case (0x02): //SRL
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("\nPC:%.8x\tINSTR:%.8x\t SRL R%-2d, R%-2d, R%-2d\n", 
-            CURRENT_STATE.PC,
-            instr_opcode,
-            rd,
-            rs,
-            rt
-        );
+                CURRENT_STATE.PC,
+                instr_opcode,
+                rd,
+                rs,
+                rt
+            );
         break;
         case (0x03): //SRA
             rt_as_src = 1;
