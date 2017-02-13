@@ -8,7 +8,7 @@ An open source CPU design and verification platform for academia
 
 
 <a id="what-is-SimpleCPU"></a>
-What is SimpleCPU?
+What is [SimpleCPU] (https://simplecpu.github.io/)?
 -----------------
 SimpleCPU is a CPU design and verification platform with a bunch of design and verification tools / designs under its hood. SimpleCPU is aimed towards students and researchers, helping them learn and easily carry out CPU simulations in an intuitive way. Being an open source project makes it easier for one to get an indepth understanding of the the underlying concepts by glossing at the source.
 
