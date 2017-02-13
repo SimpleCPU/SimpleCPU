@@ -7,7 +7,16 @@ ADDI
 ADDIU   
 AND     
 ANDI    
-BEQ     
+BEQ
+BGEZ
+BGEZAL
+BGTZ
+BLEZ
+BLTZ
+BLTZAL
+BNE
+J
+JAL
 JR      
 LW      
 NOR     
@@ -47,6 +56,9 @@ Generating a test -
 Inside hex_gen directory do - 
   make
   ./hex_gen -i <no_of_i_type_instr> -r <no_of_r_type_instr> -j <no_of_j_type_instr>
+  (Note: You might need to set the LD_LIBRARY_PATH variable to point to the shared lib area)
+  Can be done using - 
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<path_to_the_shared_lib>
   
  Sample output - 
   ./hex_gen -i 10 -r 10
