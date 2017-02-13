@@ -208,3 +208,7 @@ Also See [Contributing](CONTRIBUTING.md)
 Future Work and Ideas
 -----
 See [Future Work](https://github.com/SimpleCPU/SimpleCPU/wiki/Future-Work-and-ideas)
+
+FAQs
+-----
+See our [FAQ](https://github.com/SimpleCPU/SimpleCPU/wiki/FAQs) wiki page for more info. 
