@@ -7,7 +7,16 @@ ADDI
 ADDIU   
 AND     
 ANDI    
-BEQ     
+BEQ
+BGEZ
+BGEZAL
+BGTZ
+BLEZ
+BLTZ
+BLTZAL
+BNE
+J
+JAL
 JR      
 LW      
 NOR     
