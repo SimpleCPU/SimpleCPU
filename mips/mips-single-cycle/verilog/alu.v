@@ -27,8 +27,8 @@ module alu
     assign  n_alu_o             = n_alu;
     assign  opr_b_negated_alu   = op_alu_i[0] ? ~opr_b_alu_i : opr_b_alu_i;
     assign  cin_alu             = op_alu_i[0] ? 1'b1 : 1'b0;
-    assign  z_alu               = adder_out_alu ? 1'b0 : 1'b1;
-    assign  n_alu               = adder_out_alu[31];
+    assign  z_alu               = res_alu ? 1'b0 : 1'b1;
+    assign  n_alu               = res_alu[31];
 
     assign res_alu              = ((op_alu_i == `ADD_OP) || (op_alu_i == `SUB_OP)) ?   adder_out_alu :
                                   ((op_alu_i == `SHL_OP) || (op_alu_i == `LSR_OP) || (op_alu_i == `ASR_OP)) ? shifter_out_alu :
