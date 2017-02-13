@@ -58,8 +58,8 @@ XORI
 The simulator provides support to the hex generator tool and also supports the testbench by providing various API calls through DPI support in system verilog. 
 The source code is organised in the following 
 manner: 
-testbench/iss/src/ - contains the .c and .h files
-testbench/iss/lib/ - contains the lib files required
+iss/src/ - contains the .c and .h files
+iss/lib/ - contains the lib files required
 
 Currently, the simulator processes each instruction by first decoding it to decide whether it is a R-type or I-type or J-type instruction and then proceeds with 
 the execution by evaluating the case statement using  either the opcode field value of the instruction or the function field value, whichever is applicable. The 
@@ -68,7 +68,15 @@ Please go through the source code to understand more about the implementation te
 instruction set simulators (ARM, x86) is in progress!
 
 Running the generated hex file on the simulator - 
-Inside testbench/iss/ directory:
+Inside iss/ directory:
   make sim
   ./sim
- (Note: Make sure instr_hex file is present inside testbench/iss directory)
+ (Note: Make sure instr_hex and pc_values_hex files are present inside iss/ directory)
+ 
+ To create lib files for RTL (to use C-DPI calls)
+   make iss
+   Copy the lib file to the RTL directory
+   
+ To create lib files for Hex-gen 
+   make hex
+   Copy the lib file to hex_gen/lib directory
