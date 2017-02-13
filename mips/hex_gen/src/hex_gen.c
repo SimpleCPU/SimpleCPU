@@ -8,10 +8,40 @@
 
 #include "hex_gen.h"
 
-void update_cpu (int pc, int instr, int valid) {
-    CPU[instr_gen].PC       = pc;
-    CPU[instr_gen].instr    = instr;
-    CPU[instr_gen].valid    = valid;
+void update_cpu (int pc, int hex_instr) {
+    PC[pc]           = 1;
+    instr[pc]        = hex_instr;
+    printf ("PC Update: PC[%x] = %d\tinstr[%x] = %x\n", pc, PC[pc], pc, instr[pc]);
+    prev_pc = CURRENT_STATE.PC;
+}
+
+/* The following function checks if the calculated address      */
+/* is a valid branch address. If the address is valid, the      */
+/* function returns 1.                                          */
+int check_brn_addr (int imm) {
+    int shift_val = shift_const(14);
+    int sign = (imm & 0x8000)>>15 ? 1 : 0;
+    imm = imm << 2;
+    imm = (sign) ? (imm | shift_val) : imm;
+    unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
+    //printf("BRN ADDR is %x\n", addr);
+    if ((addr > 0) && (addr < (0xF00)) && (PC[addr]==0)) {
+        return 1;
+    }
+    return 0;
+}
+
+/* The following function checks if the calculated address           */
+/* is a valid jump address. If the address is valid, the function    */
+/* returns 1.                                                        */
+int check_j_addr (int addr) {
+    // printf("Target is %x\t ADDR is %x\n", target, addr);
+    // Reducing the range of jump address to avoid
+    // PC from overflowing the memory region
+    if ((addr > 0) && (addr < (0xF00))) {
+        return 1;
+    }
+    return 0;
 }
 
 /* R instruction format     */
@@ -22,7 +52,7 @@ void update_cpu (int pc, int instr, int valid) {
 /* 10:6     shamt           */
 /* 5:0      funct           */
 void print_assembled_r_instr (int funct, int rs, int rt, int rd) {
-    printf ("%4s %s, %s, %s\n", 
+    printf ("%4s %s, %s, %s\n\n", 
             funct_str_r_type[funct],
             register_str[rd],
             register_str[rs],
@@ -47,15 +77,14 @@ void gen_r_instr () {
                 (rt << 16) + (rd << 11) +
                 (shamt << 6) + funct;
 
-    printf ("R Type instr generated - 0x%.7x\t\n", hex_instr);
+    printf ("[%d] R Type instr generated - 0x%.7x\t\n", instr_gen, hex_instr);
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
-    print_assembled_r_instr (rand_funct_idx, rs, rt, rd);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr, 1);
+        update_cpu (0, hex_instr);
     else
-        update_cpu (prev_pc, hex_instr, 1);
-    prev_pc = CURRENT_STATE.PC;
+        update_cpu (prev_pc, hex_instr);
+    print_assembled_r_instr (rand_funct_idx, rs, rt, rd);
     instr_gen++;
 }
 
@@ -67,9 +96,9 @@ void gen_r_instr () {
 void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     int sign_ext = 0;
     int sign = ((imm & 0x8000)>>15);
-    if ((opcode == 2) || 
-        (opcode == 5) ||
-        (opcode == 9)
+    if ((opcode_val_i_type[opcode] == ANDI) || 
+        (opcode_val_i_type[opcode] == ORI)  ||
+        (opcode_val_i_type[opcode] == XORI)
     ) {
         sign_ext = 0;
     }
@@ -79,7 +108,7 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     if (sign_ext) {
         imm = (sign) ? (imm | 0xFFFF0000) : (unsigned)imm;
     }
-    printf ("%4s %s, %s, %x\n", 
+    printf ("%4s %s, %s, %x\n\n", 
             opcode_str_i_type[opcode],
             register_str[rt],
             register_str[rs],
@@ -94,34 +123,46 @@ void gen_i_instr () {
     int     imm;
     int     rand_opcode_idx;
     START:
-    rand_opcode_idx = rand()%10;
+    rand_opcode_idx = rand()%17;
 
     opcode  = opcode_val_i_type [rand_opcode_idx];
     rt      = rand() % 32;
+    if ((opcode == BGEZ) || (opcode == BGEZAL) ||
+        (opcode == BLTZ) || (opcode == BLTZAL))
+    {
+        // This true for the above mentioned branch variants
+        // ISA specifies that opcode = 0x1 and instruction
+        // should further be decoded using the value present
+        // at [20:16] field (which is RT itself)
+        rt = opcode;
+        opcode = 0x1;
+
+    }
 RS:
     rs      = rand() % 32;
 IMM:    
     imm     = rand() % 65535;   /* 16-bit signal */
 
-    if ((rand_opcode_idx == 4) || (rand_opcode_idx == 6)) {
+    if ((opcode == LW) || (opcode == SW)) {
         if ((check_ls_addr (rs, imm)) == 2) goto RS;
         if ((check_ls_addr (rs, imm)) == 0) goto IMM;
     }
-    if ((rand_opcode_idx == 3)) {
+    if ((opcode == 1) || (opcode == BEQ) ||
+        (opcode == BGTZ) || (opcode == BLEZ) ||
+        (opcode == BNE)) {
         if ((check_brn_addr (imm)) == 0) goto IMM;
     }
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
 
-    printf ("I Type instr generated - 0x%8x\t\n", hex_instr);
+    printf ("[%d] I Type instr generated - 0x%-8x\n", instr_gen, hex_instr);
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
-    print_assembled_i_instr (rand_opcode_idx, rs, rt, imm);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr, 1);
+        update_cpu (0, hex_instr);
     else
-        update_cpu (prev_pc, hex_instr, 1);
-    prev_pc = CURRENT_STATE.PC;
+        update_cpu (prev_pc, hex_instr);
+    print_assembled_i_instr (rand_opcode_idx, rs, rt, imm);
     instr_gen++;
 }
 
@@ -129,23 +170,10 @@ IMM:
 /* 31:26    opcode          */
 /* 25:0     target          */
 void print_assembled_j_instr (int opcode, int target) {
-    printf ("%4s %-8x\n", 
+    printf ("%4s %-8x\n\n", 
             opcode_str_j_type[opcode],
             target
     );
-}
-
-/* This function checks if there is no already */
-/* generated instruction at the branch/jump    */
-/* target address                              */
-int check_pc (int target) {
-    int     i = 0;
-    for (i = 0; i < instr_gen; i++) {
-        if (CPU[instr_gen].PC == target) {
-            return 0;
-        }
-    }
-    return 1;
 }
 
 void gen_j_instr () {
@@ -156,37 +184,73 @@ void gen_j_instr () {
     opcode  = opcode_val_j_type [rand_opcode_idx];
 TARGET:
     target   = rand ()%0x3FFFFFF; // random number for 26 bit ie (2^26 - 1)
-    if (check_j_addr (target) == 0 || !check_pc (target))
+    unsigned int addr = (unsigned) (((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2));
+    if ((check_j_addr (addr) == 0) && !(PC[addr]==0))
     {
         goto TARGET;
     }
     hex_instr = (opcode << 26) + target;
 
-    printf ("J Type instr generated - 0x%.7x\t\n", hex_instr);
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
     // print_assembled_j_instr (rand_opcode_idx, target);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr, 1);
+        update_cpu (0, hex_instr);
     else
-        update_cpu (prev_pc, hex_instr, 1);
-    prev_pc = CURRENT_STATE.PC;
+        update_cpu (prev_pc, hex_instr);
+    printf ("[%d] J Type instr generated - 0x%.7x\t\n", instr_gen, hex_instr);
     instr_gen++;
 }
 
 void gen_end_seq () {
     //FILE * dump;
     int opcode = 0x2402000a;
-    update_cpu (CPU[instr_gen-1].PC + 4, opcode, 1);
+    update_cpu (CURRENT_STATE.PC, opcode);
     load_instr_opcode ((uint32_t)opcode);
     run (1);
     instr_gen++;
     opcode = 0x0000000c;
-    update_cpu (CPU[instr_gen-1].PC + 4, opcode, 1);
+    update_cpu (CURRENT_STATE.PC, opcode);
     load_instr_opcode ((uint32_t)opcode);
     run (1);
     //dump = fopen ("dump", "w");
     //rdump (dump);
+}
+
+int gen_j (int address) {
+    int opcode;
+    int target;
+    target = (address & 0xFFFFFFC)>>2;
+    opcode = (J << 26) + target;
+    return opcode;
+}
+
+/* Function to check if there is enough  */
+/* space available to generate the instr */
+void make_room () {
+    int i;
+    int opcode;
+    // There should be space for at least
+    // two instructions. Check for PC valid
+    //  if valid -> no space else it is okay
+    if ((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) {
+        return;
+    }
+    // Start the loop from 1 as there is
+    // no need to check the [0] index since
+    // it will always be valid
+    printf ("PC:%x\n", CURRENT_STATE.PC);
+    for (i = 4; i < 4096; i=i+4) {
+        if ((PC[i] == 0) && (PC[i+4]==0)) {
+            printf("Branching to the following PC:%x\n", i);
+            opcode = gen_j ((int)i);
+            load_instr_opcode ((uint32_t)opcode);
+            run (1);
+            update_cpu (prev_pc, opcode);
+            return;
+        }
+    }
+    // No space available. Insert a branch
 }
 
 void gen_instr_hex (int num_r, int num_i, int num_j) {
@@ -196,9 +260,8 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
     for (i = 0; i < n;) {
         int choice = rand () % 3;
         switch (choice) {
-            // TODO: Add logic such that exact number 
-            // of R, I and J instructions are generated
             case 0: if (r_gen < num_r) {
+                        make_room();
                         gen_r_instr ();
                         r_gen++;
                         i++;
@@ -206,6 +269,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
                     }
                     else break;
             case 1: if (i_gen < num_i) {
+                        make_room();
                         gen_i_instr ();
                         i_gen++;
                         i++;
@@ -213,6 +277,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
                     }
                     else break;
             case 2: if (j_gen < num_j) {
+                        make_room();
                         gen_j_instr ();
                         j_gen++;
                         i++;
@@ -224,25 +289,27 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
     gen_end_seq ();
 }
 
-void print_to_file (FILE* pc_val, FILE* instr_hex, int n) {
+void print_to_file (FILE* pc_hex_val, FILE* instr_hex_val) {
     int i = 0;
-    for (i = 0; i < n + NUM_END_SEQ_INSTR; i++) {
-        fprintf(pc_val, "%x\n", CPU[i].PC);
-        fprintf(instr_hex, "%x\n", CPU[i].instr);
+    for (i = 0; i < 4096; i=i+4) {
+        if (PC[i]) {
+            fprintf(pc_hex_val, "%x\n", i);
+            fprintf(instr_hex_val, "%x\n", instr[i]);
+        }
     }
 }
 
-void init () {
-    CPU[0].PC = 0;
-}
+//void init () {
+//    PC[0] = 0;
+//}
 
 int main (int argc, char* argv[]) {
     int num_r = 0;      /* number of r-type instructions    */
     int num_i = 0;      /* number of i-type instructions    */
     int num_j = 0;      /* number of j-type instructions    */
     int n = 0;          /* number of instructions           */
-    FILE *pc_val;       /* output file pointer for PC values*/
-    FILE *instr_hex;    /* output file pointer for instr hex*/
+    //FILE *pc_val;       /* output file pointer for PC values*/
+    //FILE *instr_hex;    /* output file pointer for instr hex*/
     /* Parse argv array and extract all the information     */
     /* argv array is null terminated                        */
     int i = 0;
@@ -267,14 +334,14 @@ int main (int argc, char* argv[]) {
         printf ("Generating the hex for the following set of instructions\n");
         printf ("\t %3d - R-Type instructions\n", num_r);
         printf ("\t %3d - I-Type instructions\n", num_i);
-        printf ("\t %3d - J-Type instructions\n", num_j);
+        printf ("\t %3d - J-Type instructions\n\n", num_j);
     }
 
-    init ();
+    //init ();
     init_memory ();
     gen_instr_hex (num_r, num_i, num_j);
-    pc_val    = fopen ("pc_values_hex", "w");
-    instr_hex = fopen ("instr_hex", "w");
-    print_to_file (pc_val, instr_hex, n);
+    pc_hex_val    = fopen ("pc_values_hex", "w");
+    instr_hex_val = fopen ("instr_hex", "w");
+    print_to_file (pc_hex_val, instr_hex_val);
     return 0;
 }

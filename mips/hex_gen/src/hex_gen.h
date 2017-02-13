@@ -14,11 +14,8 @@
 
 #define NUM_END_SEQ_INSTR 2
 
-struct CPU_Struct {
-    int PC;             /* program counter                  */
-    int instr;          /* the hex value of the instruction */
-    int valid;          /* whether this entry is valid      */
-} CPU[999];
+int PC[4096] = {0};             /* program counter arr - index using PC */
+int instr[4096] = {0};          /* the hex value of the instruction     */
 
 typedef struct CPU_State_Struct {
 
@@ -33,6 +30,10 @@ extern CPU_State CURRENT_STATE;
 int instr_gen = 0;      /* keeps a count of the number of   */
                         /* instructions generated           */
 extern int prev_pc;
+FILE* pc_hex_val;
+FILE* instr_hex_val;
+
+
 const int funct_val_r_type[13] = {
     ADD,        ADDU,       AND,
     /*DIV,        DIVU,       JALR,*/
