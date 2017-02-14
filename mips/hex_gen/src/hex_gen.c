@@ -130,8 +130,8 @@ void gen_i_instr () {
     if ((opcode == BGEZ) || (opcode == BGEZAL) ||
         (opcode == BLTZ) || (opcode == BLTZAL))
     {
-        // This true for the above mentioned branch variants
-        // ISA specifies that opcode = 0x1 and instruction
+        // This is true for the above mentioned branch variants.
+        // ISA specifies that if opcode = 0x1 then the instruction
         // should further be decoded using the value present
         // at [20:16] field (which is RT itself)
         rt = opcode;
@@ -225,8 +225,10 @@ int gen_j (int address) {
     return opcode;
 }
 
-/* Function to check if there is enough  */
-/* space available to generate the instr */
+/* Function to check if there is enough      */
+/* space available to generate the instr     */
+/* If need more space the function would     */
+/* insert a J instr to a somewhat free space */
 void make_room () {
     int i;
     int opcode;
@@ -236,13 +238,14 @@ void make_room () {
     if ((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) {
         return;
     }
-    // Start the loop from 1 as there is
+    // No space available. Inset Jump instr
+    // Start the loop from 4 as there is
     // no need to check the [0] index since
     // it will always be valid
     printf ("PC:%x\n", CURRENT_STATE.PC);
     for (i = 4; i < 4096; i=i+4) {
         if ((PC[i] == 0) && (PC[i+4]==0)) {
-            printf("Branching to the following PC:%x\n", i);
+            //printf("Branching to the following PC:%x\n", i);
             opcode = gen_j ((int)i);
             load_instr_opcode ((uint32_t)opcode);
             run (1);
@@ -250,7 +253,6 @@ void make_room () {
             return;
         }
     }
-    // No space available. Insert a branch
 }
 
 void gen_instr_hex (int num_r, int num_i, int num_j) {
@@ -299,10 +301,6 @@ void print_to_file (FILE* pc_hex_val, FILE* instr_hex_val) {
     }
 }
 
-//void init () {
-//    PC[0] = 0;
-//}
-
 int main (int argc, char* argv[]) {
     int num_r = 0;      /* number of r-type instructions    */
     int num_i = 0;      /* number of i-type instructions    */
@@ -336,8 +334,6 @@ int main (int argc, char* argv[]) {
         printf ("\t %3d - I-Type instructions\n", num_i);
         printf ("\t %3d - J-Type instructions\n\n", num_j);
     }
-
-    //init ();
     init_memory ();
     gen_instr_hex (num_r, num_i, num_j);
     pc_hex_val    = fopen ("pc_values_hex", "w");
