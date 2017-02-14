@@ -4,15 +4,15 @@
 int decode_instr_type (uint32_t instr_opcode) {
     int type;
     if ((instr_opcode >> 26) == 0) { //R type
-        type = 0;
+        type = R_TYPE;
         return type;
     }
     else if (((instr_opcode >> 26) == 2 ) || ((instr_opcode >> 26) == 3)) { //J type
-        type = 1;
+        type = J_TYPE;
         return type;
     }
     else { //I type
-        type = 2;
+        type = I_TYPE;
         return type;
     }
     printf("No valid type found for instruction: %32x\n", instr_opcode);
@@ -880,9 +880,9 @@ void process_instruction() {
     instr_opcode = mem_read_32(CURRENT_STATE.PC);
     //printf ("Instr Read: %-8x from %-8x\n", instr_opcode, CURRENT_STATE.PC);
     int type = decode_instr_type (instr_opcode);
-    if (type == 0)
+    if (type == R_TYPE)
         decode_r (instr_opcode);
-    else if (type == 1)
+    else if (type == J_TYPE)
         decode_j (instr_opcode);
     else 
         decode_i (instr_opcode);
