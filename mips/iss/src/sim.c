@@ -352,11 +352,11 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             if (CURRENT_STATE.REGS[2] == 0xA) {
                 RUN_BIT = 0;
             }
+            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t SYSCALL\n", 
                 CURRENT_STATE.PC,
-                instr_opcode,
+                instr_opcode
             );
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
         default:
             printf ("ERROR. Incorrect R-type instruction opcode\n");
