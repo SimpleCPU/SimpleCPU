@@ -242,7 +242,7 @@ void make_room () {
     // Start the loop from 4 as there is
     // no need to check the [0] index since
     // it will always be valid
-    printf ("PC:%x\n", CURRENT_STATE.PC);
+    //printf ("PC:%x\n", CURRENT_STATE.PC);
     for (i = 4; i < 4096; i=i+4) {
         if ((PC[i] == 0) && (PC[i+4]==0)) {
             //printf("Branching to the following PC:%x\n", i);
