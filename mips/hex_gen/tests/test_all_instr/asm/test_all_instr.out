@@ -1,0 +1,3661 @@
+Generating the hex for the following set of instructions
+	 600 - R-Type instructions
+	 200 - I-Type instructions
+	  90 - J-Type instructions
+
+[0] I Type instr generated - 0x2e695102
+PC:00000000	INSTR:2e695102	 SLTIU R9 , R19, 9 
+SLTIU R9, R19, 5102
+
+[1] I Type instr generated - 0x112c0158
+PC:00000004	INSTR:112c0158	 BEQ R9 , R12, 344
+BEQ  R12, R9, 158
+
+[2] R Type instr generated - 0x3c10a61	
+PC:00000008	INSTR:03c10a61	 ADDU R1 , R30, R1 
+ADDU R1, R30, R1
+
+[3] J Type instr generated - 0x8000222	
+PC:0000000c	INSTR:08000222	 J 888     
+J    222     
+
+[4] R Type instr generated - 0x237c160	
+PC:00000888	INSTR:0237c160	 ADD R24, R17, R23
+ADD  R24, R17, R23
+
+[5] R Type instr generated - 0x337abe5	
+PC:0000088c	INSTR:0337abe5	 OR R21, R25, R23
+OR   R21, R25, R23
+
+[6] J Type instr generated - 0x8000067	
+PC:00000890	INSTR:08000067	 J 19c     
+J    67      
+
+[7] J Type instr generated - 0xc000128	
+PC:0000019c	INSTR:0c000128	 JAL 4a0     
+JAL  128     
+
+[8] J Type instr generated - 0x80002c2	
+PC:000004a0	INSTR:080002c2	 J b08     
+J    2c2     
+
+[9] I Type instr generated - 0x8e493179
+PC:00000b08	INSTR:8e493179	 LW R9 , R18, 12665
+LW   R9, R18, 3179
+
+[10] R Type instr generated - 0x0aa3a27	
+PC:00000b0c	INSTR:00aa3a27	 NOR R7 , R5 , R10
+NOR  R7, R5, R10
+
+[11] I Type instr generated - 0x1a19fe75
+PC:00000b10	INSTR:1a19fe75	 BLEZ R16, 260564
+BLEZ R25, R16, fffffe75
+
+[12] J Type instr generated - 0xc00007c	
+PC:000004e8	INSTR:0c00007c	 JAL 1f0     
+JAL  7c      
+
+[13] J Type instr generated - 0x8000087	
+PC:000001f0	INSTR:08000087	 J 21c     
+J    87      
+
+[14] J Type instr generated - 0x80002d6	
+PC:0000021c	INSTR:080002d6	 J b58     
+J    2d6     
+
+[15] J Type instr generated - 0xc0000f5	
+PC:00000b58	INSTR:0c0000f5	 JAL 3d4     
+JAL  f5      
+
+[16] I Type instr generated - 0x25649323
+PC:000003d4	INSTR:25649323	 SLTU R11, R4 , 37667
+ADDIU R4, R11, ffff9323
+
+[17] I Type instr generated - 0x8d15111a
+PC:000003d8	INSTR:8d15111a	 LW R21, R8 , 4378
+LW   R21, R8, 111a
+
+[18] J Type instr generated - 0xc00006f	
+PC:000003dc	INSTR:0c00006f	 JAL 1bc     
+JAL  6f      
+
+[19] R Type instr generated - 0x13cd5a5	
+PC:000001bc	INSTR:013cd5a5	 OR R26, R9 , R28
+OR   R26, R9, R28
+
+[20] I Type instr generated - 0x233fc56f
+PC:000001c0	INSTR:233fc56f	 SLTU R25, R31, 50543
+ADDI R31, R25, ffffc56f
+
+[21] J Type instr generated - 0x80002fc	
+PC:000001c4	INSTR:080002fc	 J bf0     
+J    2fc     
+
+[22] I Type instr generated - 0x2646d64b
+PC:00000bf0	INSTR:2646d64b	 SLTU R18, R6 , 54859
+ADDIU R6, R18, ffffd64b
+
+[23] R Type instr generated - 0x23703c3	
+SRA  R0, R17, R23
+
+[24] R Type instr generated - 0x2022c24	
+PC:00000bf8	INSTR:02022c24	 AND R5 , R16, R2 
+AND  R5, R16, R2
+
+[25] J Type instr generated - 0xc0002a7	
+PC:00000bfc	INSTR:0c0002a7	 JAL a9c     
+JAL  2a7     
+
+[26] J Type instr generated - 0x80003b1	
+PC:00000a9c	INSTR:080003b1	 J ec4     
+J    3b1     
+
+[27] I Type instr generated - 0x600fe43 
+PC:00000ec4	INSTR:0600fe43	 BLTZ R16, 65091
+BLTZ R0, R16, fffffe43
+
+[28] R Type instr generated - 0x14e0660	
+ADD  R0, R10, R14
+
+[29] I Type instr generated - 0x1a57fd5d
+PC:00000ecc	INSTR:1a57fd5d	 BLEZ R18, 259444
+BLEZ R23, R18, fffffd5d
+
+[30] R Type instr generated - 0x1ac9840	
+PC:00000444	INSTR:01ac9840	 SLL R19, R13, R12
+SLL  R19, R13, R12
+
+[31] R Type instr generated - 0x173272a	
+PC:00000448	INSTR:0173272a	 SLT R4 , R11, R19
+SLT  R4, R11, R19
+
+[32] J Type instr generated - 0xc000102	
+PC:0000044c	INSTR:0c000102	 JAL 408     
+JAL  102     
+
+[33] J Type instr generated - 0x8000066	
+PC:00000408	INSTR:08000066	 J 198     
+J    66      
+
+PC:00000198	INSTR:08000004	 J 10      
+[34] I Type instr generated - 0x2f275bc1
+PC:00000010	INSTR:2f275bc1	 SLTIU R7 , R25, 7 
+SLTIU R7, R25, 5bc1
+
+[35] J Type instr generated - 0xc000359	
+PC:00000014	INSTR:0c000359	 JAL d64     
+JAL  359     
+
+[36] J Type instr generated - 0x800016d	
+PC:00000d64	INSTR:0800016d	 J 5b4     
+J    16d     
+
+[37] I Type instr generated - 0x2006f1ce
+PC:000005b4	INSTR:2006f1ce	 SLTU R0 , R6 , 61902
+ADDI R6, R0, fffff1ce
+
+[38] J Type instr generated - 0x8000275	
+PC:000005b8	INSTR:08000275	 J 9d4     
+J    275     
+
+[39] J Type instr generated - 0x8000072	
+PC:000009d4	INSTR:08000072	 J 1c8     
+J    72      
+
+[40] R Type instr generated - 0x29cd766	
+PC:000001c8	INSTR:029cd766	 XOR R26, R20, R28
+XOR  R26, R20, R28
+
+[41] I Type instr generated - 0x30d33fb4
+PC:000001cc	INSTR:30d33fb4	 ANDI R19, R6 , 16308
+ANDI R19, R6, 3fb4
+
+[42] J Type instr generated - 0x8000161	
+PC:000001d0	INSTR:08000161	 J 584     
+J    161     
+
+[43] I Type instr generated - 0x2aea056e
+PC:00000584	INSTR:2aea056e	 SLTI R10, R23, 10
+SLTI R10, R23, 56e
+
+[44] I Type instr generated - 0x37162cdf
+PC:00000588	INSTR:37162cdf	 ORI R22, R24, 11487
+ORI  R22, R24, 2cdf
+
+[45] R Type instr generated - 0x278a580	
+PC:0000058c	INSTR:0278a580	 SLL R20, R19, R24
+SLL  R20, R19, R24
+
+[46] I Type instr generated - 0x1a17ffbc
+PC:00000590	INSTR:1a17ffbc	 BLEZ R16, 261872
+BLEZ R23, R16, ffffffbc
+
+[47] J Type instr generated - 0x80003bf	
+PC:00000484	INSTR:080003bf	 J efc     
+J    3bf     
+
+[48] R Type instr generated - 0x3220666	
+XOR  R0, R25, R2
+
+[49] I Type instr generated - 0x6b1fe35 
+PC:00000f00	INSTR:06b1fe35	 BGEZAL R21, 65077
+BGEZAL R17, R21, fffffe35
+
+[50] I Type instr generated - 0x2cef2568
+PC:00000f04	INSTR:2cef2568	 SLTIU R15, R7 , 15
+SLTIU R15, R7, 2568
+
+[51] J Type instr generated - 0xc000137	
+PC:00000f08	INSTR:0c000137	 JAL 4dc     
+JAL  137     
+
+[52] R Type instr generated - 0x02b2d26	
+PC:000004dc	INSTR:002b2d26	 XOR R5 , R1 , R11
+XOR  R5, R1, R11
+
+[53] I Type instr generated - 0x22c93001
+PC:000004e0	INSTR:22c93001	 SLTU R22, R9 , 12289
+ADDI R9, R22, 3001
+
+PC:000004e4	INSTR:08000006	 J 18      
+[54] J Type instr generated - 0xc000367	
+PC:00000018	INSTR:0c000367	 JAL d9c     
+JAL  367     
+
+[55] J Type instr generated - 0xc0000f8	
+PC:00000d9c	INSTR:0c0000f8	 JAL 3e0     
+JAL  f8      
+
+[56] R Type instr generated - 0x16eabab	
+PC:000003e0	INSTR:016eabab	 SLTU R21, R11, R14
+SLTU R21, R11, R14
+
+[57] I Type instr generated - 0x3397a237
+PC:000003e4	INSTR:3397a237	 ANDI R23, R28, 41527
+ANDI R23, R28, a237
+
+[58] R Type instr generated - 0x2bef322	
+PC:000003e8	INSTR:02bef322	 SUB R30, R21, R30
+SUB  R30, R21, R30
+
+[59] I Type instr generated - 0xafe44724
+PC:000003ec	INSTR:afe44724	 SW R4 , R31, 18212
+SW   R4, R31, 4724
+
+[60] I Type instr generated - 0x5010194 
+PC:000003f0	INSTR:05010194	 BGEZ R8 , 1616
+BGEZ R1, R8, 194
+
+[61] I Type instr generated - 0x2033712c
+PC:00000a44	INSTR:2033712c	 SLTU R1 , R19, 28972
+ADDI R19, R1, 712c
+
+[62] J Type instr generated - 0xc000132	
+PC:00000a48	INSTR:0c000132	 JAL 4c8     
+JAL  132     
+
+[63] J Type instr generated - 0xc000333	
+PC:000004c8	INSTR:0c000333	 JAL ccc     
+JAL  333     
+
+[64] R Type instr generated - 0x1851d24	
+PC:00000ccc	INSTR:01851d24	 AND R3 , R12, R5 
+AND  R3, R12, R5
+
+[65] R Type instr generated - 0x10ea923	
+PC:00000cd0	INSTR:010ea923	 SUBU R21, R8 , R14
+SUBU R21, R8, R14
+
+[66] I Type instr generated - 0x37de52da
+PC:00000cd4	INSTR:37de52da	 ORI R30, R30, 21210
+ORI  R30, R30, 52da
+
+[67] J Type instr generated - 0x800022a	
+PC:00000cd8	INSTR:0800022a	 J 8a8     
+J    22a     
+
+[68] J Type instr generated - 0xc000013	
+PC:000008a8	INSTR:0c000013	 JAL 4c      
+JAL  13      
+
+[69] I Type instr generated - 0x460007f 
+PC:0000004c	INSTR:0460007f	 BLTZ R3 , 127
+BLTZ R0, R3, 7f
+
+[70] I Type instr generated - 0x691030a 
+PC:00000050	INSTR:0691030a	 BGEZAL R20, 3112
+BGEZAL R17, R20, 30a
+
+[71] I Type instr generated - 0x29cf4bf6
+PC:00000c7c	INSTR:29cf4bf6	 SLTI R15, R14, 15
+SLTI R15, R14, 4bf6
+
+[72] J Type instr generated - 0xc0001d1	
+PC:00000c80	INSTR:0c0001d1	 JAL 744     
+JAL  1d1     
+
+[73] J Type instr generated - 0xc0001c4	
+PC:00000744	INSTR:0c0001c4	 JAL 710     
+JAL  1c4     
+
+[74] J Type instr generated - 0x8000370	
+PC:00000710	INSTR:08000370	 J dc0     
+J    370     
+
+[75] I Type instr generated - 0x307452c3
+PC:00000dc0	INSTR:307452c3	 ANDI R20, R3 , 21187
+ANDI R20, R3, 52c3
+
+[76] R Type instr generated - 0x2016c6b	
+PC:00000dc4	INSTR:02016c6b	 SLTU R13, R16, R1 
+SLTU R13, R16, R1
+
+[77] J Type instr generated - 0xc000232	
+PC:00000dc8	INSTR:0c000232	 JAL 8c8     
+JAL  232     
+
+[78] J Type instr generated - 0x800006a	
+PC:000008c8	INSTR:0800006a	 J 1a8     
+J    6a      
+
+[79] I Type instr generated - 0x32e6f0be
+PC:000001a8	INSTR:32e6f0be	 ANDI R6 , R23, 61630
+ANDI R6, R23, f0be
+
+[80] J Type instr generated - 0x800028d	
+PC:000001ac	INSTR:0800028d	 J a34     
+J    28d     
+
+[81] I Type instr generated - 0x20c2b2d0
+PC:00000a34	INSTR:20c2b2d0	 SLTU R6 , R2 , 45776
+ADDI R2, R6, ffffb2d0
+
+[82] I Type instr generated - 0xaf8a3381
+PC:00000a38	INSTR:af8a3381	 SW R10, R28, 13185
+SW   R10, R28, 3381
+
+[83] I Type instr generated - 0xad833be6
+PC:00000a3c	INSTR:ad833be6	 SW R3 , R12, 15334
+SW   R3, R12, 3be6
+
+PC:00000a40	INSTR:08000007	 J 1c      
+[84] I Type instr generated - 0x2a503fcc
+PC:0000001c	INSTR:2a503fcc	 SLTI R16, R18, 16
+SLTI R16, R18, 3fcc
+
+[85] J Type instr generated - 0x80002ad	
+PC:00000020	INSTR:080002ad	 J ab4     
+J    2ad     
+
+[86] J Type instr generated - 0xc00011a	
+PC:00000ab4	INSTR:0c00011a	 JAL 468     
+JAL  11a     
+
+[87] R Type instr generated - 0x1e478a7	
+PC:00000468	INSTR:01e478a7	 NOR R15, R15, R4 
+NOR  R15, R15, R4
+
+[88] J Type instr generated - 0x800036d	
+PC:0000046c	INSTR:0800036d	 J db4     
+J    36d     
+
+[89] R Type instr generated - 0x17fbda2	
+PC:00000db4	INSTR:017fbda2	 SUB R23, R11, R31
+SUB  R23, R11, R31
+
+[90] J Type instr generated - 0xc000205	
+PC:00000db8	INSTR:0c000205	 JAL 814     
+JAL  205     
+
+[91] J Type instr generated - 0xc00021a	
+PC:00000814	INSTR:0c00021a	 JAL 868     
+JAL  21a     
+
+[92] I Type instr generated - 0x651ffb9 
+PC:00000868	INSTR:0651ffb9	 BGEZAL R18, 261860
+BGEZAL R17, R18, ffffffb9
+
+[93] I Type instr generated - 0x2d713905
+PC:00000750	INSTR:2d713905	 SLTIU R17, R11, 17
+SLTIU R17, R11, 3905
+
+[94] J Type instr generated - 0x8000319	
+PC:00000754	INSTR:08000319	 J c64     
+J    319     
+
+[95] J Type instr generated - 0x80003b7	
+PC:00000c64	INSTR:080003b7	 J edc     
+J    3b7     
+
+[96] R Type instr generated - 0x1ead780	
+PC:00000edc	INSTR:01ead780	 SLL R26, R15, R10
+SLL  R26, R15, R10
+
+[97] R Type instr generated - 0x295d800	
+PC:00000ee0	INSTR:0295d800	 SLL R27, R20, R21
+SLL  R27, R20, R21
+
+[98] J Type instr generated - 0x80001bf	
+PC:00000ee4	INSTR:080001bf	 J 6fc     
+J    1bf     
+
+[99] R Type instr generated - 0x093b5a7	
+PC:000006fc	INSTR:0093b5a7	 NOR R22, R4 , R19
+NOR  R22, R4, R19
+
+[100] I Type instr generated - 0x1bf70092
+PC:00000700	INSTR:1bf70092	 BLEZ R31, 146
+BLEZ R23, R31, 92
+
+[101] I Type instr generated - 0x3a2ad5a7
+PC:00000704	INSTR:3a2ad5a7	 XORI R10, R17, 54695
+XORI R10, R17, d5a7
+
+[102] I Type instr generated - 0x1ec1ff95
+PC:00000708	INSTR:1ec1ff95	 BGTZ R22, 65429
+BGTZ R1, R22, ffffff95
+
+PC:0000070c	INSTR:08000009	 J 24      
+[103] J Type instr generated - 0x8000266	
+PC:00000024	INSTR:08000266	 J 998     
+J    266     
+
+[104] R Type instr generated - 0x0606526	
+PC:00000998	INSTR:00606526	 XOR R12, R3 , R0 
+XOR  R12, R3, R0
+
+[105] R Type instr generated - 0x0360580	
+SLL  R0, R1, R22
+
+[106] I Type instr generated - 0x1288ff7e
+PC:000009a0	INSTR:1288ff7e	 BEQ R20, R8 , 261624
+BEQ  R8, R20, ffffff7e
+
+[107] R Type instr generated - 0x1133625	
+PC:0000079c	INSTR:01133625	 OR R6 , R8 , R19
+OR   R6, R8, R19
+
+[108] R Type instr generated - 0x13a09eb	
+PC:000007a0	INSTR:013a09eb	 SLTU R1 , R9 , R26
+SLTU R1, R9, R26
+
+[109] R Type instr generated - 0x01a6621	
+PC:000007a4	INSTR:001a6621	 ADDU R12, R0 , R26
+ADDU R12, R0, R26
+
+[110] I Type instr generated - 0x731feeb 
+PC:000007a8	INSTR:0731feeb	 BGEZAL R25, 261036
+BGEZAL R17, R25, fffffeeb
+
+[111] J Type instr generated - 0xc000247	
+PC:00000358	INSTR:0c000247	 JAL 91c     
+JAL  247     
+
+[112] I Type instr generated - 0x660ffd5 
+PC:0000091c	INSTR:0660ffd5	 BLTZ R19, 65493
+BLTZ R0, R19, ffffffd5
+
+[113] J Type instr generated - 0x8000282	
+PC:00000920	INSTR:08000282	 J a08     
+J    282     
+
+[114] J Type instr generated - 0x8000116	
+PC:00000a08	INSTR:08000116	 J 458     
+J    116     
+
+[115] J Type instr generated - 0xc00035a	
+PC:00000458	INSTR:0c00035a	 JAL d68     
+JAL  35a     
+
+[116] J Type instr generated - 0x80002e2	
+PC:00000d68	INSTR:080002e2	 J b88     
+J    2e2     
+
+[117] R Type instr generated - 0x3b86366	
+PC:00000b88	INSTR:03b86366	 XOR R12, R29, R24
+XOR  R12, R29, R24
+
+[118] R Type instr generated - 0x2805f82	
+PC:00000b8c	INSTR:02805f82	 SRL R11, R20, R0 
+SRL  R11, R20, R0
+
+[119] J Type instr generated - 0x8000368	
+PC:00000b90	INSTR:08000368	 J da0     
+J    368     
+
+[120] I Type instr generated - 0x1148fdd6
+PC:00000da0	INSTR:1148fdd6	 BEQ R10, R8 , 64982
+BEQ  R8, R10, fffffdd6
+
+[121] I Type instr generated - 0x480fce2 
+PC:00000da4	INSTR:0480fce2	 BLTZ R4 , 64738
+BLTZ R0, R4, fffffce2
+
+[122] J Type instr generated - 0x80000c1	
+PC:00000da8	INSTR:080000c1	 J 304     
+J    c1      
+
+[123] R Type instr generated - 0x11f0421	
+ADDU R0, R8, R31
+
+[124] I Type instr generated - 0x3be2ec12
+PC:00000308	INSTR:3be2ec12	 XORI R2 , R31, 60434
+XORI R2, R31, ec12
+
+[125] I Type instr generated - 0x29efe5f3
+PC:0000030c	INSTR:29efe5f3	 SLTI R15, R15, 15
+SLTI R15, R15, ffffe5f3
+
+[126] I Type instr generated - 0x23ea9cd2
+PC:00000310	INSTR:23ea9cd2	 SLTU R31, R10, 40146
+ADDI R10, R31, ffff9cd2
+
+[127] I Type instr generated - 0x8c794b3e
+PC:00000314	INSTR:8c794b3e	 LW R25, R3 , 19262
+LW   R25, R3, 4b3e
+
+[128] R Type instr generated - 0x1d366e3	
+PC:00000318	INSTR:01d366e3	 SUBU R12, R14, R19
+SUBU R12, R14, R19
+
+[129] J Type instr generated - 0x8000185	
+PC:0000031c	INSTR:08000185	 J 614     
+J    185     
+
+[130] J Type instr generated - 0xc0003aa	
+PC:00000614	INSTR:0c0003aa	 JAL ea8     
+JAL  3aa     
+
+[131] R Type instr generated - 0x04bb402	
+PC:00000ea8	INSTR:004bb402	 SRL R22, R2 , R11
+SRL  R22, R2, R11
+
+[132] R Type instr generated - 0x06a6d83	
+PC:00000eac	INSTR:006a6d83	 SRA R13, R10, 22
+SRA  R13, R3, R10
+
+[133] R Type instr generated - 0x184da62	
+PC:00000eb0	INSTR:0184da62	 SUB R27, R12, R4 
+SUB  R27, R12, R4
+
+[134] R Type instr generated - 0x19b28aa	
+PC:00000eb4	INSTR:019b28aa	 SLT R5 , R12, R27
+SLT  R5, R12, R27
+
+[135] I Type instr generated - 0x1102fd54
+PC:00000eb8	INSTR:1102fd54	 BEQ R8 , R2 , 64852
+BEQ  R2, R8, fffffd54
+
+[136] I Type instr generated - 0x3498bdd7
+PC:00000ebc	INSTR:3498bdd7	 ORI R24, R4 , 48599
+ORI  R24, R4, bdd7
+
+PC:00000ec0	INSTR:0800000a	 J 28      
+[137] J Type instr generated - 0x800023a	
+PC:00000028	INSTR:0800023a	 J 8e8     
+J    23a     
+
+[138] R Type instr generated - 0x0259eea	
+PC:000008e8	INSTR:00259eea	 SLT R19, R1 , R5 
+SLT  R19, R1, R5
+
+[139] J Type instr generated - 0xc000110	
+PC:000008ec	INSTR:0c000110	 JAL 440     
+JAL  110     
+
+PC:00000440	INSTR:0800000b	 J 2c      
+[140] R Type instr generated - 0x2d53361	
+PC:0000002c	INSTR:02d53361	 ADDU R6 , R22, R21
+ADDU R6, R22, R21
+
+[141] J Type instr generated - 0x80000fd	
+PC:00000030	INSTR:080000fd	 J 3f4     
+J    fd      
+
+[142] J Type instr generated - 0xc00034a	
+PC:000003f4	INSTR:0c00034a	 JAL d28     
+JAL  34a     
+
+[143] R Type instr generated - 0x15d1742	
+PC:00000d28	INSTR:015d1742	 SRL R2 , R10, R29
+SRL  R2, R10, R29
+
+[144] R Type instr generated - 0x2ac4643	
+PC:00000d2c	INSTR:02ac4643	 SRA R8 , R12, 25
+SRA  R8, R21, R12
+
+[145] I Type instr generated - 0x591fe59 
+PC:00000d30	INSTR:0591fe59	 BGEZAL R12, 65113
+BGEZAL R17, R12, fffffe59
+
+[146] I Type instr generated - 0x34aedd25
+PC:00000d34	INSTR:34aedd25	 ORI R14, R5 , 56613
+ORI  R14, R5, dd25
+
+[147] I Type instr generated - 0x22b150db
+PC:00000d38	INSTR:22b150db	 SLTU R21, R17, 20699
+ADDI R17, R21, 50db
+
+[148] R Type instr generated - 0x392daab	
+PC:00000d3c	INSTR:0392daab	 SLTU R27, R28, R18
+SLTU R27, R28, R18
+
+[149] R Type instr generated - 0x03971a6	
+PC:00000d40	INSTR:003971a6	 XOR R14, R1 , R25
+XOR  R14, R1, R25
+
+[150] J Type instr generated - 0x8000124	
+PC:00000d44	INSTR:08000124	 J 490     
+J    124     
+
+[151] I Type instr generated - 0x4110097 
+PC:00000490	INSTR:04110097	 BGEZAL R0 , 604
+BGEZAL R17, R0, 97
+
+[152] J Type instr generated - 0xc00037b	
+PC:000006f0	INSTR:0c00037b	 JAL dec     
+JAL  37b     
+
+[153] R Type instr generated - 0x13010c3	
+PC:00000dec	INSTR:013010c3	 SRA R2 , R16, 3 
+SRA  R2, R9, R16
+
+[154] J Type instr generated - 0x80001f0	
+PC:00000df0	INSTR:080001f0	 J 7c0     
+J    1f0     
+
+[155] R Type instr generated - 0x2227667	
+PC:000007c0	INSTR:02227667	 NOR R14, R17, R2 
+NOR  R14, R17, R2
+
+[156] I Type instr generated - 0x6110039 
+PC:000007c4	INSTR:06110039	 BGEZAL R16, 228
+BGEZAL R17, R16, 39
+
+[157] I Type instr generated - 0x241b200d
+PC:000008ac	INSTR:241b200d	 SLTU R0 , R27, 8205
+ADDIU R27, R0, 200d
+
+[158] I Type instr generated - 0x384efa51
+PC:000008b0	INSTR:384efa51	 XORI R14, R2 , 64081
+XORI R14, R2, fa51
+
+[159] R Type instr generated - 0x1e142e5	
+PC:000008b4	INSTR:01e142e5	 OR R8 , R15, R1 
+OR   R8, R15, R1
+
+[160] J Type instr generated - 0x80003a0	
+PC:000008b8	INSTR:080003a0	 J e80     
+J    3a0     
+
+[161] I Type instr generated - 0x2fc44a23
+PC:00000e80	INSTR:2fc44a23	 SLTIU R4 , R30, 4 
+SLTIU R4, R30, 4a23
+
+[162] R Type instr generated - 0x19c0aa5	
+PC:00000e84	INSTR:019c0aa5	 OR R1 , R12, R28
+OR   R1, R12, R28
+
+[163] I Type instr generated - 0x1932ff53
+PC:00000e88	INSTR:1932ff53	 BLEZ R9 , 65363
+BLEZ R18, R9, ffffff53
+
+[164] R Type instr generated - 0x119476b	
+PC:00000e8c	INSTR:0119476b	 SLTU R8 , R8 , R25
+SLTU R8, R8, R25
+
+[165] J Type instr generated - 0xc000206	
+PC:00000e90	INSTR:0c000206	 JAL 818     
+JAL  206     
+
+[166] J Type instr generated - 0x8000180	
+PC:00000818	INSTR:08000180	 J 600     
+J    180     
+
+[167] I Type instr generated - 0x22d28294
+PC:00000600	INSTR:22d28294	 SLTU R22, R18, 33428
+ADDI R18, R22, ffff8294
+
+[168] R Type instr generated - 0x375e426	
+PC:00000604	INSTR:0375e426	 XOR R28, R27, R21
+XOR  R28, R27, R21
+
+[169] I Type instr generated - 0x1328febd
+PC:00000608	INSTR:1328febd	 BEQ R25, R8 , 65213
+BEQ  R8, R25, fffffebd
+
+[170] R Type instr generated - 0x15e946a	
+PC:0000060c	INSTR:015e946a	 SLT R18, R10, R30
+SLT  R18, R10, R30
+
+PC:00000610	INSTR:0800000d	 J 34      
+[171] J Type instr generated - 0xc0002cc	
+PC:00000034	INSTR:0c0002cc	 JAL b30     
+JAL  2cc     
+
+[172] R Type instr generated - 0x13190eb	
+PC:00000b30	INSTR:013190eb	 SLTU R18, R9 , R17
+SLTU R18, R9, R17
+
+[173] I Type instr generated - 0x1ba80095
+PC:00000b34	INSTR:1ba80095	 BLEZ R29, 596
+BLEZ R8, R29, 95
+
+[174] J Type instr generated - 0xc000119	
+PC:00000d8c	INSTR:0c000119	 JAL 464     
+JAL  119     
+
+PC:00000464	INSTR:0800000e	 J 38      
+[175] R Type instr generated - 0x2757ae5	
+PC:00000038	INSTR:02757ae5	 OR R15, R19, R21
+OR   R15, R19, R21
+
+[176] J Type instr generated - 0x800018c	
+PC:0000003c	INSTR:0800018c	 J 630     
+J    18c     
+
+[177] J Type instr generated - 0x8000032	
+PC:00000630	INSTR:08000032	 J c8      
+J    32      
+
+[178] I Type instr generated - 0x29710569
+PC:000000c8	INSTR:29710569	 SLTI R17, R11, 17
+SLTI R17, R11, 569
+
+[179] J Type instr generated - 0x80001a8	
+PC:000000cc	INSTR:080001a8	 J 6a0     
+J    1a8     
+
+[180] R Type instr generated - 0x30f9226	
+PC:000006a0	INSTR:030f9226	 XOR R18, R24, R15
+XOR  R18, R24, R15
+
+[181] I Type instr generated - 0x78100ca 
+PC:000006a4	INSTR:078100ca	 BGEZ R28, 808
+BGEZ R1, R28, ca
+
+PC:000009d0	INSTR:08000010	 J 40      
+[182] I Type instr generated - 0x59001fb 
+PC:00000040	INSTR:059001fb	 BLTZAL R12, 2028
+BLTZAL R16, R12, 1fb
+
+[183] R Type instr generated - 0x34a7400	
+PC:00000830	INSTR:034a7400	 SLL R14, R26, R10
+SLL  R14, R26, R10
+
+[184] I Type instr generated - 0x4b0fe94 
+PC:00000834	INSTR:04b0fe94	 BLTZAL R5 , 65172
+BLTZAL R16, R5, fffffe94
+
+[185] I Type instr generated - 0x27ccd8ad
+PC:00000838	INSTR:27ccd8ad	 SLTU R30, R12, 55469
+ADDIU R12, R30, ffffd8ad
+
+[186] R Type instr generated - 0x1bc6920	
+PC:0000083c	INSTR:01bc6920	 ADD R13, R13, R28
+ADD  R13, R13, R28
+
+[187] I Type instr generated - 0x33642896
+PC:00000840	INSTR:33642896	 ANDI R4 , R27, 10390
+ANDI R4, R27, 2896
+
+[188] R Type instr generated - 0x12fccea	
+PC:00000844	INSTR:012fccea	 SLT R25, R9 , R15
+SLT  R25, R9, R15
+
+[189] J Type instr generated - 0x8000115	
+PC:00000848	INSTR:08000115	 J 454     
+J    115     
+
+PC:00000454	INSTR:08000011	 J 44      
+[190] I Type instr generated - 0x15ca019c
+PC:00000044	INSTR:15ca019c	 BNE R14, R10, 1648
+BNE  R10, R14, 19c
+
+[191] J Type instr generated - 0xc000136	
+PC:000006b8	INSTR:0c000136	 JAL 4d8     
+JAL  136     
+
+PC:000004d8	INSTR:08000015	 J 54      
+[192] J Type instr generated - 0xc00017f	
+PC:00000054	INSTR:0c00017f	 JAL 5fc     
+JAL  17f     
+
+PC:000005fc	INSTR:08000016	 J 58      
+[193] R Type instr generated - 0x370cfab	
+PC:00000058	INSTR:0370cfab	 SLTU R25, R27, R16
+SLTU R25, R27, R16
+
+[194] I Type instr generated - 0x60002fb 
+PC:0000005c	INSTR:060002fb	 BLTZ R16, 763
+BLTZ R0, R16, 2fb
+
+[195] R Type instr generated - 0x182e4e6	
+PC:00000060	INSTR:0182e4e6	 XOR R28, R12, R2 
+XOR  R28, R12, R2
+
+[196] I Type instr generated - 0x21f44a84
+PC:00000064	INSTR:21f44a84	 SLTU R15, R20, 19076
+ADDI R20, R15, 4a84
+
+[197] I Type instr generated - 0x262451d9
+PC:00000068	INSTR:262451d9	 SLTU R17, R4 , 20953
+ADDIU R4, R17, 51d9
+
+[198] J Type instr generated - 0x8000085	
+PC:0000006c	INSTR:08000085	 J 214     
+J    85      
+
+[199] I Type instr generated - 0xaef83227
+PC:00000214	INSTR:aef83227	 SW R24, R23, 12839
+SW   R24, R23, 3227
+
+PC:00000218	INSTR:0800001c	 J 70      
+[200] R Type instr generated - 0x2930240	
+SLL  R0, R20, R19
+
+[201] I Type instr generated - 0x36c17bcc
+PC:00000074	INSTR:36c17bcc	 ORI R1 , R22, 31692
+ORI  R1, R22, 7bcc
+
+[202] R Type instr generated - 0x2302a67	
+PC:00000078	INSTR:02302a67	 NOR R5 , R17, R16
+NOR  R5, R17, R16
+
+[203] I Type instr generated - 0x671015c 
+PC:0000007c	INSTR:0671015c	 BGEZAL R19, 1392
+BGEZAL R17, R19, 15c
+
+[204] R Type instr generated - 0x16b8d26	
+PC:000005f0	INSTR:016b8d26	 XOR R17, R11, R11
+XOR  R17, R11, R11
+
+[205] I Type instr generated - 0xac8067ee
+PC:000005f4	INSTR:ac8067ee	 SW R0 , R4 , 26606
+SW   R0, R4, 67ee
+
+PC:000005f8	INSTR:08000020	 J 80      
+[206] R Type instr generated - 0x27a3b67	
+PC:00000080	INSTR:027a3b67	 NOR R7 , R19, R26
+NOR  R7, R19, R26
+
+[207] J Type instr generated - 0x8000025	
+PC:00000084	INSTR:08000025	 J 94      
+J    25      
+
+[208] R Type instr generated - 0x066c7a4	
+PC:00000094	INSTR:0066c7a4	 AND R24, R3 , R6 
+AND  R24, R3, R6
+
+[209] I Type instr generated - 0x23cd4136
+PC:00000098	INSTR:23cd4136	 SLTU R30, R13, 16694
+ADDI R13, R30, 4136
+
+[210] R Type instr generated - 0x19fa56a	
+PC:0000009c	INSTR:019fa56a	 SLT R20, R12, R31
+SLT  R20, R12, R31
+
+[211] J Type instr generated - 0xc0000d7	
+PC:000000a0	INSTR:0c0000d7	 JAL 35c     
+JAL  d7      
+
+[212] R Type instr generated - 0x193fde2	
+PC:0000035c	INSTR:0193fde2	 SUB R31, R12, R19
+SUB  R31, R12, R19
+
+[213] I Type instr generated - 0x1fe50180
+PC:00000360	INSTR:1fe50180	 BGTZ R31, 1536
+BGTZ R5, R31, 180
+
+[214] I Type instr generated - 0x340bc1cf
+PC:00000964	INSTR:340bc1cf	 ORI R11, R0 , 49615
+ORI  R11, R0, c1cf
+
+[215] R Type instr generated - 0x2b1b302	
+PC:00000968	INSTR:02b1b302	 SRL R22, R21, R17
+SRL  R22, R21, R17
+
+[216] J Type instr generated - 0xc000100	
+PC:0000096c	INSTR:0c000100	 JAL 400     
+JAL  100     
+
+[217] R Type instr generated - 0x19ebfa5	
+PC:00000400	INSTR:019ebfa5	 OR R23, R12, R30
+OR   R23, R12, R30
+
+PC:00000404	INSTR:08000022	 J 88      
+[218] J Type instr generated - 0x80001cb	
+PC:00000088	INSTR:080001cb	 J 72c     
+J    1cb     
+
+[219] R Type instr generated - 0x2b125ab	
+PC:0000072c	INSTR:02b125ab	 SLTU R4 , R21, R17
+SLTU R4, R21, R17
+
+[220] I Type instr generated - 0x2ce74fda
+PC:00000730	INSTR:2ce74fda	 SLTIU R7 , R7 , 7 
+SLTIU R7, R7, 4fda
+
+[221] J Type instr generated - 0x8000130	
+PC:00000734	INSTR:08000130	 J 4c0     
+J    130     
+
+[222] R Type instr generated - 0x1224ee6	
+PC:000004c0	INSTR:01224ee6	 XOR R9 , R9 , R2 
+XOR  R9, R9, R2
+
+PC:000004c4	INSTR:08000023	 J 8c      
+[223] J Type instr generated - 0xc000079	
+PC:0000008c	INSTR:0c000079	 JAL 1e4     
+JAL  79      
+
+[224] R Type instr generated - 0x00287ea	
+PC:000001e4	INSTR:000287ea	 SLT R16, R0 , R2 
+SLT  R16, R0, R2
+
+[225] R Type instr generated - 0x3652c6b	
+PC:000001e8	INSTR:03652c6b	 SLTU R5 , R27, R5 
+SLTU R5, R27, R5
+
+PC:000001ec	INSTR:08000029	 J a4      
+[226] J Type instr generated - 0xc00023f	
+PC:000000a4	INSTR:0c00023f	 JAL 8fc     
+JAL  23f     
+
+[227] I Type instr generated - 0x1b1e0078
+PC:000008fc	INSTR:1b1e0078	 BLEZ R24, 480
+BLEZ R30, R24, 78
+
+[228] I Type instr generated - 0x8f6f60c7
+PC:00000ae0	INSTR:8f6f60c7	 LW R15, R27, 24775
+LW   R15, R27, 60c7
+
+[229] R Type instr generated - 0x18354a2	
+PC:00000ae4	INSTR:018354a2	 SUB R10, R12, R3 
+SUB  R10, R12, R3
+
+[230] J Type instr generated - 0xc000142	
+PC:00000ae8	INSTR:0c000142	 JAL 508     
+JAL  142     
+
+[231] I Type instr generated - 0x20fa26f3
+PC:00000508	INSTR:20fa26f3	 SLTU R7 , R26, 9971
+ADDI R26, R7, 26f3
+
+[232] I Type instr generated - 0x4210129 
+PC:0000050c	INSTR:04210129	 BGEZ R1 , 1188
+BGEZ R1, R1, 129
+
+[233] I Type instr generated - 0x1668ffe8
+PC:000009b4	INSTR:1668ffe8	 BNE R19, R8 , 262048
+BNE  R8, R19, ffffffe8
+
+[234] J Type instr generated - 0xc00009a	
+PC:00000958	INSTR:0c00009a	 JAL 268     
+JAL  9a      
+
+[235] I Type instr generated - 0x126cfff6
+PC:00000268	INSTR:126cfff6	 BEQ R19, R12, 65526
+BEQ  R12, R19, fffffff6
+
+[236] I Type instr generated - 0x1e2a02e3
+PC:0000026c	INSTR:1e2a02e3	 BGTZ R17, 739
+BGTZ R10, R17, 2e3
+
+[237] J Type instr generated - 0x80000fe	
+PC:00000270	INSTR:080000fe	 J 3f8     
+J    fe      
+
+[238] R Type instr generated - 0x21dc780	
+PC:000003f8	INSTR:021dc780	 SLL R24, R16, R29
+SLL  R24, R16, R29
+
+PC:000003fc	INSTR:0800002a	 J a8      
+[239] R Type instr generated - 0x2613065	
+PC:000000a8	INSTR:02613065	 OR R6 , R19, R1 
+OR   R6, R19, R1
+
+[240] I Type instr generated - 0x3258ba42
+PC:000000ac	INSTR:3258ba42	 ANDI R24, R18, 47682
+ANDI R24, R18, ba42
+
+[241] J Type instr generated - 0xc0000aa	
+PC:000000b0	INSTR:0c0000aa	 JAL 2a8     
+JAL  aa      
+
+[242] J Type instr generated - 0xc00013d	
+PC:000002a8	INSTR:0c00013d	 JAL 4f4     
+JAL  13d     
+
+[243] J Type instr generated - 0x8000092	
+PC:000004f4	INSTR:08000092	 J 248     
+J    92      
+
+[244] I Type instr generated - 0x3774ebe9
+PC:00000248	INSTR:3774ebe9	 ORI R20, R27, 60393
+ORI  R20, R27, ebe9
+
+[245] J Type instr generated - 0xc0000bb	
+PC:0000024c	INSTR:0c0000bb	 JAL 2ec     
+JAL  bb      
+
+[246] I Type instr generated - 0x6b102d2 
+PC:000002ec	INSTR:06b102d2	 BGEZAL R21, 2888
+BGEZAL R17, R21, 2d2
+
+[247] J Type instr generated - 0xc000034	
+PC:00000e38	INSTR:0c000034	 JAL d0      
+JAL  34      
+
+[248] I Type instr generated - 0x8f2b6818
+PC:000000d0	INSTR:8f2b6818	 LW R11, R25, 26648
+LW   R11, R25, 6818
+
+[249] J Type instr generated - 0xc000012	
+PC:000000d4	INSTR:0c000012	 JAL 48      
+JAL  12      
+
+PC:00000048	INSTR:0800002d	 J b4      
+[250] I Type instr generated - 0x51000ff 
+PC:000000b4	INSTR:051000ff	 BLTZAL R8 , 255
+BLTZAL R16, R8, ff
+
+[251] J Type instr generated - 0x800035b	
+PC:000000b8	INSTR:0800035b	 J d6c     
+J    35b     
+
+[252] R Type instr generated - 0x3dbc7a7	
+PC:00000d6c	INSTR:03dbc7a7	 NOR R24, R30, R27
+NOR  R24, R30, R27
+
+[253] R Type instr generated - 0x1cea3e2	
+PC:00000d70	INSTR:01cea3e2	 SUB R20, R14, R14
+SUB  R20, R14, R14
+
+[254] R Type instr generated - 0x3fc6be0	
+PC:00000d74	INSTR:03fc6be0	 ADD R13, R31, R28
+ADD  R13, R31, R28
+
+[255] I Type instr generated - 0x1d42ffb4
+PC:00000d78	INSTR:1d42ffb4	 BGTZ R10, 261840
+BGTZ R2, R10, ffffffb4
+
+[256] J Type instr generated - 0xc00011f	
+PC:00000c4c	INSTR:0c00011f	 JAL 47c     
+JAL  11f     
+
+[257] I Type instr generated - 0x1e020055
+PC:0000047c	INSTR:1e020055	 BGTZ R16, 85
+BGTZ R2, R16, 55
+
+PC:00000480	INSTR:0800002f	 J bc      
+[258] R Type instr generated - 0x03dff67	
+PC:000000bc	INSTR:003dff67	 NOR R31, R1 , R29
+NOR  R31, R1, R29
+
+[259] J Type instr generated - 0xc0000e9	
+PC:000000c0	INSTR:0c0000e9	 JAL 3a4     
+JAL  e9      
+
+[260] J Type instr generated - 0x80000ec	
+PC:000003a4	INSTR:080000ec	 J 3b0     
+J    ec      
+
+[261] I Type instr generated - 0x2fb36af8
+PC:000003b0	INSTR:2fb36af8	 SLTIU R19, R29, 19
+SLTIU R19, R29, 6af8
+
+[262] I Type instr generated - 0x2c4232f6
+PC:000003b4	INSTR:2c4232f6	 SLTIU R2 , R2 , 2 
+SLTIU R2, R2, 32f6
+
+[263] R Type instr generated - 0x36c0865	
+PC:000003b8	INSTR:036c0865	 OR R1 , R27, R12
+OR   R1, R27, R12
+
+[264] R Type instr generated - 0x2616b23	
+PC:000003bc	INSTR:02616b23	 SUBU R13, R19, R1 
+SUBU R13, R19, R1
+
+[265] I Type instr generated - 0x1a15ffc6
+PC:000003c0	INSTR:1a15ffc6	 BLEZ R16, 261912
+BLEZ R21, R16, ffffffc6
+
+[266] I Type instr generated - 0x2dc5ca30
+PC:000002dc	INSTR:2dc5ca30	 SLTIU R5 , R14, 5 
+SLTIU R5, R14, ffffca30
+
+[267] I Type instr generated - 0x162d0022
+PC:000002e0	INSTR:162d0022	 BNE R17, R13, 136
+BNE  R13, R17, 22
+
+[268] R Type instr generated - 0x33d0720	
+ADD  R0, R25, R29
+
+[269] I Type instr generated - 0x8f8c27bd
+PC:00000370	INSTR:8f8c27bd	 LW R12, R28, 10173
+LW   R12, R28, 27bd
+
+[270] R Type instr generated - 0x0a0b262	
+PC:00000374	INSTR:00a0b262	 SUB R22, R5 , R0 
+SUB  R22, R5, R0
+
+[271] I Type instr generated - 0x2d923877
+PC:00000378	INSTR:2d923877	 SLTIU R18, R12, 18
+SLTIU R18, R12, 3877
+
+[272] R Type instr generated - 0x3f56b66	
+PC:0000037c	INSTR:03f56b66	 XOR R13, R31, R21
+XOR  R13, R31, R21
+
+[273] I Type instr generated - 0x13afff9c
+PC:00000380	INSTR:13afff9c	 BEQ R29, R15, 65436
+BEQ  R15, R29, ffffff9c
+
+[274] I Type instr generated - 0x5a100f6 
+PC:00000384	INSTR:05a100f6	 BGEZ R13, 984
+BGEZ R1, R13, f6
+
+[275] I Type instr generated - 0x540ffcc 
+PC:00000760	INSTR:0540ffcc	 BLTZ R10, 65484
+BLTZ R0, R10, ffffffcc
+
+[276] I Type instr generated - 0x21a28a35
+PC:00000764	INSTR:21a28a35	 SLTU R13, R2 , 35381
+ADDI R2, R13, ffff8a35
+
+[277] R Type instr generated - 0x3bdd625	
+PC:00000768	INSTR:03bdd625	 OR R26, R29, R29
+OR   R26, R29, R29
+
+[278] R Type instr generated - 0x335c124	
+PC:0000076c	INSTR:0335c124	 AND R24, R25, R21
+AND  R24, R25, R21
+
+[279] I Type instr generated - 0x680ffd8 
+PC:00000770	INSTR:0680ffd8	 BLTZ R20, 65496
+BLTZ R0, R20, ffffffd8
+
+[280] R Type instr generated - 0x340afc0	
+PC:00000774	INSTR:0340afc0	 SLL R21, R26, R0 
+SLL  R21, R26, R0
+
+[281] R Type instr generated - 0x39bb426	
+PC:00000778	INSTR:039bb426	 XOR R22, R28, R27
+XOR  R22, R28, R27
+
+[282] R Type instr generated - 0x35429e1	
+PC:0000077c	INSTR:035429e1	 ADDU R5 , R26, R20
+ADDU R5, R26, R20
+
+[283] R Type instr generated - 0x2142fa2	
+PC:00000780	INSTR:02142fa2	 SUB R5 , R16, R20
+SUB  R5, R16, R20
+
+[284] R Type instr generated - 0x32bcde0	
+PC:00000784	INSTR:032bcde0	 ADD R25, R25, R11
+ADD  R25, R25, R11
+
+[285] I Type instr generated - 0x21b9acd7
+PC:00000788	INSTR:21b9acd7	 SLTU R13, R25, 44247
+ADDI R25, R13, ffffacd7
+
+[286] R Type instr generated - 0x05a0ac3	
+PC:0000078c	INSTR:005a0ac3	 SRA R1 , R26, 11
+SRA  R1, R2, R26
+
+[287] I Type instr generated - 0x1ac9fe51
+PC:00000790	INSTR:1ac9fe51	 BLEZ R22, 65105
+BLEZ R9, R22, fffffe51
+
+[288] R Type instr generated - 0x0637be4	
+PC:00000794	INSTR:00637be4	 AND R15, R3 , R3 
+AND  R15, R3, R3
+
+PC:00000798	INSTR:08000036	 J d8      
+[289] R Type instr generated - 0x1a4d020	
+PC:000000d8	INSTR:01a4d020	 ADD R26, R13, R4 
+ADD  R26, R13, R4
+
+[290] I Type instr generated - 0x57002cf 
+PC:000000dc	INSTR:057002cf	 BLTZAL R11, 2876
+BLTZAL R16, R11, 2cf
+
+[291] R Type instr generated - 0x1a4ea27	
+PC:00000c1c	INSTR:01a4ea27	 NOR R29, R13, R4 
+NOR  R29, R13, R4
+
+[292] I Type instr generated - 0x681fd49 
+PC:00000c20	INSTR:0681fd49	 BGEZ R20, 259364
+BGEZ R1, R20, fffffd49
+
+[293] R Type instr generated - 0x07a0826	
+PC:00000148	INSTR:007a0826	 XOR R1 , R3 , R26
+XOR  R1, R3, R26
+
+[294] R Type instr generated - 0x017ada4	
+PC:0000014c	INSTR:0017ada4	 AND R21, R0 , R23
+AND  R21, R0, R23
+
+[295] I Type instr generated - 0x27cc047e
+PC:00000150	INSTR:27cc047e	 SLTU R30, R12, 1150
+ADDIU R12, R30, 47e
+
+[296] I Type instr generated - 0x7e0002d 
+PC:00000154	INSTR:07e0002d	 BLTZ R31, 45
+BLTZ R0, R31, 2d
+
+[297] R Type instr generated - 0x2d0402a	
+PC:00000158	INSTR:02d0402a	 SLT R8 , R22, R16
+SLT  R8, R22, R16
+
+[298] I Type instr generated - 0x5e1013a 
+PC:0000015c	INSTR:05e1013a	 BGEZ R15, 1256
+BGEZ R1, R15, 13a
+
+[299] R Type instr generated - 0x2d795a5	
+PC:00000648	INSTR:02d795a5	 OR R18, R22, R23
+OR   R18, R22, R23
+
+[300] R Type instr generated - 0x02d0060	
+ADD  R0, R1, R13
+
+[301] R Type instr generated - 0x1a35825	
+PC:00000650	INSTR:01a35825	 OR R11, R13, R3 
+OR   R11, R13, R3
+
+[302] I Type instr generated - 0x39cc75f5
+PC:00000654	INSTR:39cc75f5	 XORI R12, R14, 30197
+XORI R12, R14, 75f5
+
+[303] I Type instr generated - 0x6f0ffb7 
+PC:00000658	INSTR:06f0ffb7	 BLTZAL R23, 65463
+BLTZAL R16, R23, ffffffb7
+
+[304] I Type instr generated - 0x681010a 
+PC:0000065c	INSTR:0681010a	 BGEZ R20, 1064
+BGEZ R1, R20, 10a
+
+[305] I Type instr generated - 0x3687589b
+PC:00000a88	INSTR:3687589b	 ORI R7 , R20, 22683
+ORI  R7, R20, 589b
+
+[306] R Type instr generated - 0x1ac2661	
+PC:00000a8c	INSTR:01ac2661	 ADDU R4 , R13, R12
+ADDU R4, R13, R12
+
+[307] R Type instr generated - 0x113ce60	
+PC:00000a90	INSTR:0113ce60	 ADD R25, R8 , R19
+ADD  R25, R8, R19
+
+[308] R Type instr generated - 0x26d8864	
+PC:00000a94	INSTR:026d8864	 AND R17, R19, R13
+AND  R17, R19, R13
+
+PC:00000a98	INSTR:08000038	 J e0      
+[309] I Type instr generated - 0x6b0031e 
+PC:000000e0	INSTR:06b0031e	 BLTZAL R21, 798
+BLTZAL R16, R21, 31e
+
+[310] I Type instr generated - 0x284e8ec7
+PC:000000e4	INSTR:284e8ec7	 SLTI R14, R2 , 14
+SLTI R14, R2, ffff8ec7
+
+[311] R Type instr generated - 0x2fcd3a7	
+PC:000000e8	INSTR:02fcd3a7	 NOR R26, R23, R28
+NOR  R26, R23, R28
+
+[312] R Type instr generated - 0x2f94642	
+PC:000000ec	INSTR:02f94642	 SRL R8 , R23, R25
+SRL  R8, R23, R25
+
+[313] I Type instr generated - 0x222ab170
+PC:000000f0	INSTR:222ab170	 SLTU R17, R10, 45424
+ADDI R10, R17, ffffb170
+
+[314] I Type instr generated - 0x3698f6bf
+PC:000000f4	INSTR:3698f6bf	 ORI R24, R20, 63167
+ORI  R24, R20, f6bf
+
+[315] R Type instr generated - 0x13a1500	
+PC:000000f8	INSTR:013a1500	 SLL R2 , R9 , R26
+SLL  R2, R9, R26
+
+[316] R Type instr generated - 0x06643a2	
+PC:000000fc	INSTR:006643a2	 SUB R8 , R3 , R6 
+SUB  R8, R3, R6
+
+[317] R Type instr generated - 0x0b09240	
+PC:00000100	INSTR:00b09240	 SLL R18, R5 , R16
+SLL  R18, R5, R16
+
+[318] I Type instr generated - 0x63100fd 
+PC:00000104	INSTR:063100fd	 BGEZAL R17, 1012
+BGEZAL R17, R17, fd
+
+[319] I Type instr generated - 0x751ff2d 
+PC:000004fc	INSTR:0751ff2d	 BGEZAL R26, 65325
+BGEZAL R17, R26, ffffff2d
+
+[320] R Type instr generated - 0x0f82a27	
+PC:00000500	INSTR:00f82a27	 NOR R5 , R7 , R24
+NOR  R5, R7, R24
+
+PC:00000504	INSTR:08000042	 J 108     
+[321] R Type instr generated - 0x30f2863	
+PC:00000108	INSTR:030f2863	 SUBU R5 , R24, R15
+SUBU R5, R24, R15
+
+[322] R Type instr generated - 0x088b9e6	
+PC:0000010c	INSTR:0088b9e6	 XOR R23, R4 , R8 
+XOR  R23, R4, R8
+
+[323] R Type instr generated - 0x2596283	
+PC:00000110	INSTR:02596283	 SRA R12, R25, 10
+SRA  R12, R18, R25
+
+[324] I Type instr generated - 0x154f021d
+PC:00000114	INSTR:154f021d	 BNE R10, R15, 2164
+BNE  R15, R10, 21d
+
+[325] I Type instr generated - 0x1a900016
+PC:0000098c	INSTR:1a900016	 BLEZ R20, 88
+BLEZ R16, R20, 16
+
+[326] I Type instr generated - 0x16a7fed8
+PC:000009e8	INSTR:16a7fed8	 BNE R21, R7 , 260960
+BNE  R7, R21, fffffed8
+
+[327] I Type instr generated - 0x6a00168 
+PC:0000054c	INSTR:06a00168	 BLTZ R21, 360
+BLTZ R0, R21, 168
+
+[328] I Type instr generated - 0x3a562c89
+PC:00000550	INSTR:3a562c89	 XORI R22, R18, 11401
+XORI R22, R18, 2c89
+
+[329] I Type instr generated - 0x370d83b8
+PC:00000554	INSTR:370d83b8	 ORI R13, R24, 33720
+ORI  R13, R24, 83b8
+
+[330] R Type instr generated - 0x36e5e23	
+PC:00000558	INSTR:036e5e23	 SUBU R11, R27, R14
+SUBU R11, R27, R14
+
+[331] R Type instr generated - 0x2f5dd24	
+PC:0000055c	INSTR:02f5dd24	 AND R27, R23, R21
+AND  R27, R23, R21
+
+[332] I Type instr generated - 0x49100a5 
+PC:00000560	INSTR:049100a5	 BGEZAL R4 , 165
+BGEZAL R17, R4, a5
+
+[333] I Type instr generated - 0x1dd401e3
+PC:00000564	INSTR:1dd401e3	 BGTZ R14, 1932
+BGTZ R20, R14, 1e3
+
+[334] I Type instr generated - 0x400fdd6 
+PC:00000cf4	INSTR:0400fdd6	 BLTZ R0 , 64982
+BLTZ R0, R0, fffffdd6
+
+[335] I Type instr generated - 0x2388fa19
+PC:00000cf8	INSTR:2388fa19	 SLTU R28, R8 , 64025
+ADDI R8, R28, fffffa19
+
+[336] R Type instr generated - 0x0f0536a	
+PC:00000cfc	INSTR:00f0536a	 SLT R10, R7 , R16
+SLT  R10, R7, R16
+
+[337] R Type instr generated - 0x29b6fe5	
+PC:00000d00	INSTR:029b6fe5	 OR R13, R20, R27
+OR   R13, R20, R27
+
+[338] R Type instr generated - 0x102f361	
+PC:00000d04	INSTR:0102f361	 ADDU R30, R8 , R2 
+ADDU R30, R8, R2
+
+[339] I Type instr generated - 0x1612ff3c
+PC:00000d08	INSTR:1612ff3c	 BNE R16, R18, 65340
+BNE  R18, R16, ffffff3c
+
+[340] I Type instr generated - 0x2f06231f
+PC:00000d0c	INSTR:2f06231f	 SLTIU R6 , R24, 6 
+SLTIU R6, R24, 231f
+
+[341] R Type instr generated - 0x3925fa3	
+PC:00000d10	INSTR:03925fa3	 SUBU R11, R28, R18
+SUBU R11, R28, R18
+
+[342] I Type instr generated - 0x2fde902d
+PC:00000d14	INSTR:2fde902d	 SLTIU R30, R30, 30
+SLTIU R30, R30, ffff902d
+
+[343] R Type instr generated - 0x3574663	
+PC:00000d18	INSTR:03574663	 SUBU R8 , R26, R23
+SUBU R8, R26, R23
+
+[344] I Type instr generated - 0x31518571
+PC:00000d1c	INSTR:31518571	 ANDI R17, R10, 34161
+ANDI R17, R10, 8571
+
+[345] R Type instr generated - 0x1021c60	
+PC:00000d20	INSTR:01021c60	 ADD R3 , R8 , R2 
+ADD  R3, R8, R2
+
+PC:00000d24	INSTR:08000046	 J 118     
+[346] I Type instr generated - 0x19810102
+PC:00000118	INSTR:19810102	 BLEZ R12, 1032
+BLEZ R1, R12, 102
+
+[347] I Type instr generated - 0xafe65438
+PC:00000524	INSTR:afe65438	 SW R6 , R31, 21560
+SW   R6, R31, 5438
+
+[348] R Type instr generated - 0x0815443	
+PC:00000528	INSTR:00815443	 SRA R10, R1 , 17
+SRA  R10, R4, R1
+
+[349] R Type instr generated - 0x21d1e21	
+PC:0000052c	INSTR:021d1e21	 ADDU R3 , R16, R29
+ADDU R3, R16, R29
+
+[350] R Type instr generated - 0x232862b	
+PC:00000530	INSTR:0232862b	 SLTU R16, R17, R18
+SLTU R16, R17, R18
+
+[351] R Type instr generated - 0x15ac502	
+PC:00000534	INSTR:015ac502	 SRL R24, R10, R26
+SRL  R24, R10, R26
+
+[352] I Type instr generated - 0x1d68ff33
+PC:00000538	INSTR:1d68ff33	 BGTZ R11, 261324
+BGTZ R8, R11, ffffff33
+
+[353] I Type instr generated - 0xacb06c72
+PC:00000208	INSTR:acb06c72	 SW R16, R5 , 27762
+SW   R16, R5, 6c72
+
+[354] I Type instr generated - 0x5e0008b 
+PC:0000020c	INSTR:05e0008b	 BLTZ R15, 139
+BLTZ R0, R15, 8b
+
+PC:00000210	INSTR:08000047	 J 11c     
+[355] R Type instr generated - 0x2351466	
+PC:0000011c	INSTR:02351466	 XOR R2 , R17, R21
+XOR  R2, R17, R21
+
+[356] R Type instr generated - 0x210b5a1	
+PC:00000120	INSTR:0210b5a1	 ADDU R22, R16, R16
+ADDU R22, R16, R16
+
+[357] R Type instr generated - 0x02d09e4	
+PC:00000124	INSTR:002d09e4	 AND R1 , R1 , R13
+AND  R1, R1, R13
+
+[358] I Type instr generated - 0x2dedba82
+PC:00000128	INSTR:2dedba82	 SLTIU R13, R15, 13
+SLTIU R13, R15, ffffba82
+
+[359] R Type instr generated - 0x09866a6	
+PC:0000012c	INSTR:009866a6	 XOR R12, R4 , R24
+XOR  R12, R4, R24
+
+[360] R Type instr generated - 0x1bd5d25	
+PC:00000130	INSTR:01bd5d25	 OR R11, R13, R29
+OR   R11, R13, R29
+
+[361] I Type instr generated - 0x2e41732d
+PC:00000134	INSTR:2e41732d	 SLTIU R1 , R18, 1 
+SLTIU R1, R18, 732d
+
+[362] R Type instr generated - 0x12b8724	
+PC:00000138	INSTR:012b8724	 AND R16, R9 , R11
+AND  R16, R9, R11
+
+[363] I Type instr generated - 0x2b982184
+PC:0000013c	INSTR:2b982184	 SLTI R24, R28, 24
+SLTI R24, R28, 2184
+
+[364] I Type instr generated - 0x5c00117 
+PC:00000140	INSTR:05c00117	 BLTZ R14, 279
+BLTZ R0, R14, 117
+
+PC:00000144	INSTR:08000058	 J 160     
+[365] R Type instr generated - 0x347126a	
+PC:00000160	INSTR:0347126a	 SLT R2 , R26, R7 
+SLT  R2, R26, R7
+
+[366] I Type instr generated - 0x2323ed2b
+PC:00000164	INSTR:2323ed2b	 SLTU R25, R3 , 60715
+ADDI R3, R25, ffffed2b
+
+[367] R Type instr generated - 0x3eacc2b	
+PC:00000168	INSTR:03eacc2b	 SLTU R25, R31, R10
+SLTU R25, R31, R10
+
+[368] R Type instr generated - 0x3f8c3e0	
+PC:0000016c	INSTR:03f8c3e0	 ADD R24, R31, R24
+ADD  R24, R31, R24
+
+[369] R Type instr generated - 0x2f826e4	
+PC:00000170	INSTR:02f826e4	 AND R4 , R23, R24
+AND  R4, R23, R24
+
+[370] I Type instr generated - 0x246e476b
+PC:00000174	INSTR:246e476b	 SLTU R3 , R14, 18283
+ADDIU R14, R3, 476b
+
+[371] R Type instr generated - 0x27fc06a	
+PC:00000178	INSTR:027fc06a	 SLT R24, R19, R31
+SLT  R24, R19, R31
+
+[372] R Type instr generated - 0x122fda0	
+PC:0000017c	INSTR:0122fda0	 ADD R31, R9 , R2 
+ADD  R31, R9, R2
+
+[373] R Type instr generated - 0x2b333a0	
+PC:00000180	INSTR:02b333a0	 ADD R6 , R21, R19
+ADD  R6, R21, R19
+
+[374] I Type instr generated - 0x66001e2 
+PC:00000184	INSTR:066001e2	 BLTZ R19, 482
+BLTZ R0, R19, 1e2
+
+[375] I Type instr generated - 0x5c0014d 
+PC:00000188	INSTR:05c0014d	 BLTZ R14, 333
+BLTZ R0, R14, 14d
+
+[376] R Type instr generated - 0x3c3166a	
+PC:0000018c	INSTR:03c3166a	 SLT R2 , R30, R3 
+SLT  R2, R30, R3
+
+[377] I Type instr generated - 0x265e0542
+PC:00000190	INSTR:265e0542	 SLTU R18, R30, 1346
+ADDIU R30, R18, 542
+
+PC:00000194	INSTR:08000068	 J 1a0     
+[378] I Type instr generated - 0x3a37a576
+PC:000001a0	INSTR:3a37a576	 XORI R23, R17, 42358
+XORI R23, R17, a576
+
+PC:000001a4	INSTR:0800006c	 J 1b0     
+[379] I Type instr generated - 0x1598028b
+PC:000001b0	INSTR:1598028b	 BNE R12, R24, 2604
+BNE  R24, R12, 28b
+
+[380] R Type instr generated - 0x0169025	
+PC:00000be0	INSTR:00169025	 OR R18, R0 , R22
+OR   R18, R0, R22
+
+[381] I Type instr generated - 0x780fdf1 
+PC:00000be4	INSTR:0780fdf1	 BLTZ R28, 65009
+BLTZ R0, R28, fffffdf1
+
+[382] I Type instr generated - 0xaf816e75
+PC:00000be8	INSTR:af816e75	 SW R1 , R28, 28277
+SW   R1, R28, 6e75
+
+PC:00000bec	INSTR:0800006d	 J 1b4     
+[383] I Type instr generated - 0x2f9e5fd4
+PC:000001b4	INSTR:2f9e5fd4	 SLTIU R30, R28, 30
+SLTIU R30, R28, 5fd4
+
+PC:000001b8	INSTR:08000075	 J 1d4     
+[384] I Type instr generated - 0x77000ef 
+PC:000001d4	INSTR:077000ef	 BLTZAL R27, 239
+BLTZAL R16, R27, ef
+
+[385] I Type instr generated - 0x208e7fbc
+PC:000001d8	INSTR:208e7fbc	 SLTU R4 , R14, 32700
+ADDI R14, R4, 7fbc
+
+[386] R Type instr generated - 0x1d71a23	
+PC:000001dc	INSTR:01d71a23	 SUBU R3 , R14, R23
+SUBU R3, R14, R23
+
+PC:000001e0	INSTR:0800007d	 J 1f4     
+[387] R Type instr generated - 0x09162aa	
+PC:000001f4	INSTR:009162aa	 SLT R12, R4 , R17
+SLT  R12, R4, R17
+
+[388] R Type instr generated - 0x00c2d02	
+PC:000001f8	INSTR:000c2d02	 SRL R5 , R0 , R12
+SRL  R5, R0, R12
+
+[389] R Type instr generated - 0x1163caa	
+PC:000001fc	INSTR:01163caa	 SLT R7 , R8 , R22
+SLT  R7, R8, R22
+
+[390] R Type instr generated - 0x194ee65	
+PC:00000200	INSTR:0194ee65	 OR R29, R12, R20
+OR   R29, R12, R20
+
+PC:00000204	INSTR:08000088	 J 220     
+[391] R Type instr generated - 0x12ba726	
+PC:00000220	INSTR:012ba726	 XOR R20, R9 , R11
+XOR  R20, R9, R11
+
+[392] R Type instr generated - 0x2bc15a1	
+PC:00000224	INSTR:02bc15a1	 ADDU R2 , R21, R28
+ADDU R2, R21, R28
+
+[393] R Type instr generated - 0x36e1761	
+PC:00000228	INSTR:036e1761	 ADDU R2 , R27, R14
+ADDU R2, R27, R14
+
+[394] R Type instr generated - 0x2bff62b	
+PC:0000022c	INSTR:02bff62b	 SLTU R30, R21, R31
+SLTU R30, R21, R31
+
+[395] R Type instr generated - 0x16d74a5	
+PC:00000230	INSTR:016d74a5	 OR R14, R11, R13
+OR   R14, R11, R13
+
+[396] R Type instr generated - 0x06a372b	
+PC:00000234	INSTR:006a372b	 SLTU R6 , R3 , R10
+SLTU R6, R3, R10
+
+[397] I Type instr generated - 0x1cfc0012
+PC:00000238	INSTR:1cfc0012	 BGTZ R7 , 72
+BGTZ R28, R7, 12
+
+[398] R Type instr generated - 0x0d76da5	
+PC:00000284	INSTR:00d76da5	 OR R13, R6 , R23
+OR   R13, R6, R23
+
+[399] R Type instr generated - 0x1974bc2	
+PC:00000288	INSTR:01974bc2	 SRL R9 , R12, R23
+SRL  R9, R12, R23
+
+[400] I Type instr generated - 0x45000a2 
+PC:0000028c	INSTR:045000a2	 BLTZAL R2 , 162
+BLTZAL R16, R2, a2
+
+[401] R Type instr generated - 0x1150d42	
+PC:00000290	INSTR:01150d42	 SRL R1 , R8 , R21
+SRL  R1, R8, R21
+
+[402] I Type instr generated - 0x16870315
+PC:00000294	INSTR:16870315	 BNE R20, R7 , 3156
+BNE  R7, R20, 315
+
+[403] R Type instr generated - 0x3ee0123	
+SUBU R0, R31, R14
+
+[404] R Type instr generated - 0x0da6026	
+PC:00000ef0	INSTR:00da6026	 XOR R12, R6 , R26
+XOR  R12, R6, R26
+
+[405] R Type instr generated - 0x0b335a0	
+PC:00000ef4	INSTR:00b335a0	 ADD R6 , R5 , R19
+ADD  R6, R5, R19
+
+PC:00000ef8	INSTR:0800008f	 J 23c     
+[406] I Type instr generated - 0x1a59011d
+PC:0000023c	INSTR:1a59011d	 BLEZ R18, 1140
+BLEZ R25, R18, 11d
+
+PC:000006b4	INSTR:08000090	 J 240     
+[407] R Type instr generated - 0x266cdab	
+PC:00000240	INSTR:0266cdab	 SLTU R25, R19, R6 
+SLTU R25, R19, R6
+
+PC:00000244	INSTR:08000094	 J 250     
+[408] I Type instr generated - 0x30be5424
+PC:00000250	INSTR:30be5424	 ANDI R30, R5 , 21540
+ANDI R30, R5, 5424
+
+[409] I Type instr generated - 0x373d9b97
+PC:00000254	INSTR:373d9b97	 ORI R29, R25, 39831
+ORI  R29, R25, 9b97
+
+[410] I Type instr generated - 0x8d5658a7
+PC:00000258	INSTR:8d5658a7	 LW R22, R10, 22695
+LW   R22, R10, 58a7
+
+[411] I Type instr generated - 0x176e02f1
+PC:0000025c	INSTR:176e02f1	 BNE R27, R14, 3012
+BNE  R14, R27, 2f1
+
+[412] I Type instr generated - 0x1dc0fde8
+PC:00000e24	INSTR:1dc0fde8	 BGTZ R14, 65000
+BGTZ R0, R14, fffffde8
+
+[413] R Type instr generated - 0x31740a3	
+PC:00000e28	INSTR:031740a3	 SUBU R8 , R24, R23
+SUBU R8, R24, R23
+
+[414] R Type instr generated - 0x2be8202	
+PC:00000e2c	INSTR:02be8202	 SRL R16, R21, R30
+SRL  R16, R21, R30
+
+[415] I Type instr generated - 0x450fe99 
+PC:00000e30	INSTR:0450fe99	 BLTZAL R2 , 65177
+BLTZAL R16, R2, fffffe99
+
+PC:00000e34	INSTR:08000098	 J 260     
+[416] I Type instr generated - 0x2ede2bb4
+PC:00000260	INSTR:2ede2bb4	 SLTIU R30, R22, 30
+SLTIU R30, R22, 2bb4
+
+PC:00000264	INSTR:0800009d	 J 274     
+[417] I Type instr generated - 0x66102df 
+PC:00000274	INSTR:066102df	 BGEZ R19, 2940
+BGEZ R1, R19, 2df
+
+[418] R Type instr generated - 0x201baa2	
+PC:00000df4	INSTR:0201baa2	 SUB R23, R16, R1 
+SUB  R23, R16, R1
+
+[419] I Type instr generated - 0xadbc1151
+PC:00000df8	INSTR:adbc1151	 SW R28, R13, 4433
+SW   R28, R13, 1151
+
+[420] R Type instr generated - 0x07a1540	
+PC:00000dfc	INSTR:007a1540	 SLL R2 , R3 , R26
+SLL  R2, R3, R26
+
+[421] I Type instr generated - 0x4c1fe33 
+PC:00000e00	INSTR:04c1fe33	 BGEZ R6 , 260300
+BGEZ R1, R6, fffffe33
+
+[422] I Type instr generated - 0x20975759
+PC:000006d0	INSTR:20975759	 SLTU R4 , R23, 22361
+ADDI R23, R4, 5759
+
+[423] R Type instr generated - 0x31f1221	
+PC:000006d4	INSTR:031f1221	 ADDU R2 , R24, R31
+ADDU R2, R24, R31
+
+[424] I Type instr generated - 0x2a7bac33
+PC:000006d8	INSTR:2a7bac33	 SLTI R27, R19, 27
+SLTI R27, R19, ffffac33
+
+[425] R Type instr generated - 0x0bbcfc0	
+PC:000006dc	INSTR:00bbcfc0	 SLL R25, R5 , R27
+SLL  R25, R5, R27
+
+[426] I Type instr generated - 0x2992f8be
+PC:000006e0	INSTR:2992f8be	 SLTI R18, R12, 18
+SLTI R18, R12, fffff8be
+
+[427] I Type instr generated - 0x16a6ffbb
+PC:000006e4	INSTR:16a6ffbb	 BNE R21, R6 , 261868
+BNE  R6, R21, ffffffbb
+
+[428] I Type instr generated - 0x730ffe8 
+PC:000005d4	INSTR:0730ffe8	 BLTZAL R25, 65512
+BLTZAL R16, R25, ffffffe8
+
+[429] I Type instr generated - 0x1f6600ba
+PC:000005d8	INSTR:1f6600ba	 BGTZ R27, 186
+BGTZ R6, R27, ba
+
+[430] R Type instr generated - 0x33e1860	
+PC:000005dc	INSTR:033e1860	 ADD R3 , R25, R30
+ADD  R3, R25, R30
+
+[431] R Type instr generated - 0x0258fa4	
+PC:000005e0	INSTR:00258fa4	 AND R17, R1 , R5 
+AND  R17, R1, R5
+
+[432] R Type instr generated - 0x0e59166	
+PC:000005e4	INSTR:00e59166	 XOR R18, R7 , R5 
+XOR  R18, R7, R5
+
+[433] R Type instr generated - 0x05507c2	
+SRL  R0, R2, R21
+
+PC:000005ec	INSTR:0800009e	 J 278     
+[434] R Type instr generated - 0x2d98c20	
+PC:00000278	INSTR:02d98c20	 ADD R17, R22, R25
+ADD  R17, R22, R25
+
+[435] I Type instr generated - 0x1b85011a
+PC:0000027c	INSTR:1b85011a	 BLEZ R28, 282
+BLEZ R5, R28, 11a
+
+PC:00000280	INSTR:080000a6	 J 298     
+[436] R Type instr generated - 0x2468467	
+PC:00000298	INSTR:02468467	 NOR R16, R18, R6 
+NOR  R16, R18, R6
+
+[437] R Type instr generated - 0x30f04e4	
+AND  R0, R24, R15
+
+[438] I Type instr generated - 0x223879ce
+PC:000002a0	INSTR:223879ce	 SLTU R17, R24, 31182
+ADDI R24, R17, 79ce
+
+PC:000002a4	INSTR:080000ab	 J 2ac     
+[439] R Type instr generated - 0x3a619ab	
+PC:000002ac	INSTR:03a619ab	 SLTU R3 , R29, R6 
+SLTU R3, R29, R6
+
+[440] I Type instr generated - 0x3353b732
+PC:000002b0	INSTR:3353b732	 ANDI R19, R26, 46898
+ANDI R19, R26, b732
+
+[441] R Type instr generated - 0x0e8eaea	
+PC:000002b4	INSTR:00e8eaea	 SLT R29, R7 , R8 
+SLT  R29, R7, R8
+
+[442] I Type instr generated - 0x1d6d00b1
+PC:000002b8	INSTR:1d6d00b1	 BGTZ R11, 177
+BGTZ R13, R11, b1
+
+[443] R Type instr generated - 0x104c902	
+PC:000002bc	INSTR:0104c902	 SRL R25, R8 , R4 
+SRL  R25, R8, R4
+
+[444] I Type instr generated - 0x19b602a3
+PC:000002c0	INSTR:19b602a3	 BLEZ R13, 675
+BLEZ R22, R13, 2a3
+
+[445] R Type instr generated - 0x0e0eee5	
+PC:000002c4	INSTR:00e0eee5	 OR R29, R7 , R0 
+OR   R29, R7, R0
+
+[446] R Type instr generated - 0x365f360	
+PC:000002c8	INSTR:0365f360	 ADD R30, R27, R5 
+ADD  R30, R27, R5
+
+[447] I Type instr generated - 0x172b0235
+PC:000002cc	INSTR:172b0235	 BNE R25, R11, 2260
+BNE  R11, R25, 235
+
+[448] R Type instr generated - 0x3ef5ee1	
+PC:00000ba4	INSTR:03ef5ee1	 ADDU R11, R31, R15
+ADDU R11, R31, R15
+
+[449] R Type instr generated - 0x1fcb060	
+PC:00000ba8	INSTR:01fcb060	 ADD R22, R15, R28
+ADD  R22, R15, R28
+
+[450] I Type instr generated - 0x31ca74d8
+PC:00000bac	INSTR:31ca74d8	 ANDI R10, R14, 29912
+ANDI R10, R14, 74d8
+
+[451] I Type instr generated - 0x242a6389
+PC:00000bb0	INSTR:242a6389	 SLTU R1 , R10, 25481
+ADDIU R10, R1, 6389
+
+[452] I Type instr generated - 0x329f07a5
+PC:00000bb4	INSTR:329f07a5	 ANDI R31, R20, 1957
+ANDI R31, R20, 7a5
+
+[453] I Type instr generated - 0x247a5cb4
+PC:00000bb8	INSTR:247a5cb4	 SLTU R3 , R26, 23732
+ADDIU R26, R3, 5cb4
+
+[454] I Type instr generated - 0x17d6fedf
+PC:00000bbc	INSTR:17d6fedf	 BNE R30, R22, 260988
+BNE  R22, R30, fffffedf
+
+[455] R Type instr generated - 0x05f3842	
+PC:0000073c	INSTR:005f3842	 SRL R7 , R2 , R31
+SRL  R7, R2, R31
+
+PC:00000740	INSTR:080000b4	 J 2d0     
+[456] I Type instr generated - 0x136e0160
+PC:000002d0	INSTR:136e0160	 BEQ R27, R14, 352
+BEQ  R14, R27, 160
+
+[457] R Type instr generated - 0x3e56f2b	
+PC:000002d4	INSTR:03e56f2b	 SLTU R13, R31, R5 
+SLTU R13, R31, R5
+
+PC:000002d8	INSTR:080000b9	 J 2e4     
+[458] R Type instr generated - 0x1bd9d20	
+PC:000002e4	INSTR:01bd9d20	 ADD R19, R13, R29
+ADD  R19, R13, R29
+
+PC:000002e8	INSTR:080000bc	 J 2f0     
+[459] I Type instr generated - 0x731006f 
+PC:000002f0	INSTR:0731006f	 BGEZAL R25, 444
+BGEZAL R17, R25, 6f
+
+[460] R Type instr generated - 0x3a98761	
+PC:000004b0	INSTR:03a98761	 ADDU R16, R29, R9 
+ADDU R16, R29, R9
+
+[461] I Type instr generated - 0x40100f8 
+PC:000004b4	INSTR:040100f8	 BGEZ R0 , 992
+BGEZ R1, R0, f8
+
+[462] I Type instr generated - 0x3ae0859f
+PC:00000898	INSTR:3ae0859f	 XORI R0 , R23, 34207
+XORI R0, R23, 859f
+
+[463] I Type instr generated - 0x199500e2
+PC:0000089c	INSTR:199500e2	 BLEZ R12, 904
+BLEZ R21, R12, e2
+
+[464] I Type instr generated - 0x4c0ffd1 
+PC:00000c28	INSTR:04c0ffd1	 BLTZ R6 , 65489
+BLTZ R0, R6, ffffffd1
+
+[465] R Type instr generated - 0x0b4f661	
+PC:00000c2c	INSTR:00b4f661	 ADDU R30, R5 , R20
+ADDU R30, R5, R20
+
+[466] R Type instr generated - 0x25ce4e2	
+PC:00000c30	INSTR:025ce4e2	 SUB R28, R18, R28
+SUB  R28, R18, R28
+
+[467] I Type instr generated - 0x1813fdcc
+PC:00000c34	INSTR:1813fdcc	 BLEZ R0 , 259888
+BLEZ R19, R0, fffffdcc
+
+PC:00000368	INSTR:080000bd	 J 2f4     
+[468] I Type instr generated - 0x40002de 
+PC:000002f4	INSTR:040002de	 BLTZ R0 , 734
+BLTZ R0, R0, 2de
+
+[469] I Type instr generated - 0x5e101dc 
+PC:000002f8	INSTR:05e101dc	 BGEZ R15, 1904
+BGEZ R1, R15, 1dc
+
+[470] R Type instr generated - 0x08fbba5	
+PC:00000a6c	INSTR:008fbba5	 OR R23, R4 , R15
+OR   R23, R4, R15
+
+[471] I Type instr generated - 0x8c6114d9
+PC:00000a70	INSTR:8c6114d9	 LW R1 , R3 , 5337
+LW   R1, R3, 14d9
+
+[472] R Type instr generated - 0x21ca865	
+PC:00000a74	INSTR:021ca865	 OR R21, R16, R28
+OR   R21, R16, R28
+
+[473] I Type instr generated - 0x36b3477c
+PC:00000a78	INSTR:36b3477c	 ORI R19, R21, 18300
+ORI  R19, R21, 477c
+
+[474] I Type instr generated - 0x34a7cfaa
+PC:00000a7c	INSTR:34a7cfaa	 ORI R7 , R5 , 53162
+ORI  R7, R5, cfaa
+
+[475] R Type instr generated - 0x1d47800	
+PC:00000a80	INSTR:01d47800	 SLL R15, R14, R20
+SLL  R15, R14, R20
+
+PC:00000a84	INSTR:080000bf	 J 2fc     
+[476] R Type instr generated - 0x0fbb8e6	
+PC:000002fc	INSTR:00fbb8e6	 XOR R23, R7 , R27
+XOR  R23, R7, R27
+
+PC:00000300	INSTR:080000c8	 J 320     
+[477] R Type instr generated - 0x2200bab	
+PC:00000320	INSTR:02200bab	 SLTU R1 , R17, R0 
+SLTU R1, R17, R0
+
+[478] R Type instr generated - 0x3d629e3	
+PC:00000324	INSTR:03d629e3	 SUBU R5 , R30, R22
+SUBU R5, R30, R22
+
+[479] R Type instr generated - 0x23b93a0	
+PC:00000328	INSTR:023b93a0	 ADD R18, R17, R27
+ADD  R18, R17, R27
+
+[480] R Type instr generated - 0x1c42643	
+PC:0000032c	INSTR:01c42643	 SRA R4 , R4 , 25
+SRA  R4, R14, R4
+
+[481] R Type instr generated - 0x3dd0160	
+ADD  R0, R30, R29
+
+[482] R Type instr generated - 0x381e9e5	
+PC:00000334	INSTR:0381e9e5	 OR R29, R28, R1 
+OR   R29, R28, R1
+
+[483] R Type instr generated - 0x29b68a5	
+PC:00000338	INSTR:029b68a5	 OR R13, R20, R27
+OR   R13, R20, R27
+
+[484] R Type instr generated - 0x2135364	
+PC:0000033c	INSTR:02135364	 AND R10, R16, R19
+AND  R10, R16, R19
+
+[485] R Type instr generated - 0x26bdfe4	
+PC:00000340	INSTR:026bdfe4	 AND R27, R19, R11
+AND  R27, R19, R11
+
+[486] R Type instr generated - 0x2aac760	
+PC:00000344	INSTR:02aac760	 ADD R24, R21, R10
+ADD  R24, R21, R10
+
+[487] R Type instr generated - 0x0020983	
+PC:00000348	INSTR:00020983	 SRA R1 , R2 , 6 
+SRA  R1, R0, R2
+
+[488] R Type instr generated - 0x2635d24	
+PC:0000034c	INSTR:02635d24	 AND R11, R19, R3 
+AND  R11, R19, R3
+
+[489] R Type instr generated - 0x1cc1603	
+PC:00000350	INSTR:01cc1603	 SRA R2 , R12, 24
+SRA  R2, R14, R12
+
+PC:00000354	INSTR:080000e2	 J 388     
+[490] R Type instr generated - 0x3af8e40	
+PC:00000388	INSTR:03af8e40	 SLL R17, R29, R15
+SLL  R17, R29, R15
+
+[491] R Type instr generated - 0x0ec0fe0	
+PC:0000038c	INSTR:00ec0fe0	 ADD R1 , R7 , R12
+ADD  R1, R7, R12
+
+[492] R Type instr generated - 0x1b0476a	
+PC:00000390	INSTR:01b0476a	 SLT R8 , R13, R16
+SLT  R8, R13, R16
+
+[493] R Type instr generated - 0x3551003	
+PC:00000394	INSTR:03551003	 SRA R2 , R21, 0 
+SRA  R2, R26, R21
+
+[494] R Type instr generated - 0x265cfeb	
+PC:00000398	INSTR:0265cfeb	 SLTU R25, R19, R5 
+SLTU R25, R19, R5
+
+[495] R Type instr generated - 0x2205283	
+PC:0000039c	INSTR:02205283	 SRA R10, R0 , 10
+SRA  R10, R17, R0
+
+PC:000003a0	INSTR:080000ea	 J 3a8     
+[496] R Type instr generated - 0x046c2c0	
+PC:000003a8	INSTR:0046c2c0	 SLL R24, R2 , R6 
+SLL  R24, R2, R6
+
+PC:000003ac	INSTR:080000f1	 J 3c4     
+[497] R Type instr generated - 0x3f239e2	
+PC:000003c4	INSTR:03f239e2	 SUB R7 , R31, R18
+SUB  R7, R31, R18
+
+[498] R Type instr generated - 0x24c6260	
+PC:000003c8	INSTR:024c6260	 ADD R12, R18, R12
+ADD  R12, R18, R12
+
+[499] R Type instr generated - 0x0802c60	
+PC:000003cc	INSTR:00802c60	 ADD R5 , R4 , R0 
+ADD  R5, R4, R0
+
+PC:000003d0	INSTR:08000103	 J 40c     
+[500] R Type instr generated - 0x32b99a7	
+PC:0000040c	INSTR:032b99a7	 NOR R19, R25, R11
+NOR  R19, R25, R11
+
+[501] R Type instr generated - 0x345fe27	
+PC:00000410	INSTR:0345fe27	 NOR R31, R26, R5 
+NOR  R31, R26, R5
+
+[502] R Type instr generated - 0x0a9fea7	
+PC:00000414	INSTR:00a9fea7	 NOR R31, R5 , R9 
+NOR  R31, R5, R9
+
+[503] R Type instr generated - 0x0eb78a6	
+PC:00000418	INSTR:00eb78a6	 XOR R15, R7 , R11
+XOR  R15, R7, R11
+
+[504] R Type instr generated - 0x34643aa	
+PC:0000041c	INSTR:034643aa	 SLT R8 , R26, R6 
+SLT  R8, R26, R6
+
+[505] R Type instr generated - 0x2d0d2e0	
+PC:00000420	INSTR:02d0d2e0	 ADD R26, R22, R16
+ADD  R26, R22, R16
+
+[506] R Type instr generated - 0x1f1a542	
+PC:00000424	INSTR:01f1a542	 SRL R20, R15, R17
+SRL  R20, R15, R17
+
+[507] R Type instr generated - 0x1fba263	
+PC:00000428	INSTR:01fba263	 SUBU R20, R15, R27
+SUBU R20, R15, R27
+
+[508] R Type instr generated - 0x2511903	
+PC:0000042c	INSTR:02511903	 SRA R3 , R17, 4 
+SRA  R3, R18, R17
+
+[509] R Type instr generated - 0x2e48227	
+PC:00000430	INSTR:02e48227	 NOR R16, R23, R4 
+NOR  R16, R23, R4
+
+[510] R Type instr generated - 0x2b458a0	
+PC:00000434	INSTR:02b458a0	 ADD R11, R21, R20
+ADD  R11, R21, R20
+
+[511] R Type instr generated - 0x39cbb23	
+PC:00000438	INSTR:039cbb23	 SUBU R23, R28, R28
+SUBU R23, R28, R28
+
+PC:0000043c	INSTR:08000117	 J 45c     
+[512] R Type instr generated - 0x232c7e6	
+PC:0000045c	INSTR:0232c7e6	 XOR R24, R17, R18
+XOR  R24, R17, R18
+
+PC:00000460	INSTR:0800011c	 J 470     
+[513] R Type instr generated - 0x2b05263	
+PC:00000470	INSTR:02b05263	 SUBU R10, R21, R16
+SUBU R10, R21, R16
+
+[514] R Type instr generated - 0x0517fc3	
+PC:00000474	INSTR:00517fc3	 SRA R15, R17, 31
+SRA  R15, R2, R17
+
+PC:00000478	INSTR:08000122	 J 488     
+[515] R Type instr generated - 0x00b6b82	
+PC:00000488	INSTR:000b6b82	 SRL R13, R0 , R11
+SRL  R13, R0, R11
+
+PC:0000048c	INSTR:08000125	 J 494     
+[516] R Type instr generated - 0x055e9e0	
+PC:00000494	INSTR:0055e9e0	 ADD R29, R2 , R21
+ADD  R29, R2, R21
+
+[517] R Type instr generated - 0x16a54aa	
+PC:00000498	INSTR:016a54aa	 SLT R10, R11, R10
+SLT  R10, R11, R10
+
+PC:0000049c	INSTR:08000129	 J 4a4     
+[518] R Type instr generated - 0x1deae62	
+PC:000004a4	INSTR:01deae62	 SUB R21, R14, R30
+SUB  R21, R14, R30
+
+[519] R Type instr generated - 0x151ab60	
+PC:000004a8	INSTR:0151ab60	 ADD R21, R10, R17
+ADD  R21, R10, R17
+
+PC:000004ac	INSTR:0800012e	 J 4b8     
+[520] R Type instr generated - 0x3e624a1	
+PC:000004b8	INSTR:03e624a1	 ADDU R4 , R31, R6 
+ADDU R4, R31, R6
+
+PC:000004bc	INSTR:08000133	 J 4cc     
+[521] R Type instr generated - 0x2895b64	
+PC:000004cc	INSTR:02895b64	 AND R11, R20, R9 
+AND  R11, R20, R9
+
+[522] R Type instr generated - 0x24aee60	
+PC:000004d0	INSTR:024aee60	 ADD R29, R18, R10
+ADD  R29, R18, R10
+
+PC:000004d4	INSTR:0800013b	 J 4ec     
+[523] R Type instr generated - 0x09ac36b	
+PC:000004ec	INSTR:009ac36b	 SLTU R24, R4 , R26
+SLTU R24, R4, R26
+
+PC:000004f0	INSTR:08000144	 J 510     
+[524] R Type instr generated - 0x046792a	
+PC:00000510	INSTR:0046792a	 SLT R15, R2 , R6 
+SLT  R15, R2, R6
+
+[525] R Type instr generated - 0x1ff0b43	
+PC:00000514	INSTR:01ff0b43	 SRA R1 , R31, 13
+SRA  R1, R15, R31
+
+[526] R Type instr generated - 0x3212f00	
+PC:00000518	INSTR:03212f00	 SLL R5 , R25, R1 
+SLL  R5, R25, R1
+
+[527] R Type instr generated - 0x23882c2	
+PC:0000051c	INSTR:023882c2	 SRL R16, R17, R24
+SRL  R16, R17, R24
+
+PC:00000520	INSTR:0800014f	 J 53c     
+[528] R Type instr generated - 0x3e30bc0	
+PC:0000053c	INSTR:03e30bc0	 SLL R1 , R31, R3 
+SLL  R1, R31, R3
+
+[529] R Type instr generated - 0x0747bab	
+PC:00000540	INSTR:00747bab	 SLTU R15, R3 , R20
+SLTU R15, R3, R20
+
+[530] R Type instr generated - 0x0a3e583	
+PC:00000544	INSTR:00a3e583	 SRA R28, R3 , 22
+SRA  R28, R5, R3
+
+PC:00000548	INSTR:0800015a	 J 568     
+[531] R Type instr generated - 0x33a4e21	
+PC:00000568	INSTR:033a4e21	 ADDU R9 , R25, R26
+ADDU R9, R25, R26
+
+[532] R Type instr generated - 0x17e2d80	
+PC:0000056c	INSTR:017e2d80	 SLL R5 , R11, R30
+SLL  R5, R11, R30
+
+[533] R Type instr generated - 0x3d7a9e2	
+PC:00000570	INSTR:03d7a9e2	 SUB R21, R30, R23
+SUB  R21, R30, R23
+
+[534] R Type instr generated - 0x15f57a3	
+PC:00000574	INSTR:015f57a3	 SUBU R10, R10, R31
+SUBU R10, R10, R31
+
+[535] R Type instr generated - 0x1f16c26	
+PC:00000578	INSTR:01f16c26	 XOR R13, R15, R17
+XOR  R13, R15, R17
+
+[536] R Type instr generated - 0x085b2e4	
+PC:0000057c	INSTR:0085b2e4	 AND R22, R4 , R5 
+AND  R22, R4, R5
+
+PC:00000580	INSTR:08000165	 J 594     
+[537] R Type instr generated - 0x0b2f864	
+PC:00000594	INSTR:00b2f864	 AND R31, R5 , R18
+AND  R31, R5, R18
+
+[538] R Type instr generated - 0x1809a25	
+PC:00000598	INSTR:01809a25	 OR R19, R12, R0 
+OR   R19, R12, R0
+
+[539] R Type instr generated - 0x03a7fe4	
+PC:0000059c	INSTR:003a7fe4	 AND R15, R1 , R26
+AND  R15, R1, R26
+
+[540] R Type instr generated - 0x26d4be6	
+PC:000005a0	INSTR:026d4be6	 XOR R9 , R19, R13
+XOR  R9, R19, R13
+
+[541] R Type instr generated - 0x2415d60	
+PC:000005a4	INSTR:02415d60	 ADD R11, R18, R1 
+ADD  R11, R18, R1
+
+[542] R Type instr generated - 0x3f26b60	
+PC:000005a8	INSTR:03f26b60	 ADD R13, R31, R18
+ADD  R13, R31, R18
+
+[543] R Type instr generated - 0x23a8027	
+PC:000005ac	INSTR:023a8027	 NOR R16, R17, R26
+NOR  R16, R17, R26
+
+PC:000005b0	INSTR:0800016f	 J 5bc     
+[544] R Type instr generated - 0x1c420e6	
+PC:000005bc	INSTR:01c420e6	 XOR R4 , R14, R4 
+XOR  R4, R14, R4
+
+[545] R Type instr generated - 0x1f24cc3	
+PC:000005c0	INSTR:01f24cc3	 SRA R9 , R18, 19
+SRA  R9, R15, R18
+
+[546] R Type instr generated - 0x0b86322	
+PC:000005c4	INSTR:00b86322	 SUB R12, R5 , R24
+SUB  R12, R5, R24
+
+[547] R Type instr generated - 0x3848b42	
+PC:000005c8	INSTR:03848b42	 SRL R17, R28, R4 
+SRL  R17, R28, R4
+
+[548] R Type instr generated - 0x3a1b96b	
+PC:000005cc	INSTR:03a1b96b	 SLTU R23, R29, R1 
+SLTU R23, R29, R1
+
+PC:000005d0	INSTR:08000186	 J 618     
+[549] R Type instr generated - 0x3c54be4	
+PC:00000618	INSTR:03c54be4	 AND R9 , R30, R5 
+AND  R9, R30, R5
+
+[550] R Type instr generated - 0x1221543	
+PC:0000061c	INSTR:01221543	 SRA R2 , R2 , 21
+SRA  R2, R9, R2
+
+[551] R Type instr generated - 0x2884b67	
+PC:00000620	INSTR:02884b67	 NOR R9 , R20, R8 
+NOR  R9, R20, R8
+
+[552] R Type instr generated - 0x2e3daaa	
+PC:00000624	INSTR:02e3daaa	 SLT R27, R23, R3 
+SLT  R27, R23, R3
+
+[553] R Type instr generated - 0x0d35d22	
+PC:00000628	INSTR:00d35d22	 SUB R11, R6 , R19
+SUB  R11, R6, R19
+
+PC:0000062c	INSTR:0800018d	 J 634     
+[554] R Type instr generated - 0x3fdb500	
+PC:00000634	INSTR:03fdb500	 SLL R22, R31, R29
+SLL  R22, R31, R29
+
+[555] R Type instr generated - 0x3e916aa	
+PC:00000638	INSTR:03e916aa	 SLT R2 , R31, R9 
+SLT  R2, R31, R9
+
+[556] R Type instr generated - 0x35e74eb	
+PC:0000063c	INSTR:035e74eb	 SLTU R14, R26, R30
+SLTU R14, R26, R30
+
+[557] R Type instr generated - 0x3d6d143	
+PC:00000640	INSTR:03d6d143	 SRA R26, R22, 5 
+SRA  R26, R30, R22
+
+PC:00000644	INSTR:08000198	 J 660     
+[558] R Type instr generated - 0x091c921	
+PC:00000660	INSTR:0091c921	 ADDU R25, R4 , R17
+ADDU R25, R4, R17
+
+[559] R Type instr generated - 0x03928e2	
+PC:00000664	INSTR:003928e2	 SUB R5 , R1 , R25
+SUB  R5, R1, R25
+
+[560] R Type instr generated - 0x2da36e4	
+PC:00000668	INSTR:02da36e4	 AND R6 , R22, R26
+AND  R6, R22, R26
+
+[561] R Type instr generated - 0x2d99923	
+PC:0000066c	INSTR:02d99923	 SUBU R19, R22, R25
+SUBU R19, R22, R25
+
+[562] R Type instr generated - 0x3c1f643	
+PC:00000670	INSTR:03c1f643	 SRA R30, R1 , 25
+SRA  R30, R30, R1
+
+[563] R Type instr generated - 0x3e21864	
+PC:00000674	INSTR:03e21864	 AND R3 , R31, R2 
+AND  R3, R31, R2
+
+[564] R Type instr generated - 0x360e9e7	
+PC:00000678	INSTR:0360e9e7	 NOR R29, R27, R0 
+NOR  R29, R27, R0
+
+[565] R Type instr generated - 0x28aa76a	
+PC:0000067c	INSTR:028aa76a	 SLT R20, R20, R10
+SLT  R20, R20, R10
+
+[566] R Type instr generated - 0x0367c66	
+PC:00000680	INSTR:00367c66	 XOR R15, R1 , R22
+XOR  R15, R1, R22
+
+[567] R Type instr generated - 0x31a4182	
+PC:00000684	INSTR:031a4182	 SRL R8 , R24, R26
+SRL  R8, R24, R26
+
+[568] R Type instr generated - 0x28cf626	
+PC:00000688	INSTR:028cf626	 XOR R30, R20, R12
+XOR  R30, R20, R12
+
+[569] R Type instr generated - 0x0b683e4	
+PC:0000068c	INSTR:00b683e4	 AND R16, R5 , R22
+AND  R16, R5, R22
+
+[570] R Type instr generated - 0x0004ba6	
+PC:00000690	INSTR:00004ba6	 XOR R9 , R0 , R0 
+XOR  R9, R0, R0
+
+[571] R Type instr generated - 0x317a72a	
+PC:00000694	INSTR:0317a72a	 SLT R20, R24, R23
+SLT  R20, R24, R23
+
+[572] R Type instr generated - 0x07a5320	
+PC:00000698	INSTR:007a5320	 ADD R10, R3 , R26
+ADD  R10, R3, R26
+
+PC:0000069c	INSTR:080001aa	 J 6a8     
+[573] R Type instr generated - 0x1578ea1	
+PC:000006a8	INSTR:01578ea1	 ADDU R17, R10, R23
+ADDU R17, R10, R23
+
+[574] R Type instr generated - 0x18455e3	
+PC:000006ac	INSTR:018455e3	 SUBU R10, R12, R4 
+SUBU R10, R12, R4
+
+PC:000006b0	INSTR:080001af	 J 6bc     
+[575] R Type instr generated - 0x0cb0e22	
+PC:000006bc	INSTR:00cb0e22	 SUB R1 , R6 , R11
+SUB  R1, R6, R11
+
+[576] R Type instr generated - 0x3d1b1e6	
+PC:000006c0	INSTR:03d1b1e6	 XOR R22, R30, R17
+XOR  R22, R30, R17
+
+[577] R Type instr generated - 0x191d264	
+PC:000006c4	INSTR:0191d264	 AND R26, R12, R17
+AND  R26, R12, R17
+
+[578] R Type instr generated - 0x379a221	
+PC:000006c8	INSTR:0379a221	 ADDU R20, R27, R25
+ADDU R20, R27, R25
+
+PC:000006cc	INSTR:080001ba	 J 6e8     
+[579] R Type instr generated - 0x1c69d42	
+PC:000006e8	INSTR:01c69d42	 SRL R19, R14, R6 
+SRL  R19, R14, R6
+
+PC:000006ec	INSTR:080001bd	 J 6f4     
+[580] R Type instr generated - 0x2022ae7	
+PC:000006f4	INSTR:02022ae7	 NOR R5 , R16, R2 
+NOR  R5, R16, R2
+
+PC:000006f8	INSTR:080001c5	 J 714     
+[581] R Type instr generated - 0x323f502	
+PC:00000714	INSTR:0323f502	 SRL R30, R25, R3 
+SRL  R30, R25, R3
+
+[582] R Type instr generated - 0x1985627	
+PC:00000718	INSTR:01985627	 NOR R10, R12, R24
+NOR  R10, R12, R24
+
+[583] R Type instr generated - 0x2b9ce63	
+PC:0000071c	INSTR:02b9ce63	 SUBU R25, R21, R25
+SUBU R25, R21, R25
+
+[584] R Type instr generated - 0x0f041a5	
+PC:00000720	INSTR:00f041a5	 OR R8 , R7 , R16
+OR   R8, R7, R16
+
+[585] R Type instr generated - 0x3e54d6a	
+PC:00000724	INSTR:03e54d6a	 SLT R9 , R31, R5 
+SLT  R9, R31, R5
+
+PC:00000728	INSTR:080001d2	 J 748     
+[586] R Type instr generated - 0x0ebb8a1	
+PC:00000748	INSTR:00ebb8a1	 ADDU R23, R7 , R11
+ADDU R23, R7, R11
+
+PC:0000074c	INSTR:080001d6	 J 758     
+[587] R Type instr generated - 0x0e6c483	
+PC:00000758	INSTR:00e6c483	 SRA R24, R6 , 18
+SRA  R24, R7, R6
+
+PC:0000075c	INSTR:080001eb	 J 7ac     
+[588] R Type instr generated - 0x2b2bd42	
+PC:000007ac	INSTR:02b2bd42	 SRL R23, R21, R18
+SRL  R23, R21, R18
+
+[589] R Type instr generated - 0x30f15e4	
+PC:000007b0	INSTR:030f15e4	 AND R2 , R24, R15
+AND  R2, R24, R15
+
+[590] R Type instr generated - 0x0dacaa7	
+PC:000007b4	INSTR:00dacaa7	 NOR R25, R6 , R26
+NOR  R25, R6, R26
+
+[591] R Type instr generated - 0x34e956b	
+PC:000007b8	INSTR:034e956b	 SLTU R18, R26, R14
+SLTU R18, R26, R14
+
+PC:000007bc	INSTR:080001f2	 J 7c8     
+[592] R Type instr generated - 0x2691022	
+PC:000007c8	INSTR:02691022	 SUB R2 , R19, R9 
+SUB  R2, R19, R9
+
+[593] R Type instr generated - 0x085ae64	
+PC:000007cc	INSTR:0085ae64	 AND R21, R4 , R5 
+AND  R21, R4, R5
+
+[594] R Type instr generated - 0x1ad3bea	
+PC:000007d0	INSTR:01ad3bea	 SLT R7 , R13, R13
+SLT  R7, R13, R13
+
+[595] R Type instr generated - 0x09c3c6a	
+PC:000007d4	INSTR:009c3c6a	 SLT R7 , R4 , R28
+SLT  R7, R4, R28
+
+[596] R Type instr generated - 0x1b08423	
+PC:000007d8	INSTR:01b08423	 SUBU R16, R13, R16
+SUBU R16, R13, R16
+
+[597] R Type instr generated - 0x1051364	
+PC:000007dc	INSTR:01051364	 AND R2 , R8 , R5 
+AND  R2, R8, R5
+
+[598] R Type instr generated - 0x2accc83	
+PC:000007e0	INSTR:02accc83	 SRA R25, R12, 18
+SRA  R25, R21, R12
+
+[599] R Type instr generated - 0x1673282	
+PC:000007e4	INSTR:01673282	 SRL R6 , R11, R7 
+SRL  R6, R11, R7
+
+[600] R Type instr generated - 0x0676f40	
+PC:000007e8	INSTR:00676f40	 SLL R13, R3 , R7 
+SLL  R13, R3, R7
+
+[601] R Type instr generated - 0x38931e3	
+PC:000007ec	INSTR:038931e3	 SUBU R6 , R28, R9 
+SUBU R6, R28, R9
+
+[602] R Type instr generated - 0x32beaeb	
+PC:000007f0	INSTR:032beaeb	 SLTU R29, R25, R11
+SLTU R29, R25, R11
+
+[603] R Type instr generated - 0x229502a	
+PC:000007f4	INSTR:0229502a	 SLT R10, R17, R9 
+SLT  R10, R17, R9
+
+[604] R Type instr generated - 0x1d38aa5	
+PC:000007f8	INSTR:01d38aa5	 OR R17, R14, R19
+OR   R17, R14, R19
+
+[605] R Type instr generated - 0x02eae64	
+PC:000007fc	INSTR:002eae64	 AND R21, R1 , R14
+AND  R21, R1, R14
+
+[606] R Type instr generated - 0x3804faa	
+PC:00000800	INSTR:03804faa	 SLT R9 , R28, R0 
+SLT  R9, R28, R0
+
+[607] R Type instr generated - 0x3a918ab	
+PC:00000804	INSTR:03a918ab	 SLTU R3 , R29, R9 
+SLTU R3, R29, R9
+
+[608] R Type instr generated - 0x07ed2e2	
+PC:00000808	INSTR:007ed2e2	 SUB R26, R3 , R30
+SUB  R26, R3, R30
+
+[609] R Type instr generated - 0x3c7a342	
+PC:0000080c	INSTR:03c7a342	 SRL R20, R30, R7 
+SRL  R20, R30, R7
+
+PC:00000810	INSTR:08000207	 J 81c     
+[610] R Type instr generated - 0x14fbdc0	
+PC:0000081c	INSTR:014fbdc0	 SLL R23, R10, R15
+SLL  R23, R10, R15
+
+[611] R Type instr generated - 0x0e4c6c2	
+PC:00000820	INSTR:00e4c6c2	 SRL R24, R7 , R4 
+SRL  R24, R7, R4
+
+[612] R Type instr generated - 0x07591c0	
+PC:00000824	INSTR:007591c0	 SLL R18, R3 , R21
+SLL  R18, R3, R21
+
+[613] R Type instr generated - 0x0ee54c3	
+PC:00000828	INSTR:00ee54c3	 SRA R10, R14, 19
+SRA  R10, R7, R14
+
+PC:0000082c	INSTR:08000213	 J 84c     
+[614] R Type instr generated - 0x0680de1	
+PC:0000084c	INSTR:00680de1	 ADDU R1 , R3 , R8 
+ADDU R1, R3, R8
+
+[615] R Type instr generated - 0x21d2861	
+PC:00000850	INSTR:021d2861	 ADDU R5 , R16, R29
+ADDU R5, R16, R29
+
+[616] R Type instr generated - 0x058a882	
+PC:00000854	INSTR:0058a882	 SRL R21, R2 , R24
+SRL  R21, R2, R24
+
+[617] R Type instr generated - 0x11fed6b	
+PC:00000858	INSTR:011fed6b	 SLTU R29, R8 , R31
+SLTU R29, R8, R31
+
+[618] R Type instr generated - 0x0427c00	
+PC:0000085c	INSTR:00427c00	 SLL R15, R2 , R2 
+SLL  R15, R2, R2
+
+[619] R Type instr generated - 0x17a90e7	
+PC:00000860	INSTR:017a90e7	 NOR R18, R11, R26
+NOR  R18, R11, R26
+
+PC:00000864	INSTR:0800021b	 J 86c     
+[620] R Type instr generated - 0x3391065	
+PC:0000086c	INSTR:03391065	 OR R2 , R25, R25
+OR   R2, R25, R25
+
+[621] R Type instr generated - 0x0682f42	
+PC:00000870	INSTR:00682f42	 SRL R5 , R3 , R8 
+SRL  R5, R3, R8
+
+[622] R Type instr generated - 0x01876eb	
+PC:00000874	INSTR:001876eb	 SLTU R14, R0 , R24
+SLTU R14, R0, R24
+
+[623] R Type instr generated - 0x34ba6e3	
+PC:00000878	INSTR:034ba6e3	 SUBU R20, R26, R11
+SUBU R20, R26, R11
+
+[624] R Type instr generated - 0x249af43	
+PC:0000087c	INSTR:0249af43	 SRA R21, R9 , 29
+SRA  R21, R18, R9
+
+[625] R Type instr generated - 0x38c0167	
+NOR  R0, R28, R12
+
+PC:00000884	INSTR:08000228	 J 8a0     
+[626] R Type instr generated - 0x00eda40	
+PC:000008a0	INSTR:000eda40	 SLL R27, R0 , R14
+SLL  R27, R0, R14
+
+PC:000008a4	INSTR:0800022f	 J 8bc     
+[627] R Type instr generated - 0x22ff2a2	
+PC:000008bc	INSTR:022ff2a2	 SUB R30, R17, R15
+SUB  R30, R17, R15
+
+[628] R Type instr generated - 0x02f3720	
+PC:000008c0	INSTR:002f3720	 ADD R6 , R1 , R15
+ADD  R6, R1, R15
+
+PC:000008c4	INSTR:08000233	 J 8cc     
+[629] R Type instr generated - 0x0196c60	
+PC:000008cc	INSTR:00196c60	 ADD R13, R0 , R25
+ADD  R13, R0, R25
+
+[630] R Type instr generated - 0x0b17be5	
+PC:000008d0	INSTR:00b17be5	 OR R15, R5 , R17
+OR   R15, R5, R17
+
+[631] R Type instr generated - 0x15047ab	
+PC:000008d4	INSTR:015047ab	 SLTU R8 , R10, R16
+SLTU R8, R10, R16
+
+[632] R Type instr generated - 0x01d19e1	
+PC:000008d8	INSTR:001d19e1	 ADDU R3 , R0 , R29
+ADDU R3, R0, R29
+
+[633] R Type instr generated - 0x38dfac3	
+PC:000008dc	INSTR:038dfac3	 SRA R31, R13, 11
+SRA  R31, R28, R13
+
+[634] R Type instr generated - 0x2db4927	
+PC:000008e0	INSTR:02db4927	 NOR R9 , R22, R27
+NOR  R9, R22, R27
+
+PC:000008e4	INSTR:0800023c	 J 8f0     
+[635] R Type instr generated - 0x1271ce4	
+PC:000008f0	INSTR:01271ce4	 AND R3 , R9 , R7 
+AND  R3, R9, R7
+
+[636] R Type instr generated - 0x30200e7	
+NOR  R0, R24, R2
+
+PC:000008f8	INSTR:08000240	 J 900     
+[637] R Type instr generated - 0x2e5a222	
+PC:00000900	INSTR:02e5a222	 SUB R20, R23, R5 
+SUB  R20, R23, R5
+
+[638] R Type instr generated - 0x341a8ab	
+PC:00000904	INSTR:0341a8ab	 SLTU R21, R26, R1 
+SLTU R21, R26, R1
+
+[639] R Type instr generated - 0x1314f27	
+PC:00000908	INSTR:01314f27	 NOR R9 , R9 , R17
+NOR  R9, R9, R17
+
+[640] R Type instr generated - 0x34705e5	
+OR   R0, R26, R7
+
+[641] R Type instr generated - 0x3c1d4a4	
+PC:00000910	INSTR:03c1d4a4	 AND R26, R30, R1 
+AND  R26, R30, R1
+
+[642] R Type instr generated - 0x24f58a4	
+PC:00000914	INSTR:024f58a4	 AND R11, R18, R15
+AND  R11, R18, R15
+
+PC:00000918	INSTR:08000249	 J 924     
+[643] R Type instr generated - 0x248356b	
+PC:00000924	INSTR:0248356b	 SLTU R6 , R18, R8 
+SLTU R6, R18, R8
+
+[644] R Type instr generated - 0x0c02ce0	
+PC:00000928	INSTR:00c02ce0	 ADD R5 , R6 , R0 
+ADD  R5, R6, R0
+
+[645] R Type instr generated - 0x1df95e4	
+PC:0000092c	INSTR:01df95e4	 AND R18, R14, R31
+AND  R18, R14, R31
+
+[646] R Type instr generated - 0x3174dc3	
+PC:00000930	INSTR:03174dc3	 SRA R9 , R23, 23
+SRA  R9, R24, R23
+
+[647] R Type instr generated - 0x0e486e4	
+PC:00000934	INSTR:00e486e4	 AND R16, R7 , R4 
+AND  R16, R7, R4
+
+[648] R Type instr generated - 0x15e4a60	
+PC:00000938	INSTR:015e4a60	 ADD R9 , R10, R30
+ADD  R9, R10, R30
+
+[649] R Type instr generated - 0x367c9e4	
+PC:0000093c	INSTR:0367c9e4	 AND R25, R27, R7 
+AND  R25, R27, R7
+
+[650] R Type instr generated - 0x281e020	
+PC:00000940	INSTR:0281e020	 ADD R28, R20, R1 
+ADD  R28, R20, R1
+
+[651] R Type instr generated - 0x2436d42	
+PC:00000944	INSTR:02436d42	 SRL R13, R18, R3 
+SRL  R13, R18, R3
+
+[652] R Type instr generated - 0x0bdc2e5	
+PC:00000948	INSTR:00bdc2e5	 OR R24, R5 , R29
+OR   R24, R5, R29
+
+[653] R Type instr generated - 0x29da520	
+PC:0000094c	INSTR:029da520	 ADD R20, R20, R29
+ADD  R20, R20, R29
+
+[654] R Type instr generated - 0x0a66b43	
+PC:00000950	INSTR:00a66b43	 SRA R13, R6 , 13
+SRA  R13, R5, R6
+
+PC:00000954	INSTR:08000257	 J 95c     
+[655] R Type instr generated - 0x2c02cc2	
+PC:0000095c	INSTR:02c02cc2	 SRL R5 , R22, R0 
+SRL  R5, R22, R0
+
+PC:00000960	INSTR:0800025c	 J 970     
+[656] R Type instr generated - 0x0b199a6	
+PC:00000970	INSTR:00b199a6	 XOR R19, R5 , R17
+XOR  R19, R5, R17
+
+[657] R Type instr generated - 0x0dddd03	
+PC:00000974	INSTR:00dddd03	 SRA R27, R29, 20
+SRA  R27, R6, R29
+
+[658] R Type instr generated - 0x26aaa43	
+PC:00000978	INSTR:026aaa43	 SRA R21, R10, 9 
+SRA  R21, R19, R10
+
+[659] R Type instr generated - 0x010d9a2	
+PC:0000097c	INSTR:0010d9a2	 SUB R27, R0 , R16
+SUB  R27, R0, R16
+
+[660] R Type instr generated - 0x26ba466	
+PC:00000980	INSTR:026ba466	 XOR R20, R19, R11
+XOR  R20, R19, R11
+
+[661] R Type instr generated - 0x273e3e1	
+PC:00000984	INSTR:0273e3e1	 ADDU R28, R19, R19
+ADDU R28, R19, R19
+
+PC:00000988	INSTR:08000264	 J 990     
+[662] R Type instr generated - 0x3586183	
+PC:00000990	INSTR:03586183	 SRA R12, R24, 6 
+SRA  R12, R26, R24
+
+PC:00000994	INSTR:08000269	 J 9a4     
+[663] R Type instr generated - 0x1edcb22	
+PC:000009a4	INSTR:01edcb22	 SUB R25, R15, R13
+SUB  R25, R15, R13
+
+[664] R Type instr generated - 0x01603e0	
+ADD  R0, R0, R22
+
+[665] R Type instr generated - 0x03ff9aa	
+PC:000009ac	INSTR:003ff9aa	 SLT R31, R1 , R31
+SLT  R31, R1, R31
+
+PC:000009b0	INSTR:0800026e	 J 9b8     
+[666] R Type instr generated - 0x06f14a3	
+PC:000009b8	INSTR:006f14a3	 SUBU R2 , R3 , R15
+SUBU R2, R3, R15
+
+[667] R Type instr generated - 0x33210a7	
+PC:000009bc	INSTR:033210a7	 NOR R2 , R25, R18
+NOR  R2, R25, R18
+
+[668] R Type instr generated - 0x0c9fc6b	
+PC:000009c0	INSTR:00c9fc6b	 SLTU R31, R6 , R9 
+SLTU R31, R6, R9
+
+[669] R Type instr generated - 0x12f2023	
+PC:000009c4	INSTR:012f2023	 SUBU R4 , R9 , R15
+SUBU R4, R9, R15
+
+[670] R Type instr generated - 0x36828aa	
+PC:000009c8	INSTR:036828aa	 SLT R5 , R27, R8 
+SLT  R5, R27, R8
+
+PC:000009cc	INSTR:08000276	 J 9d8     
+[671] R Type instr generated - 0x35dea65	
+PC:000009d8	INSTR:035dea65	 OR R29, R26, R29
+OR   R29, R26, R29
+
+[672] R Type instr generated - 0x0450bc3	
+PC:000009dc	INSTR:00450bc3	 SRA R1 , R5 , 15
+SRA  R1, R2, R5
+
+[673] R Type instr generated - 0x2b90c61	
+PC:000009e0	INSTR:02b90c61	 ADDU R1 , R21, R25
+ADDU R1, R21, R25
+
+PC:000009e4	INSTR:0800027b	 J 9ec     
+[674] R Type instr generated - 0x17e0ee0	
+PC:000009ec	INSTR:017e0ee0	 ADD R1 , R11, R30
+ADD  R1, R11, R30
+
+[675] R Type instr generated - 0x3e39da3	
+PC:000009f0	INSTR:03e39da3	 SUBU R19, R31, R3 
+SUBU R19, R31, R3
+
+[676] R Type instr generated - 0x1f5c483	
+PC:000009f4	INSTR:01f5c483	 SRA R24, R21, 18
+SRA  R24, R15, R21
+
+[677] R Type instr generated - 0x2ee23ab	
+PC:000009f8	INSTR:02ee23ab	 SLTU R4 , R23, R14
+SLTU R4, R23, R14
+
+[678] R Type instr generated - 0x0219e65	
+PC:000009fc	INSTR:00219e65	 OR R19, R1 , R1 
+OR   R19, R1, R1
+
+[679] R Type instr generated - 0x1f1fd80	
+PC:00000a00	INSTR:01f1fd80	 SLL R31, R15, R17
+SLL  R31, R15, R17
+
+PC:00000a04	INSTR:08000283	 J a0c     
+[680] R Type instr generated - 0x1a26667	
+PC:00000a0c	INSTR:01a26667	 NOR R12, R13, R2 
+NOR  R12, R13, R2
+
+[681] R Type instr generated - 0x3017062	
+PC:00000a10	INSTR:03017062	 SUB R14, R24, R1 
+SUB  R14, R24, R1
+
+[682] R Type instr generated - 0x38407eb	
+SLTU R0, R28, R4
+
+[683] R Type instr generated - 0x175f32b	
+PC:00000a18	INSTR:0175f32b	 SLTU R30, R11, R21
+SLTU R30, R11, R21
+
+[684] R Type instr generated - 0x193e3e5	
+PC:00000a1c	INSTR:0193e3e5	 OR R28, R12, R19
+OR   R28, R12, R19
+
+[685] R Type instr generated - 0x2807027	
+PC:00000a20	INSTR:02807027	 NOR R14, R20, R0 
+NOR  R14, R20, R0
+
+[686] R Type instr generated - 0x0b73ae1	
+PC:00000a24	INSTR:00b73ae1	 ADDU R7 , R5 , R23
+ADDU R7, R5, R23
+
+[687] R Type instr generated - 0x13a302a	
+PC:00000a28	INSTR:013a302a	 SLT R6 , R9 , R26
+SLT  R6, R9, R26
+
+[688] R Type instr generated - 0x05b4d64	
+PC:00000a2c	INSTR:005b4d64	 AND R9 , R2 , R27
+AND  R9, R2, R27
+
+PC:00000a30	INSTR:08000293	 J a4c     
+[689] R Type instr generated - 0x208ba64	
+PC:00000a4c	INSTR:0208ba64	 AND R23, R16, R8 
+AND  R23, R16, R8
+
+[690] R Type instr generated - 0x2ead42a	
+PC:00000a50	INSTR:02ead42a	 SLT R26, R23, R10
+SLT  R26, R23, R10
+
+[691] R Type instr generated - 0x00e7262	
+PC:00000a54	INSTR:000e7262	 SUB R14, R0 , R14
+SUB  R14, R0, R14
+
+[692] R Type instr generated - 0x31a1902	
+PC:00000a58	INSTR:031a1902	 SRL R3 , R24, R26
+SRL  R3, R24, R26
+
+[693] R Type instr generated - 0x16e8a60	
+PC:00000a5c	INSTR:016e8a60	 ADD R17, R11, R14
+ADD  R17, R11, R14
+
+[694] R Type instr generated - 0x10f22a1	
+PC:00000a60	INSTR:010f22a1	 ADDU R4 , R8 , R15
+ADDU R4, R8, R15
+
+[695] R Type instr generated - 0x207ff80	
+PC:00000a64	INSTR:0207ff80	 SLL R31, R16, R7 
+SLL  R31, R16, R7
+
+PC:00000a68	INSTR:080002a8	 J aa0     
+[696] R Type instr generated - 0x0125ea3	
+PC:00000aa0	INSTR:00125ea3	 SUBU R11, R0 , R18
+SUBU R11, R0, R18
+
+[697] R Type instr generated - 0x16829e5	
+PC:00000aa4	INSTR:016829e5	 OR R5 , R11, R8 
+OR   R5, R11, R8
+
+[698] R Type instr generated - 0x2ff5f02	
+PC:00000aa8	INSTR:02ff5f02	 SRL R11, R23, R31
+SRL  R11, R23, R31
+
+[699] R Type instr generated - 0x0f1cea7	
+PC:00000aac	INSTR:00f1cea7	 NOR R25, R7 , R17
+NOR  R25, R7, R17
+
+PC:00000ab0	INSTR:080002ae	 J ab8     
+[700] R Type instr generated - 0x1ecb442	
+PC:00000ab8	INSTR:01ecb442	 SRL R22, R15, R12
+SRL  R22, R15, R12
+
+[701] R Type instr generated - 0x3009583	
+PC:00000abc	INSTR:03009583	 SRA R18, R0 , 22
+SRA  R18, R24, R0
+
+[702] R Type instr generated - 0x17647aa	
+PC:00000ac0	INSTR:017647aa	 SLT R8 , R11, R22
+SLT  R8, R11, R22
+
+[703] R Type instr generated - 0x01148e7	
+PC:00000ac4	INSTR:001148e7	 NOR R9 , R0 , R17
+NOR  R9, R0, R17
+
+[704] R Type instr generated - 0x3d524c0	
+PC:00000ac8	INSTR:03d524c0	 SLL R4 , R30, R21
+SLL  R4, R30, R21
+
+[705] R Type instr generated - 0x2212ee0	
+PC:00000acc	INSTR:02212ee0	 ADD R5 , R17, R1 
+ADD  R5, R17, R1
+
+[706] R Type instr generated - 0x36a6f40	
+PC:00000ad0	INSTR:036a6f40	 SLL R13, R27, R10
+SLL  R13, R27, R10
+
+[707] R Type instr generated - 0x3ad5403	
+PC:00000ad4	INSTR:03ad5403	 SRA R10, R13, 16
+SRA  R10, R29, R13
+
+[708] R Type instr generated - 0x344eb2a	
+PC:00000ad8	INSTR:0344eb2a	 SLT R29, R26, R4 
+SLT  R29, R26, R4
+
+PC:00000adc	INSTR:080002bb	 J aec     
+[709] R Type instr generated - 0x1b0bf24	
+PC:00000aec	INSTR:01b0bf24	 AND R23, R13, R16
+AND  R23, R13, R16
+
+[710] R Type instr generated - 0x1a02ea0	
+PC:00000af0	INSTR:01a02ea0	 ADD R5 , R13, R0 
+ADD  R5, R13, R0
+
+[711] R Type instr generated - 0x13be321	
+PC:00000af4	INSTR:013be321	 ADDU R28, R9 , R27
+ADDU R28, R9, R27
+
+[712] R Type instr generated - 0x2364b27	
+PC:00000af8	INSTR:02364b27	 NOR R9 , R17, R22
+NOR  R9, R17, R22
+
+[713] R Type instr generated - 0x0868fe4	
+PC:00000afc	INSTR:00868fe4	 AND R17, R4 , R6 
+AND  R17, R4, R6
+
+[714] R Type instr generated - 0x266cfc0	
+PC:00000b00	INSTR:0266cfc0	 SLL R25, R19, R6 
+SLL  R25, R19, R6
+
+PC:00000b04	INSTR:080002c5	 J b14     
+[715] R Type instr generated - 0x2dbcc00	
+PC:00000b14	INSTR:02dbcc00	 SLL R25, R22, R27
+SLL  R25, R22, R27
+
+[716] R Type instr generated - 0x0f57d62	
+PC:00000b18	INSTR:00f57d62	 SUB R15, R7 , R21
+SUB  R15, R7, R21
+
+[717] R Type instr generated - 0x31bda2a	
+PC:00000b1c	INSTR:031bda2a	 SLT R27, R24, R27
+SLT  R27, R24, R27
+
+[718] R Type instr generated - 0x27d77c3	
+PC:00000b20	INSTR:027d77c3	 SRA R14, R29, 31
+SRA  R14, R19, R29
+
+[719] R Type instr generated - 0x2d9a7ea	
+PC:00000b24	INSTR:02d9a7ea	 SLT R20, R22, R25
+SLT  R20, R22, R25
+
+[720] R Type instr generated - 0x0da0da2	
+PC:00000b28	INSTR:00da0da2	 SUB R1 , R6 , R26
+SUB  R1, R6, R26
+
+PC:00000b2c	INSTR:080002ce	 J b38     
+[721] R Type instr generated - 0x1bc09a5	
+PC:00000b38	INSTR:01bc09a5	 OR R1 , R13, R28
+OR   R1, R13, R28
+
+[722] R Type instr generated - 0x32ac52a	
+PC:00000b3c	INSTR:032ac52a	 SLT R24, R25, R10
+SLT  R24, R25, R10
+
+[723] R Type instr generated - 0x235352a	
+PC:00000b40	INSTR:0235352a	 SLT R6 , R17, R21
+SLT  R6, R17, R21
+
+[724] R Type instr generated - 0x23ed964	
+PC:00000b44	INSTR:023ed964	 AND R27, R17, R30
+AND  R27, R17, R30
+
+[725] R Type instr generated - 0x0233f20	
+PC:00000b48	INSTR:00233f20	 ADD R7 , R1 , R3 
+ADD  R7, R1, R3
+
+[726] R Type instr generated - 0x37f1bab	
+PC:00000b4c	INSTR:037f1bab	 SLTU R3 , R27, R31
+SLTU R3, R27, R31
+
+[727] R Type instr generated - 0x1f29762	
+PC:00000b50	INSTR:01f29762	 SUB R18, R15, R18
+SUB  R18, R15, R18
+
+PC:00000b54	INSTR:080002d7	 J b5c     
+[728] R Type instr generated - 0x2a887a7	
+PC:00000b5c	INSTR:02a887a7	 NOR R16, R21, R8 
+NOR  R16, R21, R8
+
+[729] R Type instr generated - 0x3e87ae0	
+PC:00000b60	INSTR:03e87ae0	 ADD R15, R31, R8 
+ADD  R15, R31, R8
+
+[730] R Type instr generated - 0x056c662	
+PC:00000b64	INSTR:0056c662	 SUB R24, R2 , R22
+SUB  R24, R2, R22
+
+[731] R Type instr generated - 0x3cff2e0	
+PC:00000b68	INSTR:03cff2e0	 ADD R30, R30, R15
+ADD  R30, R30, R15
+
+[732] R Type instr generated - 0x369fbe1	
+PC:00000b6c	INSTR:0369fbe1	 ADDU R31, R27, R9 
+ADDU R31, R27, R9
+
+[733] R Type instr generated - 0x34b79e6	
+PC:00000b70	INSTR:034b79e6	 XOR R15, R26, R11
+XOR  R15, R26, R11
+
+[734] R Type instr generated - 0x3e42aa6	
+PC:00000b74	INSTR:03e42aa6	 XOR R5 , R31, R4 
+XOR  R5, R31, R4
+
+[735] R Type instr generated - 0x04083eb	
+PC:00000b78	INSTR:004083eb	 SLTU R16, R2 , R0 
+SLTU R16, R2, R0
+
+[736] R Type instr generated - 0x145c440	
+PC:00000b7c	INSTR:0145c440	 SLL R24, R10, R5 
+SLL  R24, R10, R5
+
+[737] R Type instr generated - 0x185bca7	
+PC:00000b80	INSTR:0185bca7	 NOR R23, R12, R5 
+NOR  R23, R12, R5
+
+PC:00000b84	INSTR:080002e5	 J b94     
+[738] R Type instr generated - 0x068ca20	
+PC:00000b94	INSTR:0068ca20	 ADD R25, R3 , R8 
+ADD  R25, R3, R8
+
+[739] R Type instr generated - 0x0ecd7a5	
+PC:00000b98	INSTR:00ecd7a5	 OR R26, R7 , R12
+OR   R26, R7, R12
+
+[740] R Type instr generated - 0x0b5412a	
+PC:00000b9c	INSTR:00b5412a	 SLT R8 , R5 , R21
+SLT  R8, R5, R21
+
+PC:00000ba0	INSTR:080002f0	 J bc0     
+[741] R Type instr generated - 0x03c33ea	
+PC:00000bc0	INSTR:003c33ea	 SLT R6 , R1 , R28
+SLT  R6, R1, R28
+
+[742] R Type instr generated - 0x058e0eb	
+PC:00000bc4	INSTR:0058e0eb	 SLTU R28, R2 , R24
+SLTU R28, R2, R24
+
+[743] R Type instr generated - 0x079bdea	
+PC:00000bc8	INSTR:0079bdea	 SLT R23, R3 , R25
+SLT  R23, R3, R25
+
+[744] R Type instr generated - 0x2c59762	
+PC:00000bcc	INSTR:02c59762	 SUB R18, R22, R5 
+SUB  R18, R22, R5
+
+[745] R Type instr generated - 0x05b2a61	
+PC:00000bd0	INSTR:005b2a61	 ADDU R5 , R2 , R27
+ADDU R5, R2, R27
+
+[746] R Type instr generated - 0x11a7be5	
+PC:00000bd4	INSTR:011a7be5	 OR R15, R8 , R26
+OR   R15, R8, R26
+
+[747] R Type instr generated - 0x0d621c0	
+PC:00000bd8	INSTR:00d621c0	 SLL R4 , R6 , R22
+SLL  R4, R6, R22
+
+PC:00000bdc	INSTR:08000300	 J c00     
+[748] R Type instr generated - 0x003f540	
+PC:00000c00	INSTR:0003f540	 SLL R30, R0 , R3 
+SLL  R30, R0, R3
+
+[749] R Type instr generated - 0x17aec20	
+PC:00000c04	INSTR:017aec20	 ADD R29, R11, R26
+ADD  R29, R11, R26
+
+[750] R Type instr generated - 0x27bd8e1	
+PC:00000c08	INSTR:027bd8e1	 ADDU R27, R19, R27
+ADDU R27, R19, R27
+
+[751] R Type instr generated - 0x3517a40	
+PC:00000c0c	INSTR:03517a40	 SLL R15, R26, R17
+SLL  R15, R26, R17
+
+[752] R Type instr generated - 0x066ff2a	
+PC:00000c10	INSTR:0066ff2a	 SLT R31, R3 , R6 
+SLT  R31, R3, R6
+
+[753] R Type instr generated - 0x355d800	
+PC:00000c14	INSTR:0355d800	 SLL R27, R26, R21
+SLL  R27, R26, R21
+
+PC:00000c18	INSTR:0800030e	 J c38     
+[754] R Type instr generated - 0x0743d20	
+PC:00000c38	INSTR:00743d20	 ADD R7 , R3 , R20
+ADD  R7, R3, R20
+
+[755] R Type instr generated - 0x0da4665	
+PC:00000c3c	INSTR:00da4665	 OR R8 , R6 , R26
+OR   R8, R6, R26
+
+[756] R Type instr generated - 0x06f9c00	
+PC:00000c40	INSTR:006f9c00	 SLL R19, R3 , R15
+SLL  R19, R3, R15
+
+[757] R Type instr generated - 0x278ad02	
+PC:00000c44	INSTR:0278ad02	 SRL R21, R19, R24
+SRL  R21, R19, R24
+
+PC:00000c48	INSTR:08000314	 J c50     
+[758] R Type instr generated - 0x0bf2403	
+PC:00000c50	INSTR:00bf2403	 SRA R4 , R31, 16
+SRA  R4, R5, R31
+
+[759] R Type instr generated - 0x3cb2721	
+PC:00000c54	INSTR:03cb2721	 ADDU R4 , R30, R11
+ADDU R4, R30, R11
+
+[760] R Type instr generated - 0x182ba24	
+PC:00000c58	INSTR:0182ba24	 AND R23, R12, R2 
+AND  R23, R12, R2
+
+[761] R Type instr generated - 0x3135b26	
+PC:00000c5c	INSTR:03135b26	 XOR R11, R24, R19
+XOR  R11, R24, R19
+
+PC:00000c60	INSTR:0800031a	 J c68     
+[762] R Type instr generated - 0x3de0566	
+XOR  R0, R30, R30
+
+[763] R Type instr generated - 0x36820ab	
+PC:00000c6c	INSTR:036820ab	 SLTU R4 , R27, R8 
+SLTU R4, R27, R8
+
+[764] R Type instr generated - 0x2171ec2	
+PC:00000c70	INSTR:02171ec2	 SRL R3 , R16, R23
+SRL  R3, R16, R23
+
+[765] R Type instr generated - 0x1f8642b	
+PC:00000c74	INSTR:01f8642b	 SLTU R12, R15, R24
+SLTU R12, R15, R24
+
+PC:00000c78	INSTR:08000321	 J c84     
+[766] R Type instr generated - 0x0aef821	
+PC:00000c84	INSTR:00aef821	 ADDU R31, R5 , R14
+ADDU R31, R5, R14
+
+[767] R Type instr generated - 0x05374a1	
+PC:00000c88	INSTR:005374a1	 ADDU R14, R2 , R19
+ADDU R14, R2, R19
+
+[768] R Type instr generated - 0x11a6cab	
+PC:00000c8c	INSTR:011a6cab	 SLTU R13, R8 , R26
+SLTU R13, R8, R26
+
+[769] R Type instr generated - 0x2b56c67	
+PC:00000c90	INSTR:02b56c67	 NOR R13, R21, R21
+NOR  R13, R21, R21
+
+[770] R Type instr generated - 0x2661ca7	
+PC:00000c94	INSTR:02661ca7	 NOR R3 , R19, R6 
+NOR  R3, R19, R6
+
+[771] R Type instr generated - 0x2457220	
+PC:00000c98	INSTR:02457220	 ADD R14, R18, R5 
+ADD  R14, R18, R5
+
+[772] R Type instr generated - 0x2c6e46b	
+PC:00000c9c	INSTR:02c6e46b	 SLTU R28, R22, R6 
+SLTU R28, R22, R6
+
+[773] R Type instr generated - 0x2c1e3a5	
+PC:00000ca0	INSTR:02c1e3a5	 OR R28, R22, R1 
+OR   R28, R22, R1
+
+[774] R Type instr generated - 0x068d366	
+PC:00000ca4	INSTR:0068d366	 XOR R26, R3 , R8 
+XOR  R26, R3, R8
+
+[775] R Type instr generated - 0x005ff2b	
+PC:00000ca8	INSTR:0005ff2b	 SLTU R31, R0 , R5 
+SLTU R31, R0, R5
+
+[776] R Type instr generated - 0x2f1b1c0	
+PC:00000cac	INSTR:02f1b1c0	 SLL R22, R23, R17
+SLL  R22, R23, R17
+
+[777] R Type instr generated - 0x235bda0	
+PC:00000cb0	INSTR:0235bda0	 ADD R23, R17, R21
+ADD  R23, R17, R21
+
+[778] R Type instr generated - 0x0d2a6ab	
+PC:00000cb4	INSTR:00d2a6ab	 SLTU R20, R6 , R18
+SLTU R20, R6, R18
+
+[779] R Type instr generated - 0x3f95b00	
+PC:00000cb8	INSTR:03f95b00	 SLL R11, R31, R25
+SLL  R11, R31, R25
+
+[780] R Type instr generated - 0x2e8aee0	
+PC:00000cbc	INSTR:02e8aee0	 ADD R21, R23, R8 
+ADD  R21, R23, R8
+
+[781] R Type instr generated - 0x0a624a2	
+PC:00000cc0	INSTR:00a624a2	 SUB R4 , R5 , R6 
+SUB  R4, R5, R6
+
+[782] R Type instr generated - 0x3a86467	
+PC:00000cc4	INSTR:03a86467	 NOR R12, R29, R8 
+NOR  R12, R29, R8
+
+PC:00000cc8	INSTR:08000337	 J cdc     
+[783] R Type instr generated - 0x334052b	
+SLTU R0, R25, R20
+
+[784] R Type instr generated - 0x0cd5aa1	
+PC:00000ce0	INSTR:00cd5aa1	 ADDU R11, R6 , R13
+ADDU R11, R6, R13
+
+[785] R Type instr generated - 0x3216203	
+PC:00000ce4	INSTR:03216203	 SRA R12, R1 , 8 
+SRA  R12, R25, R1
+
+[786] R Type instr generated - 0x0e9ac65	
+PC:00000ce8	INSTR:00e9ac65	 OR R21, R7 , R9 
+OR   R21, R7, R9
+
+[787] R Type instr generated - 0x28f0327	
+NOR  R0, R20, R15
+
+PC:00000cf0	INSTR:08000352	 J d48     
+[788] R Type instr generated - 0x2f4aaa1	
+PC:00000d48	INSTR:02f4aaa1	 ADDU R21, R23, R20
+ADDU R21, R23, R20
+
+[789] R Type instr generated - 0x291f06a	
+PC:00000d4c	INSTR:0291f06a	 SLT R30, R20, R17
+SLT  R30, R20, R17
+
+[790] R Type instr generated - 0x3521ea4	
+PC:00000d50	INSTR:03521ea4	 AND R3 , R26, R18
+AND  R3, R26, R18
+
+[791] R Type instr generated - 0x3a0ba20	
+PC:00000d54	INSTR:03a0ba20	 ADD R23, R29, R0 
+ADD  R23, R29, R0
+
+[792] R Type instr generated - 0x2da6f65	
+PC:00000d58	INSTR:02da6f65	 OR R13, R22, R26
+OR   R13, R22, R26
+
+[793] R Type instr generated - 0x22a9b80	
+PC:00000d5c	INSTR:022a9b80	 SLL R19, R17, R10
+SLL  R19, R17, R10
+
+PC:00000d60	INSTR:0800035f	 J d7c     
+[794] R Type instr generated - 0x0848340	
+PC:00000d7c	INSTR:00848340	 SLL R16, R4 , R4 
+SLL  R16, R4, R4
+
+[795] R Type instr generated - 0x032e702	
+PC:00000d80	INSTR:0032e702	 SRL R28, R1 , R18
+SRL  R28, R1, R18
+
+[796] R Type instr generated - 0x3c02623	
+PC:00000d84	INSTR:03c02623	 SUBU R4 , R30, R0 
+SUBU R4, R30, R0
+
+PC:00000d88	INSTR:08000364	 J d90     
+[797] R Type instr generated - 0x3617023	
+PC:00000d90	INSTR:03617023	 SUBU R14, R27, R1 
+SUBU R14, R27, R1
+
+[798] R Type instr generated - 0x35bde67	
+PC:00000d94	INSTR:035bde67	 NOR R27, R26, R27
+NOR  R27, R26, R27
+
+PC:00000d98	INSTR:0800036b	 J dac     
+[799] R Type instr generated - 0x172e167	
+PC:00000dac	INSTR:0172e167	 NOR R28, R11, R18
+NOR  R28, R11, R18
+
+PC:00000db0	INSTR:08000373	 J dcc     
+[800] R Type instr generated - 0x3260a61	
+PC:00000dcc	INSTR:03260a61	 ADDU R1 , R25, R6 
+ADDU R1, R25, R6
+
+[801] R Type instr generated - 0x3142961	
+PC:00000dd0	INSTR:03142961	 ADDU R5 , R24, R20
+ADDU R5, R24, R20
+
+[802] R Type instr generated - 0x29a94ea	
+PC:00000dd4	INSTR:029a94ea	 SLT R18, R20, R26
+SLT  R18, R20, R26
+
+[803] R Type instr generated - 0x024e221	
+PC:00000dd8	INSTR:0024e221	 ADDU R28, R1 , R4 
+ADDU R28, R1, R4
+
+[804] R Type instr generated - 0x29a5de6	
+PC:00000ddc	INSTR:029a5de6	 XOR R11, R20, R26
+XOR  R11, R20, R26
+
+[805] R Type instr generated - 0x3518862	
+PC:00000de0	INSTR:03518862	 SUB R17, R26, R17
+SUB  R17, R26, R17
+
+[806] R Type instr generated - 0x2e4db82	
+PC:00000de4	INSTR:02e4db82	 SRL R27, R23, R4 
+SRL  R27, R23, R4
+
+PC:00000de8	INSTR:08000381	 J e04     
+[807] R Type instr generated - 0x14e36a7	
+PC:00000e04	INSTR:014e36a7	 NOR R6 , R10, R14
+NOR  R6, R10, R14
+
+[808] R Type instr generated - 0x28a946a	
+PC:00000e08	INSTR:028a946a	 SLT R18, R20, R10
+SLT  R18, R20, R10
+
+[809] R Type instr generated - 0x037f943	
+PC:00000e0c	INSTR:0037f943	 SRA R31, R23, 5 
+SRA  R31, R1, R23
+
+[810] R Type instr generated - 0x2e8f0e0	
+PC:00000e10	INSTR:02e8f0e0	 ADD R30, R23, R8 
+ADD  R30, R23, R8
+
+[811] R Type instr generated - 0x2bef6e2	
+PC:00000e14	INSTR:02bef6e2	 SUB R30, R21, R30
+SUB  R30, R21, R30
+
+[812] R Type instr generated - 0x0ca6880	
+PC:00000e18	INSTR:00ca6880	 SLL R13, R6 , R10
+SLL  R13, R6, R10
+
+[813] R Type instr generated - 0x11f8682	
+PC:00000e1c	INSTR:011f8682	 SRL R16, R8 , R31
+SRL  R16, R8, R31
+
+PC:00000e20	INSTR:0800038f	 J e3c     
+[814] R Type instr generated - 0x14d3c83	
+PC:00000e3c	INSTR:014d3c83	 SRA R7 , R13, 18
+SRA  R7, R10, R13
+
+[815] R Type instr generated - 0x3e45021	
+PC:00000e40	INSTR:03e45021	 ADDU R10, R31, R4 
+ADDU R10, R31, R4
+
+[816] R Type instr generated - 0x2efbde7	
+PC:00000e44	INSTR:02efbde7	 NOR R23, R23, R15
+NOR  R23, R23, R15
+
+[817] R Type instr generated - 0x0ad4de3	
+PC:00000e48	INSTR:00ad4de3	 SUBU R9 , R5 , R13
+SUBU R9, R5, R13
+
+[818] R Type instr generated - 0x3c00da4	
+PC:00000e4c	INSTR:03c00da4	 AND R1 , R30, R0 
+AND  R1, R30, R0
+
+[819] R Type instr generated - 0x04c36a6	
+PC:00000e50	INSTR:004c36a6	 XOR R6 , R2 , R12
+XOR  R6, R2, R12
+
+[820] R Type instr generated - 0x2ac0ec3	
+PC:00000e54	INSTR:02ac0ec3	 SRA R1 , R12, 27
+SRA  R1, R21, R12
+
+[821] R Type instr generated - 0x11e32e3	
+PC:00000e58	INSTR:011e32e3	 SUBU R6 , R8 , R30
+SUBU R6, R8, R30
+
+[822] R Type instr generated - 0x30bff82	
+PC:00000e5c	INSTR:030bff82	 SRL R31, R24, R11
+SRL  R31, R24, R11
+
+[823] R Type instr generated - 0x1ac6863	
+PC:00000e60	INSTR:01ac6863	 SUBU R13, R13, R12
+SUBU R13, R13, R12
+
+[824] R Type instr generated - 0x1c04f2b	
+PC:00000e64	INSTR:01c04f2b	 SLTU R9 , R14, R0 
+SLTU R9, R14, R0
+
+[825] R Type instr generated - 0x3087c67	
+PC:00000e68	INSTR:03087c67	 NOR R15, R24, R8 
+NOR  R15, R24, R8
+
+[826] R Type instr generated - 0x25064a2	
+PC:00000e6c	INSTR:025064a2	 SUB R12, R18, R16
+SUB  R12, R18, R16
+
+[827] R Type instr generated - 0x3137bab	
+PC:00000e70	INSTR:03137bab	 SLTU R15, R24, R19
+SLTU R15, R24, R19
+
+[828] R Type instr generated - 0x162c226	
+PC:00000e74	INSTR:0162c226	 XOR R24, R11, R2 
+XOR  R24, R11, R2
+
+[829] R Type instr generated - 0x1470e2b	
+PC:00000e78	INSTR:01470e2b	 SLTU R1 , R10, R7 
+SLTU R1, R10, R7
+
+PC:00000e7c	INSTR:080003a5	 J e94     
+[830] R Type instr generated - 0x199ca61	
+PC:00000e94	INSTR:0199ca61	 ADDU R25, R12, R25
+ADDU R25, R12, R25
+
+[831] R Type instr generated - 0x246e5a5	
+PC:00000e98	INSTR:0246e5a5	 OR R28, R18, R6 
+OR   R28, R18, R6
+
+[832] R Type instr generated - 0x2a06fa5	
+PC:00000e9c	INSTR:02a06fa5	 OR R13, R21, R0 
+OR   R13, R21, R0
+
+[833] R Type instr generated - 0x30fa6e7	
+PC:00000ea0	INSTR:030fa6e7	 NOR R20, R24, R15
+NOR  R20, R24, R15
+
+PC:00000ea4	INSTR:080003b4	 J ed0     
+[834] R Type instr generated - 0x0aa8e80	
+PC:00000ed0	INSTR:00aa8e80	 SLL R17, R5 , R10
+SLL  R17, R5, R10
+
+[835] R Type instr generated - 0x1765342	
+PC:00000ed4	INSTR:01765342	 SRL R10, R11, R22
+SRL  R10, R11, R22
+
+PC:00000ed8	INSTR:080003c3	 J f0c     
+[836] R Type instr generated - 0x1dcb066	
+PC:00000f0c	INSTR:01dcb066	 XOR R22, R14, R28
+XOR  R22, R14, R28
+
+[837] R Type instr generated - 0x3164c6a	
+PC:00000f10	INSTR:03164c6a	 SLT R9 , R24, R22
+SLT  R9, R24, R22
+
+[838] R Type instr generated - 0x3afd0c2	
+PC:00000f14	INSTR:03afd0c2	 SRL R26, R29, R15
+SRL  R26, R29, R15
+
+[839] R Type instr generated - 0x0d28c63	
+PC:00000f18	INSTR:00d28c63	 SUBU R17, R6 , R18
+SUBU R17, R6, R18
+
+[840] R Type instr generated - 0x38ec023	
+PC:00000f1c	INSTR:038ec023	 SUBU R24, R28, R14
+SUBU R24, R28, R14
+
+[841] R Type instr generated - 0x0a06d43	
+PC:00000f20	INSTR:00a06d43	 SRA R13, R0 , 21
+SRA  R13, R5, R0
+
+[842] R Type instr generated - 0x19a7fe2	
+PC:00000f24	INSTR:019a7fe2	 SUB R15, R12, R26
+SUB  R15, R12, R26
+
+[843] R Type instr generated - 0x2cb8fea	
+PC:00000f28	INSTR:02cb8fea	 SLT R17, R22, R11
+SLT  R17, R22, R11
+
+[844] R Type instr generated - 0x11e3e6a	
+PC:00000f2c	INSTR:011e3e6a	 SLT R7 , R8 , R30
+SLT  R7, R8, R30
+
+[845] R Type instr generated - 0x1d5156b	
+PC:00000f30	INSTR:01d5156b	 SLTU R2 , R14, R21
+SLTU R2, R14, R21
+
+[846] R Type instr generated - 0x17ac262	
+PC:00000f34	INSTR:017ac262	 SUB R24, R11, R26
+SUB  R24, R11, R26
+
+[847] R Type instr generated - 0x0ce5982	
+PC:00000f38	INSTR:00ce5982	 SRL R11, R6 , R14
+SRL  R11, R6, R14
+
+[848] R Type instr generated - 0x1987d83	
+PC:00000f3c	INSTR:01987d83	 SRA R15, R24, 22
+SRA  R15, R12, R24
+
+[849] R Type instr generated - 0x28065a4	
+PC:00000f40	INSTR:028065a4	 AND R12, R20, R0 
+AND  R12, R20, R0
+
+[850] R Type instr generated - 0x166c862	
+PC:00000f44	INSTR:0166c862	 SUB R25, R11, R6 
+SUB  R25, R11, R6
+
+[851] R Type instr generated - 0x20e726a	
+PC:00000f48	INSTR:020e726a	 SLT R14, R16, R14
+SLT  R14, R16, R14
+
+[852] R Type instr generated - 0x2d45521	
+PC:00000f4c	INSTR:02d45521	 ADDU R10, R22, R20
+ADDU R10, R22, R20
+
+[853] R Type instr generated - 0x05f3d82	
+PC:00000f50	INSTR:005f3d82	 SRL R7 , R2 , R31
+SRL  R7, R2, R31
+
+[854] R Type instr generated - 0x3d32c67	
+PC:00000f54	INSTR:03d32c67	 NOR R5 , R30, R19
+NOR  R5, R30, R19
+
+[855] R Type instr generated - 0x3d5c780	
+PC:00000f58	INSTR:03d5c780	 SLL R24, R30, R21
+SLL  R24, R30, R21
+
+[856] R Type instr generated - 0x288ce60	
+PC:00000f5c	INSTR:0288ce60	 ADD R25, R20, R8 
+ADD  R25, R20, R8
+
+[857] R Type instr generated - 0x1961180	
+PC:00000f60	INSTR:01961180	 SLL R2 , R12, R22
+SLL  R2, R12, R22
+
+[858] R Type instr generated - 0x2cdb061	
+PC:00000f64	INSTR:02cdb061	 ADDU R22, R22, R13
+ADDU R22, R22, R13
+
+[859] R Type instr generated - 0x3245582	
+PC:00000f68	INSTR:03245582	 SRL R10, R25, R4 
+SRL  R10, R25, R4
+
+[860] R Type instr generated - 0x0239664	
+PC:00000f6c	INSTR:00239664	 AND R18, R1 , R3 
+AND  R18, R1, R3
+
+[861] R Type instr generated - 0x2609c61	
+PC:00000f70	INSTR:02609c61	 ADDU R19, R19, R0 
+ADDU R19, R19, R0
+
+[862] R Type instr generated - 0x1330283	
+SRA  R0, R9, R19
+
+[863] R Type instr generated - 0x33952e2	
+PC:00000f78	INSTR:033952e2	 SUB R10, R25, R25
+SUB  R10, R25, R25
+
+[864] R Type instr generated - 0x0388163	
+PC:00000f7c	INSTR:00388163	 SUBU R16, R1 , R24
+SUBU R16, R1, R24
+
+[865] R Type instr generated - 0x032e226	
+PC:00000f80	INSTR:0032e226	 XOR R28, R1 , R18
+XOR  R28, R1, R18
+
+[866] R Type instr generated - 0x0690200	
+SLL  R0, R3, R9
+
+[867] R Type instr generated - 0x2df062b	
+SLTU R0, R22, R31
+
+[868] R Type instr generated - 0x09aae82	
+PC:00000f8c	INSTR:009aae82	 SRL R21, R4 , R26
+SRL  R21, R4, R26
+
+[869] R Type instr generated - 0x3c691e3	
+PC:00000f90	INSTR:03c691e3	 SUBU R18, R30, R6 
+SUBU R18, R30, R6
+
+[870] R Type instr generated - 0x0f77280	
+PC:00000f94	INSTR:00f77280	 SLL R14, R7 , R23
+SLL  R14, R7, R23
+
+[871] R Type instr generated - 0x10c39a3	
+PC:00000f98	INSTR:010c39a3	 SUBU R7 , R8 , R12
+SUBU R7, R8, R12
+
+[872] R Type instr generated - 0x308e8e1	
+PC:00000f9c	INSTR:0308e8e1	 ADDU R29, R24, R8 
+ADDU R29, R24, R8
+
+[873] R Type instr generated - 0x0ccc5c2	
+PC:00000fa0	INSTR:00ccc5c2	 SRL R24, R6 , R12
+SRL  R24, R6, R12
+
+[874] R Type instr generated - 0x15d6082	
+PC:00000fa4	INSTR:015d6082	 SRL R12, R10, R29
+SRL  R12, R10, R29
+
+[875] R Type instr generated - 0x02058e7	
+PC:00000fa8	INSTR:002058e7	 NOR R11, R1 , R0 
+NOR  R11, R1, R0
+
+[876] R Type instr generated - 0x1a39ae6	
+PC:00000fac	INSTR:01a39ae6	 XOR R19, R13, R3 
+XOR  R19, R13, R3
+
+[877] R Type instr generated - 0x0356aea	
+PC:00000fb0	INSTR:00356aea	 SLT R13, R1 , R21
+SLT  R13, R1, R21
+
+[878] R Type instr generated - 0x3a69e40	
+PC:00000fb4	INSTR:03a69e40	 SLL R19, R29, R6 
+SLL  R19, R29, R6
+
+[879] R Type instr generated - 0x3e725eb	
+PC:00000fb8	INSTR:03e725eb	 SLTU R4 , R31, R7 
+SLTU R4, R31, R7
+
+[880] R Type instr generated - 0x02bb4a4	
+PC:00000fbc	INSTR:002bb4a4	 AND R22, R1 , R11
+AND  R22, R1, R11
+
+[881] R Type instr generated - 0x2ee3521	
+PC:00000fc0	INSTR:02ee3521	 ADDU R6 , R23, R14
+ADDU R6, R23, R14
+
+[882] R Type instr generated - 0x328a603	
+PC:00000fc4	INSTR:0328a603	 SRA R20, R8 , 24
+SRA  R20, R25, R8
+
+[883] R Type instr generated - 0x155256b	
+PC:00000fc8	INSTR:0155256b	 SLTU R4 , R10, R21
+SLTU R4, R10, R21
+
+[884] R Type instr generated - 0x22ea4c2	
+PC:00000fcc	INSTR:022ea4c2	 SRL R20, R17, R14
+SRL  R20, R17, R14
+
+[885] R Type instr generated - 0x0902de5	
+PC:00000fd0	INSTR:00902de5	 OR R5 , R4 , R16
+OR   R5, R4, R16
+
+[886] R Type instr generated - 0x2c5f460	
+PC:00000fd4	INSTR:02c5f460	 ADD R30, R22, R5 
+ADD  R30, R22, R5
+
+[887] R Type instr generated - 0x248dce4	
+PC:00000fd8	INSTR:0248dce4	 AND R27, R18, R8 
+AND  R27, R18, R8
+
+[888] R Type instr generated - 0x0421165	
+PC:00000fdc	INSTR:00421165	 OR R2 , R2 , R2 
+OR   R2, R2, R2
+
+[889] R Type instr generated - 0x00ad2a3	
+PC:00000fe0	INSTR:000ad2a3	 SUBU R26, R0 , R10
+SUBU R26, R0, R10
+
+PC:00000fe4	INSTR:2402000a	 SLTU R0 , R2 , 10
+PC:00000fe8	INSTR:0000000c	 SYSCALL
