@@ -11,7 +11,7 @@
 void update_cpu (int pc, int hex_instr) {
     PC[pc]           = 1;
     instr[pc]        = hex_instr;
-    printf ("PC Update: PC[%x] = %d\tinstr[%x] = %x\n", pc, PC[pc], pc, instr[pc]);
+    //printf ("PC Update: PC[%x] = %d\tinstr[%x] = %x\n", pc, PC[pc], pc, instr[pc]);
     prev_pc = CURRENT_STATE.PC;
 }
 
@@ -193,14 +193,14 @@ TARGET:
     }
     hex_instr = (opcode << 26) + target;
 
+    printf ("[%d] J Type instr generated - 0x%.7x\t\n", instr_gen, hex_instr);
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
-    // print_assembled_j_instr (rand_opcode_idx, target);
+    print_assembled_j_instr (rand_opcode_idx, target);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
-    printf ("[%d] J Type instr generated - 0x%.7x\t\n", instr_gen, hex_instr);
     instr_gen++;
 }
 
