@@ -185,8 +185,10 @@ void gen_j_instr () {
 TARGET:
     target   = rand ()%0x3FFFFFF; // random number for 26 bit ie (2^26 - 1)
     unsigned int addr = (unsigned) (((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2));
-    if ((check_j_addr (addr) == 0) && !(PC[addr]==0))
-    {
+    if ((check_j_addr (addr) == 0)) {
+        goto TARGET;
+    }
+    else if (!PC[addr] == 0) {
         goto TARGET;
     }
     hex_instr = (opcode << 26) + target;
