@@ -31,6 +31,7 @@ module top
     wire        is_r_type_top;
     wire        is_i_type_top;
     wire        is_j_type_top;
+    wire        use_link_reg_top;
     wire        reg_src_top;
     wire        reg_dst_top;
     wire        jump_top;
@@ -105,10 +106,12 @@ module top
         .sign_imm_dec_o (sign_imm_top),
         .is_r_type_dec_o (is_r_type_top),
         .is_i_type_dec_o (is_i_type_top),
-        .is_j_type_dec_o (is_j_type_top)
+        .is_j_type_dec_o (is_j_type_top),
+        .use_link_reg_dec_o (use_link_reg_top)
     );
 
-    assign rd_top = reg_dst_top ? rd_dec_top : rt_top;
+    assign rd_top = (use_link_reg_top) ? 32'h1F     :
+                    (reg_dst_top       ? rd_dec_top : rt_top);
     assign rs_top = reg_src_top ? rt_top     : rs_dec_top;
 
     regfile R1 (
