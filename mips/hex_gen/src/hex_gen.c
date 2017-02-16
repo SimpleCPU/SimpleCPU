@@ -52,7 +52,7 @@ int check_j_addr (int addr) {
 /* 10:6     shamt           */
 /* 5:0      funct           */
 void print_assembled_r_instr (int funct, int rs, int rt, int rd) {
-    printf ("%4s %s, %s, %s\n\n", 
+    printf ("%-4s %s, %s, %s\n\n", 
             funct_str_r_type[funct],
             register_str[rd],
             register_str[rs],
@@ -108,7 +108,7 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     if (sign_ext) {
         imm = (sign) ? (imm | 0xFFFF0000) : (unsigned)imm;
     }
-    printf ("%4s %s, %s, %x\n\n", 
+    printf ("%-4s %s, %s, %x\n\n", 
             opcode_str_i_type[opcode],
             register_str[rt],
             register_str[rs],
@@ -170,7 +170,7 @@ IMM:
 /* 31:26    opcode          */
 /* 25:0     target          */
 void print_assembled_j_instr (int opcode, int target) {
-    printf ("%4s %-8x\n\n", 
+    printf ("%-4s %-8x\n\n", 
             opcode_str_j_type[opcode],
             target
     );
@@ -237,7 +237,8 @@ void make_room () {
     // There should be space for at least
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
-    if ((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) {
+    if (((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) &&
+        !(CURRENT_STATE.PC == 0xFFC)) {
         return;
     }
     // No space available. Inset Jump instr
@@ -255,6 +256,8 @@ void make_room () {
             return;
         }
     }
+    printf ("\nExit! PC overflow.\n");
+    exit (0);
 }
 
 void gen_instr_hex (int num_r, int num_i, int num_j) {
