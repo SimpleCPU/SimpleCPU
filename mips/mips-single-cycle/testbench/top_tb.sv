@@ -29,7 +29,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign rd_val       = T1.R1.reg_file[rd];
     assign rs_val       = T1.R1.reg_file[rs];
     assign rt_val       = T1.R1.reg_file[rt];
-    assign rt_val_dest  = T1.reg_wr_top ? T1.wr_data_rf_top : rt_val;
+    assign rt_val_dest  = (T1.reg_wr_top && !T1.use_link_reg_top) ? T1.wr_data_rf_top : rt_val;
     assign rd_val_dest  = T1.reg_wr_top ? T1.wr_data_rf_top : rd_val;
 
     top T1 (
