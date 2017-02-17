@@ -1,5 +1,6 @@
 *.so
 *.swp
+*.swo
 *.v.swp
 *.c.swp
 *.log
