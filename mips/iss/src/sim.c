@@ -475,11 +475,11 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             
         break;
         case (0x09): //ADDIU
-            printf ("PC:%.8x\tINSTR:%.8x\t SLTU R%-2d, R%-2d, %-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t ADDIU R%-2d, R%-2d, %-2d\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
-                rs,
                 rt,
+                rs,
                 imm
             );
             if (rt == 0) {
@@ -917,10 +917,10 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
     int rs_val_model = CURRENT_STATE.REGS[rs_model];
     int rt_val_model = CURRENT_STATE.REGS[rt_model];
     int rd_val_model = CURRENT_STATE.REGS[rd_model];
-    if (rs == rd) {
+    if ((rs == rd)) {
         rs_val = rd_val;
     }
-    if (rt == rd) {
+    if ((rt == rd) && (rt != 0)) {
         rt_val = rd_val;
     }
     printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n", pc, instr, rd, rd_val, rs, rs_val, rt, rt_val);
@@ -984,7 +984,7 @@ extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val)
     int rt_model     = (instr_model >> 16)   & 0x1F;
     int rs_val_model = (int) CURRENT_STATE.REGS[rs_model];
     int rt_val_model = (int) CURRENT_STATE.REGS[rt_model];
-    if (rs == rt) {
+    if ((rs == rt)) {
         rs_val = rt_val;
     }
     printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\n", pc, instr, rs, rs_val, rt, rt_val);
