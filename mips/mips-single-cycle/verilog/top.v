@@ -110,7 +110,7 @@ module top
         .use_link_reg_dec_o (use_link_reg_top)
     );
 
-    assign rd_top = (use_link_reg_top) ? 32'h1F     :
+    assign rd_top = (use_link_reg_top) ? 5'h1F     :
                     (reg_dst_top       ? rd_dec_top : rt_top);
     assign rs_top = reg_src_top ? rt_top     : rs_dec_top;
 
@@ -147,9 +147,10 @@ module top
         .read_data_dmem_ram_o (read_data_dmem_ram_top)
     );
 
-    assign wr_data_rf_top = (|rd_top) ? 
-                            (mem_to_reg_top ? read_data_dmem_ram_top : res_alu_top) :
-                            32'h0;
+    assign wr_data_rf_top = (use_link_reg_top) ? (curr_pc_top + 32'h4) :
+                                               (|rd_top) ? (mem_to_reg_top ? read_data_dmem_ram_top : 
+                                                                             res_alu_top) :
+                                                         32'h0;
 
     control C1 (
         .instr_op_ctl_i (op_top),
