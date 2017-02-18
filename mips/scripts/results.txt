@@ -1,0 +1,122 @@
+make iss
+gcc -fPIC -W -shared -g -m32 -O2 src/main.c src/sim.c src/main.h -o iss.so
+cp iss.so ../mips-single-cycle/
+rm -rf vsim.wlf wlf* transcript work/
+vlib work
+vlog testbench/* verilog/*
+Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+-- Compiling module top_tb
+-- Compiling module adder
+-- Compiling module alu
+-- Compiling module carry_lookahead_adder
+-- Compiling module carry_lookahead_gen
+-- Compiling module comparator
+-- Compiling module control
+-- Compiling module data_mem
+-- Compiling module decode
+-- Compiling module instr_mem
+-- Compiling module issue
+-- Compiling module logical
+-- Compiling module pc_reg
+-- Compiling module reduced_full_adder
+-- Compiling module regfile
+-- Compiling module shifter
+-- Compiling module top
+
+Top level modules:
+	top_tb
+	issue
+vsim -c top_tb -sv_lib iss -do "onElabError resume;  run -all; exit" | tee sim.logReading /home/dbehl/modelsim_reduced/tcl/vsim/pref.tcl 
+
+# 10.1e
+
+# vsim -do {run -all; exit} -c -sv_lib iss top_tb 
+# Loading sv_std.std
+# Loading work.top_tb
+# Loading work.top
+# Loading work.pc_reg
+# Loading work.adder
+# Loading work.carry_lookahead_adder
+# Loading work.reduced_full_adder
+# Loading work.carry_lookahead_gen
+# Loading work.instr_mem
+# Loading work.decode
+# Loading work.regfile
+# Loading work.alu
+# Loading work.shifter
+# Loading work.logical
+# Loading work.comparator
+# Loading work.data_mem
+# Loading work.control
+# Loading ./iss.so
+# run -all 
+# ** Warning: (vsim-PLI-3408) Too few data words read on line 546 of file "instr_hex". Expected 1000, found 545.    : testbench/init_imem.sv(7)
+#    Time: 0 ps  Iteration: 0  Instance: /top_tb
+# ** Warning: (vsim-PLI-3408) Too few data words read on line 546 of file "pc_values_hex". Expected 1000, found 545.    : testbench/init_imem.sv(8)
+#    Time: 0 ps  Iteration: 0  Instance: /top_tb
+# MIPS Simulator
+# 
+# Loading instr_hex
+# Read 545 words from program into memory.
+# 
+# Init done
+# CPU initialised
+# 
+# PC:00000000	INSTR:2e695102	 SLTIU R9 , R19, 9 
+# [RTL]  	PC:00000000	Instr:2e695102	R19:00000000	R9:00000001
+# [MODEL]	PC:00000000	Instr:2e695102	R19:00000000	R9:00000001
+# PC:00000004	INSTR:112c0158	 BEQ R9 , R12, 344
+# [RTL]  	PC:00000004	Instr:112c0158	R9:00000001	R12:00000000
+# [MODEL]	PC:00000004	Instr:112c0158	R9:00000001	R12:00000000
+# PC:00000008	INSTR:0431000d	 BGEZAL R1 , 52
+# [RTL]  	PC:00000008	Instr:0431000d	R1:00000000	R17:00000000
+# [MODEL]	PC:00000008	Instr:0431000d	R1:00000000	R17:00000000
+# PC:00000040	INSTR:8ccc5a32	 LW R12, R6 , 23090
+# [RTL]  	PC:00000040	Instr:8ccc5a32	R6:00000000	R12:efefefef
+# [MODEL]	PC:00000040	Instr:8ccc5a32	R6:00000000	R12:efefefef
+# PC:00000044	INSTR:1bc200a8	 BLEZ R30, 672
+# [RTL]  	PC:00000044	Instr:1bc200a8	R30:00000000	R2:00000000
+# [MODEL]	PC:00000044	Instr:1bc200a8	R30:00000000	R2:00000000
+# PC:000002e8	INSTR:06a1ffba	 BGEZ R21, 261864
+# [RTL]  	PC:000002e8	Instr:06a1ffba	R21:00000000	R1:00000000
+# [MODEL]	PC:000002e8	Instr:06a1ffba	R21:00000000	R1:00000000
+# PC:000001d4	INSTR:2e7964f7	 SLTIU R25, R19, 25
+# [RTL]  	PC:000001d4	Instr:2e7964f7	R19:00000000	R25:00000001
+# [MODEL]	PC:000001d4	Instr:2e7964f7	R19:00000000	R25:00000001
+# PC:000001d8	INSTR:04110324	 BGEZAL R0 , 3216
+# [RTL]  	PC:000001d8	Instr:04110324	R0:00000000	R17:00000000
+# [MODEL]	PC:000001d8	Instr:04110324	R0:00000000	R17:00000000
+# PC:00000e6c	INSTR:16aefd2c	 BNE R21, R14, 64812
+# [RTL]  	PC:00000e6c	Instr:16aefd2c	R21:00000000	R14:00000000
+# [MODEL]	PC:00000e6c	Instr:16aefd2c	R21:00000000	R14:00000000
+# PC:00000e70	INSTR:0601fd04	 BGEZ R16, 259088
+# [RTL]  	PC:00000e70	Instr:0601fd04	R16:00000000	R1:00000000
+# [MODEL]	PC:00000e70	Instr:0601fd04	R16:00000000	R1:00000000
+# PC:00000284	INSTR:3004dbf3	 ANDI R4 , R0 , 56307
+# [RTL]  	PC:00000284	Instr:3004dbf3	R0:00000000	R4:00000000
+# [MODEL]	PC:00000284	Instr:3004dbf3	R0:00000000	R4:00000000
+# PC:00000288	INSTR:ac4d4e71	 SW R13, R2 , 20081
+# [RTL]  	PC:00000288	Instr:ac4d4e71	R2:00000000	R13:00000000
+# [MODEL]	PC:00000288	Instr:ac4d4e71	R2:00000000	R13:00000000
+# PC:0000028c	INSTR:276dfd29	 ADDIU R13, R27, 64809
+# [RTL]  	PC:0000028c	Instr:276dfd29	R27:00000000	R13:fffffd29
+# [MODEL]	PC:0000028c	Instr:276dfd29	R27:00000000	R13:fffffd29
+# PC:00000290	INSTR:0791002a	 BGEZAL R28, 168
+# [RTL]  	PC:00000290	Instr:0791002a	R28:00000000	R17:00000000
+# [MODEL]	PC:00000290	Instr:0791002a	R28:00000000	R17:00000000
+# PC:0000033c	INSTR:0760000b	 BLTZ R27, 11
+# [RTL]  	PC:0000033c	Instr:0760000b	R27:00000000	R0:00000000
+# [MODEL]	PC:0000033c	Instr:0760000b	R27:00000000	R0:00000000
+# PC:00000340	INSTR:385c5b51	 XORI R28, R2 , 23377
+# [RTL]  	PC:00000340	Instr:385c5b51	R2:00000000	R28:00005b51
+# [MODEL]	PC:00000340	Instr:385c5b51	R2:00000000	R28:00005b51
+# PC:00000344	INSTR:254dd165	 ADDIU R13, R10, 53605
+# [RTL]  	PC:00000344	Instr:254dd165	R10:00000000	R13:ffffd165
+# [MODEL]	PC:00000344	Instr:254dd165	R10:00000000	R13:ffffd165
+# PC:00000348	INSTR:07e1ff55	 BGEZ R31, 261460
+# [RTL]  	PC:00000348	Instr:07e1ff55	R31:00000000	R1:00000000
+# [MODEL]	PC:00000348	Instr:07e1ff55	R31:00000294	R1:00000000
+# RTL R31 VAL: 0	 Model R31 VAL: 294
+# RS Value Mismatch
+# ** Note: $finish    : testbench/top_tb.sv(74)
+#    Time: 360 ps  Iteration: 1  Instance: /top_tb
