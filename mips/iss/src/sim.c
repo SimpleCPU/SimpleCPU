@@ -990,7 +990,7 @@ extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val)
     int rs_model     = (instr_model >> 21)   & 0x1F;
     int rt_model     = (wr_link_reg) ? 0x1F : (instr_model >> 16)   & 0x1F;
     int rs_val_model = CURRENT_STATE.REGS[rs_model];
-    int rt_val_model = (wr_link_reg) ? CURRENT_STATE.REGS[31] : CURRENT_STATE.REGS[rt_model];
+    int rt_val_model = CURRENT_STATE.REGS[rt_model];
     if ((rs == rt)) {
         rs_val = rt_val;
     }
