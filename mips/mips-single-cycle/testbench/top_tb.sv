@@ -73,6 +73,10 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
             if (!compare_i (pc, instr, rs, rt, rs_val, rt_val_dest))
                 $fatal(1, "TEST FAILED\n");
         end
+        else
+        begin
+            $fatal(1, "TEST FAILED\n");
+        end
     end
 
     always @ (negedge clk_tb)
