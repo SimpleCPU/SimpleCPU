@@ -25,11 +25,11 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign instr        = T1.instr_top;
     assign rd           = T1.rd_top;
     assign rs           = T1.rs_top;
-    assign rt           = T1.rt_top;
+    assign rt           = (T1.use_link_reg_top) ? 32'h1F : T1.rt_top;
     assign rd_val       = T1.R1.reg_file[rd];
     assign rs_val       = T1.R1.reg_file[rs];
     assign rt_val       = T1.R1.reg_file[rt];
-    assign rt_val_dest  = (T1.reg_wr_top && !T1.use_link_reg_top) ? T1.wr_data_rf_top : rt_val;
+    assign rt_val_dest  = (T1.reg_wr_top || T1.use_link_reg_top) ? T1.wr_data_rf_top : rt_val;
     assign rd_val_dest  = T1.reg_wr_top ? T1.wr_data_rf_top : rd_val;
 
     top T1 (
@@ -70,6 +70,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         end
         else if (T1.is_i_type_top)
         begin
+        $display ("RT is %x\n\n", rt_val_dest);
             if (!compare_i (pc, instr, rs, rt, rs_val, rt_val_dest))
                 $fatal(1, "TEST FAILED\n");
         end
