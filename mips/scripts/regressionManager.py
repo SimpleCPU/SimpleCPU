@@ -28,12 +28,19 @@ def regression():
 					shutil.copyfile(hex_dir + files, main_dir + 'pc_values_hex')
 				elif pc not in files:
 					shutil.copyfile(hex_dir + files, main_dir + 'instr_hex')
+
+		print "*" * 10 + "Running tests from: " + hex_dir + "*" * 10
+		subprocess.call("perl " + main_dir + "run.pl > results.txt 2>&1", shell=True)
+
+		if stress_test:
 			for files in stress_test:
 				if pc in files:
 					shutil.copyfile(hex_dir + files, main_dir + 'pc_values_hex')
 				elif pc not in files:
 					shutil.copyfile(hex_dir + files, main_dir + 'instr_hex')
-		subprocess.call("perl " + main_dir + "run.pl | tee results.txt", shell=True)
+
+		print "*" * 10 + "Running tests from: " + hex_dir + "*" * 10
+		subprocess.call("perl " + main_dir + "run.pl > results.txt 2>&1", shell=True)
 
 def main():
 	regression()
