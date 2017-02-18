@@ -66,12 +66,12 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         if (T1.is_r_type_top) 
         begin
             if (!compare_r (pc, instr, rd, rs, rt, rd_val_dest, rs_val, rt_val))
-                $finish;
+                $fatal(1, "TEST FAILED\n");
         end
         else if (T1.is_i_type_top)
         begin
             if (!compare_i (pc, instr, rs, rt, rs_val, rt_val_dest))
-                $finish;
+                $fatal(1, "TEST FAILED\n");
         end
     end
 
@@ -79,6 +79,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     begin
         if ((T1.instr_top == 'hc) && (T1.R1.reg_file[2] == 'ha))
         begin
+            $display("TEST PASSED\n");
             $display("End of simulation reached\n");
             $finish;
         end
