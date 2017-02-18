@@ -33,7 +33,7 @@ def regression():
 					shutil.copyfile(hex_dir + files, main_dir + 'pc_values_hex')
 				elif pc not in files:
 					shutil.copyfile(hex_dir + files, main_dir + 'instr_hex')
-		subprocess.call("perl " + main_dir + "run.pl >results.txt", shell=True)
+		subprocess.call("perl " + main_dir + "run.pl | tee results.txt", shell=True)
 
 def main():
 	regression()
