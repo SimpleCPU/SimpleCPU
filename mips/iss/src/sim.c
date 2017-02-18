@@ -939,37 +939,37 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
     }
     else if (rd != rd_model) {
         RUN_BIT = 0;
-        printf ("RTL RD: %x\t Model RD: %x\n", rd, rd_model);
-        printf ("RD Mismatch\n");
+        printf ("Unexpected R%d Register\n", rd);
+        printf ("Expecting  R%d Register\n", rd_model);
         return 0;
     }
     else if (rs != rs_model) {
         RUN_BIT = 0;
-        printf ("RTL RS: %x\t Model RS: %x\n", rs, rs_model);
-        printf ("RS Mismatch\n");
+        printf ("Unexpected R%d Register\n", rs);
+        printf ("Expecting  R%d Register\n", rs_model);
         return 0;
     }
     else if (rt != rt_model) {
         RUN_BIT = 0;
-        printf ("RTL RT: %x\t Model RT: %x\n", rt, rt_model);
-        printf ("RT Mismatch\n");
+        printf ("Unexpected R%d Register\n", rt);
+        printf ("Expecting  R%d Register\n", rt_model);
         return 0;
     }
     else if (rd_val != rd_val_model) {
         RUN_BIT = 0;
-        printf ("RTL RD VAL: %x\t Model RD VAL: %x\n", rd_val, rd_val_model);
+        printf ("RTL R%d VAL: %x\t Model R%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
         printf ("RD Value Mismatch\n");
         return 0;
     }
     else if (rs_val != rs_val_model) {
         RUN_BIT = 0;
-        printf ("RTL RS VAL: %x\t Model RS VAL: %x\n", rs_val, rs_val_model);
+        printf ("RTL R%d VAL: %x\t Model R%d VAL: %x\n", rs, rs_val, rs_model, rs_val_model);
         printf ("RS Value Mismatch\n");
         return 0;
     }
     else if (rt_val != rt_val_model) {
         RUN_BIT = 0;
-        printf ("RTL RT VAL: %x\t Model RT VAL: %x\n", rt_val, rt_val_model);
+        printf ("RTL R%d VAL: %x\t Model R%d VAL: %x\n", rt, rt_val, rt_model, rt_val_model);
         printf ("RT Value Mismatch\n");
         return 0;
     }
