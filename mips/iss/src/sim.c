@@ -138,6 +138,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
         case (0x09): //JALR
             NEXT_STATE.PC = CURRENT_STATE.REGS[rs];
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
+            wr_link_reg = 0;
             printf ("PC:%.8x\tINSTR:%.8x\t JALR %-2d", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -787,6 +788,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 else {
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4;
                 }
+                wr_link_reg = 1;
                 printf ("PC:%.8x\tINSTR:%.8x\t BLTZAL R%-2d, %-2d\n", 
                     CURRENT_STATE.PC,
                     instr_opcode,
@@ -807,6 +809,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 else {
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4;
                 }
+                wr_link_reg = 1;
                 printf ("PC:%.8x\tINSTR:%.8x\t BGEZAL R%-2d, %-2d\n", 
                     CURRENT_STATE.PC,
                     instr_opcode,
@@ -852,6 +855,7 @@ void execute_j (unsigned int opcode, int target) {
             address = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
+            wr_link_reg = 1;
             printf ("PC:%.8x\tINSTR:%.8x\t JAL %-8x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -874,6 +878,8 @@ void decode_j (uint32_t instr_opcode) {
 }
 
 void process_instruction() {
+    rt_as_src   = 0;
+    wr_link_reg = 0;
     /* execute one instruction here. You should use CURRENT_STATE and modify
      * values in NEXT_STATE. You can call mem_read_32() and mem_write_32() to
      * access memory. */
@@ -913,18 +919,20 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
     int rs_model     = (instr_model >> 21)   & 0x1F;
     int rt_model     = (instr_model >> 16)   & 0x1F;
     int rd_model     = (instr_model >> 11)   & 0x1F;
-    rs_model         = (rt_as_src) ? rt_model : rs_model;
+    int funct        = (instr_opcode)        & 0x3F;
+    rs_model         = (rt_as_src)   ? rt_model : rs_model;
     int rs_val_model = CURRENT_STATE.REGS[rs_model];
     int rt_val_model = CURRENT_STATE.REGS[rt_model];
-    int rd_val_model = CURRENT_STATE.REGS[rd_model];
+    int rd_val_model = (wr_link_reg) ? CURRENT_STATE.REGS[31] : CURRENT_STATE.REGS[rd_model];
     if ((rs == rd)) {
         rs_val = rd_val;
     }
-    if ((rt == rd) && (rt != 0)) {
+    if ((rt == rd)) {
         rt_val = rd_val;
     }
     printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n", pc, instr, rd, rd_val, rs, rs_val, rt, rt_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n", prev_pc, instr_model, rd_model, rd_val_model, rs_model, rs_val_model, rt_model, rt_val_model);
+    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n", prev_pc, instr_model, rd_model, rd_val_model, 
+                                                                            rs_model, rs_val_model, rt_model, rt_val_model);
     if (prev_pc != pc) {
         RUN_BIT = 0;
         printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
@@ -974,16 +982,15 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
         return 0;
     }
     prev_pc = CURRENT_STATE.PC;
-    rt_as_src = 0;
     return 1;
 }
 
 extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val) {
     int instr_model = (int) mem_read_32(prev_pc);
     int rs_model     = (instr_model >> 21)   & 0x1F;
-    int rt_model     = (instr_model >> 16)   & 0x1F;
-    int rs_val_model = (int) CURRENT_STATE.REGS[rs_model];
-    int rt_val_model = (int) CURRENT_STATE.REGS[rt_model];
+    int rt_model     = (wr_link_reg) ? 0x1F : (instr_model >> 16)   & 0x1F;
+    int rs_val_model = CURRENT_STATE.REGS[rs_model];
+    int rt_val_model = (wr_link_reg) ? CURRENT_STATE.REGS[31] : CURRENT_STATE.REGS[rt_model];
     if ((rs == rt)) {
         rs_val = rt_val;
     }
