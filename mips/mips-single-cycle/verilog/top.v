@@ -79,7 +79,7 @@ module top
                                 (branch_top & ((op_top == `BVAR)  & ((rt_top == `BGEZ) | (rt_top == `BGEZAL))) & (~n_top | z_top)) |
                                 (branch_top & ((op_top == `BLEZ)) & (n_top  | z_top)) |
                                 (branch_top & ((op_top == `BGTZ)) & ~(n_top | z_top)) |
-                                (branch_top & ((op_top == `BVAR)  & (rt_top == `BLTZ) | (rt_top == `BLTZAL)) & (n_top & ~z_top)) |
+                                (branch_top & ((op_top == `BVAR)  & ((rt_top == `BLTZ) | (rt_top == `BLTZAL))) & (n_top & ~z_top)) |
                                 (branch_top & ((op_top == `BNE))  & ~z_top)
                                 ? next_beq_pc_top : next_seq_pc_top;
     assign next_jmp_pc_top = {next_seq_pc_top[31:28], instr_top[25:0] << 2};
