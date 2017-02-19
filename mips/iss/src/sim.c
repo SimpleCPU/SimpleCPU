@@ -931,7 +931,7 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
         rt_val = rd_val;
     }
     printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n", pc, instr, rd, rd_val, rs, rs_val, rt, rt_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n", prev_pc, instr_model, rd_model, rd_val_model, 
+    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\tR%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model, 
                                                                             rs_model, rs_val_model, rt_model, rt_val_model);
     if (prev_pc != pc) {
         RUN_BIT = 0;
@@ -995,7 +995,7 @@ extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val)
         rs_val = rt_val;
     }
     printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\n", pc, instr, rs, rs_val, rt, rt_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\n", prev_pc, instr_model, rs_model, rs_val_model, rt_model, rt_val_model);
+    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\tR%d:%.8x\n\n", prev_pc, instr_model, rs_model, rs_val_model, rt_model, rt_val_model);
     if (prev_pc != pc) {
         RUN_BIT = 0;
         printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
