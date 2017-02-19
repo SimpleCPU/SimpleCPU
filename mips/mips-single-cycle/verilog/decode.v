@@ -59,7 +59,7 @@ module decode
     assign funct_dec         = instr_dec_i[5:0];
     assign shamt_dec         = instr_dec_i[10:6];
     assign is_r_type_dec     = (op_dec == 6'h0) ? 1'b1 : 1'b0;
-    assign is_i_type_dec     = ((op_dec != 6'h0) && ((op_dec != 6'h2) || (op_dec != 6'h3))) ? 1'b1 : 1'b0;
+    assign is_i_type_dec     = ((op_dec != 6'h0) && ((op_dec != 6'h2) && (op_dec != 6'h3))) ? 1'b1 : 1'b0;
     assign is_j_type_dec     = ((op_dec == 6'h2) || (op_dec == 6'h3)) ? 1'b1 : 1'b0;
     assign use_link_reg_dec  = (((op_dec == 6'h1) && ((rt_dec == 5'h10) || (rt_dec == 5'h11))) ||
                                ((is_r_type_dec) && ((funct_dec == 6'h9))) ||
