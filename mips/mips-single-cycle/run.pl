@@ -1,6 +1,13 @@
 #!/usr/bin/perl -w
 use strict;
 use warnings;
+use Getopt::Long qw(GetOptions);
+
+my $sim_mode = 0;
+
+GetOptions (
+    'sim_only=i'    =>  \$sim_mode
+    );
 
 # compile the ISS first
 chdir '../iss';
@@ -13,16 +20,18 @@ else {
     # Copy the sim.so file to the main directory
     print ("cp iss.so ../mips-single-cycle/\n");
     system ("cp iss.so ../mips-single-cycle/");
-    # Compile the RTL
+    # Compile the RTL only when sim_mode = 0
     chdir "../mips-single-cycle";
-    print ("rm -rf vsim.wlf wlf* transcript work/\n");
-    system ("rm -rf vsim.wlf wlf* transcript work/");
-    print ("vlib work\n");
-    system ("vlib work");
-    print ("vlog testbench/* verilog/*\n");
-    system ("vlog testbench/* verilog/*");
+    if ($sim_mode eq 0) {
+        print ("rm -rf vsim.wlf wlf* transcript work/\n");
+        system ("rm -rf vsim.wlf wlf* transcript work/");
+        print ("vlib work\n");
+        system ("vlib work");
+        print ("vlog testbench/* verilog/*\n");
+        system ("vlog testbench/* verilog/*");
+    }
     # Run the simulation
-    print ("vsim -c top_tb -sv_lib iss -do \"onElabError resume;  run -all; exit\" | tee sim.log");
+    print ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" | tee sim.log");
     system ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" | tee sim.log");
     print ("rm -rf vsim.wlf wlf* transcript \n");
     system ("rm -rf vsim.wlf wlf* transcript ");
