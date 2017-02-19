@@ -70,7 +70,6 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         end
         else if (T1.is_i_type_top)
         begin
-        $display ("RT is %x\n\n", rt_val_dest);
             if (!compare_i (pc, instr, rs, rt, rs_val, rt_val_dest))
                 $fatal(1, "TEST FAILED\n");
         end
