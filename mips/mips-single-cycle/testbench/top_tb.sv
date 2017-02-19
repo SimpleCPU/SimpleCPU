@@ -8,6 +8,7 @@ import "DPI-C" function void init ();
 import "DPI-C" function void run (int cycles);
 import "DPI-C" function int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val);
 import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val);
+import "DPI-C" function int compare_j (int pc, int instr, int rt, int rt_val);
 
     wire[31:0]  pc;
     wire[31:0]  instr;
@@ -71,6 +72,11 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         else if (T1.is_i_type_top)
         begin
             if (!compare_i (pc, instr, rs, rt, rs_val, rt_val_dest))
+                $fatal(1, "TEST FAILED\n");
+        end
+        else if (T1.is_j_type_top)
+        begin
+            if (!compare_j (pc, instr, rt, rt_val_dest))
                 $fatal(1, "TEST FAILED\n");
         end
         else
