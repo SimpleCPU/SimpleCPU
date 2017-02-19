@@ -9,6 +9,7 @@ def regression():
 
 	sub_dir = os.listdir(test_dir)
 	hex_dir = ''
+	pc = 'pc'
 
 	for s in sub_dir:
 		stress_test = []
@@ -22,7 +23,6 @@ def regression():
 			if basic in f:
 				basic_test.append(f)
 		if basic_test:
-			pc = 'pc'
 			for files in basic_test:
 				if pc in files:
 					shutil.copyfile(hex_dir + files, main_dir + 'pc_values_hex')
