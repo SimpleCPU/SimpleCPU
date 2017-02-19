@@ -117,7 +117,7 @@ module top
     regfile R1 (
         .clk (clk),
         .reset (reset),
-        .w_en_rf_i (reg_wr_top),
+        .w_en_rf_i (reg_wr_top | use_link_reg_top),
         .w_data_rf_i (wr_data_rf_top),
         .w_reg_rf_i (rd_top),
         .r_reg_p1_rf_i (rs_top),
