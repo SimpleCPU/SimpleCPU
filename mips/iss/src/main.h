@@ -43,3 +43,4 @@ extern void init();
 extern void run(int num_cycles);
 extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val);
 extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val);
+extern int compare_j (int pc, int instr, int rt, int rt_val);

@@ -915,11 +915,11 @@ int check_ls_addr (int rs, int imm) {
 }
 
 extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val) {
-    int instr_model = (int) mem_read_32(prev_pc);
+    int instr_model  = (int) instr_opcode;
     int rs_model     = (instr_model >> 21)   & 0x1F;
     int rt_model     = (instr_model >> 16)   & 0x1F;
     int rd_model     = (instr_model >> 11)   & 0x1F;
-    int funct        = (instr_opcode)        & 0x3F;
+    int funct        = (instr_model)         & 0x3F;
     rs_model         = (rt_as_src)   ? rt_model : rs_model;
     int rs_val_model = CURRENT_STATE.REGS[rs_model];
     int rt_val_model = CURRENT_STATE.REGS[rt_model];
@@ -986,7 +986,7 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
 }
 
 extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val) {
-    int instr_model = (int) mem_read_32(prev_pc);
+    int instr_model  = (int) instr_opcode;
     int rs_model     = (instr_model >> 21)   & 0x1F;
     int rt_model     = (wr_link_reg) ? 0x1F : (instr_model >> 16)   & 0x1F;
     int rs_val_model = CURRENT_STATE.REGS[rs_model];
@@ -1027,6 +1027,46 @@ extern int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val)
         return 0;
     }
     else if (rt_val != rt_val_model) {
+        RUN_BIT = 0;
+        printf ("RTL R%d VAL: %x\t Model R%d VAL: %x\n", rt, rt_val, rt_model, rt_val_model);
+        printf ("RT Value Mismatch\n");
+        return 0;
+    }
+    prev_pc = CURRENT_STATE.PC;
+    return 1;
+}
+
+extern int compare_j (int pc, int instr, int rt, int rt_val) {
+    int instr_model  = (int) instr_opcode;
+    int rt_model     = (wr_link_reg) ? 0x1F : (instr_model >> 16)   & 0x1F;
+    int rt_val_model = CURRENT_STATE.REGS[rt_model];
+    if (wr_link_reg) {
+        printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tR%d:%.8x\n", pc, instr,rt, rt_val);
+        printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tR%d:%.8x\n\n", prev_pc, instr_model, rt_model, rt_val_model);
+    }
+    else {
+        printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\n", pc, instr);
+        printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\n\n", prev_pc, instr_model);
+    }
+    if (prev_pc != pc) {
+        RUN_BIT = 0;
+        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+        printf ("PC Mismatch\n");
+        return 0;
+    }
+    else if (instr != instr_model) {
+        RUN_BIT = 0;
+        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+        printf ("INSTR Mismatch\n");
+        return 0;
+    }
+    else if (wr_link_reg & (rt != rt_model)) {
+        RUN_BIT = 0;
+        printf ("Unexpected R%d Register\n", rt);
+        printf ("Expecting  R%d Register\n", rt_model);
+        return 0;
+    }
+    else if (wr_link_reg & (rt_val != rt_val_model)) {
         RUN_BIT = 0;
         printf ("RTL R%d VAL: %x\t Model R%d VAL: %x\n", rt, rt_val, rt_model, rt_val_model);
         printf ("RT Value Mismatch\n");
