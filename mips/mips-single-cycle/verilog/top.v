@@ -75,12 +75,12 @@ module top
         .carry (next_beq_pc_carry_top)
     );
 
-    assign next_brn_eq_pc_top = ((branch_top & (op_top == `BEQ)) & z_top) |
-                                ((branch_top & (rt_top == `BGEZ) | (rt_top == `BGEZAL)) & (~n_top | z_top)) |
-                                ((branch_top & (op_top == `BLEZ)) & (n_top | z_top)) |
-                                ((branch_top & (op_top == `BGTZ)) & (~n_top)) |
-                                ((branch_top & (rt_top == `BLTZ) | (rt_top == `BLTZAL)) & (n_top)) |
-                                ((branch_top & (op_top == `BNE)) & ~z_top)
+    assign next_brn_eq_pc_top = (branch_top & ((op_top == `BEQ)) & z_top) |
+                                (branch_top & ((rt_top == `BGEZ) | (rt_top == `BGEZAL)) & (~n_top | z_top)) |
+                                (branch_top & ((op_top == `BLEZ)) & (n_top | z_top)) |
+                                (branch_top & ((op_top == `BGTZ)) & (~n_top)) |
+                                (branch_top & ((rt_top == `BLTZ) | (rt_top == `BLTZAL)) & (n_top)) |
+                                (branch_top & ((op_top == `BNE)) & ~z_top)
                                 ? next_beq_pc_top : next_seq_pc_top;
     assign next_jmp_pc_top = {next_seq_pc_top[31:28], instr_top[25:0] << 2};
     assign next_pc_top = jump_top ? next_jmp_pc_top : next_brn_eq_pc_top;
@@ -126,7 +126,8 @@ module top
         .r_data_p2_rf_o (r_data_p2_rf_top)
     );
 
-    assign r_data_p2_top = alu_src_top[1] ? {{27{1'b0}}, shamt_top} : 
+    assign r_data_p2_top = alu_src_top[2] ? 32'h0 : 
+                           alu_src_top[1] ? {{27{1'b0}}, shamt_top} : 
                            alu_src_top[0] ? sign_imm_top : r_data_p2_rf_top;
 
     alu A1 (
