@@ -783,11 +783,11 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                     imm = imm << 2;
                     address = (sign) ? (imm | shift_val) : imm;
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
-                    NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
                 }
                 else {
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4;
                 }
+                NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
                 wr_link_reg = 1;
                 printf ("PC:%.8x\tINSTR:%.8x\t BLTZAL R%-2d, %-2d\n", 
                     CURRENT_STATE.PC,
@@ -804,11 +804,11 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                     imm = imm << 2;
                     address = (sign) ? (imm | shift_val) : imm;
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4 + address;
-                    NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
                 }
                 else {
                     NEXT_STATE.PC = CURRENT_STATE.PC + 4;
                 }
+                NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
                 wr_link_reg = 1;
                 printf ("PC:%.8x\tINSTR:%.8x\t BGEZAL R%-2d, %-2d\n", 
                     CURRENT_STATE.PC,
