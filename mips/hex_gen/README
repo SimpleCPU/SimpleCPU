@@ -61,91 +61,108 @@ Inside hex_gen directory do -
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<path_to_the_shared_lib>
   
  Sample output - 
-  ./hex_gen -i 10 -r 10
-  
+  ./hex_gen -i 10 -r 10 -j 4
   Generating the hex for the following set of instructions
 	  10 - R-Type instructions
 	  10 - I-Type instructions
-	   0 - J-Type instructions
-RS is 0	IMM is 5102	 ADDR is 5102
-RS is 0	IMM is 5102	 ADDR is 5102
-I Type instr generated - 0xae695102	
-Loaded instr opcode: ae695102 into memory location 0.
-  SW R9, R19, 5102
-RS is 0	IMM is ffffc3b5	 ADDR is ffffc3b5
-RS is 0	IMM is ffffc3b5	 ADDR is ffffc3b5
-RS is 0	IMM is ffff95d5	 ADDR is ffff95d5
-RS is 0	IMM is ffff95d5	 ADDR is ffff95d5
-RS is 0	IMM is 282a	 ADDR is 282a
-RS is 0	IMM is 282a	 ADDR is 282a
-I Type instr generated - 0xad2c282a	
-Loaded instr opcode: ad2c282a into memory location 4.
-  SW R12, R9, 282a
-R Type instr generated - 0x0dc10e5	
-Loaded instr opcode: dc10e5 into memory location 8.
-  OR R2, R6, R28
-R Type instr generated - 0x1076ee3	
-Loaded instr opcode: 1076ee3 into memory location c.
-SUBU R13, R8, R7
-R Type instr generated - 0x073fb80	
-Loaded instr opcode: 73fb80 into memory location 10.
- SLL R31, R3, R19
-I Type instr generated - 0x3246a1a8	
-Loaded instr opcode: 3246a1a8 into memory location 14.
-ANDI R6, R18, a1a8
-I Type instr generated - 0x38bd1535	
-Loaded instr opcode: 38bd1535 into memory location 18.
-XORI R29, R5, 1535
-R Type instr generated - 0x28b9780	
-Loaded instr opcode: 28b9780 into memory location 1c.
- SLL R18, R20, R11
-RS is 0	IMM is ffff9647	 ADDR is ffff9647
-RS is 0	IMM is ffff9647	 ADDR is ffff9647
-RS is 0	IMM is ffffb2b9	 ADDR is ffffb2b9
-RS is 0	IMM is ffffb2b9	 ADDR is ffffb2b9
-RS is 0	IMM is ffffcc44	 ADDR is ffffcc44
-RS is 0	IMM is ffffcc44	 ADDR is ffffcc44
-RS is 0	IMM is 2012	 ADDR is 2012
-RS is 0	IMM is 2012	 ADDR is 2012
-I Type instr generated - 0xae9b2012	
-Loaded instr opcode: ae9b2012 into memory location 20.
-  SW R27, R20, 2012
-R Type instr generated - 0x3bc3862	
-Loaded instr opcode: 3bc3862 into memory location 24.
- SUB R7, R29, R28
-R Type instr generated - 0x0210fa5	
-Loaded instr opcode: 210fa5 into memory location 28.
-  OR R1, R1, R1
-R Type instr generated - 0x03ebfa4	
-Loaded instr opcode: 3ebfa4 into memory location 2c.
- AND R23, R1, R30
-R Type instr generated - 0x2cfc2e2	
-Loaded instr opcode: 2cfc2e2 into memory location 30.
- SUB R24, R22, R15
-R Type instr generated - 0x21bdb24	
-Loaded instr opcode: 21bdb24 into memory location 34.
- AND R27, R16, R27
-R Type instr generated - 0x28cc720	
-Loaded instr opcode: 28cc720 into memory location 38.
- ADD R24, R20, R12
-I Type instr generated - 0x3342d092	
-Loaded instr opcode: 3342d092 into memory location 3c.
-ANDI R2, R26, d092
-I Type instr generated - 0x355a3901	
-Loaded instr opcode: 355a3901 into memory location 40.
- ORI R26, R10, 3901
-I Type instr generated - 0x24d13f54	
-Loaded instr opcode: 24d13f54 into memory location 44.
-ADDIU R17, R6, 3f54
-I Type instr generated - 0x203ed3c2	
-Loaded instr opcode: 203ed3c2 into memory location 48.
-ADDI R30, R1, ffffd3c2
-RS is 0	IMM is 4cbc	 ADDR is 4cbc
-RS is 0	IMM is 4cbc	 ADDR is 4cbc
-I Type instr generated - 0x8d1b4cbc	
-Loaded instr opcode: 8d1b4cbc into memory location 4c.
-Addr:4cbc	mem_content:efefefef
-  LW R27, R8, 4cbc
-Loaded instr opcode: 2402000a into memory location 50.
-Loaded instr opcode: c into memory location 54.
+	   4 - J-Type instructions
 
+[0] I Type instr generated - 0x2e695102
+PC:00000000	INSTR:2e695102	 SLTIU R9 , R19, 9 
+SLTIU R9, R19, 5102
+
+[1] I Type instr generated - 0x112c0158
+PC:00000004	INSTR:112c0158	 BEQ R9 , R12, 344
+BEQ  R12, R9, 158
+
+[2] R Type instr generated - 0x3c10a61	
+PC:00000008	INSTR:03c10a61	 ADDU R1 , R30, R1 
+ADDU R1, R30, R1
+
+[3] J Type instr generated - 0x8000222	
+PC:0000000c	INSTR:08000222	 J 888     
+J    222     
+
+[4] R Type instr generated - 0x237c160	
+PC:00000888	INSTR:0237c160	 ADD R24, R17, R23
+ADD  R24, R17, R23
+
+[5] R Type instr generated - 0x337abe5	
+PC:0000088c	INSTR:0337abe5	 OR R21, R25, R23
+OR   R21, R25, R23
+
+[6] J Type instr generated - 0x8000067	
+PC:00000890	INSTR:08000067	 J 19c     
+J    67      
+
+[7] J Type instr generated - 0xc000128	
+PC:0000019c	INSTR:0c000128	 JAL 4a0     
+JAL  128     
+
+[8] J Type instr generated - 0x80002c2	
+PC:000004a0	INSTR:080002c2	 J b08     
+J    2c2     
+
+[9] I Type instr generated - 0x8e493179
+PC:00000b08	INSTR:8e493179	 LW R9 , R18, 12665
+LW   R9, R18, 3179
+
+[10] R Type instr generated - 0x0aa3a27	
+PC:00000b0c	INSTR:00aa3a27	 NOR R7 , R5 , R10
+NOR  R7, R5, R10
+
+[11] I Type instr generated - 0x1a19fe75
+PC:00000b10	INSTR:1a19fe75	 BLEZ R16, 260564
+BLEZ R25, R16, fffffe75
+
+[12] R Type instr generated - 0x0e17900	
+PC:000004e8	INSTR:00e17900	 SLL R15, R7 , R1 
+SLL  R15, R7, R1
+
+[13] I Type instr generated - 0x4410106 
+PC:000004ec	INSTR:04410106	 BGEZ R2 , 1048
+BGEZ R1, R2, 106
+
+[14] R Type instr generated - 0x3728bab	
+PC:00000908	INSTR:03728bab	 SLTU R17, R27, R18
+SLTU R17, R27, R18
+
+[15] R Type instr generated - 0x2cce343	
+PC:0000090c	INSTR:02cce343	 SRA R28, R12, 13
+SRA  R28, R22, R12
+
+[16] R Type instr generated - 0x26ee32b	
+PC:00000910	INSTR:026ee32b	 SLTU R28, R19, R14
+SLTU R28, R19, R14
+
+[17] R Type instr generated - 0x05a92ea	
+PC:00000914	INSTR:005a92ea	 SLT R18, R2 , R26
+SLT  R18, R2, R26
+
+[18] I Type instr generated - 0x1e49ff81
+PC:00000918	INSTR:1e49ff81	 BGTZ R18, 65409
+BGTZ R9, R18, ffffff81
+
+[19] R Type instr generated - 0x08d3d42	
+PC:0000091c	INSTR:008d3d42	 SRL R7 , R4 , R13
+SRL  R7, R4, R13
+
+[20] I Type instr generated - 0x7a0013a 
+PC:00000920	INSTR:07a0013a	 BLTZ R29, 314
+BLTZ R0, R29, 13a
+
+[21] I Type instr generated - 0x11ec00fb
+PC:00000924	INSTR:11ec00fb	 BEQ R15, R12, 1004
+BEQ  R12, R15, fb
+
+[22] I Type instr generated - 0x721fdc7 
+PC:00000d14	INSTR:0721fdc7	 BGEZ R25, 259868
+BGEZ R1, R25, fffffdc7
+
+[23] I Type instr generated - 0x8df97a53
+PC:00000434	INSTR:8df97a53	 LW R25, R15, 31315
+LW   R25, R15, 7a53
+
+PC:00000438	INSTR:2402000a	 SLTU R0 , R2 , 10
+PC:0000043c	INSTR:0000000c	 SYSCALL
+  
