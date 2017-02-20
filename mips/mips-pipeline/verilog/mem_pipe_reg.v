@@ -31,19 +31,19 @@ module mem_pipe_reg
     always @(posedge clk or posedge reset)
     if (reset)
     begin
-        reg_wr_mem_pipe_reg_o         <=  0;
-        mem_to_reg_mem_pipe_reg_o     <=  0;
-        mem_wr_mem_pipe_reg_o         <=  0;
-        rd_mem_pipe_reg_o             <=  0;
-        res_alu_mem_pipe_reg_o        <=  0;
+        reg_wr_mem_pipe_reg         <=  0;
+        mem_to_reg_mem_pipe_reg     <=  0;
+        mem_wr_mem_pipe_reg         <=  0;
+        rd_mem_pipe_reg             <=  0;
+        res_alu_mem_pipe_reg        <=  0;
     end
     else
     begin
-        reg_wr_mem_pipe_reg_o         <=  reg_wr_mem_pipe_reg_i;
-        mem_to_reg_mem_pipe_reg_o     <=  mem_to_reg_mem_pipe_reg_i;
-        mem_wr_mem_pipe_reg_o         <=  mem_wr_mem_pipe_reg_i;
-        rd_mem_pipe_reg_o             <=  rd_mem_pipe_reg_i;
-        res_alu_mem_pipe_reg_o        <=  res_alu_mem_pipe_reg_i;
+        reg_wr_mem_pipe_reg         <=  reg_wr_mem_pipe_reg_i;
+        mem_to_reg_mem_pipe_reg     <=  mem_to_reg_mem_pipe_reg_i;
+        mem_wr_mem_pipe_reg         <=  mem_wr_mem_pipe_reg_i;
+        rd_mem_pipe_reg             <=  rd_mem_pipe_reg_i;
+        res_alu_mem_pipe_reg        <=  res_alu_mem_pipe_reg_i;
     end
 
 endmodule

@@ -6,6 +6,7 @@
 `define ADDIU   6'b00_1001 // I
 `define AND     6'b10_0100 // R
 `define ANDI    6'b00_1100 // I
+`define BVAR    6'b00_0001 // I
 `define BEQ     6'b00_0100 // I
 `define BGEZ    6'b00_0001 // I
 `define BGEZAL  6'b01_0001 // I

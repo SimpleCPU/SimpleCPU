@@ -14,8 +14,8 @@ module iss_pipe_reg
     reg [31:0] next_pc_iss_pipe_reg;
     reg [31:0] instr_iss_pipe_reg;
 
-    assign next_pc_pc_reg_o = next_pc_pc_reg;
-    assign instr_pc_reg_o   = instr_pc_reg;
+    assign next_pc_iss_pipe_reg_o = next_pc_iss_pipe_reg;
+    assign instr_iss_pipe_reg_o   = instr_iss_pipe_reg;
 
     always @(posedge clk or posedge reset)
     if (reset)
