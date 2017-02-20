@@ -9,8 +9,9 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include "hex_gen_instr_defines.h"
+#include "mips_instr_defines.h"
 
 #define NUM_END_SEQ_INSTR 2
 
@@ -29,10 +30,16 @@ typedef struct CPU_State_Struct {
 extern CPU_State CURRENT_STATE;
 int instr_gen = 0;      /* keeps a count of the number of   */
                         /* instructions generated           */
+
+extern int shift_const (int);
+extern void load_instr_opcode (uint32_t);
+extern void run (int);
+extern int check_ls_addr (int, int);
+extern void init_memory ();
+
 extern int prev_pc;
 FILE* pc_hex_val;
 FILE* instr_hex_val;
-
 
 const int funct_val_r_type[13] = {
     ADD,        ADDU,       AND,

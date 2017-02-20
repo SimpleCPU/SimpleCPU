@@ -122,7 +122,6 @@ void gen_i_instr () {
     int     hex_instr;
     int     imm;
     int     rand_opcode_idx;
-    START:
     rand_opcode_idx = rand()%17;
 
     opcode  = opcode_val_i_type [rand_opcode_idx];
