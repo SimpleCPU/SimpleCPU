@@ -41,10 +41,9 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
     int64_t mul_res;
     if ((rd == 0) && (funct != 0x0c)) {
         NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        if ((funct == 0x00) || (funct == 0x02) ||
-            (funct == 0x03) || (funct == 0x04) ||
-            (funct == 0x06) || (funct == 0x07) ||
-            (funct == 0x06) || (funct == 0x07)
+        if ((funct == SLL) || (funct == SRL) ||
+            (funct == SRA) || (funct == SLLV) ||
+            (funct == SRLV)|| (funct == SRAV)
         )
             rt_as_src = 1;
         return;
