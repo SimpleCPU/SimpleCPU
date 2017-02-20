@@ -33,6 +33,5 @@ else {
     # Run the simulation
     print ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" | tee sim.log");
     system ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" | tee sim.log");
-    print ("rm -rf vsim.wlf wlf* transcript \n");
     system ("rm -rf vsim.wlf wlf* transcript ");
 }
