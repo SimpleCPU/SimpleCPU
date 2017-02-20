@@ -59,16 +59,23 @@ module top
     wire[31:0]  res_alu_ex_mem;
     wire        z_ex_mem;
     wire        n_ex_mem;
+    wire        reg_wr_mem_wb;
+    wire        mem_to_reg_mem_wb;
+    wire        mem_wr_mem_wb;
+    wire[4:0]   rd_mem_wb;
+    wire[31:0]  res_alu_mem_wb;
     wire[31:0]  read_data_dmem_ram_mem_wb;
     wire        reg_wr_wb_ret;
     wire        mem_to_reg_wb_ret;
+    wire[4:0]   rd_wb_ret;
     wire[31:0]  res_alu_wb_ret;
     wire[31:0]  read_data_wb_ret;
     wire[31:0]  wr_data_rf_wb_ret;
 
-    pc_reg PC (
+    fetch_pipe_reg FETCH_REG (
         .clk (clk),
         .reset (reset),
+        .enable (),
         .next_pc_pc_reg_i (next_pc_top),
         .next_pc_pc_reg_o (pc_pc_reg_fetch)
     );
@@ -208,10 +215,12 @@ module top
         .reg_wr_mem_pipe_reg_i (reg_wr_ex_mem),
         .mem_to_reg_mem_pipe_reg_i (mem_to_reg_ex_mem),
         .mem_wr_mem_pipe_reg_i (mem_wr_ex_mem),
+        .rd_mem_pipe_reg_i (rd_ex_mem),
         .res_alu_mem_pipe_reg_i (res_alu_ex_mem),
         .reg_wr_mem_pipe_reg_o (reg_wr_mem_wb),
         .mem_to_reg_mem_pipe_reg_o (mem_to_reg_mem_wb),
         .mem_wr_mem_pipe_reg_o (mem_wr_mem_wb),
+        .rd_mem_pipe_reg_o (rd_mem_wb),
         .res_alu_mem_pipe_reg_o (res_alu_mem_wb)
     );
 
@@ -229,10 +238,12 @@ module top
         .reset (reset),
         .reg_wr_wb_pipe_reg_i (reg_wr_mem_wb),
         .mem_to_reg_wb_pipe_reg_i (mem_to_reg_mem_wb),
+        .rd_wb_pipe_reg_i (rd_mem_wb),
         .res_alu_wb_pipe_reg_i (res_alu_mem_wb),
         .read_data_wb_pipe_reg_i (read_data_mem_wb),
         .reg_wr_wb_pipe_reg_o (reg_wr_wb_ret),
         .mem_to_reg_wb_pipe_reg_o (mem_to_reg_wb_ret),
+        .rd_wb_pipe_reg_o (rd_wb_ret),
         .res_alu_wb_pipe_reg_o (res_alu_wb_ret),
         .read_data_wb_pipe_reg_o (read_data_wb_ret)
     );
