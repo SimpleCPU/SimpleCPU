@@ -1,11 +1,15 @@
-hex: src/*.c src/*.h
-	gcc -fPIC -W -shared -g -O2 $^ -o lib$@.so
+INC_DIR = ../shared
+CFLAGS = -Wall -I $(INC_DIR)
+DEPS = mips_instr_defines.h
 
-iss: src/*.c src/*.h
-	gcc -fPIC -W -shared -g -m32 -O2 $^ -o $@.so
+hex: src/*.c
+	gcc -fPIC $(CFLAGS) -shared -g -O2 $^ -o lib$@.so
 
-sim: src/*.c src/*.h
-	gcc -W -g -O2 $^ -o $@
+iss: src/*.c
+	gcc -fPIC $(CFLAGS) -shared -g -m32 -O2 $^ -o $@.so
+
+sim: src/*.c
+	gcc $(CFLAGS) -g -O2 $^ -o $@
 
 .PHONY: clean
 clean:

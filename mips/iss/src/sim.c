@@ -31,6 +31,7 @@ int shift_const (unsigned int shamt) {
         case 25: return 0xFFFFFF80;          case 26: return 0xFFFFFFC0;          case 27: return 0xFFFFFFE0;          case 28: return 0xFFFFFFF0;
         case 29: return 0xFFFFFFF8;          case 30: return 0xFFFFFFFC;          case 31: return 0xFFFFFFFE;          case 0 : return 0x00000000;
     }
+    return 0;
 }
 
 
@@ -838,8 +839,6 @@ void decode_i (uint32_t instr_opcode) {
 }
 
 void execute_j (unsigned int opcode, int target) {
-    int sign;
-    int shift_val;
     uint32_t address;
     switch (opcode) { 
         case (0x02): //J
@@ -919,7 +918,6 @@ extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int
     int rs_model     = (instr_model >> 21)   & 0x1F;
     int rt_model     = (instr_model >> 16)   & 0x1F;
     int rd_model     = (instr_model >> 11)   & 0x1F;
-    int funct        = (instr_model)         & 0x3F;
     rs_model         = (rt_as_src)   ? rt_model : rs_model;
     int rs_val_model = CURRENT_STATE.REGS[rs_model];
     int rt_val_model = CURRENT_STATE.REGS[rt_model];

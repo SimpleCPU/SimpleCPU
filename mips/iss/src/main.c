@@ -294,7 +294,7 @@ void initialize(char *program_filename, int num_prog_files, char *pc_filename) {
 /* Procedure : sim                                             */
 /*                                                             */
 /***************************************************************/
-int sim(int argc, char *argv[]) {                              
+void sim(int argc, char *argv[]) {                              
   FILE * dumpsim_file;
 
   /* Error Checking */
