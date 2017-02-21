@@ -49,7 +49,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
         return;
     }
     switch (funct) {
-        case (0x00): //SLL
+        case (SLL): //SLL
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] << shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -61,7 +61,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x02): //SRL
+        case (SRL): //SRL
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -73,7 +73,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x03): //SRA
+        case (SRA): //SRA
             rt_as_src = 1;
             sign = (CURRENT_STATE.REGS[rs] & 0x10000000)>>31;
             shift_val = shift_const(shamt);
@@ -88,7 +88,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 shamt
             );
         break;
-        case (0x04): //SLLV
+        case (SLLV): //SLLV
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] << (CURRENT_STATE.REGS[rs] & 0x1F);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -100,7 +100,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x06): //SRLV
+        case (SRLV): //SRLV
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> (CURRENT_STATE.REGS[rs] & 0x1F);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -112,7 +112,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x07): //SRAV
+        case (SRAV): //SRAV
             rt_as_src = 1;
             sign = (CURRENT_STATE.REGS[rs] & 0x10000000)>>31;
             shift_val = shift_const(CURRENT_STATE.REGS[rs] & 0x1F);
@@ -127,7 +127,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x08): //JR
+        case (JR): //JR
             NEXT_STATE.PC = CURRENT_STATE.REGS[rs];
             printf ("PC:%.8x\tINSTR:%.8x\t JR %-2d", 
                 CURRENT_STATE.PC,
@@ -135,7 +135,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 NEXT_STATE.PC
             );
         break;
-        case (0x09): //JALR
+        case (JALR): //JALR
             NEXT_STATE.PC = CURRENT_STATE.REGS[rs];
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
             wr_link_reg = 0;
@@ -145,7 +145,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 NEXT_STATE.PC
             );
         break;
-        case (0x20): //ADD
+        case (ADD): //ADD
             NEXT_STATE.REGS[rd] = (int32_t)(CURRENT_STATE.REGS[rs] + CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t ADD R%-2d, R%-2d, R%-2d\n", 
@@ -156,7 +156,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x21): //ADDU
+        case (ADDU): //ADDU
             NEXT_STATE.REGS[rd] = (uint32_t)(CURRENT_STATE.REGS[rs] + CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t ADDU R%-2d, R%-2d, R%-2d\n", 
@@ -167,7 +167,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x22): //SUB
+        case (SUB): //SUB
             NEXT_STATE.REGS[rd] = (int32_t)(CURRENT_STATE.REGS[rs] - CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t SUB R%-2d, R%-2d, R%-2d\n", 
@@ -178,7 +178,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x23): //SUBU
+        case (SUBU): //SUBU
             NEXT_STATE.REGS[rd] = (uint32_t)(CURRENT_STATE.REGS[rs] - CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t SUBU R%-2d, R%-2d, R%-2d\n", 
@@ -189,7 +189,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x24): //AND
+        case (AND): //AND
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs] & CURRENT_STATE.REGS[rt];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t AND R%-2d, R%-2d, R%-2d\n", 
@@ -200,7 +200,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x25): //OR
+        case (OR): //OR
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs] | CURRENT_STATE.REGS[rt];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t OR R%-2d, R%-2d, R%-2d\n", 
@@ -211,7 +211,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x26): //XOR
+        case (XOR): //XOR
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs] ^ CURRENT_STATE.REGS[rt];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t XOR R%-2d, R%-2d, R%-2d\n", 
@@ -222,7 +222,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x27): //NOR
+        case (NOR): //NOR
             NEXT_STATE.REGS[rd] = ~(CURRENT_STATE.REGS[rs] | CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t NOR R%-2d, R%-2d, R%-2d\n", 
@@ -233,7 +233,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x2a): //SLT
+        case (SLT): //SLT
             NEXT_STATE.REGS[rd] = ((signed)CURRENT_STATE.REGS[rs] < (signed)CURRENT_STATE.REGS[rt]) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t SLT R%-2d, R%-2d, R%-2d\n", 
@@ -244,7 +244,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x2b): //SLTU
+        case (SLTU): //SLTU
             NEXT_STATE.REGS[rd] = (CURRENT_STATE.REGS[rs] < CURRENT_STATE.REGS[rt]) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t SLTU R%-2d, R%-2d, R%-2d\n", 
@@ -255,7 +255,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x18): //MULT
+        case (MULT): //MULT
             mul_res = (int64_t)(CURRENT_STATE.REGS[rs] * CURRENT_STATE.REGS[rt]);
             NEXT_STATE.HI = (int32_t)((mul_res>>32) & 0xFFFFFFFF);
             NEXT_STATE.LO = (int32_t)(mul_res & 0xFFFFFFFF);
@@ -269,7 +269,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x10): //MFHI
+        case (MFHI): //MFHI
             NEXT_STATE.REGS[rd] = CURRENT_STATE.HI;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t MFHI R%-2d\n, HI:%-2d", 
@@ -279,7 +279,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 NEXT_STATE.HI
             );
         break;
-        case (0x12): //MFLO
+        case (MFLO): //MFLO
             NEXT_STATE.REGS[rd] = CURRENT_STATE.LO;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t MFLO R%-2d\n, LO:%-2d", 
@@ -289,7 +289,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 NEXT_STATE.LO
             );
         break;
-        case (0x11): //MTHI
+        case (MTHI): //MTHI
             NEXT_STATE.HI = CURRENT_STATE.REGS[rs];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t MFHI HI:%-2d, R%-2d\n", 
@@ -299,7 +299,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rs
             );
         break;
-        case (0x13): //MTLO
+        case (MTLO): //MTLO
             NEXT_STATE.LO = CURRENT_STATE.REGS[rs];
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t MTLO LO:%-2d, R%-2d\n", 
@@ -309,7 +309,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rs
             );
         break;
-        case (0x19): //MULTU
+        case (MULTU): //MULTU
             mul_res = (uint64_t)((uint32_t)CURRENT_STATE.REGS[rs] * (uint32_t)CURRENT_STATE.REGS[rt]);
             NEXT_STATE.HI = (uint32_t)((mul_res>>32) & 0xFFFFFFFF);
             NEXT_STATE.LO = (uint32_t)(mul_res & 0xFFFFFFFF);
@@ -323,7 +323,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x1a): //DIV
+        case (DIV): //DIV
             NEXT_STATE.LO = ((int32_t)CURRENT_STATE.REGS[rs] / (int32_t)CURRENT_STATE.REGS[rt]);
             NEXT_STATE.HI = ((int32_t)CURRENT_STATE.REGS[rs] % (int32_t)CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -336,7 +336,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x1b): //DIVU
+        case (DIVU): //DIVU
             NEXT_STATE.LO = ((uint32_t)CURRENT_STATE.REGS[rs] / (uint32_t)CURRENT_STATE.REGS[rt]);
             NEXT_STATE.HI = ((uint32_t)CURRENT_STATE.REGS[rs] % (uint32_t)CURRENT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -349,7 +349,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 rt
             );
         break;
-        case (0x0c): //SYSCALL
+        case (SYSCALL): //SYSCALL
             if (CURRENT_STATE.REGS[2] == 0xA) {
                 RUN_BIT = 0;
             }
@@ -382,7 +382,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
     uint32_t address;
     //printf ("I-side instruction\tOpcode is :0x%x\n", opcode);
     switch (opcode) {
-        case (0x04): //BEQ
+        case (BEQ): //BEQ
             if (CURRENT_STATE.REGS[rs] == CURRENT_STATE.REGS[rt]) {
                 shift_val = shift_const(14);
                 sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -401,7 +401,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x05): //BNE
+        case (BNE): //BNE
             if (CURRENT_STATE.REGS[rs] != CURRENT_STATE.REGS[rt]) {
                 shift_val = shift_const(14);
                 sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -420,7 +420,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x06): //BLEZ
+        case (BLEZ): //BLEZ
             if ((int32_t)CURRENT_STATE.REGS[rs] <= 0) {
                 shift_val = shift_const(14);
                 sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -438,7 +438,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x07): //BGTZ
+        case (BGTZ): //BGTZ
             if ((int32_t)CURRENT_STATE.REGS[rs] > 0) {
                 shift_val = shift_const(14);
                 sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -456,7 +456,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x08): //ADDI
+        case (ADDI): //ADDI
             printf ("PC:%.8x\tINSTR:%.8x\t ADDI R%-2d, R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -475,7 +475,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             
         break;
-        case (0x09): //ADDIU
+        case (ADDIU): //ADDIU
             printf ("PC:%.8x\tINSTR:%.8x\t ADDIU R%-2d, R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -493,7 +493,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = CURRENT_STATE.REGS[rs] + imm;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x0a): //SLTI
+        case (SLTI): //SLTI
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -511,7 +511,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = ((int32_t)CURRENT_STATE.REGS[rs] < (int32_t)imm) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x0b): //SLTIU
+        case (SLTIU): //SLTIU
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -529,7 +529,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] < (uint32_t)imm) ? 1 : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x0c): //ANDI
+        case (ANDI): //ANDI
             printf ("PC:%.8x\tINSTR:%.8x\t ANDI R%-2d, R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -544,7 +544,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] & (uint32_t)imm);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x0d): //ORI
+        case (ORI): //ORI
             printf ("PC:%.8x\tINSTR:%.8x\t ORI R%-2d, R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -559,7 +559,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] | (uint32_t)imm);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x0e): //XORI
+        case (XORI): //XORI
             printf ("PC:%.8x\tINSTR:%.8x\t XORI R%-2d, R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -574,7 +574,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = ((uint32_t)CURRENT_STATE.REGS[rs] ^ (uint32_t)imm);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x0f): //LUI
+        case (LUI): //LUI
             printf ("PC:%.8x\tINSTR:%.8x\t LUI R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
@@ -588,7 +588,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = imm << 16;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x20): //LB
+        case (LB): //LB
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -610,7 +610,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = (sign) ? (mem_content | shift_val) : mem_content;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x21): //LH
+        case (LH): //LH
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -632,7 +632,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = (sign) ? (mem_content | shift_val) : mem_content;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x23): //LW
+        case (LW): //LW
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -652,7 +652,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = mem_content;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x24): //LBU
+        case (LBU): //LBU
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -672,7 +672,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = mem_content;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x25): //LHU
+        case (LHU): //LHU
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -692,7 +692,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             NEXT_STATE.REGS[rt] = mem_content;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
-        case (0x28): //SB
+        case (SB): //SB
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -707,7 +707,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x29): //SH
+        case (SH): //SH
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -722,7 +722,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x2b): //SW
+        case (SW): //SW
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15 ? 1 : 0;
             imm = (sign) ? (imm | shift_val) : imm;
@@ -737,8 +737,8 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 imm
             );
         break;
-        case (0x01): 
-            if (rt == 0x0) { //BLTZ
+        case (BVAR): 
+            if (rt == BLTZ) { //BLTZ
                 if ((int32_t)CURRENT_STATE.REGS[rs] < 0) {
                     shift_val = shift_const(14);
                     sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -757,7 +757,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 );
                 break;
             }
-            else if (rt == 0x1) { //BGEZ
+            else if (rt == BGEZ) { //BGEZ
                 if ((int32_t)CURRENT_STATE.REGS[rs] >= 0) {
                     shift_val = shift_const(14);
                     sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -776,7 +776,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 );
                 break;
             }
-            else if (rt == 0x10) { //BLTZAL
+            else if (rt == BLTZAL) { //BLTZAL
                 if ((int32_t)CURRENT_STATE.REGS[rs] < 0) {
                     shift_val = shift_const(14);
                     sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -797,7 +797,7 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 );
                 break;
             }
-            else if (rt == 0x11) { //BGEZAL
+            else if (rt == BGEZAL) { //BGEZAL
                 if ((int32_t)CURRENT_STATE.REGS[rs] >= 0) {
                     shift_val = shift_const(14);
                     sign = (imm & 0x8000)>>15 ? 1 : 0;
@@ -840,7 +840,7 @@ void decode_i (uint32_t instr_opcode) {
 void execute_j (unsigned int opcode, int target) {
     uint32_t address;
     switch (opcode) { 
-        case (0x02): //J
+        case (J): //J
             address = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             printf ("PC:%.8x\tINSTR:%.8x\t J %-8x\n", 
@@ -849,7 +849,7 @@ void execute_j (unsigned int opcode, int target) {
                 NEXT_STATE.PC
             );
         break;
-        case (0x03): //JAL
+        case (JAL): //JAL
             address = ((CURRENT_STATE.PC+4) & 0xF0000000) | (target<<2);
             NEXT_STATE.PC = address;
             NEXT_STATE.REGS[31] = CURRENT_STATE.PC + 4;
