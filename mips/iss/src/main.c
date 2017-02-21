@@ -186,17 +186,17 @@ void rdump(FILE * dumpsim_file) {
   printf("LO: 0x%08x\n", CURRENT_STATE.LO);
   printf("\n");
 
-  /* dump the state information into the dumpsim file */
-  fprintf(dumpsim_file, "\nCurrent register/bus values :\n");
-  fprintf(dumpsim_file, "-------------------------------------\n");
-  fprintf(dumpsim_file, "Instruction Count : %u\n", INSTRUCTION_COUNT);
-  fprintf(dumpsim_file, "PC                : 0x%08x\n", CURRENT_STATE.PC);
-  fprintf(dumpsim_file, "Registers:\n");
-  for (k = 0; k < MIPS_REGS; k++)
-    fprintf(dumpsim_file, "R%d: 0x%08x\n", k, CURRENT_STATE.REGS[k]);
-  fprintf(dumpsim_file, "HI: 0x%08x\n", CURRENT_STATE.HI);
-  fprintf(dumpsim_file, "LO: 0x%08x\n", CURRENT_STATE.LO);
-  fprintf(dumpsim_file, "\n");
+  ///* dump the state information into the dumpsim file */
+  //fprintf(dumpsim_file, "\nCurrent register/bus values :\n");
+  //fprintf(dumpsim_file, "-------------------------------------\n");
+  //fprintf(dumpsim_file, "Instruction Count : %u\n", INSTRUCTION_COUNT);
+  //fprintf(dumpsim_file, "PC                : 0x%08x\n", CURRENT_STATE.PC);
+  //fprintf(dumpsim_file, "Registers:\n");
+  //for (k = 0; k < MIPS_REGS; k++)
+  //  fprintf(dumpsim_file, "R%d: 0x%08x\n", k, CURRENT_STATE.REGS[k]);
+  //fprintf(dumpsim_file, "HI: 0x%08x\n", CURRENT_STATE.HI);
+  //fprintf(dumpsim_file, "LO: 0x%08x\n", CURRENT_STATE.LO);
+  //fprintf(dumpsim_file, "\n");
 }
 
 /***************************************************************/
@@ -295,7 +295,7 @@ void initialize(char *program_filename, int num_prog_files, char *pc_filename) {
 /*                                                             */
 /***************************************************************/
 void sim(int argc, char *argv[]) {                              
-  FILE * dumpsim_file;
+  //FILE * dumpsim_file;
 
   /* Error Checking */
   if (argc < 2) {
@@ -308,10 +308,10 @@ void sim(int argc, char *argv[]) {
 
   initialize(argv[0], argc - 2, argv[1]);
 
-  if ( (dumpsim_file = fopen( "dumpsim", "w" )) == NULL ) {
-    printf("Error: Can't open dumpsim file\n");
-    exit(-1);
-  }
+  //if ( (dumpsim_file = fopen( "dumpsim", "w" )) == NULL ) {
+  //  printf("Error: Can't open dumpsim file\n");
+  //  exit(-1);
+  //}
 
 }
 
