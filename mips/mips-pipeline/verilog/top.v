@@ -71,6 +71,8 @@ module top
     wire[31:0]  res_alu_wb_ret;
     wire[31:0]  read_data_wb_ret;
     wire[31:0]  wr_data_rf_wb_ret;
+    wire[1:0]   fwd_r_data_p1_alu_ex;
+    wire[1:0]   fwd_r_data_p2_alu_ex;
 
     fetch_pipe_reg FETCH_REG (
         .clk (clk),
