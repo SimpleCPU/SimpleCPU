@@ -3,10 +3,12 @@ use strict;
 use warnings;
 use Getopt::Long qw(GetOptions);
 
-my $sim_mode = 0;
+my $sim_mode  = 0;
+my $test_name = "alu_ops";
 
 GetOptions (
-    'sim_only=i'    =>  \$sim_mode
+    'sim_only=i'    =>  \$sim_mode,
+    'test=s'        =>  \$test_name
     );
 
 # compile the ISS first
@@ -31,7 +33,7 @@ else {
         system ("vlog testbench/* verilog/*");
     }
     # Run the simulation
-    print ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" | tee sim.log");
-    system ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" | tee sim.log");
+    print ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" +test=$test_name  | tee sim.log");
+    system ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" +test=$test_name | tee sim.log");
     system ("rm -rf vsim.wlf wlf* transcript ");
 }
