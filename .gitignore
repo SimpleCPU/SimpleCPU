@@ -6,6 +6,8 @@
 *.c.swp
 *.log
 *.wlf
+hex_gen
+iss.so
 sim
 sim.dSYM
 work
