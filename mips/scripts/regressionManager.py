@@ -32,7 +32,7 @@ def regression():
 			for files in basic_test:
 				if pc not in files:
 					print "\n" + "*" * 10 + "Running tests from: " + hex_dir + "*" * 10 + "\n"
-					child = fdpexpect.fdspawn(subprocess.call("perl " + main_dir + "run.pl -test " + hex_dir + files.split('.')[0], shell=True))
+					child = fdpexpect.fdspawn(subprocess.call("perl " + main_dir + "run.pl -regress 1 -test " + hex_dir + files.split('.')[0], shell=True))
 					c = child.expect(['Fatal: TEST FAILED'])
 					if c == 1:
 						child.kill(0)
@@ -41,7 +41,7 @@ def regression():
 			for files in stress_test:
 				if pc not in files:
 					print "\n" + "*" * 10 + "Running tests from: " + hex_dir + "*" * 10 + "\n"
-					child = fdpexpect.fdspawn(subprocess.call("perl " + main_dir + "run.pl -test " + hex_dir + files.split('.')[0], shell=True))
+					child = fdpexpect.fdspawn(subprocess.call("perl " + main_dir + "run.pl -regress 1 -test " + hex_dir + files.split('.')[0], shell=True))
 					c = child.expect(['Fatal: TEST FAILED'])
 					if c == 1:
 						child.kill(0)
