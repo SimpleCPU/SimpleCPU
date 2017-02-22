@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+from pexpect import fdpexpect
 
 
 def regression():
@@ -14,7 +15,12 @@ def regression():
 	for s in sub_dir:
 		stress_test = []
 		basic_test = []
-		hex_dir = test_dir + s + '/' + os.listdir(test_dir + s)[1] + '/'	
+		if len(os.listdir(test_dir + s)) == 2:
+			directory = os.listdir(test_dir + s)[1]
+		else:
+			directory = os.listdir(test_dir + s)[0]
+
+		hex_dir = test_dir + s + '/' + directory + '/'	
 		for f in os.listdir(hex_dir):
 			stress = 'stress'
 			basic = 'basic'
@@ -24,23 +30,22 @@ def regression():
 				basic_test.append(f)
 		if basic_test:
 			for files in basic_test:
-				if pc in files:
-					shutil.copyfile(hex_dir + files, main_dir + 'pc_values_hex')
-				elif pc not in files:
-					shutil.copyfile(hex_dir + files, main_dir + 'instr_hex')
-
-		print "*" * 10 + "Running tests from: " + hex_dir + "*" * 10
-		subprocess.call("perl " + main_dir + "run.pl > results.txt 2>&1", shell=True)
-
+				if pc not in files:
+					print "\n" + "*" * 10 + "Running tests from: " + hex_dir + "*" * 10 + "\n"
+					child = fdpexpect.fdspawn(subprocess.call("perl " + main_dir + "run.pl -test " + hex_dir + files.split('.')[0], shell=True))
+					c = child.expect(['Fatal: TEST FAILED'])
+					if c == 1:
+						child.kill(0)
+		
 		if stress_test:
 			for files in stress_test:
-				if pc in files:
-					shutil.copyfile(hex_dir + files, main_dir + 'pc_values_hex')
-				elif pc not in files:
-					shutil.copyfile(hex_dir + files, main_dir + 'instr_hex')
+				if pc not in files:
+					print "\n" + "*" * 10 + "Running tests from: " + hex_dir + "*" * 10 + "\n"
+					child = fdpexpect.fdspawn(subprocess.call("perl " + main_dir + "run.pl -test " + hex_dir + files.split('.')[0], shell=True))
+					c = child.expect(['Fatal: TEST FAILED'])
+					if c == 1:
+						child.kill(0)
 
-		print "*" * 10 + "Running tests from: " + hex_dir + "*" * 10
-		subprocess.call("perl " + main_dir + "run.pl > results.txt 2>&1", shell=True)
 
 def main():
 	regression()
