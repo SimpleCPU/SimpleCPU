@@ -818,10 +818,10 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
                 );
                 break;
             }
-            printf ("ERROR. Incorrect I-type instruction opcode\n");
+            printf ("[BVAR] ERROR. Incorrect I-type instruction opcode %8x\n", instr_opcode);
         break;
         default:
-            printf ("ERROR. Incorrect I-type instruction opcode\n");
+            printf ("ERROR. Incorrect I-type instruction opcode %8x\n", instr_opcode);
     }
 }
 
