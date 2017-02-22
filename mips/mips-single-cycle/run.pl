@@ -5,24 +5,30 @@ use Getopt::Long qw(GetOptions);
 
 my $sim_mode  = 0;
 my $test_name = "alu_ops_stress";
+my $regress_mode = 0;
 
 GetOptions (
     'sim_only=i'    =>  \$sim_mode,
-    'test=s'        =>  \$test_name
+    'test=s'        =>  \$test_name,
+    'regress'       =>  \$regress_mode
     );
-
-my $dir_name = $test_name;
-if ($dir_name =~ /basic/) {
-  $dir_name =~ s/_basic//;
+# We only need to copy the hex files when
+# we are not in regress mode. As in regress
+# mode the script is provided with the 
+# complete path of the hex files.
+if (!$regress_mode) {
+    my $dir_name = $test_name;
+    if ($dir_name =~ /basic/) {
+      $dir_name =~ s/_basic//;
+    }
+    elsif ($dir_name =~ /stress/) {
+      $dir_name =~ s/_stress//;
+    }
+    # Get the test from hex-gen
+    print ("cp ../hex_gen/tests/rand_$dir_name/hex/$test_name* ");
+    system ("cp ../hex_gen/tests/rand_$dir_name/hex/$test_name* .");
 }
-elsif ($dir_name =~ /stress/) {
-  $dir_name =~ s/_stress//;
-}
-# get the test from hex-gen
-print ("cp ../hex_gen/tests/rand_$dir_name/hex/$test_name* ");
-system ("cp ../hex_gen/tests/rand_$dir_name/hex/$test_name* .");
-
-# compile the ISS first
+# Compile the ISS first
 chdir '../iss';
 print ("make iss\n");
 if (system ("make iss")) {
@@ -31,8 +37,8 @@ if (system ("make iss")) {
 }
 else {
     # Copy the sim.so file to the main directory
-    print ("cp iss.so ../mips-single-cycle/\n");
-    system ("cp iss.so ../mips-single-cycle/");
+    print ("cp iss.so ../mips-single-cycle/lib/\n");
+    system ("cp iss.so ../mips-single-cycle/lib/");
     # Compile the RTL only when sim_mode = 0
     chdir "../mips-single-cycle";
     if ($sim_mode eq 0) {
@@ -44,7 +50,12 @@ else {
         system ("vlog testbench/* verilog/*");
     }
     # Run the simulation
-    print ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" +test=$test_name  | tee sim.log");
-    system ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" +test=$test_name | tee sim.log");
+    print ("vsim -c top_tb -sv_lib lib/iss -do \"run -all; exit\" +test=$test_name  | tee sim.log");
+    system ("vsim -c top_tb -sv_lib lib/iss -do \"run -all; exit\" +test=$test_name | tee sim.log");
     system ("rm -rf vsim.wlf wlf* transcript");
+    # Remove the test from the current dir
+    # if we are not in the regress mode
+    if (!$regress_mode) {
+        system ("rm -rf $test_name.hex $test_name\_pc.hex");
+    }
 }
