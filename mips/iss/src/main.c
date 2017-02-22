@@ -294,19 +294,20 @@ void initialize(char *program_filename, int num_prog_files, char *pc_filename) {
 /* Procedure : sim                                             */
 /*                                                             */
 /***************************************************************/
-void sim(int argc, char *argv[]) {                              
+void sim(char *instr_hex, char *pc_values_hex) {                              
   //FILE * dumpsim_file;
 
-  /* Error Checking */
-  if (argc < 2) {
-    printf("Error: usage: %s <program_file> <pc_file> \n",
-           argv[0]);
-    exit(1);
-  }
+  ///* Error Checking */
+  //if (argc < 2) {
+  //  printf("Error: usage: %s <program_file> <pc_file> \n",
+  //         argv[0]);
+  //  exit(1);
+  //}
 
+  
   printf("MIPS Simulator\n\n");
 
-  initialize(argv[0], argc - 2, argv[1]);
+  initialize(instr_hex, 1, pc_values_hex);
 
   //if ( (dumpsim_file = fopen( "dumpsim", "w" )) == NULL ) {
   //  printf("Error: Can't open dumpsim file\n");
@@ -315,14 +316,24 @@ void sim(int argc, char *argv[]) {
 
 }
 
-extern void init () {
-  int argc = 3;
-  char *argv[] = {"instr_hex", "pc_values_hex"};
-  sim (argc, argv);
+extern void init (char *test_name) {
+  char instr_hex[99];
+  char pc_values_hex[99];
+
+  strcpy (instr_hex, test_name);
+  strcpy (pc_values_hex, test_name);
+
+  //printf ("%s\t%s\n", instr_hex, pc_values_hex);
+  strcat (instr_hex, (const char*)".hex");
+  strcat (pc_values_hex, (const char*)"_pc.hex");
+
+  //printf ("%s\t%s\n", instr_hex, pc_values_hex);
+  sim (instr_hex, pc_values_hex);
 }
 
-int main () {
-    init ();
+int main (int argc, char* test_name[]) {
+    //printf ("Test name is %s\n", test_name[1]);
+    init (test_name[1]);
     go();
     return 0;
 }
