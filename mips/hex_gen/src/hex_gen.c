@@ -203,21 +203,6 @@ TARGET:
     instr_gen++;
 }
 
-void gen_end_seq () {
-    //FILE * dump;
-    int opcode = 0x2402000a;
-    update_cpu (CURRENT_STATE.PC, opcode);
-    load_instr_opcode ((uint32_t)opcode);
-    run (1);
-    instr_gen++;
-    opcode = 0x0000000c;
-    update_cpu (CURRENT_STATE.PC, opcode);
-    load_instr_opcode ((uint32_t)opcode);
-    run (1);
-    //dump = fopen ("dump", "w");
-    //rdump (dump);
-}
-
 int gen_j (int address) {
     int opcode;
     int target;
@@ -257,6 +242,23 @@ void make_room () {
     }
     printf ("\nExit! PC overflow.\n");
     exit (0);
+}
+
+void gen_end_seq () {
+    //FILE * dump;
+    make_room ();
+    int opcode = 0x2402000a;
+    update_cpu (CURRENT_STATE.PC, opcode);
+    load_instr_opcode ((uint32_t)opcode);
+    run (1);
+    instr_gen++;
+    make_room ();
+    opcode = 0x0000000c;
+    update_cpu (CURRENT_STATE.PC, opcode);
+    load_instr_opcode ((uint32_t)opcode);
+    run (1);
+    //dump = fopen ("dump", "w");
+    //rdump (dump);
 }
 
 void gen_instr_hex (int num_r, int num_i, int num_j) {
