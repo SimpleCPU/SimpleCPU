@@ -196,10 +196,10 @@ module top
     );
 
     assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? r_data_p1_rf_ex_mem :
-                                  fwd_r_data_p1_alu_ex[0] ? w_data_rf_wb :
+                                  fwd_r_data_p1_alu_ex[0] ? wr_data_rf_wb_ret :
                                   res_alu_mem_wb;
     assign r_data_p2_alu_ex_mem = fwd_r_data_p2_alu_ex[1] ? r_data_p2_rf_ex_mem :
-                                  fwd_r_data_p2_alu_ex[0] ? w_data_rf_wb :
+                                  fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   res_alu_mem_wb;
 
     alu A1 (
