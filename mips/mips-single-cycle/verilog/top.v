@@ -49,6 +49,8 @@ module top
     wire[31:0]  res_alu_top;
     wire        z_top;
     wire        n_top;
+    wire        v_pc_top;
+    wire        v_branch_top;
     wire[31:0]  read_data_dmem_ram_top;
     wire[31:0]  wr_data_rf_top;
 
@@ -64,7 +66,8 @@ module top
         .op2 (32'h4),
         .cin (1'b0),
         .sum (next_seq_pc_top),
-        .carry (next_seq_pc_carry_top)
+        .carry (next_seq_pc_carry_top),
+        .v_flag (v_pc_top)
     );
 
     adder ADD2 (
@@ -72,7 +75,8 @@ module top
         .op2 (sign_imm_top << 2),
         .cin (1'b0),
         .sum (next_beq_pc_top),
-        .carry (next_beq_pc_carry_top)
+        .carry (next_beq_pc_carry_top),
+        .v_flag (v_branch_top)
     );
 
     assign next_brn_eq_pc_top = (branch_top & ((op_top == `BEQ))  & z_top) |
