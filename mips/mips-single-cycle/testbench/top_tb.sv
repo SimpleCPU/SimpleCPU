@@ -4,7 +4,7 @@ module top_tb ();
 `include "testbench/init_imem.sv"
 `include "testbench/init_dmem.sv"
 `include "testbench/boot_code.sv"
-import "DPI-C" function void init ();
+import "DPI-C" function void init (string test_name);
 import "DPI-C" function void run (int cycles);
 import "DPI-C" function int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val);
 import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val);
@@ -21,6 +21,7 @@ import "DPI-C" function int compare_j (int pc, int instr, int rt, int rt_val);
     wire[31:0]  rd_val_dest;
     wire[31:0]  rt_val_dest;
     reg clk_tb, reset_tb;
+    string      test_name;
 
     assign pc           = T1.curr_pc_top;
     assign instr        = T1.instr_top;
@@ -42,10 +43,12 @@ import "DPI-C" function int compare_j (int pc, int instr, int rt, int rt_val);
     
     initial
     begin
-        init_imem ();
+        if (!($value$plusargs("test=%s", test_name)))
+          $fatal ("No test name given");
+        init_imem (test_name);
         init_dmem ();
         boot_code ();
-        init ();
+        init (test_name);
         $display ("CPU initialised\n");
         reset_tb = 1'b1;
         # (T);

@@ -1,15 +1,14 @@
 // Memory initialisation
 
-function void init_imem ();
+function void init_imem (string test_name);
     logic [31:0] instr_hex [1023:0];
     logic [31:0] pc_val [2048:0];
 
     string instr_hex_s;
     string pc_values_hex_s;
-    string test_name;
 
-    if (!($value$plusargs("test=%s", test_name)))
-        $fatal ("No test name given");
+    //if (!($value$plusargs("test=%s", test_name)))
+    //    $fatal ("No test name given");
     instr_hex_s     = {test_name, ".hex"};
     pc_values_hex_s = {test_name, "_pc.hex"};
 
