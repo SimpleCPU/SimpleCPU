@@ -4,7 +4,7 @@ use warnings;
 use Getopt::Long qw(GetOptions);
 
 my $sim_mode  = 0;
-my $test_name = "alu_ops";
+my $test_name = "alu_ops_stress";
 
 GetOptions (
     'sim_only=i'    =>  \$sim_mode,
