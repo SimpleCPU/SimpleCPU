@@ -46,5 +46,5 @@ else {
     # Run the simulation
     print ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" +test=$test_name  | tee sim.log");
     system ("vsim -c top_tb -sv_lib iss -do \"run -all; exit\" +test=$test_name | tee sim.log");
-    system ("rm -rf vsim.wlf wlf* transcript $test_name.hex $test_name\_pc.hex");
+    system ("rm -rf vsim.wlf wlf* transcript");
 }
