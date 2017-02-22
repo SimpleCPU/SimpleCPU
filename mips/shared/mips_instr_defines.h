@@ -6,6 +6,7 @@
 #define ADDIU   0x9
 #define AND     0x24
 #define ANDI    0xc
+#define BVAR    0x1
 #define BEQ     0x4
 #define BGEZ    0x1
 #define BGEZAL  0x11
@@ -50,6 +51,6 @@
 #define SRLV    0x6
 #define SUB     0x22
 #define SUBU    0x23
-#define SYSCALL 0x3
+#define SYSCALL 0xc
 #define XOR     0x26
 #define XORI    0xe
