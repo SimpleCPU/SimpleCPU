@@ -36,7 +36,7 @@ if (system ("make iss")) {
     exit;
 }
 else {
-    # Copy the sim.so file to the main directory
+    # Copy the iss.so file to the main directory
     if (!(-d "../mips-single-cycle/lib")) {
       system ("mkdir ../mips-single-cycle/lib");
     }
