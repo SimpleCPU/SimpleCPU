@@ -146,7 +146,7 @@ IMM:
         if ((check_ls_addr (rs, imm)) == 2) goto RS;
         if ((check_ls_addr (rs, imm)) == 0) goto IMM;
     }
-    if ((opcode == 1) || (opcode == BEQ) ||
+    if ((opcode == BVAR) || (opcode == BEQ) ||
         (opcode == BGTZ) || (opcode == BLEZ) ||
         (opcode == BNE)) {
         if ((check_brn_addr (imm)) == 0) goto IMM;
