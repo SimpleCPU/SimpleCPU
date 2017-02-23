@@ -11,7 +11,7 @@ GetOptions (
     'sim_only=i'    =>  \$sim_mode,
     'test=s'        =>  \$test_name,
     'regress'       =>  \$regress_mode
-    );
+);
 # We only need to copy the hex files when
 # we are not in regress mode. As in regress
 # mode the script is provided with the 
