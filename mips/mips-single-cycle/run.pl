@@ -37,6 +37,9 @@ if (system ("make iss")) {
 }
 else {
     # Copy the sim.so file to the main directory
+    if (!(-d "../mips-single-cycle/lib")) {
+      system ("mkdir ../mips-single-cycle/lib");
+    }
     print ("cp iss.so ../mips-single-cycle/lib/\n");
     system ("cp iss.so ../mips-single-cycle/lib/");
     # Compile the RTL only when sim_mode = 0
