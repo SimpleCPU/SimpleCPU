@@ -73,11 +73,14 @@ module top
     wire[31:0]  wr_data_rf_wb_ret;
     wire[1:0]   fwd_r_data_p1_alu_ex;
     wire[1:0]   fwd_r_data_p2_alu_ex;
+    wire        stall_iss;
+    wire        stall_fetch;
+    wire        flush_ex;
 
     fetch_pipe_reg FETCH_REG (
         .clk (clk),
         .reset (reset),
-        .enable (),
+        .enable (stall_fetch),
         .next_pc_pc_reg_i (next_pc_top),
         .next_pc_pc_reg_o (pc_pc_reg_fetch)
     );
@@ -253,5 +256,20 @@ module top
     assign wr_data_rf_wb_ret = (|rd_wb_ret) ? 
                                (mem_to_reg_wb_ret ? read_data_wb_ret : res_alu_wb_ret) :
                                32'h0;
+
+    hazard_unit hazard (
+        .rs_iss_ex_hz_i (rs_iss_ex),
+        .rt_iss_ex_hz_i (rt_iss_ex),
+        .rs_ex_mem_hz_i (rs_ex_mem),
+        .rt_ex_mem_hz_i (rt_ex_mem),
+        .mem_to_reg_ex_mem_hz_i (mem_to_reg_ex_mem),
+        .reg_wr_mem_wb_hz_i (reg_wr_mem_wb),
+        .reg_wr_wb_ret_hz_i (reg_wr_wb_ret),
+        .stall_fetch_hz_o (stall_fetch),
+        .stall_iss_hz_o (stall_iss),
+        .flush_ex_hz_o (flush_ex),
+        .fwd_p1_ex_mem_hz_o (fwd_r_data_p1_alu_ex),
+        .fwd_p2_ex_mem_hz_o (fwd_r_data_p2_alu_ex)
+    );
 
 endmodule
