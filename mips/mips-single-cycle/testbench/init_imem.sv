@@ -7,8 +7,6 @@ function void init_imem (string test_name);
     string instr_hex_s;
     string pc_values_hex_s;
 
-    //if (!($value$plusargs("test=%s", test_name)))
-    //    $fatal ("No test name given");
     instr_hex_s     = {test_name, ".hex"};
     pc_values_hex_s = {test_name, "_pc.hex"};
 
