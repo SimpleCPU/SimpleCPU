@@ -3,7 +3,6 @@ import re
 import time
 import shutil
 import subprocess
-from pexpect import fdpexpect
 
 Logfilename = str(int(time.time()))
 
