@@ -243,7 +243,7 @@ sudo apt-get install perl
 
 Run the simulation (for single cycle MIPS CPU) - 
 ```
-perl run.pl
+perl run.pl -test all_instr
 ```
 The entire simulation is carried out by the "run.pl" perl script. The script first compiles the model version and dumps the .so file to be used by the simulator for C-DPI calls. If there aren't any errors during make, the HDL code is then compiled and simulated.
 
