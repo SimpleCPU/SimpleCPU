@@ -53,24 +53,24 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] << shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            printf ("PC:%.8x\tINSTR:%.8x\t SLL R%-2d, R%-2d, R%-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t SLL R%-2d, R%-2d, 0x%-x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
                 rs,
-                rt
+                shamt
             );
         break;
         case (SRL): //SRL
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> shamt;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            printf ("PC:%.8x\tINSTR:%.8x\t SRL R%-2d, R%-2d, R%-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t SRL R%-2d, R%-2d, 0x%-x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
                 rs,
-                rt
+                shamt
             );
         break;
         case (SRA): //SRA
@@ -80,7 +80,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> shamt;
             NEXT_STATE.REGS[rd] = (sign == 1) ? NEXT_STATE.REGS[rd] | shift_val: NEXT_STATE.REGS[rd]; 
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            printf ("PC:%.8x\tINSTR:%.8x\t SRA R%-2d, R%-2d, %-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t SRA R%-2d, R%-2d, 0x%-x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
@@ -92,24 +92,24 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] << (CURRENT_STATE.REGS[rs] & 0x1F);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            printf ("PC:%.8x\tINSTR:%.8x\t SLLV R%-2d, R%-2d, R%-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t SLLV R%-2d, R%-2d, 0x%-x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
                 rs,
-                rt
+                shamt
             );
         break;
         case (SRLV): //SRLV
             rt_as_src = 1;
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> (CURRENT_STATE.REGS[rs] & 0x1F);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            printf ("PC:%.8x\tINSTR:%.8x\t SRLV R%-2d, R%-2d, R%-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t SRLV R%-2d, R%-2d, 0x%-x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
                 rs,
-                rt
+                shamt
             );
         break;
         case (SRAV): //SRAV
@@ -119,12 +119,12 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rt] >> (CURRENT_STATE.REGS[rs] & 0x1F);
             NEXT_STATE.REGS[rd] = (sign == 1) ? NEXT_STATE.REGS[rd] | shift_val: NEXT_STATE.REGS[rd]; 
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            printf ("PC:%.8x\tINSTR:%.8x\t SRAV R%-2d, R%-2d, R%-2d\n", 
+            printf ("PC:%.8x\tINSTR:%.8x\t SRAV R%-2d, R%-2d, 0x%-x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
                 rs,
-                rt
+                shamt
             );
         break;
         case (JR): //JR
