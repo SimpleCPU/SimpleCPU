@@ -108,7 +108,7 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     if (sign_ext) {
         imm = (sign) ? (imm | 0xFFFF0000) : (unsigned)imm;
     }
-    printf ("%-4s %s, %s, %x\n\n", 
+    printf ("%-4s %s, %s, 0x%x\n\n", 
             opcode_str_i_type[opcode],
             register_str[rt],
             register_str[rs],
@@ -127,8 +127,8 @@ void gen_i_instr () {
     opcode  = opcode_val_i_type [rand_opcode_idx];
     rt      = rand() % 32;
     if ((opcode == BGEZ) || (opcode == BGEZAL) ||
-        (opcode == BLTZ) || (opcode == BLTZAL))
-    {
+        (opcode == BLTZ) || (opcode == BLTZAL)
+    ) {
         // This is true for the above mentioned branch variants.
         // ISA specifies that if opcode = 0x1 then the instruction
         // should further be decoded using the value present
@@ -140,7 +140,7 @@ void gen_i_instr () {
 RS:
     rs      = rand() % 32;
 IMM:    
-    imm     = rand() % 65535;   /* 16-bit signal */
+    imm     = rand() % 0xFFFF;   /* 16-bit signal */
 
     if ((opcode == LW) || (opcode == SW)) {
         if ((check_ls_addr (rs, imm)) == 2) goto RS;
@@ -169,7 +169,7 @@ IMM:
 /* 31:26    opcode          */
 /* 25:0     target          */
 void print_assembled_j_instr (int opcode, int target) {
-    printf ("%-4s %-8x\n\n", 
+    printf ("%-4s 0x%-8x\n\n", 
             opcode_str_j_type[opcode],
             target
     );
@@ -247,13 +247,14 @@ void make_room () {
 void gen_end_seq () {
     //FILE * dump;
     make_room ();
-    int opcode = 0x2402000a;
+    int opcode = 0x2402000a;  // ADDU R10, R0, 0xa
     update_cpu (CURRENT_STATE.PC, opcode);
     load_instr_opcode ((uint32_t)opcode);
     run (1);
     instr_gen++;
+
     make_room ();
-    opcode = 0x0000000c;
+    opcode = 0x0000000c;      // SYSCALL
     update_cpu (CURRENT_STATE.PC, opcode);
     load_instr_opcode ((uint32_t)opcode);
     run (1);
