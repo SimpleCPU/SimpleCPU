@@ -16,4 +16,16 @@ module hazard_unit
         output  wire[1:0]   fwd_p2_ex_mem_hz_o
     );
 
+    wire        stall_fetch_hz;
+    wire        stall_iss_hz;
+    wire        flush_ex_hz;
+    wire[1:0]   fwd_p1_ex_mem_hz;
+    wire[1:0]   fwd_p2_ex_mem_hz;
+
+    assign  stall_fetch_hz_o    = stall_fetch_hz;
+    assign  stall_iss_hz_o      = stall_iss_hz;
+    assign  flush_ex_hz_o       = flush_ex_hz;
+    assign  fwd_p1_ex_mem_hz_o  = fwd_p1_ex_mem_hz; 
+    assign  fwd_p2_ex_mem_hz_o  = fwd_p2_ex_mem_hz; 
+
 endmodule
