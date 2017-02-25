@@ -10,8 +10,8 @@ module top
     wire[31:0]  next_seq_pc_pc_reg_fetch;
     wire        next_seq_pc_carry_pc_reg_fetch;
     wire[31:0]  instr_pc_reg_fetch;
-    wire[31:0]  next_seq_pc_fetch_iss;
-    wire[31:0]  instr_fetch_iss;
+    wire[31:0]  next_seq_pc_iss_ex;
+    wire[31:0]  instr_iss_ex;
     wire        sign_ext_iss;
     wire[4:0]   rt_iss_ex; 
     wire[4:0]   rs_iss_ex; 
@@ -82,6 +82,7 @@ module top
     wire        valid_mem_wb;
     wire        valid_wb_ret;
 
+    // FETCH STAGE
     fetch_pipe_reg FETCH_REG (
         .clk (clk),
         .reset (reset),
@@ -106,18 +107,19 @@ module top
         .carry (next_seq_pc_carry_pc_reg_fetch)
     );
 
+    // ISSUE STAGE
     iss_pipe_reg FETCH_ISS_REG (
         .clk (clk),
         .reset (reset),
         .enable (stall_iss),
         .next_pc_iss_pipe_reg_i (next_seq_pc_pc_reg_fetch),
         .instr_iss_pipe_reg_i (instr_pc_reg_fetch),
-        .next_pc_iss_pipe_reg_o (next_seq_pc_fetch_iss),
-        .instr_iss_pipe_reg_o (instr_fetch_iss)
+        .next_pc_iss_pipe_reg_o (next_seq_pc_iss_ex),
+        .instr_iss_pipe_reg_o (instr_iss_ex)
     );
 
     decode D1 (
-        .instr_dec_i (instr_fetch_iss),
+        .instr_dec_i (instr_iss_ex),
         .sign_ext_i (sign_ext_iss),
         .rt_dec_o (rt_iss_ex),
         .rs_dec_o (rs_dec_iss_ex),
@@ -152,7 +154,7 @@ module top
     );
 
     adder ADD2 (
-        .op1 (next_seq_pc_fetch_iss),
+        .op1 (next_seq_pc_iss_ex),
         .op2 (sign_imm_iss_ex << 2),
         .cin (1'b0),
         .sum (next_beq_pc_iss_ex),
@@ -174,6 +176,7 @@ module top
     assign r_data_p2_rf_iss_ex = alu_src_iss_ex[1] ? {{27{1'b0}}, shamt_iss_ex} : 
                                  alu_src_iss_ex[0] ? sign_imm_iss_ex : r_data_p2_iss_ex;
 
+    // EXECUTE STAGE
     ex_pipe_reg ISS_EX_REG (
         .clk (clk),
         .reset (reset),
@@ -222,6 +225,7 @@ module top
         .n_alu_o (n_ex_mem)
     );
 
+    // MEMORY STAGE
     mem_pipe_reg EX_MEM_REG (
         .clk (clk),
         .reset (reset),
@@ -248,6 +252,7 @@ module top
         .read_data_dmem_ram_o (read_data_dmem_ram_mem_wb)
     );
 
+    // WRITEBACK STAGE
     wb_pipe_reg MEM_WB_REG (
         .clk (clk),
         .reset (reset),
