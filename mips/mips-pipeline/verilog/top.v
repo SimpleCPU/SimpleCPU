@@ -258,10 +258,10 @@ module top
                                32'h0;
 
     hazard_unit hazard (
-        .rs_iss_ex_hz_i (rs_iss_ex),
-        .rt_iss_ex_hz_i (rt_iss_ex),
         .rs_ex_mem_hz_i (rs_ex_mem),
         .rt_ex_mem_hz_i (rt_ex_mem),
+        .rd_mem_wb_hz_i (rd_mem_wb),
+        .rd_wb_ret_hz_i (rd_wb_ret),
         .mem_to_reg_ex_mem_hz_i (mem_to_reg_ex_mem),
         .reg_wr_mem_wb_hz_i (reg_wr_mem_wb),
         .reg_wr_wb_ret_hz_i (reg_wr_wb_ret),
