@@ -7,7 +7,7 @@ module top
     );
     
     wire[31:0]  next_pc_iss_ex;
-    wire[31:0]  pc_pc_reg_fetch;
+    wire[31:0]  curr_pc_pc_reg_fetch;
     wire[31:0]  next_seq_pc_pc_reg_fetch;
     wire        next_seq_pc_carry_pc_reg_fetch;
     wire[31:0]  instr_pc_reg_fetch;
@@ -89,19 +89,19 @@ module top
         .reset (reset),
         .enable (stall_fetch),
         .next_pc_pc_reg_i (next_pc_fetch_iss),
-        .next_pc_pc_reg_o (pc_pc_reg_fetch)
+        .next_pc_pc_reg_o (curr_pc_pc_reg_fetch)
     );
 
     instr_mem I_MEM1 (
         .clk (clk),
-        .addr_imem_ram_i (pc_pc_reg_fetch),
+        .addr_imem_ram_i (curr_pc_pc_reg_fetch),
         .wr_instr_imem_ram_i (wr_instr_imem_top),
         .wr_en_imem_ram_i (wr_en_imem_top),
         .read_instr_imem_ram_o (instr_pc_reg_fetch)
     );
 
     adder ADD1 (
-        .op1 (pc_pc_reg_fetch),
+        .op1 (curr_pc_pc_reg_fetch),
         .op2 (32'h4),
         .cin (1'b0),
         .sum (next_seq_pc_pc_reg_fetch),
