@@ -6,6 +6,7 @@ module top
         input   wire    reset
     );
     
+    wire[31:0]  next_pc_iss_ex;
     wire[31:0]  pc_pc_reg_fetch;
     wire[31:0]  next_seq_pc_pc_reg_fetch;
     wire        next_seq_pc_carry_pc_reg_fetch;
@@ -87,7 +88,7 @@ module top
         .clk (clk),
         .reset (reset),
         .enable (stall_fetch),
-        .next_pc_pc_reg_i (next_pc_top),
+        .next_pc_pc_reg_i (next_pc_fetch_iss),
         .next_pc_pc_reg_o (pc_pc_reg_fetch)
     );
 
@@ -106,6 +107,7 @@ module top
         .sum (next_seq_pc_pc_reg_fetch),
         .carry (next_seq_pc_carry_pc_reg_fetch)
     );
+    assign next_pc_fetch_iss    = next_seq_pc_pc_reg_fetch;
 
     // ISSUE STAGE
     iss_pipe_reg FETCH_ISS_REG (
@@ -133,9 +135,9 @@ module top
         .is_i_type_dec_o (is_i_type_iss_ex),
         .is_j_type_dec_o (is_j_type_iss_ex)
     );
-    assign rd_iss_ex    = reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
-    assign rs_iss_ex    = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
-    assign valid_iss_ex = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex); 
+    assign rd_iss_ex        = reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
+    assign rs_iss_ex        = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
+    assign valid_iss_ex     = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex); 
 
     control C1 (
         .instr_op_ctl_i (op_iss_ex),
