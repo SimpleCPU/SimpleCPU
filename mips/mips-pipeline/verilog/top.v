@@ -76,6 +76,11 @@ module top
     wire        stall_iss;
     wire        stall_fetch;
     wire        flush_ex;
+    wire        instr_retired;
+    wire        valid_iss_ex;
+    wire        valid_ex_mem;
+    wire        valid_mem_wb;
+    wire        valid_wb_ret;
 
     fetch_pipe_reg FETCH_REG (
         .clk (clk),
@@ -126,8 +131,9 @@ module top
         .is_i_type_dec_o (is_i_type_iss_ex),
         .is_j_type_dec_o (is_j_type_iss_ex)
     );
-    assign rd_iss_ex = reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
-    assign rs_iss_ex = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
+    assign rd_iss_ex    = reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
+    assign rs_iss_ex    = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
+    assign valid_iss_ex = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex); 
 
     control C1 (
         .instr_op_ctl_i (op_iss_ex),
@@ -172,6 +178,7 @@ module top
         .clk (clk),
         .reset (reset),
         .clr (),
+        .valid_ex_pipe_reg_i (valid_iss_ex),
         .reg_wr_ex_pipe_reg_i (reg_wr_iss_ex),
         .mem_to_reg_ex_pipe_reg_i (mem_to_reg_iss_ex),
         .mem_wr_ex_pipe_reg_i (mem_wr_iss_ex),
@@ -184,6 +191,7 @@ module top
         .r_data_p1_ex_pipe_reg_i (r_data_p1_rf_iss_ex),
         .r_data_p2_ex_pipe_reg_i (r_data_p2_rf_iss_ex),
         .sign_imm_ex_pipe_reg_i (sign_imm_iss_ex),
+        .valid_ex_pipe_reg_o (valid_ex_mem),
         .reg_wr_ex_pipe_reg_o (reg_wr_ex_mem),
         .mem_to_reg_ex_pipe_reg_o (mem_to_reg_ex_mem),
         .mem_wr_ex_pipe_reg_o (mem_wr_ex_mem),
@@ -217,11 +225,13 @@ module top
     mem_pipe_reg EX_MEM_REG (
         .clk (clk),
         .reset (reset),
+        .valid_mem_pipe_reg_i (valid_ex_mem),
         .reg_wr_mem_pipe_reg_i (reg_wr_ex_mem),
         .mem_to_reg_mem_pipe_reg_i (mem_to_reg_ex_mem),
         .mem_wr_mem_pipe_reg_i (mem_wr_ex_mem),
         .rd_mem_pipe_reg_i (rd_ex_mem),
         .res_alu_mem_pipe_reg_i (res_alu_ex_mem),
+        .valid_mem_pipe_reg_o (valid_mem_wb),
         .reg_wr_mem_pipe_reg_o (reg_wr_mem_wb),
         .mem_to_reg_mem_pipe_reg_o (mem_to_reg_mem_wb),
         .mem_wr_mem_pipe_reg_o (mem_wr_mem_wb),
@@ -242,10 +252,12 @@ module top
         .clk (clk),
         .reset (reset),
         .reg_wr_wb_pipe_reg_i (reg_wr_mem_wb),
+        .valid_wb_pipe_reg_i (valid_mem_wb),
         .mem_to_reg_wb_pipe_reg_i (mem_to_reg_mem_wb),
         .rd_wb_pipe_reg_i (rd_mem_wb),
         .res_alu_wb_pipe_reg_i (res_alu_mem_wb),
         .read_data_wb_pipe_reg_i (read_data_mem_wb),
+        .instr_retired_wb_pipe_reg_o(valid_wb_ret),
         .reg_wr_wb_pipe_reg_o (reg_wr_wb_ret),
         .mem_to_reg_wb_pipe_reg_o (mem_to_reg_wb_ret),
         .rd_wb_pipe_reg_o (rd_wb_ret),
