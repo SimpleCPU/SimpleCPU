@@ -20,7 +20,7 @@ import "DPI-C" function int compare_j (int pc, int instr, int rt, int rt_val);
     wire[31:0]  rt_val;
     wire[31:0]  rd_val_dest;
     wire[31:0]  rt_val_dest;
-    reg clk_tb, reset_tb;
+    reg         clk_tb, reset_tb;
     string      test_name;
 
     assign pc           = T1.curr_pc_top;
