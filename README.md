@@ -28,7 +28,7 @@ Since CPU verification requires that the CPU should work under all possible comb
 
 Here's an example simulation of a single cycle 32-bit MIPS CPU running a random instruction sequence along with an instruction set simulator which helps in checking the RTL state as in when each instruction retires. 
 ```sh
-perl run.pl 
+perl run.pl -test alu_ops_basic
 make iss
 gcc -fPIC -W -shared -g -m32 -O2 main.c sim.c -o iss.so
 cp iss.so ../../
