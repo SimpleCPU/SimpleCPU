@@ -64,7 +64,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     
 
     // FETCH
-    assign pc_fetch         = T1.pc_pc_reg_fetch;
+    assign pc_fetch         = T1.curr_pc_pc_reg_fetch;
     assign instr_fetch      = T1.instr_pc_reg_fetch;
 
     // ISSUE
@@ -76,9 +76,9 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign rd_iss           = T1.rd_iss_ex;
 
     // EXECUTE
-    assign rd_val_ex        = T1.reg_file[rd_ex];
-    assign rs_val_ex        = T1.reg_file[rs_ex];
-    assign rt_val_ex        = T1.reg_file[rt_ex];
+    assign rd_val_ex        = T1.R1.reg_file[rd_ex];
+    assign rs_val_ex        = T1.R1.reg_file[rs_ex];
+    assign rt_val_ex        = T1.R1.reg_file[rt_ex];
 
     // MEM
 
