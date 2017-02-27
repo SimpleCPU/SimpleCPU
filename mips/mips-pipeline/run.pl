@@ -6,12 +6,34 @@ use Getopt::Long qw(GetOptions);
 my $sim_mode  = 0;
 my $test_name = "alu_ops_stress";
 my $regress_mode = 0;
+my $help;
 
 GetOptions (
+    'help'          =>  \$help,
     'sim_only=i'    =>  \$sim_mode,
     'test=s'        =>  \$test_name,
-    'regress'       =>  \$regress_mode
+    'regress=i'     =>  \$regress_mode
 );
+
+my $usage =<<USAGE;
+
+This script is used to compile, build and run RTL simulations
+along with the co-simulated model runs. The script compiles
+the C-model and copies the generated so file to the lib/ dir.
+If this goes fine, then the RTL is compiled and simulation
+starts. 
+You can pass the following options to the script - 
+  -help                => Prints this message
+  -sim_mode = <value>  => To run in simulation mode only i.e. RTL won't be compiled
+  -test = <name>       => Pass the test name to both model and RTL
+  -regress = <value>   => Use this flag to tell the script we are in regress mode
+
+USAGE
+
+if ($help) {
+    print $usage;
+    exit;
+}
 # We only need to copy the hex files when
 # we are not in regress mode. As in regress
 # mode the script is provided with the 
