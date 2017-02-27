@@ -6,6 +6,7 @@ module top
         input   wire    reset
     );
     
+    wire[31:0]  next_pc_fetch_iss;
     wire[31:0]  next_pc_iss_ex;
     wire[31:0]  curr_pc_pc_reg_fetch;
     wire[31:0]  next_seq_pc_pc_reg_fetch;
@@ -95,7 +96,7 @@ module top
     instr_mem I_MEM1 (
         .clk (clk),
         .addr_imem_ram_i (curr_pc_pc_reg_fetch),
-        .wr_instr_imem_ram_i (wr_instr_imem_top),
+        .wr_instr_imem_ram_i (),
         .wr_en_imem_ram_i (wr_en_imem_top),
         .read_instr_imem_ram_o (instr_pc_reg_fetch)
     );
@@ -263,7 +264,7 @@ module top
         .mem_to_reg_wb_pipe_reg_i (mem_to_reg_mem_wb),
         .rd_wb_pipe_reg_i (rd_mem_wb),
         .res_alu_wb_pipe_reg_i (res_alu_mem_wb),
-        .read_data_wb_pipe_reg_i (read_data_mem_wb),
+        .read_data_wb_pipe_reg_i (read_data_dmem_ram_mem_wb),
         .instr_retired_wb_pipe_reg_o(valid_wb_ret),
         .reg_wr_wb_pipe_reg_o (reg_wr_wb_ret),
         .mem_to_reg_wb_pipe_reg_o (mem_to_reg_wb_ret),
