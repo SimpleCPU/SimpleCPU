@@ -1,0 +1,7 @@
+all_instr
+alu_ops_basic
+alu_ops_stress
+i_type_instr_basic
+i_type_instr_stress
+j_type_instr_stress
+
