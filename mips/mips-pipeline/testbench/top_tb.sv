@@ -80,9 +80,6 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign rd_iss            = T1.rd_iss_ex;
 
     // EXECUTE
-    assign rd_val_ex         = T1.R1.reg_file[rd_ex];
-    assign rs_val_ex         = T1.R1.reg_file[rs_ex];
-    assign rt_val_ex         = T1.R1.reg_file[rt_ex];
 
     // MEM
 
@@ -90,6 +87,9 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign rt_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rt_val_wb;
     assign rd_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rd_val_wb;
     assign instr_retired_wb  = T1.instr_retired;
+    assign rd_val_wb         = T1.R1.reg_file[rd_wb];
+    assign rs_val_wb         = T1.R1.reg_file[rs_wb];
+    assign rt_val_wb         = T1.R1.reg_file[rt_wb];
 
     // RETIRED
 
@@ -154,9 +154,6 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         rs_mem          <=  rs_ex;
         rt_mem          <=  rt_ex;
         rd_mem          <=  rd_ex;
-        rs_val_mem      <=  rs_val_ex;
-        rt_val_mem      <=  rt_val_ex;
-        rd_val_mem      <=  rd_val_ex;
     end
 
     // WRITE-BACK
@@ -170,9 +167,6 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         rs_wb           <=  rs_mem;
         rt_wb           <=  rt_mem;
         rd_wb           <=  rd_mem;
-        rs_val_wb       <=  rs_val_mem;
-        rt_val_wb       <=  rt_val_mem;
-        rd_val_wb       <=  rd_val_mem;
     end
 
     always @ (posedge clk_tb)
