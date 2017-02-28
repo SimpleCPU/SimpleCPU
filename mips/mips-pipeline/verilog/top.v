@@ -169,7 +169,7 @@ module top
         .reset (reset),
         .w_en_rf_i (reg_wr_wb_ret),
         .w_data_rf_i (wr_data_rf_wb_ret),
-        .w_reg_rf_i (),
+        .w_reg_rf_i (rd_wb_ret),
         .r_reg_p1_rf_i (rs_iss_ex),
         .r_reg_p2_rf_i (rt_iss_ex),
         .r_data_p1_rf_o (r_data_p1_rf_iss_ex),
@@ -273,6 +273,7 @@ module top
         .read_data_wb_pipe_reg_o (read_data_wb_ret)
     );
 
+    assign instr_retired     = valid_wb_ret;
     assign wr_data_rf_wb_ret = (|rd_wb_ret) ? 
                                (mem_to_reg_wb_ret ? read_data_wb_ret : res_alu_wb_ret) :
                                32'h0;
