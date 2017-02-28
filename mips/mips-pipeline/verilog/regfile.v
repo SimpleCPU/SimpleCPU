@@ -14,8 +14,8 @@ module regfile
         output  wire [31:0]    r_data_p2_rf_o
     );
 
-    wire [31:0]    r_data_p1;
-    wire [31:0]    r_data_p2;
+    reg [31:0]    r_data_p1;
+    reg [31:0]    r_data_p2;
 
     assign r_data_p1_rf_o = r_data_p1;
     assign r_data_p2_rf_o = r_data_p2;
@@ -23,12 +23,15 @@ module regfile
     //Create the RegFile as a 2 dim array
     reg [31:0] reg_file [31:0];
     
-    always @ (posedge clk)
+    always @ (negedge clk)
         if (w_en_rf_i)
-        reg_file [w_reg_rf_i] <= w_data_rf_i;
+        reg_file [w_reg_rf_i] = w_data_rf_i;
 
-    assign r_data_p1 = reg_file [r_reg_p1_rf_i];
-    assign r_data_p2 = reg_file [r_reg_p2_rf_i];
+    always @ (negedge clk)
+    begin
+        r_data_p1 = reg_file [r_reg_p1_rf_i];
+        r_data_p2 = reg_file [r_reg_p2_rf_i];
+    end
 
 endmodule
 
