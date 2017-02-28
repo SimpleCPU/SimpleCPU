@@ -26,9 +26,9 @@ add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/jump_iss_e
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/branch_iss_ex
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/mem_read_iss_ex
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/mem_to_reg_iss_ex
-add wave -noupdate -expand -group ISSUE -radix hexadecimal -childformat {{{/top_tb/T1/alu_op_iss_ex[5]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[4]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[3]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[2]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[1]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[0]} -radix hexadecimal}} -subitemconfig {{/top_tb/T1/alu_op_iss_ex[5]} {-radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[4]} {-radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[3]} {-radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[2]} {-radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[1]} {-radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[0]} {-radix hexadecimal}} /top_tb/T1/alu_op_iss_ex
+add wave -noupdate -expand -group ISSUE -radix hexadecimal -childformat {{{/top_tb/T1/alu_op_iss_ex[5]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[4]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[3]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[2]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[1]} -radix hexadecimal} {{/top_tb/T1/alu_op_iss_ex[0]} -radix hexadecimal}} -subitemconfig {{/top_tb/T1/alu_op_iss_ex[5]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[4]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[3]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[2]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[1]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_op_iss_ex[0]} {-height 16 -radix hexadecimal}} /top_tb/T1/alu_op_iss_ex
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/mem_wr_iss_ex
-add wave -noupdate -expand -group ISSUE -radix hexadecimal -childformat {{{/top_tb/T1/alu_src_iss_ex[1]} -radix hexadecimal} {{/top_tb/T1/alu_src_iss_ex[0]} -radix hexadecimal}} -subitemconfig {{/top_tb/T1/alu_src_iss_ex[1]} {-radix hexadecimal} {/top_tb/T1/alu_src_iss_ex[0]} {-radix hexadecimal}} /top_tb/T1/alu_src_iss_ex
+add wave -noupdate -expand -group ISSUE -radix hexadecimal -childformat {{{/top_tb/T1/alu_src_iss_ex[2]} -radix hexadecimal} {{/top_tb/T1/alu_src_iss_ex[1]} -radix hexadecimal} {{/top_tb/T1/alu_src_iss_ex[0]} -radix hexadecimal}} -subitemconfig {{/top_tb/T1/alu_src_iss_ex[2]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_src_iss_ex[1]} {-height 16 -radix hexadecimal} {/top_tb/T1/alu_src_iss_ex[0]} {-height 16 -radix hexadecimal}} /top_tb/T1/alu_src_iss_ex
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/reg_wr_iss_ex
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/sign_ext_iss_ex
 add wave -noupdate -expand -group ISSUE -radix hexadecimal /top_tb/T1/sign_imm_iss_ex
@@ -73,8 +73,20 @@ add wave -noupdate -group WRITE-BACK -radix hexadecimal /top_tb/T1/rd_wb_ret
 add wave -noupdate -group WRITE-BACK -radix hexadecimal /top_tb/T1/res_alu_wb_ret
 add wave -noupdate -group WRITE-BACK -radix hexadecimal /top_tb/T1/read_data_wb_ret
 add wave -noupdate -group WRITE-BACK -radix hexadecimal /top_tb/T1/wr_data_rf_wb_ret
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/clk
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/r_data_p1
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/r_data_p1_rf_o
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/r_data_p2
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/r_data_p2_rf_o
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/r_reg_p1_rf_i
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/r_reg_p2_rf_i
+add wave -noupdate -radix hexadecimal -childformat {{{/top_tb/T1/R1/reg_file[31]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[30]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[29]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[28]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[27]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[26]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[25]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[24]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[23]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[22]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[21]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[20]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[19]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[18]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[17]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[16]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[15]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[14]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[13]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[12]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[11]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[10]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[9]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[8]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[7]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[6]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[5]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[4]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[3]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[2]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[1]} -radix hexadecimal} {{/top_tb/T1/R1/reg_file[0]} -radix hexadecimal}} -expand -subitemconfig {{/top_tb/T1/R1/reg_file[31]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[30]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[29]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[28]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[27]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[26]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[25]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[24]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[23]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[22]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[21]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[20]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[19]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[18]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[17]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[16]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[15]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[14]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[13]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[12]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[11]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[10]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[9]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[8]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[7]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[6]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[5]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[4]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[3]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[2]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[1]} {-radix hexadecimal} {/top_tb/T1/R1/reg_file[0]} {-radix hexadecimal}} /top_tb/T1/R1/reg_file
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/reset
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/w_data_rf_i
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/w_en_rf_i
+add wave -noupdate -radix hexadecimal /top_tb/T1/R1/w_reg_rf_i
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {110 ps} 0}
+WaveRestoreCursors {{Cursor 1} {580 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 325
 configure wave -valuecolwidth 243
@@ -90,4 +102,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {202 ps}
+WaveRestoreZoom {379 ps} {581 ps}
