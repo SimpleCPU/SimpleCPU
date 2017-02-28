@@ -138,7 +138,7 @@ module top
     );
     assign rd_iss_ex        = reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
     assign rs_iss_ex        = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
-    assign valid_iss_ex     = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex); 
+    assign valid_iss_ex     = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex) & ~reset; 
 
     control C1 (
         .instr_op_ctl_i (op_iss_ex),

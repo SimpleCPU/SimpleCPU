@@ -22,7 +22,7 @@ module mem_pipe_reg
     reg        reg_wr_mem_pipe_reg;
     reg        mem_to_reg_mem_pipe_reg;
     reg        mem_wr_mem_pipe_reg;
-    reg        rd_mem_pipe_reg;
+    reg[4:0]   rd_mem_pipe_reg;
     reg[31:0]  res_alu_mem_pipe_reg;
 
     assign valid_mem_pipe_reg_o          =  valid_mem_pipe_reg;
