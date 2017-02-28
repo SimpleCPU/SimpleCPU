@@ -96,7 +96,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         .reset (reset_tb)
     );
 
-    localparam T = 20;
+    localparam T = 40;
     
     initial
     begin
