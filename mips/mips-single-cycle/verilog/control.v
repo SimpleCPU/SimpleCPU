@@ -137,7 +137,7 @@ module control
             `SLL    :   controls = 18'b1_1_0_0_0_0_000010_0_010_1_0; // R
             default :   controls = 18'b0_1_0_0_0_0_000000_0_000_1_0;
           endcase
-        default :   controls = 17'b0_1_0_0_0_0_000000_0_0_0_0;
+        default :   controls = 18'b0_1_0_0_0_0_000000_0_0_0_0;
       endcase
     end
     
