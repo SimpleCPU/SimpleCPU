@@ -62,10 +62,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     logic[31:0]   rt_val_wb;
     logic[31:0]   rd_val_dest_wb;
     logic[31:0]   rt_val_dest_wb;
-    logic         instr_retired_wb;
-    // Retired
-    logic         instr_retired_ret;
-    
+    logic         instr_retired_wb;  
 
     // FETCH
     assign pc_fetch          = T1.curr_pc_pc_reg_fetch;
