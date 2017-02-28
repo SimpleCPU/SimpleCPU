@@ -13,7 +13,7 @@ module control
         output  wire        mem_to_reg_ctl_o,
         output  wire[5:0]   alu_op_ctl_o,
         output  wire        mem_wr_ctl_o,
-        output  wire[1:0]   alu_src_ctl_o,
+        output  wire[2:0]   alu_src_ctl_o,
         output  wire        reg_wr_ctl_o,
         output  wire        sign_ext_ctl_o
     );
@@ -26,11 +26,11 @@ module control
     wire       mem_to_reg_ctl;
     wire[5:0]  alu_op_ctl;
     wire       mem_wr_ctl;
-    wire[1:0]  alu_src_ctl;
+    wire[2:0]  alu_src_ctl;
     wire       reg_wr_ctl;
     wire       sign_ext_ctl;
 
-    reg[16:0]   controls;
+    reg[17:0]   controls;
 
     assign  reg_src_ctl_o        = reg_src_ctl;
     assign  reg_dst_ctl_o        = reg_dst_ctl;

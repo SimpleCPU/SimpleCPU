@@ -36,7 +36,7 @@ module top
     wire        mem_to_reg_iss_ex;
     wire[5:0]   alu_op_iss_ex;
     wire        mem_wr_iss_ex;
-    wire[1:0]   alu_src_iss_ex;
+    wire[2:0]   alu_src_iss_ex;
     wire        reg_wr_iss_ex;
     wire        sign_ext_iss_ex;
     wire[31:0]  next_beq_pc_iss_ex;
@@ -48,7 +48,7 @@ module top
     wire        mem_to_reg_ex_pipe_reg;
     wire        mem_wr_ex_mem;
     wire[5:0]   alu_op_ex_mem;
-    wire        alu_src_ex_mem;
+    wire[2:0]   alu_src_ex_mem;
     wire        reg_dst_ex_mem;
     wire[4:0]   rt_ex_mem;
     wire[4:0]   rs_ex_mem;

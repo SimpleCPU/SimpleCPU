@@ -10,7 +10,7 @@ module ex_pipe_reg
         input   wire        mem_to_reg_ex_pipe_reg_i,
         input   wire        mem_wr_ex_pipe_reg_i,
         input   wire[5:0]   alu_op_ex_pipe_reg_i,
-        input   wire[1:0]   alu_src_ex_pipe_reg_i,
+        input   wire[2:0]   alu_src_ex_pipe_reg_i,
         input   wire        reg_dst_ex_pipe_reg_i,
         input   wire[4:0]   rt_ex_pipe_reg_i,
         input   wire[4:0]   rs_ex_pipe_reg_i,
@@ -23,7 +23,7 @@ module ex_pipe_reg
         output  wire        mem_to_reg_ex_pipe_reg_o,
         output  wire        mem_wr_ex_pipe_reg_o,
         output  wire[5:0]   alu_op_ex_pipe_reg_o,
-        output  wire        alu_src_ex_pipe_reg_o,
+        output  wire[2:0]   alu_src_ex_pipe_reg_o,
         output  wire        reg_dst_ex_pipe_reg_o,
         output  wire[4:0]   rt_ex_pipe_reg_o,
         output  wire[4:0]   rs_ex_pipe_reg_o,
@@ -38,7 +38,7 @@ module ex_pipe_reg
     reg        mem_to_reg_ex_pipe_reg;
     reg        mem_wr_ex_pipe_reg;
     reg[5:0]   alu_op_ex_pipe_reg;
-    reg[1:0]   alu_src_ex_pipe_reg;
+    reg[2:0]   alu_src_ex_pipe_reg;
     reg        reg_dst_ex_pipe_reg;
     reg[4:0]   rt_ex_pipe_reg;
     reg[4:0]   rs_ex_pipe_reg;
