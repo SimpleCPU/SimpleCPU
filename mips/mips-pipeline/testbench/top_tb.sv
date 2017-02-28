@@ -62,8 +62,9 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     logic[31:0]   rt_val_wb;
     logic[31:0]   rd_val_dest_wb;
     logic[31:0]   rt_val_dest_wb;
+    logic         instr_retired_wb;
     // Retired
-    logic         instr_retired_top;
+    logic         instr_retired_ret;
     
 
     // FETCH
@@ -88,6 +89,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     // WRITE-BACK
     assign rt_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rt_val_wb;
     assign rd_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rd_val_wb;
+    assign instr_retired_wb  = T1.instr_retired;
 
     // RETIRED
 
@@ -165,16 +167,16 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         is_r_type_wb    <=  is_r_type_mem;
         is_i_type_wb    <=  is_i_type_mem;
         is_j_type_wb    <=  is_j_type_mem;
-        rs_wb           <=  rs_ex;
-        rt_wb           <=  rt_ex;
-        rd_wb           <=  rd_ex;
+        rs_wb           <=  rs_mem;
+        rt_wb           <=  rt_mem;
+        rd_wb           <=  rd_mem;
         rs_val_wb       <=  rs_val_mem;
         rt_val_wb       <=  rt_val_mem;
         rd_val_wb       <=  rd_val_mem;
     end
 
-
-    always @ (posedge instr_retired_top)
+    always @ (posedge clk_tb)
+    if (instr_retired_wb)
     begin
         run (1);
         if (is_r_type_wb) 
@@ -191,7 +193,8 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
             $fatal ("Incorrect instruction opcode");
     end
 
-    always @ (posedge instr_retired_top)
+    always @ (posedge clk_tb)
+    if (instr_retired_wb)
     begin
         if ((instr_wb == 'hc) && (T1.R1.reg_file[2] == 'ha))
         begin
