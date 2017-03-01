@@ -123,7 +123,7 @@ module top
 
     decode D1 (
         .instr_dec_i (instr_iss_ex),
-        .sign_ext_i (sign_ext_iss),
+        .sign_ext_i (sign_ext_iss_ex),
         .rt_dec_o (rt_iss_ex),
         .rs_dec_o (rs_dec_iss_ex),
         .rd_dec_o (rd_dec_iss_ex),
@@ -212,10 +212,10 @@ module top
         .sign_imm_ex_pipe_reg_o (sign_imm_ex_mem)
     );
 
-    assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? r_data_p1_rf_ex_mem :
+    assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? res_alu_mem_wb :
                                   fwd_r_data_p1_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p1_rf_ex_mem;
-    assign r_data_p2_alu_ex_mem = fwd_r_data_p2_alu_ex[1] ? r_data_p2_rf_ex_mem :
+    assign r_data_p2_alu_ex_mem = fwd_r_data_p2_alu_ex[1] ? res_alu_mem_wb :
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
 
