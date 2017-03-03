@@ -173,12 +173,12 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         if (is_r_type_wb) 
         begin
             if (!compare_r (pc_wb, instr_wb, rd_wb, rs_wb, rt_wb, rd_val_dest_wb, rs_val_wb, rt_val_wb))
-                $finish;
+                $fatal(1, "TEST FAILED\n");
         end
         else if (is_i_type_wb)
         begin
             if (!compare_i (pc_wb, instr_wb, rs_wb, rt_wb, rs_val_wb, rt_val_dest_wb))
-                $finish;
+                $fatal(1, "TEST FAILED\n");
         end
         else
             $fatal ("Incorrect instruction opcode");
