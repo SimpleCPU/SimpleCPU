@@ -18,6 +18,7 @@ module ex_pipe_reg
         input   wire[31:0]  r_data_p1_ex_pipe_reg_i,
         input   wire[31:0]  r_data_p2_ex_pipe_reg_i,
         input   wire[31:0]  sign_imm_ex_pipe_reg_i,
+        input   wire[5:0]   shamt_ex_pipe_reg_i,
         output  wire        valid_ex_pipe_reg_o,
         output  wire        reg_wr_ex_pipe_reg_o,
         output  wire        mem_to_reg_ex_pipe_reg_o,
@@ -30,7 +31,8 @@ module ex_pipe_reg
         output  wire[4:0]   rd_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p1_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p2_ex_pipe_reg_o,
-        output  wire[31:0]  sign_imm_ex_pipe_reg_o
+        output  wire[31:0]  sign_imm_ex_pipe_reg_o,
+        output  wire[5:0]   shamt_ex_pipe_reg_o
     );
 
     reg        valid_ex_pipe_reg;
@@ -46,6 +48,7 @@ module ex_pipe_reg
     reg[31:0]  r_data_p1_ex_pipe_reg;
     reg[31:0]  r_data_p2_ex_pipe_reg;
     reg[31:0]  sign_imm_ex_pipe_reg;
+    reg[5:0]   shamt_ex_pipe_reg;
 
     assign valid_ex_pipe_reg_o          =  valid_ex_pipe_reg;
     assign reg_wr_ex_pipe_reg_o         =  reg_wr_ex_pipe_reg;
@@ -60,6 +63,7 @@ module ex_pipe_reg
     assign r_data_p1_ex_pipe_reg_o      =  r_data_p1_ex_pipe_reg;
     assign r_data_p2_ex_pipe_reg_o      =  r_data_p2_ex_pipe_reg;
     assign sign_imm_ex_pipe_reg_o       =  sign_imm_ex_pipe_reg;
+    assign shamt_ex_pipe_reg_o          =  shamt_ex_pipe_reg;
 
     always @(posedge clk or posedge reset)
     if (reset || clr)
@@ -77,6 +81,7 @@ module ex_pipe_reg
         r_data_p1_ex_pipe_reg      <=  0;
         r_data_p2_ex_pipe_reg      <=  0;
         sign_imm_ex_pipe_reg       <=  0;
+        shamt_ex_pipe_reg          <=  0;
     end
     else
     begin
@@ -93,6 +98,7 @@ module ex_pipe_reg
         r_data_p1_ex_pipe_reg      <=  r_data_p1_ex_pipe_reg_i;
         r_data_p2_ex_pipe_reg      <=  r_data_p2_ex_pipe_reg_i;
         sign_imm_ex_pipe_reg       <=  sign_imm_ex_pipe_reg_i;
+        shamt_ex_pipe_reg          <=  shamt_ex_pipe_reg_i;
     end
 
 endmodule
