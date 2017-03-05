@@ -28,14 +28,14 @@ module hazard_unit
     assign  fwd_p1_ex_mem_hz_o  = fwd_p1_ex_mem_hz; 
     assign  fwd_p2_ex_mem_hz_o  = fwd_p2_ex_mem_hz; 
 
-    assign  fwd_p1_ex_mem_hz = (reg_wr_mem_wb_hz_i &
+    assign  fwd_p1_ex_mem_hz = (reg_wr_mem_wb_hz_i & |rd_mem_wb_hz_i &
                                (rd_mem_wb_hz_i == rs_ex_mem_hz_i)) ? 2'b10 
-                               : (reg_wr_wb_ret_hz_i &                         
+                               : (reg_wr_wb_ret_hz_i &  |rd_mem_wb_hz_i &                       
                                  (rd_wb_ret_hz_i == rs_ex_mem_hz_i)) ? 2'b01 
                                  : 2'b00;
-    assign  fwd_p2_ex_mem_hz = (reg_wr_mem_wb_hz_i &
+    assign  fwd_p2_ex_mem_hz = (reg_wr_mem_wb_hz_i & |rd_mem_wb_hz_i &
                                (rd_mem_wb_hz_i == rt_ex_mem_hz_i)) ? 2'b10 
-                               : (reg_wr_wb_ret_hz_i &                         
+                               : (reg_wr_wb_ret_hz_i & |rd_mem_wb_hz_i &
                                  (rd_wb_ret_hz_i == rt_ex_mem_hz_i)) ? 2'b01 
                                  : 2'b00;
     assign stall_fetch_hz = 1'b0;
