@@ -43,7 +43,6 @@ module top
     wire        next_beq_pc_carry_iss_ex;
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
-    wire[31:0]  r_data_p2_iss_ex;
     wire        reg_wr_ex_mem;
     wire        mem_to_reg_ex_pipe_reg;
     wire        mem_wr_ex_mem;
@@ -55,12 +54,14 @@ module top
     wire[4:0]   rd_ex_mem;
     wire[31:0]  r_data_p1_rf_ex_mem;
     wire[31:0]  r_data_p2_rf_ex_mem;
+    wire[31:0]  r_data_p2_ex_mem;
     wire[31:0]  sign_imm_ex_mem;
     wire[31:0]  r_data_p1_alu_ex_mem;
     wire[31:0]  r_data_p2_alu_ex_mem;
     wire[31:0]  res_alu_ex_mem;
     wire        z_ex_mem;
     wire        n_ex_mem;
+    wire[5:0]   shamt_ex_mem;
     wire        reg_wr_mem_wb;
     wire        mem_to_reg_mem_wb;
     wire        mem_wr_mem_wb;
@@ -173,12 +174,9 @@ module top
         .r_reg_p1_rf_i (rs_iss_ex),
         .r_reg_p2_rf_i (rt_iss_ex),
         .r_data_p1_rf_o (r_data_p1_rf_iss_ex),
-        .r_data_p2_rf_o (r_data_p2_iss_ex)
+        .r_data_p2_rf_o (r_data_p2_rf_iss_ex)
     );
     
-    assign r_data_p2_rf_iss_ex = alu_src_iss_ex[1] ? {{27{1'b0}}, shamt_iss_ex} : 
-                                 alu_src_iss_ex[0] ? sign_imm_iss_ex : r_data_p2_iss_ex;
-
     // EXECUTE STAGE
     ex_pipe_reg ISS_EX_REG (
         .clk (clk),
@@ -197,6 +195,7 @@ module top
         .r_data_p1_ex_pipe_reg_i (r_data_p1_rf_iss_ex),
         .r_data_p2_ex_pipe_reg_i (r_data_p2_rf_iss_ex),
         .sign_imm_ex_pipe_reg_i (sign_imm_iss_ex),
+        .shamt_ex_pipe_reg_i (shamt_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
         .reg_wr_ex_pipe_reg_o (reg_wr_ex_mem),
         .mem_to_reg_ex_pipe_reg_o (mem_to_reg_ex_mem),
@@ -209,15 +208,20 @@ module top
         .rd_ex_pipe_reg_o (rd_ex_mem),
         .r_data_p1_ex_pipe_reg_o (r_data_p1_rf_ex_mem),
         .r_data_p2_ex_pipe_reg_o (r_data_p2_rf_ex_mem),
-        .sign_imm_ex_pipe_reg_o (sign_imm_ex_mem)
+        .sign_imm_ex_pipe_reg_o (sign_imm_ex_mem),
+        .shamt_ex_pipe_reg_o (shamt_ex_mem)
     );
 
     assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? res_alu_mem_wb :
                                   fwd_r_data_p1_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p1_rf_ex_mem;
-    assign r_data_p2_alu_ex_mem = fwd_r_data_p2_alu_ex[1] ? res_alu_mem_wb :
+    assign r_data_p2_ex_mem     = fwd_r_data_p2_alu_ex[1] ? res_alu_mem_wb :
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
+    
+    assign r_data_p2_alu_ex_mem     = alu_src_ex_mem[1] ? {{27{1'b0}}, shamt_ex_mem} : 
+                                 alu_src_ex_mem[0] ? sign_imm_ex_mem : r_data_p2_ex_mem;
+
 
     alu A1 (
         .opr_a_alu_i (r_data_p1_alu_ex_mem),
