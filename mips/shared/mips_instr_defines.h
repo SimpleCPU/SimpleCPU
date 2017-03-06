@@ -8,6 +8,8 @@
 #define ANDI    0xc
 #define BVAR    0x1
 #define BEQ     0x4
+// The next four instructions specify the RT value
+// instead of the opcode/funct value
 #define BGEZ    0x1
 #define BGEZAL  0x11
 #define BLTZ    0x0
