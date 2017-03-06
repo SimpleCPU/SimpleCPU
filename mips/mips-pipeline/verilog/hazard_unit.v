@@ -27,7 +27,10 @@ module hazard_unit
     assign  flush_ex_hz_o       = flush_ex_hz;
     assign  fwd_p1_ex_mem_hz_o  = fwd_p1_ex_mem_hz; 
     assign  fwd_p2_ex_mem_hz_o  = fwd_p2_ex_mem_hz; 
-
+ 
+    // Forward the data only when we are writing to a non-zero register
+    // in the WB/MEM stage and the same register is being read at the
+    // EX stage
     assign  fwd_p1_ex_mem_hz = (reg_wr_mem_wb_hz_i & |rd_mem_wb_hz_i &
                                (rd_mem_wb_hz_i == rs_ex_mem_hz_i)) ? 2'b10 
                                : (reg_wr_wb_ret_hz_i &  |rd_mem_wb_hz_i &                       
