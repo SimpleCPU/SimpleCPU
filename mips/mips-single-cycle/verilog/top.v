@@ -154,7 +154,7 @@ module top
         .read_data_dmem_ram_o (read_data_dmem_ram_top)
     );
 
-    assign wr_data_rf_top = (use_link_reg_top) ? (curr_pc_top + 32'h4) :
+    assign wr_data_rf_top = (use_link_reg_top) ? (next_seq_pc_top) :
                                                (|rd_top) ? (mem_to_reg_top ? read_data_dmem_ram_top : 
                                                                              res_alu_top) :
                                                          32'h0;
