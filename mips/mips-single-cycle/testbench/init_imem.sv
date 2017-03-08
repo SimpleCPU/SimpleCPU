@@ -10,8 +10,8 @@ function void init_imem (string test_name);
     instr_hex_s     = {test_name, ".hex"};
     pc_values_hex_s = {test_name, "_pc.hex"};
 
-    $readmemh (instr_hex_s, instr_hex, 0, 999);
-    $readmemh (pc_values_hex_s, pc_val, 0, 999);
+    $readmemh (instr_hex_s, instr_hex, 0);
+    $readmemh (pc_values_hex_s, pc_val, 0);
     
     for (int i = 0; instr_hex[i]; i++) 
     begin
