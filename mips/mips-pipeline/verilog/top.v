@@ -13,6 +13,15 @@ module top
     wire        next_seq_pc_carry_pc_reg_fetch;
     wire[31:0]  instr_pc_reg_fetch;
     wire[31:0]  next_seq_pc_iss_ex;
+    wire[31:0]  curr_pc_top;
+    wire[31:0]  next_pc_top;
+    wire[31:0]  next_seq_pc_top;
+    wire[31:0]  next_beq_pc_top;
+    wire        next_seq_pc_carry_top;
+    wire        next_beq_pc_carry_top;
+    wire[31:0]  next_brn_eq_pc_top;
+    wire[31:0]  next_jmp_pc_top;
+
     wire[31:0]  instr_iss_ex;
     wire        sign_ext_iss;
     wire[4:0]   rt_iss_ex; 
@@ -177,6 +186,18 @@ module top
         .r_data_p2_rf_o (r_data_p2_rf_iss_ex)
     );
     
+    assign next_brn_eq_pc_top = (branch_top & ((op_top == `BEQ))  & z_top) |
+                                (branch_top & ((op_top == `BVAR)  & ((rt_top == `BGEZ)| 
+                                              (rt_top == `BGEZAL))) & (~n_top | z_top)) |
+                                (branch_top & ((op_top == `BLEZ)) & (n_top  | z_top)) |
+                                (branch_top & ((op_top == `BGTZ)) & ~(n_top | z_top)) |
+                                (branch_top & ((op_top == `BVAR)  & ((rt_top == `BLTZ) | 
+                                              (rt_top == `BLTZAL))) & (n_top & ~z_top))|
+                                (branch_top & ((op_top == `BNE))  & ~z_top) ? next_beq_pc_top : next_seq_pc_top;
+                                
+    assign next_jmp_pc_top = {next_seq_pc_top[31:28], instr_top[25:0] << 2};
+    assign next_pc_top = jump_top ? next_jmp_pc_top : next_brn_eq_pc_top;
+
     // EXECUTE STAGE
     ex_pipe_reg ISS_EX_REG (
         .clk (clk),
