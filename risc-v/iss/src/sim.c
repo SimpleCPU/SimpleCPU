@@ -901,8 +901,6 @@ int check_ls_addr (int rs, int imm) {
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = ((unsigned)CURRENT_STATE.REGS[rs] + (unsigned)imm);
     //printf("[LS] RS is %x\tIMM is %x\t ADDR is %x\n", CURRENT_STATE.REGS[rs], imm, addr);
-    /* For now just check if the addr > 0   */
-    /* if true, then the instruction is ok  */
     if ((addr > MEM_DATA_START) && (addr < (MEM_DATA_START + MEM_DATA_SIZE))) {
         return 1;
     }
