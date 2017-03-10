@@ -245,7 +245,6 @@ void make_room () {
 }
 
 void gen_end_seq () {
-    //FILE * dump;
     make_room ();
     int opcode = 0x2402000a;  // ADDU R10, R0, 0xa
     update_cpu (CURRENT_STATE.PC, opcode);
@@ -258,8 +257,6 @@ void gen_end_seq () {
     update_cpu (CURRENT_STATE.PC, opcode);
     load_instr_opcode ((uint32_t)opcode);
     run (1);
-    //dump = fopen ("dump", "w");
-    //rdump (dump);
 }
 
 void gen_instr_hex (int num_r, int num_i, int num_j) {
