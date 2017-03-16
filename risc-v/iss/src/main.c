@@ -305,7 +305,7 @@ void sim(char *instr_hex, char *pc_values_hex) {
   //}
 
   
-  printf("MIPS Simulator\n\n");
+  printf("RISC-V Simulator\n\n");
 
   initialize(instr_hex, 1, pc_values_hex);
 
