@@ -213,15 +213,15 @@ int gen_j (int address) {
 
 /* Function to check if there is enough      */
 /* space available to generate the instr     */
-/* If need more space the function would     */
-/* insert a J instr to a somewhat free space */
+/* If more space is needde the function      */
+/* inserts a Jump to a somewhat free space   */
 void make_room () {
     int i;
     int opcode;
     // There should be space for at least
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
-    if (((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) &&
+    if (((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4] == 0)) &&
         !(CURRENT_STATE.PC == 0xFFC)) {
         return;
     }
