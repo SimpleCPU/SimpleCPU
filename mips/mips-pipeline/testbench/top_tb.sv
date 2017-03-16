@@ -69,6 +69,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign instr_fetch       = T1.instr_pc_reg_fetch;
 
     // ISSUE
+    // signals tapped from the ISS stage
     assign is_r_type_iss     = T1.is_r_type_iss_ex;
     assign is_i_type_iss     = T1.is_i_type_iss_ex;
     assign is_j_type_iss     = T1.is_j_type_iss_ex;
@@ -76,19 +77,14 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign rt_iss            = T1.rt_iss_ex;
     assign rd_iss            = T1.rd_iss_ex;
 
-    // EXECUTE
-
-    // MEM
-
     // WRITE-BACK
+    // signals tapped from the WB stage
     assign rt_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rt_val_wb;
     assign rd_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rd_val_wb;
     assign instr_retired_wb  = T1.instr_retired;
     assign rd_val_wb         = T1.R1.reg_file[rd_wb];
     assign rs_val_wb         = T1.R1.reg_file[rs_wb];
     assign rt_val_wb         = T1.R1.reg_file[rt_wb];
-
-    // RETIRED
 
     top T1 (
         .clk (clk_tb),
