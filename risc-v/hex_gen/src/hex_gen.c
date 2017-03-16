@@ -213,15 +213,15 @@ int gen_j (int address) {
 
 /* Function to check if there is enough      */
 /* space available to generate the instr     */
-/* If need more space the function would     */
-/* insert a J instr to a somewhat free space */
+/* If more space is needde the function      */
+/* inserts a Jump to a somewhat free space   */
 void make_room () {
     int i;
     int opcode;
     // There should be space for at least
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
-    if (((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) &&
+    if (((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4] == 0)) &&
         !(CURRENT_STATE.PC == 0xFFC)) {
         return;
     }
@@ -313,8 +313,6 @@ int main (int argc, char* argv[]) {
     int num_i = 0;      /* number of i-type instructions    */
     int num_j = 0;      /* number of j-type instructions    */
     int n = 0;          /* number of instructions           */
-    //FILE *pc_val;       /* output file pointer for PC values*/
-    //FILE *instr_hex;    /* output file pointer for instr hex*/
     /* Parse argv array and extract all the information     */
     /* argv array is null terminated                        */
     int i = 0;
