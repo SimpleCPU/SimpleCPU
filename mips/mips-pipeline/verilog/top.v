@@ -12,15 +12,11 @@ module top
     wire[31:0]  next_seq_pc_pc_reg_fetch;
     wire        next_seq_pc_carry_pc_reg_fetch;
     wire[31:0]  instr_pc_reg_fetch;
+
     wire[31:0]  next_seq_pc_iss_ex;
-    wire[31:0]  curr_pc_top;
-    wire[31:0]  next_pc_top;
-    wire[31:0]  next_seq_pc_top;
-    wire[31:0]  next_beq_pc_top;
-    wire        next_seq_pc_carry_top;
-    wire        next_beq_pc_carry_top;
-    wire[31:0]  next_brn_eq_pc_top;
-    wire[31:0]  next_jmp_pc_top;
+    wire[31:0]  next_brn_eq_pc_iss_ex;
+    wire        next_brn_eq_pc_carry_iss_ex;
+    wire[31:0]  next_jmp_pc_iss_ex;
 
     wire[31:0]  instr_iss_ex;
     wire        sign_ext_iss;
@@ -48,10 +44,13 @@ module top
     wire[2:0]   alu_src_iss_ex;
     wire        reg_wr_iss_ex;
     wire        sign_ext_iss_ex;
-    wire[31:0]  next_beq_pc_iss_ex;
-    wire        next_beq_pc_carry_iss_ex;
+    wire[31:0]  next_brn_pc_iss_ex;
+    wire        next_brn_pc_carry_iss_ex;
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
+    wire[5:0]   op_ex_mem;
+    wire        branch_ex_mem;
+    wire        branch_taken_ex_mem;
     wire        reg_wr_ex_mem;
     wire        mem_to_reg_ex_pipe_reg;
     wire        mem_wr_ex_mem;
@@ -64,6 +63,7 @@ module top
     wire[31:0]  r_data_p1_rf_ex_mem;
     wire[31:0]  r_data_p2_rf_ex_mem;
     wire[31:0]  r_data_p2_ex_mem;
+    wire[31:0]  next_brn_eq_pc_ex_mem;
     wire[31:0]  sign_imm_ex_mem;
     wire[31:0]  r_data_p1_alu_ex_mem;
     wire[31:0]  r_data_p2_alu_ex_mem;
@@ -88,6 +88,7 @@ module top
     wire        stall_iss;
     wire        stall_fetch;
     wire        flush_ex;
+    wire        flush_mem;
     wire        instr_retired;
     wire        valid_iss_ex;
     wire        valid_ex_mem;
@@ -118,7 +119,10 @@ module top
         .sum (next_seq_pc_pc_reg_fetch),
         .carry (next_seq_pc_carry_pc_reg_fetch)
     );
-    assign next_pc_fetch_iss    = next_seq_pc_pc_reg_fetch;
+    
+    assign next_pc_fetch_iss = jump_iss_ex ? next_jmp_pc_iss_ex : 
+                               branch_taken_ex_mem ? next_brn_eq_pc_ex_mem : 
+                               next_seq_pc_pc_reg_fetch;
 
     // ISSUE STAGE
     iss_pipe_reg FETCH_ISS_REG (
@@ -170,8 +174,8 @@ module top
         .op1 (next_seq_pc_iss_ex),
         .op2 (sign_imm_iss_ex << 2),
         .cin (1'b0),
-        .sum (next_beq_pc_iss_ex),
-        .carry (next_beq_pc_carry_iss_ex)
+        .sum (next_brn_eq_pc_iss_ex),
+        .carry (next_brn_eq_pc_carry_iss_ex)
     );
 
     regfile R1 (
@@ -186,24 +190,16 @@ module top
         .r_data_p2_rf_o (r_data_p2_rf_iss_ex)
     );
     
-    assign next_brn_eq_pc_top = (branch_top & ((op_top == `BEQ))  & z_top) |
-                                (branch_top & ((op_top == `BVAR)  & ((rt_top == `BGEZ)| 
-                                              (rt_top == `BGEZAL))) & (~n_top | z_top)) |
-                                (branch_top & ((op_top == `BLEZ)) & (n_top  | z_top)) |
-                                (branch_top & ((op_top == `BGTZ)) & ~(n_top | z_top)) |
-                                (branch_top & ((op_top == `BVAR)  & ((rt_top == `BLTZ) | 
-                                              (rt_top == `BLTZAL))) & (n_top & ~z_top))|
-                                (branch_top & ((op_top == `BNE))  & ~z_top) ? next_beq_pc_top : next_seq_pc_top;
-                                
-    assign next_jmp_pc_top = {next_seq_pc_top[31:28], instr_top[25:0] << 2};
-    assign next_pc_top = jump_top ? next_jmp_pc_top : next_brn_eq_pc_top;
+    assign next_jmp_pc_iss_ex = {next_seq_pc_iss_ex[31:28], instr_iss_ex[25:0] << 2};
 
     // EXECUTE STAGE
     ex_pipe_reg ISS_EX_REG (
         .clk (clk),
         .reset (reset),
-        .clr (),
+        .clr (flush_ex),
         .valid_ex_pipe_reg_i (valid_iss_ex),
+        .op_ex_pipe_reg_i (op_iss_ex),
+        .branch_ex_pipe_reg_i (branch_iss_ex),
         .reg_wr_ex_pipe_reg_i (reg_wr_iss_ex),
         .mem_to_reg_ex_pipe_reg_i (mem_to_reg_iss_ex),
         .mem_wr_ex_pipe_reg_i (mem_wr_iss_ex),
@@ -215,9 +211,12 @@ module top
         .rd_ex_pipe_reg_i (rd_iss_ex),
         .r_data_p1_ex_pipe_reg_i (r_data_p1_rf_iss_ex),
         .r_data_p2_ex_pipe_reg_i (r_data_p2_rf_iss_ex),
+        .brn_eq_pc_ex_pipe_reg_i (next_brn_eq_pc_iss_ex),
         .sign_imm_ex_pipe_reg_i (sign_imm_iss_ex),
         .shamt_ex_pipe_reg_i (shamt_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
+        .op_ex_pipe_reg_o (op_ex_mem),
+        .branch_ex_pipe_reg_o (branch_ex_mem),
         .reg_wr_ex_pipe_reg_o (reg_wr_ex_mem),
         .mem_to_reg_ex_pipe_reg_o (mem_to_reg_ex_mem),
         .mem_wr_ex_pipe_reg_o (mem_wr_ex_mem),
@@ -229,6 +228,7 @@ module top
         .rd_ex_pipe_reg_o (rd_ex_mem),
         .r_data_p1_ex_pipe_reg_o (r_data_p1_rf_ex_mem),
         .r_data_p2_ex_pipe_reg_o (r_data_p2_rf_ex_mem),
+        .brn_eq_pc_ex_pipe_reg_o (next_brn_eq_pc_ex_mem),
         .sign_imm_ex_pipe_reg_o (sign_imm_ex_mem),
         .shamt_ex_pipe_reg_o (shamt_ex_mem)
     );
@@ -240,10 +240,19 @@ module top
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
     
-    assign r_data_p2_alu_ex_mem     = alu_src_ex_mem[1] ? {{27{1'b0}}, shamt_ex_mem} : 
-                                 alu_src_ex_mem[0] ? sign_imm_ex_mem : r_data_p2_ex_mem;
+    assign r_data_p2_alu_ex_mem = alu_src_ex_mem[1] ? {{27{1'b0}}, shamt_ex_mem} : 
+                                  alu_src_ex_mem[0] ? sign_imm_ex_mem : r_data_p2_ex_mem;
 
 
+    assign branch_taken_ex_mem  = (branch_ex_mem & ((op_ex_mem == `BEQ))  & z_ex_mem) |
+                                  (branch_ex_mem & ((op_ex_mem == `BVAR)  & ((rt_ex_mem == `BGEZ)| 
+                                                    (rt_ex_mem == `BGEZAL))) & (~n_ex_mem | z_ex_mem)) |
+                                  (branch_ex_mem & ((op_ex_mem == `BLEZ)) & (n_ex_mem  | z_ex_mem)) |
+                                  (branch_ex_mem & ((op_ex_mem == `BGTZ)) & ~(n_ex_mem | z_ex_mem)) |
+                                  (branch_ex_mem & ((op_ex_mem == `BVAR)  & ((rt_ex_mem == `BLTZ) | 
+                                                    (rt_ex_mem == `BLTZAL))) & (n_ex_mem & ~z_ex_mem))|
+                                  (branch_ex_mem & ((op_ex_mem == `BNE))  & ~z_ex_mem);
+                                
     alu A1 (
         .opr_a_alu_i (r_data_p1_alu_ex_mem),
         .opr_b_alu_i (r_data_p2_alu_ex_mem),
@@ -257,6 +266,7 @@ module top
     mem_pipe_reg EX_MEM_REG (
         .clk (clk),
         .reset (reset),
+        .clr (flush_mem),
         .valid_mem_pipe_reg_i (valid_ex_mem),
         .reg_wr_mem_pipe_reg_i (reg_wr_ex_mem),
         .mem_to_reg_mem_pipe_reg_i (mem_to_reg_ex_mem),
@@ -311,9 +321,12 @@ module top
         .mem_to_reg_ex_mem_hz_i (mem_to_reg_ex_mem),
         .reg_wr_mem_wb_hz_i (reg_wr_mem_wb),
         .reg_wr_wb_ret_hz_i (reg_wr_wb_ret),
+        .branch_taken_ex_mem_hz_i (branch_taken_ex_mem),
+        .jump_iss_ex_hz_i (jump_iss_ex),
         .stall_fetch_hz_o (stall_fetch),
         .stall_iss_hz_o (stall_iss),
         .flush_ex_hz_o (flush_ex),
+        .flush_mem_hz_o (flush_mem),
         .fwd_p1_ex_mem_hz_o (fwd_r_data_p1_alu_ex),
         .fwd_p2_ex_mem_hz_o (fwd_r_data_p2_alu_ex)
     );
