@@ -4,6 +4,7 @@ module iss_pipe_reg
     (
         input   wire        clk,
         input   wire        reset,
+        input   wire        clr,
         input   wire        enable,     // Active Low enable signal
         input   wire[31:0]  next_pc_iss_pipe_reg_i,
         input   wire[31:0]  instr_iss_pipe_reg_i,
@@ -18,7 +19,7 @@ module iss_pipe_reg
     assign instr_iss_pipe_reg_o   = instr_iss_pipe_reg;
 
     always @(posedge clk or posedge reset)
-    if (reset)
+    if (reset | clr)
     begin
         next_pc_iss_pipe_reg <= 31'b0;
         instr_iss_pipe_reg <= 31'b0;
