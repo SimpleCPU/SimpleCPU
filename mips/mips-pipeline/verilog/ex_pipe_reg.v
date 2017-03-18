@@ -7,6 +7,7 @@ module ex_pipe_reg
         input   wire        clr,
         input   wire        valid_ex_pipe_reg_i,
         input   wire[5:0]   op_ex_pipe_reg_i,
+        input   wire        jump_ex_pipe_reg_i,
         input   wire        branch_ex_pipe_reg_i,
         input   wire        reg_wr_ex_pipe_reg_i,
         input   wire        mem_to_reg_ex_pipe_reg_i,
@@ -24,6 +25,7 @@ module ex_pipe_reg
         input   wire[5:0]   shamt_ex_pipe_reg_i,
         output  wire        valid_ex_pipe_reg_o,
         input   wire[5:0]   op_ex_pipe_reg_o,
+        input   wire        jump_ex_pipe_reg_o,
         input   wire        branch_ex_pipe_reg_o,
         output  wire        reg_wr_ex_pipe_reg_o,
         output  wire        mem_to_reg_ex_pipe_reg_o,
@@ -43,6 +45,7 @@ module ex_pipe_reg
 
     reg        valid_ex_pipe_reg;
     reg[5:0]   op_ex_pipe_reg;
+    reg        jump_ex_pipe_reg;
     reg        branch_ex_pipe_reg;
     reg        reg_wr_ex_pipe_reg;
     reg        mem_to_reg_ex_pipe_reg;
@@ -62,6 +65,7 @@ module ex_pipe_reg
     assign valid_ex_pipe_reg_o          =  valid_ex_pipe_reg;
     assign op_ex_pipe_reg_o             =  op_ex_pipe_reg;
     assign branch_ex_pipe_reg_o         =  branch_ex_pipe_reg;
+    assign jump_ex_pipe_reg_o           =  jump_ex_pipe_reg;
     assign reg_wr_ex_pipe_reg_o         =  reg_wr_ex_pipe_reg;
     assign mem_to_reg_ex_pipe_reg_o     =  mem_to_reg_ex_pipe_reg;
     assign mem_wr_ex_pipe_reg_o         =  mem_wr_ex_pipe_reg;
@@ -83,6 +87,7 @@ module ex_pipe_reg
         valid_ex_pipe_reg          <=  0;
         op_ex_pipe_reg             <=  0;
         branch_ex_pipe_reg         <=  0;
+        jump_ex_pipe_reg           <=  0;
         reg_wr_ex_pipe_reg         <=  0;
         mem_to_reg_ex_pipe_reg     <=  0;
         mem_wr_ex_pipe_reg         <=  0;
@@ -103,6 +108,7 @@ module ex_pipe_reg
         valid_ex_pipe_reg          <=  valid_ex_pipe_reg_i;
         op_ex_pipe_reg             <=  op_ex_pipe_reg_i;
         branch_ex_pipe_reg         <=  branch_ex_pipe_reg_i;
+        jump_ex_pipe_reg           <=  jump_ex_pipe_reg_i;
         reg_wr_ex_pipe_reg         <=  reg_wr_ex_pipe_reg_i;
         mem_to_reg_ex_pipe_reg     <=  mem_to_reg_ex_pipe_reg_i;
         mem_wr_ex_pipe_reg         <=  mem_wr_ex_pipe_reg_i;
