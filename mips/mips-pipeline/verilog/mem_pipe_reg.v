@@ -4,6 +4,7 @@ module mem_pipe_reg
     (
         input   wire        clk,
         input   wire        reset,
+        input   wire        clr,
         input   wire        valid_mem_pipe_reg_i,
         input   wire        reg_wr_mem_pipe_reg_i,
         input   wire        mem_to_reg_mem_pipe_reg_i,
@@ -33,7 +34,7 @@ module mem_pipe_reg
     assign res_alu_mem_pipe_reg_o        =  res_alu_mem_pipe_reg;
 
     always @(posedge clk or posedge reset)
-    if (reset)
+    if (reset | clr)
     begin
         valid_mem_pipe_reg          <=  0;
         reg_wr_mem_pipe_reg         <=  0;
