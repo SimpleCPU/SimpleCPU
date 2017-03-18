@@ -52,9 +52,9 @@ module hazard_unit
     // the following signals should be based on those values
     // This is required to flush the value in the EX Pipe register
     // to a NO-OP. 
-    assign flush_ex_hz = branch_taken_ex_mem_hz_i | jump_iss_ex_hz_i;
+    assign flush_ex_hz = branch_taken_ex_mem_hz_i;
     // Branches would be resolved in the EXECUTE stage
     // the following signals should be based on those values
-    assign flush_iss_hz = branch_taken_ex_mem_hz_i;
+    assign flush_iss_hz = branch_taken_ex_mem_hz_i | jump_iss_ex_hz_i;
 
 endmodule
