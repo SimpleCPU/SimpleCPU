@@ -7,7 +7,6 @@ module top
     );
     
     wire[31:0]  next_pc_fetch_iss;
-    wire[31:0]  next_pc_iss_ex;
     wire[31:0]  curr_pc_pc_reg_fetch;
     wire[31:0]  next_seq_pc_pc_reg_fetch;
     wire        next_seq_pc_carry_pc_reg_fetch;
@@ -44,8 +43,6 @@ module top
     wire[2:0]   alu_src_iss_ex;
     wire        reg_wr_iss_ex;
     wire        sign_ext_iss_ex;
-    wire[31:0]  next_brn_pc_iss_ex;
-    wire        next_brn_pc_carry_iss_ex;
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
     wire[5:0]   op_ex_mem;
@@ -88,7 +85,7 @@ module top
     wire        stall_iss;
     wire        stall_fetch;
     wire        flush_ex;
-    wire        flush_mem;
+    wire        flush_iss;
     wire        instr_retired;
     wire        valid_iss_ex;
     wire        valid_ex_mem;
@@ -129,6 +126,7 @@ module top
         .clk (clk),
         .reset (reset),
         .enable (stall_iss),
+        .clr (flush_iss),
         .next_pc_iss_pipe_reg_i (next_seq_pc_pc_reg_fetch),
         .instr_iss_pipe_reg_i (instr_pc_reg_fetch),
         .next_pc_iss_pipe_reg_o (next_seq_pc_iss_ex),
@@ -266,7 +264,7 @@ module top
     mem_pipe_reg EX_MEM_REG (
         .clk (clk),
         .reset (reset),
-        .clr (flush_mem),
+        .clr (),
         .valid_mem_pipe_reg_i (valid_ex_mem),
         .reg_wr_mem_pipe_reg_i (reg_wr_ex_mem),
         .mem_to_reg_mem_pipe_reg_i (mem_to_reg_ex_mem),
@@ -326,7 +324,7 @@ module top
         .stall_fetch_hz_o (stall_fetch),
         .stall_iss_hz_o (stall_iss),
         .flush_ex_hz_o (flush_ex),
-        .flush_mem_hz_o (flush_mem),
+        .flush_iss_hz_o (flush_iss),
         .fwd_p1_ex_mem_hz_o (fwd_r_data_p1_alu_ex),
         .fwd_p2_ex_mem_hz_o (fwd_r_data_p2_alu_ex)
     );
