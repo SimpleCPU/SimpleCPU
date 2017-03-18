@@ -46,6 +46,7 @@ module top
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
     wire[5:0]   op_ex_mem;
+    wire        jump_ex_mem;
     wire        branch_ex_mem;
     wire        branch_taken_ex_mem;
     wire        reg_wr_ex_mem;
@@ -197,6 +198,7 @@ module top
         .clr (flush_ex),
         .valid_ex_pipe_reg_i (valid_iss_ex),
         .op_ex_pipe_reg_i (op_iss_ex),
+        .jump_ex_pipe_reg_i (jump_iss_ex),
         .branch_ex_pipe_reg_i (branch_iss_ex),
         .reg_wr_ex_pipe_reg_i (reg_wr_iss_ex),
         .mem_to_reg_ex_pipe_reg_i (mem_to_reg_iss_ex),
@@ -214,6 +216,7 @@ module top
         .shamt_ex_pipe_reg_i (shamt_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
         .op_ex_pipe_reg_o (op_ex_mem),
+        .jump_ex_pipe_reg_o (jump_ex_mem),
         .branch_ex_pipe_reg_o (branch_ex_mem),
         .reg_wr_ex_pipe_reg_o (reg_wr_ex_mem),
         .mem_to_reg_ex_pipe_reg_o (mem_to_reg_ex_mem),
