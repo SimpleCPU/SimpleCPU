@@ -75,6 +75,7 @@ module top
     wire[4:0]   rd_mem_wb;
     wire[31:0]  res_alu_mem_wb;
     wire[31:0]  read_data_dmem_ram_mem_wb;
+    wire[31:0]  r_data_p2_mem_wb;
     wire        reg_wr_wb_ret;
     wire        mem_to_reg_wb_ret;
     wire[4:0]   rd_wb_ret;
@@ -241,7 +242,8 @@ module top
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
     
-    assign r_data_p2_alu_ex_mem = alu_src_ex_mem[1] ? {{27{1'b0}}, shamt_ex_mem} : 
+    assign r_data_p2_alu_ex_mem = alu_src_ex_mem[2] ? 32'h0 :
+                                  alu_src_ex_mem[1] ? {{27{1'b0}}, shamt_ex_mem} : 
                                   alu_src_ex_mem[0] ? sign_imm_ex_mem : r_data_p2_ex_mem;
 
 
@@ -274,18 +276,20 @@ module top
         .mem_wr_mem_pipe_reg_i (mem_wr_ex_mem),
         .rd_mem_pipe_reg_i (rd_ex_mem),
         .res_alu_mem_pipe_reg_i (res_alu_ex_mem),
+        .r_data_p2_mem_pipe_reg_i (r_data_p2_ex_mem),
         .valid_mem_pipe_reg_o (valid_mem_wb),
         .reg_wr_mem_pipe_reg_o (reg_wr_mem_wb),
         .mem_to_reg_mem_pipe_reg_o (mem_to_reg_mem_wb),
         .mem_wr_mem_pipe_reg_o (mem_wr_mem_wb),
         .rd_mem_pipe_reg_o (rd_mem_wb),
-        .res_alu_mem_pipe_reg_o (res_alu_mem_wb)
+        .res_alu_mem_pipe_reg_o (res_alu_mem_wb),
+        .r_data_p2_mem_pipe_reg_o (r_data_p2_mem_wb)
     );
 
     data_mem D_MEM1 (
         .clk (clk),
         .addr_dmem_ram_i (res_alu_mem_wb),
-        .wr_data_dmem_ram_i (),
+        .wr_data_dmem_ram_i (r_data_p2_mem_wb),
         .wr_strb_dmem_ram_i (4'hF),
         .wr_en_dmem_ram_i (mem_wr_mem_wb),
         .read_data_dmem_ram_o (read_data_dmem_ram_mem_wb)
