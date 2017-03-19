@@ -7,15 +7,19 @@ module top
     );
     
     wire[31:0]  next_pc_fetch_iss;
+    wire[31:0]  next_cal_pc_fetch_iss;
+    wire[31:0]  next_pred_pc_fetch_iss;
     wire[31:0]  curr_pc_pc_reg_fetch;
     wire[31:0]  next_seq_pc_pc_reg_fetch;
     wire        next_seq_pc_carry_pc_reg_fetch;
     wire[31:0]  instr_pc_reg_fetch;
+    wire        brn_pred_fetch_iss;
 
     wire[31:0]  next_seq_pc_iss_ex;
     wire[31:0]  next_brn_eq_pc_iss_ex;
     wire        next_brn_eq_pc_carry_iss_ex;
     wire[31:0]  next_jmp_pc_iss_ex;
+    wire        brn_pred_iss_ex;
 
     wire[31:0]  instr_iss_ex;
     wire        sign_ext_iss;
@@ -45,10 +49,13 @@ module top
     wire        sign_ext_iss_ex;
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
+    wire[31:0]  curr_pc_iss_ex;
     wire[5:0]   op_ex_mem;
     wire        jump_ex_mem;
     wire        branch_ex_mem;
     wire        branch_taken_ex_mem;
+    wire        brn_pred_ex_mem;
+    wire        brn_fdback_ex_mem;
     wire        reg_wr_ex_mem;
     wire        mem_to_reg_ex_pipe_reg;
     wire        mem_wr_ex_mem;
@@ -69,6 +76,7 @@ module top
     wire        z_ex_mem;
     wire        n_ex_mem;
     wire[5:0]   shamt_ex_mem;
+    wire[31:0]  curr_pc_ex_mem;
     wire        reg_wr_mem_wb;
     wire        mem_to_reg_mem_wb;
     wire        mem_wr_mem_wb;
@@ -119,9 +127,22 @@ module top
         .carry (next_seq_pc_carry_pc_reg_fetch)
     );
     
-    assign next_pc_fetch_iss = jump_iss_ex ? next_jmp_pc_iss_ex : 
-                               branch_taken_ex_mem ? next_brn_eq_pc_ex_mem : 
-                               next_seq_pc_pc_reg_fetch;
+    one_level_bpred #(1024) BPRED (
+        .clk (clk),
+        .reset (reset),
+        .brn_addr_bpred_i (curr_pc_pc_reg_fetch[9:0]),
+        .brn_ex_mem_bpred_i (branch_ex_mem),
+        .brn_fdback_addr_bpred_i (curr_pc_ex_mem[9:0]),
+        .brn_fdback_bpred_i (brn_fdback_ex_mem),
+        .brn_btb_addr_bpred_i (next_brn_eq_pc_ex_mem),
+        .brn_takeness_bpred_o (brn_pred_fetch_iss),
+        .brn_target_addr_bpred_o (next_pred_pc_fetch_iss)
+    );
+
+    assign next_cal_pc_fetch_iss    = jump_iss_ex ? next_jmp_pc_iss_ex : 
+                                      (branch_taken_ex_mem & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
+                                      next_seq_pc_pc_reg_fetch;
+    assign next_pred_pc_fetch_iss   = brn_pred_fetch_iss ? next_pred_pc_fetch_iss : next_cal_pc_fetch_iss;
 
     // ISSUE STAGE
     iss_pipe_reg FETCH_ISS_REG (
@@ -131,8 +152,12 @@ module top
         .clr (flush_iss),
         .next_pc_iss_pipe_reg_i (next_seq_pc_pc_reg_fetch),
         .instr_iss_pipe_reg_i (instr_pc_reg_fetch),
+        .brn_pred_iss_pipe_reg_i (brn_pred_fetch_iss),
+        .curr_pc_iss_pipe_reg_i (curr_pc_pc_reg_fetch),
         .next_pc_iss_pipe_reg_o (next_seq_pc_iss_ex),
-        .instr_iss_pipe_reg_o (instr_iss_ex)
+        .instr_iss_pipe_reg_o (instr_iss_ex),
+        .brn_pred_iss_pipe_reg_o (brn_pred_iss_ex),
+        .curr_pc_iss_pipe_reg_o (curr_pc_iss_ex)
     );
 
     decode D1 (
@@ -215,6 +240,8 @@ module top
         .brn_eq_pc_ex_pipe_reg_i (next_brn_eq_pc_iss_ex),
         .sign_imm_ex_pipe_reg_i (sign_imm_iss_ex),
         .shamt_ex_pipe_reg_i (shamt_iss_ex),
+        .brn_pred_ex_pipe_reg_i (brn_pred_iss_ex),
+        .curr_pc_ex_pipe_reg_i (curr_pc_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
         .op_ex_pipe_reg_o (op_ex_mem),
         .jump_ex_pipe_reg_o (jump_ex_mem),
@@ -232,7 +259,9 @@ module top
         .r_data_p2_ex_pipe_reg_o (r_data_p2_rf_ex_mem),
         .brn_eq_pc_ex_pipe_reg_o (next_brn_eq_pc_ex_mem),
         .sign_imm_ex_pipe_reg_o (sign_imm_ex_mem),
-        .shamt_ex_pipe_reg_o (shamt_ex_mem)
+        .shamt_ex_pipe_reg_o (shamt_ex_mem),
+        .brn_pred_ex_pipe_reg_o (brn_pred_ex_mem),
+        .curr_pc_ex_pipe_reg_o (curr_pc_ex_mem)
     );
 
     assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? res_alu_mem_wb :
@@ -256,6 +285,8 @@ module top
                                                     (rt_ex_mem == `BLTZAL))) & (n_ex_mem & ~z_ex_mem))|
                                   (branch_ex_mem & ((op_ex_mem == `BNE))  & ~z_ex_mem);
                                 
+    assign brn_fdback_ex_mem    = brn_pred_ex_mem & branch_taken_ex_mem;
+
     alu A1 (
         .opr_a_alu_i (r_data_p1_alu_ex_mem),
         .opr_b_alu_i (r_data_p2_alu_ex_mem),
@@ -328,6 +359,7 @@ module top
         .reg_wr_wb_ret_hz_i (reg_wr_wb_ret),
         .branch_taken_ex_mem_hz_i (branch_taken_ex_mem),
         .jump_iss_ex_hz_i (jump_iss_ex),
+        .brn_pred_ex_mem_hz_i (brn_pred_ex_mem),
         .stall_fetch_hz_o (stall_fetch),
         .stall_iss_hz_o (stall_iss),
         .flush_ex_hz_o (flush_ex),
