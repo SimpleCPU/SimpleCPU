@@ -100,8 +100,13 @@ add wave -noupdate -group HAZARD /top_tb/T1/flush_iss
 add wave -noupdate -group HAZARD -radix hexadecimal /top_tb/T1/hazard/flush_ex_hz_o
 add wave -noupdate -group HAZARD -radix hexadecimal /top_tb/T1/hazard/stall_fetch_hz_o
 add wave -noupdate -group HAZARD -radix hexadecimal /top_tb/T1/hazard/stall_iss_hz_o
+add wave -noupdate -group DRAM -radix hexadecimal /top_tb/T1/D_MEM1/addr_dmem_ram_i
+add wave -noupdate -group DRAM -radix hexadecimal /top_tb/T1/D_MEM1/wr_en_dmem_ram_i
+add wave -noupdate -group DRAM -radix hexadecimal /top_tb/T1/D_MEM1/wr_strb_dmem_ram_i
+add wave -noupdate -group DRAM -radix hexadecimal /top_tb/T1/D_MEM1/wr_data_dmem_ram_i
+add wave -noupdate -group DRAM -radix hexadecimal /top_tb/T1/D_MEM1/read_data_dmem_ram_o
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {380 ps} 0}
+WaveRestoreCursors {{Cursor 1} {10780 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 325
 configure wave -valuecolwidth 243
@@ -117,4 +122,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {156 ps} {476 ps}
+WaveRestoreZoom {10407 ps} {10996 ps}
