@@ -23,10 +23,12 @@ module ex_pipe_reg
         input   wire[31:0]  brn_eq_pc_ex_pipe_reg_i,
         input   wire[31:0]  sign_imm_ex_pipe_reg_i,
         input   wire[5:0]   shamt_ex_pipe_reg_i,
+        input   wire[31:0]  curr_pc_ex_pipe_reg_i,
+        output  wire        brn_pred_ex_pipe_reg_i,
         output  wire        valid_ex_pipe_reg_o,
-        input   wire[5:0]   op_ex_pipe_reg_o,
-        input   wire        jump_ex_pipe_reg_o,
-        input   wire        branch_ex_pipe_reg_o,
+        output  wire[5:0]   op_ex_pipe_reg_o,
+        output  wire        jump_ex_pipe_reg_o,
+        output  wire        branch_ex_pipe_reg_o,
         output  wire        reg_wr_ex_pipe_reg_o,
         output  wire        mem_to_reg_ex_pipe_reg_o,
         output  wire        mem_wr_ex_pipe_reg_o,
@@ -38,9 +40,11 @@ module ex_pipe_reg
         output  wire[4:0]   rd_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p1_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p2_ex_pipe_reg_o,
-        input   wire[31:0]  brn_eq_pc_ex_pipe_reg_o,
+        output  wire[31:0]  brn_eq_pc_ex_pipe_reg_o,
         output  wire[31:0]  sign_imm_ex_pipe_reg_o,
-        output  wire[5:0]   shamt_ex_pipe_reg_o
+        output  wire[5:0]   shamt_ex_pipe_reg_o,
+        output  wire        brn_pred_ex_pipe_reg_o,
+        output  wire[31:0]  curr_pc_ex_pipe_reg_o
     );
 
     reg        valid_ex_pipe_reg;
@@ -61,6 +65,8 @@ module ex_pipe_reg
     reg[31:0]  brn_eq_pc_ex_pipe_reg;
     reg[31:0]  sign_imm_ex_pipe_reg;
     reg[5:0]   shamt_ex_pipe_reg;
+    reg        brn_pred_ex_pipe_reg;
+    reg[31:0]  curr_pc_ex_pipe_reg;
 
     assign valid_ex_pipe_reg_o          =  valid_ex_pipe_reg;
     assign op_ex_pipe_reg_o             =  op_ex_pipe_reg;
@@ -80,6 +86,8 @@ module ex_pipe_reg
     assign brn_eq_pc_ex_pipe_reg_o      =  brn_eq_pc_ex_pipe_reg;
     assign sign_imm_ex_pipe_reg_o       =  sign_imm_ex_pipe_reg;
     assign shamt_ex_pipe_reg_o          =  shamt_ex_pipe_reg;
+    assign brn_pred_ex_pipe_reg_o       =  brn_pred_ex_pipe_reg;
+    assign curr_pc_ex_pipe_reg_o        =  curr_pc_ex_pipe_reg;
 
     always @(posedge clk or posedge reset)
     if (reset | clr)
@@ -102,6 +110,8 @@ module ex_pipe_reg
         brn_eq_pc_ex_pipe_reg      <=  0;
         sign_imm_ex_pipe_reg       <=  0;
         shamt_ex_pipe_reg          <=  0;
+        brn_pred_ex_pipe_reg       <=  0;
+        curr_pc_ex_pipe_reg        <=  0;
     end
     else
     begin
@@ -123,6 +133,8 @@ module ex_pipe_reg
         brn_eq_pc_ex_pipe_reg      <=  brn_eq_pc_ex_pipe_reg_i;
         sign_imm_ex_pipe_reg       <=  sign_imm_ex_pipe_reg_i;
         shamt_ex_pipe_reg          <=  shamt_ex_pipe_reg_i;
+        brn_pred_ex_pipe_reg       <=  brn_pred_ex_pipe_reg_i;
+        curr_pc_ex_pipe_reg        <=  curr_pc_ex_pipe_reg_i;
     end
 
 endmodule
