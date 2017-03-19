@@ -7,5 +7,10 @@ function void boot_code ();
     begin
         T1.R1.reg_file [i] = 0;
     end
+    for (int i = 0; i < 1023; i++)
+    begin
+        T1.BPRED.bpred[i] = 0;
+        T1.BPRED.btb[i] = 0;
+    end
 
 endfunction
