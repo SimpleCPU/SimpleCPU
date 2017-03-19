@@ -65,6 +65,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     logic         instr_retired_wb;  
 
     // FETCH
+    // // signals tapped from the FETCH stage
     assign pc_fetch          = T1.curr_pc_pc_reg_fetch;
     assign instr_fetch       = T1.instr_pc_reg_fetch;
 
