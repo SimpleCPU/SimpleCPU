@@ -55,7 +55,7 @@ module top
     wire        branch_ex_mem;
     wire        branch_taken_ex;
     wire        brn_pred_ex_mem;
-    wire        brn_fdback_ex_mem;
+    wire        brn_corr_pred_ex_mem;
     wire        reg_wr_ex_mem;
     wire        mem_wr_ex_mem;
     wire[5:0]   alu_op_ex_mem;
@@ -132,7 +132,7 @@ module top
         .brn_addr_bpred_i (curr_pc_pc_reg_fetch[9:0]),
         .brn_ex_mem_bpred_i (branch_ex_mem),
         .brn_fdback_addr_bpred_i (curr_pc_ex_mem[9:0]),
-        .brn_fdback_bpred_i (brn_fdback_ex_mem),
+        .brn_fdback_bpred_i (brn_corr_pred_ex_mem),
         .brn_btb_addr_bpred_i (next_brn_eq_pc_ex_mem),
         .brn_takeness_bpred_o (brn_pred_fetch_iss),
         .brn_target_addr_bpred_o (next_pred_pc_fetch_iss)
@@ -283,8 +283,10 @@ module top
                                   (branch_ex_mem & ((op_ex_mem == `BVAR)  & ((rt_ex_mem == `BLTZ) | 
                                                     (rt_ex_mem == `BLTZAL))) & (n_ex_mem & ~z_ex_mem))|
                                   (branch_ex_mem & ((op_ex_mem == `BNE))  & ~z_ex_mem);
-                                
-    assign brn_fdback_ex_mem    = brn_pred_ex_mem & branch_taken_ex;
+    // Give the feedback of the prediction made by the predictor
+    // 0 - incorrect prediction
+    // 1 - correct prediction
+    assign brn_corr_pred_ex_mem    = ~(brn_pred_ex_mem ^ branch_taken_ex) & |(~(next_brn_eq_pc_ex_mem ^ next_pred_pc_ex_mem));
 
     alu A1 (
         .opr_a_alu_i (r_data_p1_alu_ex_mem),
@@ -358,7 +360,7 @@ module top
         .reg_wr_wb_ret_hz_i (reg_wr_wb_ret),
         .branch_taken_ex_mem_hz_i (branch_taken_ex),
         .jump_iss_ex_hz_i (jump_iss_ex),
-        .brn_pred_ex_mem_hz_i (brn_pred_ex_mem),
+        .brn_pred_ex_mem_hz_i (brn_corr_pred_ex_mem),
         .stall_fetch_hz_o (stall_fetch),
         .stall_iss_hz_o (stall_iss),
         .flush_ex_hz_o (flush_ex),
