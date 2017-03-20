@@ -53,11 +53,10 @@ module top
     wire[5:0]   op_ex_mem;
     wire        jump_ex_mem;
     wire        branch_ex_mem;
-    wire        branch_taken_ex_mem;
+    wire        branch_taken_ex;
     wire        brn_pred_ex_mem;
     wire        brn_fdback_ex_mem;
     wire        reg_wr_ex_mem;
-    wire        mem_to_reg_ex_pipe_reg;
     wire        mem_wr_ex_mem;
     wire[5:0]   alu_op_ex_mem;
     wire[2:0]   alu_src_ex_mem;
@@ -140,9 +139,9 @@ module top
     );
 
     assign next_cal_pc_fetch_iss    = jump_iss_ex ? next_jmp_pc_iss_ex : 
-                                      (branch_taken_ex_mem & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
+                                      (branch_taken_ex & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
                                       next_seq_pc_pc_reg_fetch;
-    assign next_pred_pc_fetch_iss   = brn_pred_fetch_iss ? next_pred_pc_fetch_iss : next_cal_pc_fetch_iss;
+    assign next_pc_fetch_iss        = brn_pred_fetch_iss ? next_pred_pc_fetch_iss : next_cal_pc_fetch_iss;
 
     // ISSUE STAGE
     iss_pipe_reg FETCH_ISS_REG (
@@ -276,7 +275,7 @@ module top
                                   alu_src_ex_mem[0] ? sign_imm_ex_mem : r_data_p2_ex_mem;
 
 
-    assign branch_taken_ex_mem  = (branch_ex_mem & ((op_ex_mem == `BEQ))  & z_ex_mem) |
+    assign branch_taken_ex      = (branch_ex_mem & ((op_ex_mem == `BEQ))  & z_ex_mem) |
                                   (branch_ex_mem & ((op_ex_mem == `BVAR)  & ((rt_ex_mem == `BGEZ)| 
                                                     (rt_ex_mem == `BGEZAL))) & (~n_ex_mem | z_ex_mem)) |
                                   (branch_ex_mem & ((op_ex_mem == `BLEZ)) & (n_ex_mem  | z_ex_mem)) |
@@ -285,7 +284,7 @@ module top
                                                     (rt_ex_mem == `BLTZAL))) & (n_ex_mem & ~z_ex_mem))|
                                   (branch_ex_mem & ((op_ex_mem == `BNE))  & ~z_ex_mem);
                                 
-    assign brn_fdback_ex_mem    = brn_pred_ex_mem & branch_taken_ex_mem;
+    assign brn_fdback_ex_mem    = brn_pred_ex_mem & branch_taken_ex;
 
     alu A1 (
         .opr_a_alu_i (r_data_p1_alu_ex_mem),
@@ -357,7 +356,7 @@ module top
         .mem_to_reg_ex_mem_hz_i (mem_to_reg_ex_mem),
         .reg_wr_mem_wb_hz_i (reg_wr_mem_wb),
         .reg_wr_wb_ret_hz_i (reg_wr_wb_ret),
-        .branch_taken_ex_mem_hz_i (branch_taken_ex_mem),
+        .branch_taken_ex_mem_hz_i (branch_taken_ex),
         .jump_iss_ex_hz_i (jump_iss_ex),
         .brn_pred_ex_mem_hz_i (brn_pred_ex_mem),
         .stall_fetch_hz_o (stall_fetch),
