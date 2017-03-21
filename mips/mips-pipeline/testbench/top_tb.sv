@@ -178,7 +178,7 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
                 $fatal(1, "TEST FAILED\n");
         end
         else
-            $fatal ("Incorrect instruction opcode");
+            $fatal (1, "Incorrect instruction opcode");
     end
 
     always @ (posedge clk_tb)
