@@ -28,12 +28,13 @@ module top
     wire[4:0]   rd_iss_ex; 
     wire[5:0]   op_iss_ex; 
     wire[5:0]   funct_iss_ex;
-    wire[5:0]   shamt_iss_ex;
+    wire[4:0]   shamt_iss_ex;
     wire[25:0]  target_iss_ex;
     wire[31:0]  sign_imm_iss_ex;
     wire        is_r_type_iss_ex;
     wire        is_i_type_iss_ex;
     wire        is_j_type_iss_ex;
+    wire        use_link_reg_iss_ex;
     wire[4:0]   rs_dec_iss_ex; 
     wire[4:0]   rd_dec_iss_ex; 
     wire        reg_src_iss_ex;
@@ -46,6 +47,7 @@ module top
     wire        mem_wr_iss_ex;
     wire[2:0]   alu_src_iss_ex;
     wire        reg_wr_iss_ex;
+    wire        reg_wr_ctl_ex;
     wire        sign_ext_iss_ex;
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
@@ -75,9 +77,11 @@ module top
     wire[31:0]  res_alu_ex_mem;
     wire        z_ex_mem;
     wire        n_ex_mem;
-    wire[5:0]   shamt_ex_mem;
+    wire[4:0]   shamt_ex_mem;
     wire[31:0]  curr_pc_ex_mem;
     wire[31:0]  next_pred_pc_ex_mem;
+    wire[31:0]  next_seq_pc_ex_mem;
+    wire        use_link_reg_ex_mem;
     wire        reg_wr_mem_wb;
     wire        mem_to_reg_mem_wb;
     wire        mem_wr_mem_wb;
@@ -85,12 +89,15 @@ module top
     wire[31:0]  res_alu_mem_wb;
     wire[31:0]  read_data_dmem_ram_mem_wb;
     wire[31:0]  r_data_p2_mem_wb;
+    wire[31:0]  next_seq_pc_mem_wb;
+    wire        use_link_reg_mem_wb;
     wire        reg_wr_wb_ret;
     wire        mem_to_reg_wb_ret;
     wire[4:0]   rd_wb_ret;
     wire[31:0]  res_alu_wb_ret;
     wire[31:0]  read_data_wb_ret;
     wire[31:0]  wr_data_rf_wb_ret;
+    wire[31:0]  next_seq_pc_wb_ret;
     wire[1:0]   fwd_r_data_p1_alu_ex;
     wire[1:0]   fwd_r_data_p2_alu_ex;
     wire        stall_iss;
@@ -176,11 +183,14 @@ module top
         .sign_imm_dec_o (sign_imm_iss_ex),
         .is_r_type_dec_o (is_r_type_iss_ex),
         .is_i_type_dec_o (is_i_type_iss_ex),
-        .is_j_type_dec_o (is_j_type_iss_ex)
+        .is_j_type_dec_o (is_j_type_iss_ex),
+        .use_link_reg_dec_o (use_link_reg_iss_ex)
     );
-    assign rd_iss_ex        = reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
+    assign rd_iss_ex        = use_link_reg_iss_ex ? 5'h1F :
+                              reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
     assign rs_iss_ex        = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
     assign valid_iss_ex     = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex) & ~reset; 
+    assign reg_wr_iss_ex    = reg_wr_ctl_ex | use_link_reg_iss_ex;
 
     control C1 (
         .instr_op_ctl_i (op_iss_ex),
@@ -194,7 +204,7 @@ module top
         .alu_op_ctl_o (alu_op_iss_ex),
         .mem_wr_ctl_o (mem_wr_iss_ex),
         .alu_src_ctl_o (alu_src_iss_ex),
-        .reg_wr_ctl_o (reg_wr_iss_ex),
+        .reg_wr_ctl_o (reg_wr_ctl_ex),
         .sign_ext_ctl_o (sign_ext_iss_ex)
     );
 
@@ -246,6 +256,8 @@ module top
         .brn_pred_ex_pipe_reg_i (brn_pred_iss_ex),
         .curr_pc_ex_pipe_reg_i (curr_pc_iss_ex),
         .next_pred_pc_ex_pipe_reg_i (next_pred_pc_iss_ex),
+        .next_seq_pc_ex_pipe_reg_i (next_seq_pc_iss_ex),
+        .use_link_reg_ex_pipe_reg_i (use_link_reg_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
         .op_ex_pipe_reg_o (op_ex_mem),
         .jump_ex_pipe_reg_o (jump_ex_mem),
@@ -266,7 +278,9 @@ module top
         .shamt_ex_pipe_reg_o (shamt_ex_mem),
         .brn_pred_ex_pipe_reg_o (brn_pred_ex_mem),
         .curr_pc_ex_pipe_reg_o (curr_pc_ex_mem),
-        .next_pred_pc_ex_pipe_reg_o (next_pred_pc_ex_mem)
+        .next_pred_pc_ex_pipe_reg_o (next_pred_pc_ex_mem),
+        .next_seq_pc_ex_pipe_reg_o (next_seq_pc_ex_mem),
+        .use_link_reg_ex_pipe_reg_o (use_link_reg_ex_mem)
     );
 
     assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? res_alu_mem_wb :
@@ -315,13 +329,17 @@ module top
         .rd_mem_pipe_reg_i (rd_ex_mem),
         .res_alu_mem_pipe_reg_i (res_alu_ex_mem),
         .r_data_p2_mem_pipe_reg_i (r_data_p2_ex_mem),
+        .use_link_reg_mem_pipe_reg_i (use_link_reg_ex_mem),
+        .next_seq_pc_mem_pipe_reg_i (next_seq_pc_ex_mem),
         .valid_mem_pipe_reg_o (valid_mem_wb),
         .reg_wr_mem_pipe_reg_o (reg_wr_mem_wb),
         .mem_to_reg_mem_pipe_reg_o (mem_to_reg_mem_wb),
         .mem_wr_mem_pipe_reg_o (mem_wr_mem_wb),
         .rd_mem_pipe_reg_o (rd_mem_wb),
         .res_alu_mem_pipe_reg_o (res_alu_mem_wb),
-        .r_data_p2_mem_pipe_reg_o (r_data_p2_mem_wb)
+        .r_data_p2_mem_pipe_reg_o (r_data_p2_mem_wb),
+        .use_link_reg_mem_pipe_reg_o (use_link_reg_mem_wb),
+        .next_seq_pc_mem_pipe_reg_o (next_seq_pc_mem_wb)
     );
 
     data_mem D_MEM1 (
@@ -343,16 +361,21 @@ module top
         .rd_wb_pipe_reg_i (rd_mem_wb),
         .res_alu_wb_pipe_reg_i (res_alu_mem_wb),
         .read_data_wb_pipe_reg_i (read_data_dmem_ram_mem_wb),
+        .use_link_reg_wb_pipe_reg_i (use_link_reg_mem_wb),
+        .next_seq_pc_wb_pipe_reg_i (next_seq_pc_mem_wb),
         .instr_retired_wb_pipe_reg_o(valid_wb_ret),
         .reg_wr_wb_pipe_reg_o (reg_wr_wb_ret),
         .mem_to_reg_wb_pipe_reg_o (mem_to_reg_wb_ret),
         .rd_wb_pipe_reg_o (rd_wb_ret),
         .res_alu_wb_pipe_reg_o (res_alu_wb_ret),
-        .read_data_wb_pipe_reg_o (read_data_wb_ret)
+        .read_data_wb_pipe_reg_o (read_data_wb_ret),
+        .use_link_reg_wb_pipe_reg_o (use_link_reg_wb_ret),
+        .next_seq_pc_wb_pipe_reg_o (next_seq_pc_wb_ret)
     );
 
     assign instr_retired     = valid_wb_ret;
-    assign wr_data_rf_wb_ret = (|rd_wb_ret) ? 
+    assign wr_data_rf_wb_ret = (use_link_reg_wb_ret) ? next_seq_pc_mem_wb :
+                               (|rd_wb_ret) ? 
                                (mem_to_reg_wb_ret ? read_data_wb_ret : res_alu_wb_ret) :
                                32'h0;
 
