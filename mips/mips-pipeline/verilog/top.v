@@ -50,6 +50,7 @@ module top
     wire[31:0]  r_data_p1_rf_iss_ex;
     wire[31:0]  r_data_p2_rf_iss_ex;
     wire[31:0]  curr_pc_iss_ex;
+    wire[31:0]  next_pred_pc_iss_ex;
     wire[5:0]   op_ex_mem;
     wire        jump_ex_mem;
     wire        branch_ex_mem;
@@ -76,6 +77,7 @@ module top
     wire        n_ex_mem;
     wire[5:0]   shamt_ex_mem;
     wire[31:0]  curr_pc_ex_mem;
+    wire[31:0]  next_pred_pc_ex_mem;
     wire        reg_wr_mem_wb;
     wire        mem_to_reg_mem_wb;
     wire        mem_wr_mem_wb;
@@ -153,10 +155,12 @@ module top
         .instr_iss_pipe_reg_i (instr_pc_reg_fetch),
         .brn_pred_iss_pipe_reg_i (brn_pred_fetch_iss),
         .curr_pc_iss_pipe_reg_i (curr_pc_pc_reg_fetch),
+        .next_pred_pc_iss_pipe_reg_i (next_pred_pc_fetch_iss),
         .next_pc_iss_pipe_reg_o (next_seq_pc_iss_ex),
         .instr_iss_pipe_reg_o (instr_iss_ex),
         .brn_pred_iss_pipe_reg_o (brn_pred_iss_ex),
-        .curr_pc_iss_pipe_reg_o (curr_pc_iss_ex)
+        .curr_pc_iss_pipe_reg_o (curr_pc_iss_ex),
+        .next_pred_pc_iss_pipe_reg_o (next_pred_pc_iss_ex)
     );
 
     decode D1 (
@@ -241,6 +245,7 @@ module top
         .shamt_ex_pipe_reg_i (shamt_iss_ex),
         .brn_pred_ex_pipe_reg_i (brn_pred_iss_ex),
         .curr_pc_ex_pipe_reg_i (curr_pc_iss_ex),
+        .next_pred_pc_ex_pipe_reg_i (next_pred_pc_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
         .op_ex_pipe_reg_o (op_ex_mem),
         .jump_ex_pipe_reg_o (jump_ex_mem),
@@ -260,7 +265,8 @@ module top
         .sign_imm_ex_pipe_reg_o (sign_imm_ex_mem),
         .shamt_ex_pipe_reg_o (shamt_ex_mem),
         .brn_pred_ex_pipe_reg_o (brn_pred_ex_mem),
-        .curr_pc_ex_pipe_reg_o (curr_pc_ex_mem)
+        .curr_pc_ex_pipe_reg_o (curr_pc_ex_mem),
+        .next_pred_pc_ex_pipe_reg_o (next_pred_pc_ex_mem)
     );
 
     assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? res_alu_mem_wb :
