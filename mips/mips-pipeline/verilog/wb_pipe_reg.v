@@ -10,21 +10,26 @@ module wb_pipe_reg
         input   wire[4:0]   rd_wb_pipe_reg_i,
         input   wire[31:0]  res_alu_wb_pipe_reg_i,
         input   wire[31:0]  read_data_wb_pipe_reg_i,
+        input   wire        use_link_reg_wb_pipe_reg_i,
+        input   wire[31:0]  next_seq_pc_wb_pipe_reg_i,
         output  wire        instr_retired_wb_pipe_reg_o,
         output  wire        reg_wr_wb_pipe_reg_o,
         output  wire        mem_to_reg_wb_pipe_reg_o,
         output  wire[4:0]   rd_wb_pipe_reg_o,
         output  wire[31:0]  res_alu_wb_pipe_reg_o,
-        output  wire[31:0]  read_data_wb_pipe_reg_o
+        output  wire[31:0]  read_data_wb_pipe_reg_o,
+        output  wire        use_link_reg_wb_pipe_reg_o,
+        output  wire[31:0]  next_seq_pc_wb_pipe_reg_o
     );
 
     reg        reg_wr_wb_pipe_reg;
     reg        mem_to_reg_wb_pipe_reg;
-    reg        instr_retired_wb_pipe_reg_q;
     reg        instr_retired_wb_pipe_reg;
     reg[4:0]   rd_wb_pipe_reg;
     reg[31:0]  res_alu_wb_pipe_reg;
     reg[31:0]  read_data_wb_pipe_reg;
+    reg        use_link_reg_wb_pipe_reg;
+    reg[31:0]  next_seq_pc_wb_pipe_reg;
 
     assign reg_wr_wb_pipe_reg_o         =  reg_wr_wb_pipe_reg;
     assign mem_to_reg_wb_pipe_reg_o     =  mem_to_reg_wb_pipe_reg;
@@ -32,6 +37,8 @@ module wb_pipe_reg
     assign rd_wb_pipe_reg_o             =  rd_wb_pipe_reg;
     assign res_alu_wb_pipe_reg_o        =  res_alu_wb_pipe_reg;
     assign read_data_wb_pipe_reg_o      =  read_data_wb_pipe_reg;
+    assign next_seq_pc_wb_pipe_reg_o    =  next_seq_pc_wb_pipe_reg;
+    assign use_link_reg_wb_pipe_reg_o   =  use_link_reg_wb_pipe_reg;
 
     always @(posedge clk or posedge reset)
     if (reset)
@@ -42,6 +49,8 @@ module wb_pipe_reg
         res_alu_wb_pipe_reg        <=  0;
         read_data_wb_pipe_reg      <=  0;
         instr_retired_wb_pipe_reg  <=  0;
+        next_seq_pc_wb_pipe_reg    <=  0;
+        use_link_reg_wb_pipe_reg   <=  0;
     end
     else
     begin
@@ -51,6 +60,8 @@ module wb_pipe_reg
         res_alu_wb_pipe_reg        <=  res_alu_wb_pipe_reg_i;
         read_data_wb_pipe_reg      <=  read_data_wb_pipe_reg_i;
         instr_retired_wb_pipe_reg  <=  valid_wb_pipe_reg_i;
+        next_seq_pc_wb_pipe_reg    <=  next_seq_pc_wb_pipe_reg_i;
+        use_link_reg_wb_pipe_reg   <=  use_link_reg_wb_pipe_reg_i;
     end
 
 endmodule
