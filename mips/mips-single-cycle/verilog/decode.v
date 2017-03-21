@@ -20,8 +20,6 @@ module decode
     );
 
     //Populate the output fields using the input instruction
-    //TODO:add some more decoding logic
-    //TODO:Add BPD here?
     wire[4:0]   rt_dec;
     wire[4:0]   rs_dec;
     wire[4:0]   rd_dec;
