@@ -147,8 +147,8 @@ module top
         .brn_target_addr_bpred_o (next_pred_pc_fetch_iss)
     );
 
-    assign next_cal_pc_fetch_iss    = jump_iss_ex ? next_jmp_pc_iss_ex : 
-                                      (branch_taken_ex & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
+    assign next_cal_pc_fetch_iss    = (branch_taken_ex & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
+                                      jump_iss_ex ? next_jmp_pc_iss_ex :
                                       next_seq_pc_pc_reg_fetch;
     // If the branch is predicted as not taken, we should pass the next
     // sequential PC. The BTB would give predicted address as 0 even 
