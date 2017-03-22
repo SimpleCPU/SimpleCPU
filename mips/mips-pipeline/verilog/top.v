@@ -150,6 +150,11 @@ module top
     assign next_cal_pc_fetch_iss    = jump_iss_ex ? next_jmp_pc_iss_ex : 
                                       (branch_taken_ex & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
                                       next_seq_pc_pc_reg_fetch;
+    // If the branch is predicted as not taken, we should pass the next
+    // sequential PC. The BTB would give predicted address as 0 even 
+    // when the prediction is correct but predicted as not taken.
+    // The following logic passes next sequential PC whenever the branch
+    // is predicted as not taken
     assign next_pc_fetch_iss        = brn_pred_fetch_iss ? next_pred_pc_fetch_iss : next_cal_pc_fetch_iss;
 
     // ISSUE STAGE
@@ -190,7 +195,7 @@ module top
                               reg_dst_iss_ex ? rd_dec_iss_ex : rt_iss_ex;
     assign rs_iss_ex        = reg_src_iss_ex ? rt_iss_ex     : rs_dec_iss_ex;
     assign valid_iss_ex     = (is_r_type_iss_ex | is_i_type_iss_ex | is_j_type_iss_ex) & ~reset; 
-    assign reg_wr_iss_ex    = reg_wr_ctl_ex | use_link_reg_iss_ex;
+    assign reg_wr_iss_ex    = reg_wr_ctl_ex;
 
     control C1 (
         .instr_op_ctl_i (op_iss_ex),
@@ -219,7 +224,7 @@ module top
     regfile R1 (
         .clk (clk),
         .reset (reset),
-        .w_en_rf_i (reg_wr_wb_ret),
+        .w_en_rf_i (reg_wr_wb_ret | use_link_reg_wb_ret),
         .w_data_rf_i (wr_data_rf_wb_ret),
         .w_reg_rf_i (rd_wb_ret),
         .r_reg_p1_rf_i (rs_iss_ex),
@@ -374,7 +379,7 @@ module top
     );
 
     assign instr_retired     = valid_wb_ret;
-    assign wr_data_rf_wb_ret = (use_link_reg_wb_ret) ? next_seq_pc_mem_wb :
+    assign wr_data_rf_wb_ret = (use_link_reg_wb_ret) ? next_seq_pc_wb_ret :
                                (|rd_wb_ret) ? 
                                (mem_to_reg_wb_ret ? read_data_wb_ret : res_alu_wb_ret) :
                                32'h0;
