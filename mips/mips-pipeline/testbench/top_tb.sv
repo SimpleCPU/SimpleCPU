@@ -8,6 +8,7 @@ import "DPI-C" function void init (string test_name);
 import "DPI-C" function void run (int cycles);
 import "DPI-C" function int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val);
 import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs_val, int rt_val);
+import "DPI-C" function int compare_j (int pc, int instr, int rt, int rt_val);
 
     logic   clk_tb, reset_tb;
     string  test_name;
@@ -75,12 +76,12 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
     assign is_i_type_iss     = T1.is_i_type_iss_ex;
     assign is_j_type_iss     = T1.is_j_type_iss_ex;
     assign rs_iss            = T1.rs_iss_ex;
-    assign rt_iss            = T1.rt_iss_ex;
+    assign rt_iss            = (T1.use_link_reg_iss_ex) ? 32'h1F : T1.rt_iss_ex;
     assign rd_iss            = T1.rd_iss_ex;
 
     // WRITE-BACK
     // signals tapped from the WB stage
-    assign rt_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rt_val_wb;
+    assign rt_val_dest_wb    = (T1.reg_wr_wb_ret | T1.use_link_reg_wb_ret) ? T1.wr_data_rf_wb_ret : rt_val_wb;
     assign rd_val_dest_wb    = T1.reg_wr_wb_ret ? T1.wr_data_rf_wb_ret : rd_val_wb;
     assign instr_retired_wb  = T1.instr_retired;
     assign rd_val_wb         = T1.R1.reg_file[rd_wb];
@@ -175,6 +176,11 @@ import "DPI-C" function int compare_i (int pc, int instr, int rs, int rt, int rs
         else if (is_i_type_wb)
         begin
             if (!compare_i (pc_wb, instr_wb, rs_wb, rt_wb, rs_val_wb, rt_val_dest_wb))
+                $fatal(1, "TEST FAILED\n");
+        end
+        else if (is_j_type_wb)
+        begin
+            if (!compare_j (pc_wb, instr_wb, rt_wb, rt_val_dest_wb))
                 $fatal(1, "TEST FAILED\n");
         end
         else
