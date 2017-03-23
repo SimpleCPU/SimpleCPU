@@ -1,4 +1,4 @@
-// A one-level branch predictor with 2-bit saturating counters
+// One-level branch predictor with 2-bit saturating counters
 // By default the predictor contains the following entries
 //    1024 entries each containing a 2-bit saturating counter
 //    Uses 10 LSB (log2(1024)of the PC to index the table
