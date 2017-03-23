@@ -104,6 +104,8 @@ module top
     wire        stall_fetch;
     wire        flush_ex;
     wire        flush_iss;
+    wire        flush_incorr_pred_ex;
+    wire        flush_incorr_pred_iss;
     wire        instr_retired;
     wire        valid_iss_ex;
     wire        valid_ex_mem;
@@ -155,14 +157,16 @@ module top
     // when the prediction is correct but predicted as not taken.
     // The following logic passes next sequential PC whenever the branch
     // is predicted as not taken
-    assign next_pc_fetch_iss        = brn_pred_fetch_iss ? next_pred_pc_fetch_iss : next_cal_pc_fetch_iss;
+    assign next_pc_fetch_iss        = (~jump_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
+                                      brn_pred_fetch_iss ? next_pred_pc_fetch_iss : 
+                                      next_cal_pc_fetch_iss;
 
     // ISSUE STAGE
     iss_pipe_reg FETCH_ISS_REG (
         .clk (clk),
         .reset (reset),
         .enable (stall_iss),
-        .clr (flush_iss),
+        .clr (flush_iss | flush_incorr_pred_iss),
         .next_pc_iss_pipe_reg_i (next_seq_pc_pc_reg_fetch),
         .instr_iss_pipe_reg_i (instr_pc_reg_fetch),
         .brn_pred_iss_pipe_reg_i (brn_pred_fetch_iss),
@@ -239,7 +243,7 @@ module top
     ex_pipe_reg ISS_EX_REG (
         .clk (clk),
         .reset (reset),
-        .clr (flush_ex),
+        .clr (flush_ex | flush_incorr_pred_ex),
         .valid_ex_pipe_reg_i (valid_iss_ex),
         .op_ex_pipe_reg_i (op_iss_ex),
         .jump_ex_pipe_reg_i (jump_iss_ex),
@@ -312,6 +316,9 @@ module top
     // 0 - incorrect prediction
     // 1 - correct prediction
     assign brn_corr_pred_ex_mem    = ~(brn_pred_ex_mem ^ branch_taken_ex) & |(~(next_brn_eq_pc_ex_mem ^ next_pred_pc_ex_mem));
+
+    assign flush_incorr_pred_iss   =  ~jump_ex_mem & (brn_pred_ex_mem & ~brn_corr_pred_ex_mem);
+    assign flush_incorr_pred_ex    =  (brn_pred_ex_mem & ~brn_corr_pred_ex_mem);
 
     alu A1 (
         .opr_a_alu_i (r_data_p1_alu_ex_mem),
