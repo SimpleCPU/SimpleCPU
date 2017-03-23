@@ -156,7 +156,12 @@ module top
     // sequential PC. The BTB would give predicted address as 0 even 
     // when the prediction is correct but predicted as not taken.
     // The following logic passes next sequential PC whenever the branch
-    // is predicted as not taken
+    // is predicted as not taken.
+    // Since jump instructions are resolved in the DECODE stage itself
+    // therefore we just need to flush the next instruction in DEC stage
+    // when an incorrect prediction is made. This is already handled in
+    // the hazard unit. So, we would already see the correct PC being
+    // fetched and there wouldn't be any need to update the PC again.
     assign next_pc_fetch_iss        = (~jump_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
                                       brn_pred_fetch_iss ? next_pred_pc_fetch_iss : 
                                       next_cal_pc_fetch_iss;
@@ -317,7 +322,23 @@ module top
     // 1 - correct prediction
     assign brn_corr_pred_ex_mem    = ~(brn_pred_ex_mem ^ branch_taken_ex) & |(~(next_brn_eq_pc_ex_mem ^ next_pred_pc_ex_mem));
 
+    // The EX stage can force the flushing of the next instruction
+    // depending on the prediction result. The below mentioned code
+    // is for the case when an incorrect prediction is made for
+    // non-branch instructions. The hazard unit flushes the EX/DEC
+    // stage only for Jumps and branches.
+    // For incorrect predictions made on jump instruction there is 
+    // no need to flush the DEC stage. They resolve in the DEC stage 
+    // and hazard unit flushes the next incorrect instruction entering
+    // the DEC stage thus there is no need of flushing any stage.
+    // For incorrect predictions made on non-jump instructions the
+    // next two instructions are speculatively fetched. Hence the 
+    // DEC and EX stage need to be flushed on the next cycle.
     assign flush_incorr_pred_iss   =  ~jump_ex_mem & (brn_pred_ex_mem & ~brn_corr_pred_ex_mem);
+    // There is not need to add the jump_ex_mem signal check here
+    // as the valid for the register would be propagated from the 
+    // DEC pipe register. Again this is already handled in the 
+    // hazard unit. 
     assign flush_incorr_pred_ex    =  (brn_pred_ex_mem & ~brn_corr_pred_ex_mem);
 
     alu A1 (
