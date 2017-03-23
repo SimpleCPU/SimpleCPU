@@ -31,11 +31,27 @@ extern CPU_State CURRENT_STATE;
 int instr_gen = 0;      /* keeps a count of the number of   */
                         /* instructions generated           */
 
+/* Declare all the external functions here */
 extern int shift_const (int);
 extern void load_instr_opcode (uint32_t);
 extern void run (int);
 extern int check_ls_addr (int, int);
 extern void init_memory ();
+
+/* Declare all the internally used functions here */
+void update_cpu (int, int);
+int check_brn_addr (int);
+int check_j_addr (int);
+void gen_r_instr ();
+void print_assembled_r_instr (int, int, int, int);
+void gen_i_instr ();
+void print_assembled_i_instr (int, int, int, int);
+void gen_j_instr ();
+void print_assembled_j_instr (int, int);
+void make_room ();
+void gen_end_seq ();
+void gen_instr_hex (int, int, int);
+void print_to_file (FILE*, FILE*);
 
 extern int prev_pc;
 FILE* pc_hex_val;
