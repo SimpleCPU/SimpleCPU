@@ -49,12 +49,12 @@ module hazard_unit
                                  : 2'b00;
     assign stall_fetch_hz = 1'b0;
     assign stall_iss_hz = 1'b0;
-    // Jumps would be resolved in the ISSUE (DECODE) stage
+    // Branches would be resolved in the EXECUTE stage
     // the following signals should be based on those values
     // This is required to flush the value in the EX Pipe register
     // to a NO-OP. 
     assign flush_ex_hz = branch_taken_ex_mem_hz_i & ~brn_pred_ex_mem_hz_i;
-    // Branches would be resolved in the EXECUTE stage
+    // Jumps would be resolved in the ISSUE (DECODE) stage
     // the following signals should be based on those values
     assign flush_iss_hz = (branch_taken_ex_mem_hz_i & ~brn_pred_ex_mem_hz_i) | jump_iss_ex_hz_i;
 
