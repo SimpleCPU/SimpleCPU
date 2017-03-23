@@ -313,8 +313,6 @@ int main (int argc, char* argv[]) {
     int num_i = 0;      /* number of i-type instructions    */
     int num_j = 0;      /* number of j-type instructions    */
     int n = 0;          /* number of instructions           */
-    //FILE *pc_val;       /* output file pointer for PC values*/
-    //FILE *instr_hex;    /* output file pointer for instr hex*/
     /* Parse argv array and extract all the information     */
     /* argv array is null terminated                        */
     int i = 0;
