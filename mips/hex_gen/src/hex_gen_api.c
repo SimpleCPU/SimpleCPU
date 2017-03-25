@@ -1,6 +1,6 @@
 /***************************************************************/
 /*                                                             */
-/* hex_gen_api.h                                               */
+/* hex_gen_api.c                                               */
 /* Desclares a set of functions which can be                   */
 /* used to create an mips assembly test                        */
 /*                                                             */
