@@ -203,14 +203,6 @@ TARGET:
     instr_gen++;
 }
 
-int gen_j (int address) {
-    int opcode;
-    int target;
-    target = (address & 0xFFFFFFC)>>2;
-    opcode = (J << 26) + target;
-    return opcode;
-}
-
 /* Function to check if there is enough      */
 /* space available to generate the instr     */
 /* If need more space the function would     */
