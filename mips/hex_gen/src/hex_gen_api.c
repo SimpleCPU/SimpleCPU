@@ -8,7 +8,7 @@
 
 #include "hex_gen_api.h"
 
-int gen_j (int address) {
+int gen_j (char* op_str, int addr) {
     int opcode;
     int target;
     target = (address & 0xFFFFFFC)>>2;
