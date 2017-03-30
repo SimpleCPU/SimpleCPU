@@ -8,8 +8,10 @@
 
 #include "hex_gen.h"
 
-/* Declare all the functions here */
+// Declare all the functions here
+// Function to get random Load/Store addr
 int get_rand_ls_addr ();
+// Function to get an already used Load/Store addr
 int get_ls_addr ();
 int get_rand_pc ();
 void gen_r_instr (char*);
