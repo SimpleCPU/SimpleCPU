@@ -8,4 +8,3 @@
 
 #include "hex_gen_api.h"
 
-/* Declare all the functions here */
