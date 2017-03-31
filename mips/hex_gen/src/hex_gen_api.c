@@ -8,7 +8,7 @@
 
 #include "hex_gen_api.h"
 
-int gen_j (char* op_str, int addr) {
+void gen_dir_j (char* op_str, int addr) {
     int opcode;
     int target;
     target = (address & 0xFFFFFFC)>>2;
@@ -16,3 +16,6 @@ int gen_j (char* op_str, int addr) {
     return opcode;
 }
 
+void gen_dir_r_instr (char* instr_mnemonic) {
+    
+}
