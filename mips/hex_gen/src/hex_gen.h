@@ -6,6 +6,8 @@
 /*                                                             */
 /***************************************************************/
 
+#ifndef HEX_GEN_H
+#define HEX_GEN_H
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -15,18 +17,16 @@
 
 #define NUM_END_SEQ_INSTR 2
 
-int PC[4096] = {0};             /* program counter arr - index using PC */
-int instr[4096] = {0};          /* the hex value of the instruction     */
+int PC[4096];             /* program counter arr - index using PC */
+int instr[4096];          /* the hex value of the instruction     */
 
 typedef struct CPU_State_Struct {
-
-  uint32_t PC;		        /* program counter */
+  uint32_t PC;		      /* program counter */
   uint32_t REGS[32];      /* register file. */
   uint32_t HI, LO;        /* special regs for mult/div. */
 } CPU_State;
 
 /* Data Structure for Latch */
-
 extern CPU_State CURRENT_STATE;
 int instr_gen = 0;      /* keeps a count of the number of   */
                         /* instructions generated           */
@@ -155,3 +155,4 @@ const char* register_str[] = {
     "R30",      "R31",             
 };
 
+#endif
