@@ -21,3 +21,5 @@ void gen_dir_r_instr (char*);
 void gen_dir_i_instr (char*, int);
 // Function to generate a specific J-type instruction
 void gen_dir_j_instr (char*, int);
+// Function to extract opcode value from instruction
+void get_opcode (char *);
