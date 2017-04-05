@@ -17,5 +17,4 @@ void gen_dir_j (char* op_str, int addr) {
 }
 
 void gen_dir_r_instr (char* instr_mnemonic) {
-    
 }
