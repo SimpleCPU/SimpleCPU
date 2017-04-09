@@ -9,11 +9,11 @@
 #include "hex_gen_api.h"
 
 void gen_dir_j (char* op_str, int addr) {
-    int opcode;
-    int target;
-    target = (address & 0xFFFFFFC)>>2;
-    opcode = (J << 26) + target;
-    return opcode;
+//    int opcode;
+//    int target;
+//    target = (addr & 0xFFFFFFC)>>2;
+//    opcode = (J << 26) + target;
+//    return opcode;
 }
 
 void gen_dir_r_instr (char* instr_mnemonic) {
@@ -24,4 +24,6 @@ void gen_dir_r_instr (char* instr_mnemonic) {
 }
 
 void get_opcode (char* instr_mnemonic) {
+    // Default to SYSCALL
+    char* opcode = "SYSCALL";
 }
