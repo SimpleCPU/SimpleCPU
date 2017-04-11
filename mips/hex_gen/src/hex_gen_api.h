@@ -6,8 +6,6 @@
 /*                                                             */
 /***************************************************************/
 
-#include "hex_gen.h"
-
 // Declare all the functions here
 // Function to get random Load/Store addr
 int get_rand_ls_addr ();
