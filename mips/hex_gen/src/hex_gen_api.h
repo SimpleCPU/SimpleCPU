@@ -6,6 +6,9 @@
 /*                                                             */
 /***************************************************************/
 
+#ifndef HEX_GEN_API_H
+#define HEX_GEN_API_H
+
 // Declare all the functions here
 // Function to get random Load/Store addr
 int get_rand_ls_addr ();
@@ -20,4 +23,6 @@ void gen_dir_i_instr (char*, int);
 // Function to generate a specific J-type instruction
 void gen_dir_j_instr (char*, int);
 // Function to extract opcode value from instruction
-void get_opcode (char *);
+char* get_opcode (char *);
+
+#endif
