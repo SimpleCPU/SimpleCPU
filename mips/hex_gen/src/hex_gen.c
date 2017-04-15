@@ -20,7 +20,7 @@ void update_cpu (int pc, int hex_instr) {
 /* function returns 1.                                          */
 int check_brn_addr (int imm) {
     int shift_val = shift_const(14);
-    int sign = (imm & 0x8000)>>15 ? 1 : 0;
+    int sign = (imm & 0x8000)>>15;
     imm = imm << 2;
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
