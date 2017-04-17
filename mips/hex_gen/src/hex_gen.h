@@ -17,8 +17,8 @@
 
 #define NUM_END_SEQ_INSTR 2
 
-int PC[4096];             /* program counter arr - index using PC */
-int instr[4096];          /* the hex value of the instruction     */
+int PC[4096]    = {0};    /* program counter arr - index using PC */
+int instr[4096] = {0};    /* the hex value of the instruction     */
 
 typedef struct CPU_State_Struct {
   uint32_t PC;		      /* program counter */
