@@ -114,7 +114,7 @@ extern void run(int num_cycles) {
   for (i = 0; i < num_cycles; i++) {
     if (RUN_BIT == FALSE) {
 	    printf("Simulator halted\n");
-	    break;
+	    exit (0);
     }
     cycle();
   }
@@ -203,7 +203,7 @@ void rdump(FILE * dumpsim_file) {
 /*                                                             */
 /* Procedure : init_memory                                     */
 /*                                                             */
-/* Purpose   : Allocate and zero memoryy                       */
+/* Purpose   : Allocate and zero memory                        */
 /*                                                             */
 /***************************************************************/
 void init_memory() {                                           
