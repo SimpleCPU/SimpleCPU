@@ -60,18 +60,39 @@ void print_assembled_r_instr (int funct, int rs, int rt, int rd) {
     );
 }
 
-void gen_r_instr () {
+void gen_r_instr (int vopt, ...) {
     int     opcode, shamt, funct;
     int     rs, rt, rd;
     int     hex_instr;
-    int     rand_funct_idx = rand()%13;
+    int     funct_idx;
+    int     i;
+    va_list valist;
 
-    opcode  = 0;
-    funct   = funct_val_r_type [rand_funct_idx];
-    shamt   = rand ()%32;
-    rs      = rand ()%32;
-    rt      = rand ()%32;
-    rd      = rand ()%32;
+    opcode      = 0;
+    funct_idx   = 0;
+    if (vopt) {
+        va_start (valist, vopt);
+        funct   = va_arg (valist, int);
+        rd      = va_arg (valist, int);
+        rs      = va_arg (valist, int);
+        rt      = va_arg (valist, int);
+        shamt   = va_arg (valist, int);
+        va_end (valist);
+
+        for (i = 0; i < 13; i++) {
+            if (funct_val_r_type[i] == funct) {
+                funct_idx = i;
+            }
+        }
+    }
+    else {
+        funct_idx   = rand()%13;
+        funct       = funct_val_r_type [funct_idx];
+        rs          = rand ()%32;
+        rt          = rand ()%32;
+        rd          = rand ()%32;
+        shamt       = rand ()%32;
+    }
 
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16) + (rd << 11) +
@@ -84,7 +105,7 @@ void gen_r_instr () {
         update_cpu (0, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
-    print_assembled_r_instr (rand_funct_idx, rs, rt, rd);
+    print_assembled_r_instr (funct_idx, rs, rt, rd);
     instr_gen++;
 }
 
@@ -271,7 +292,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
         switch (choice) {
             case 0: if (r_gen < num_r) {
                         make_room();
-                        gen_r_instr ();
+                        gen_r_instr (0);
                         r_gen++;
                         i++;
                         break;
@@ -295,7 +316,6 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
                     else break;
         }
     }
-    gen_end_seq ();
 }
 
 void print_to_file (FILE* pc_hex_val, FILE* instr_hex_val) {
@@ -309,10 +329,11 @@ void print_to_file (FILE* pc_hex_val, FILE* instr_hex_val) {
 }
 
 int main (int argc, char* argv[]) {
-    int num_r = 0;      /* number of r-type instructions    */
-    int num_i = 0;      /* number of i-type instructions    */
-    int num_j = 0;      /* number of j-type instructions    */
-    int n = 0;          /* number of instructions           */
+    int num_r = 0;      /* Number of R-type instructions    */
+    int num_i = 0;      /* Number of I-type instructions    */
+    int num_j = 0;      /* Number of J-type instructions    */
+    int n = 0;          /* Number of instructions           */
+    int dir = 0;        /* Flag to check if the run_dir_test function is required to be called */
     /* Parse argv array and extract all the information     */
     /* argv array is null terminated                        */
     int i = 0;
@@ -326,21 +347,28 @@ int main (int argc, char* argv[]) {
       else if (!(strcmp (argv[i], (char*)"-j"))) {
         num_j = atoi(argv[i+1]);
       }
+      else if (!(strcmp (argv[i], (char*)"-d"))) {
+        dir = 1;
+      }
       i++;
     }
     n = num_r + num_i + num_j;
-    if (n == 0) {
-        printf ("Zero instructions were generated\n");
-        return 1;
-    }
-    else {
+    if (n) {
         printf ("Generating the hex for the following set of instructions\n");
         printf ("\t %3d - R-Type instructions\n", num_r);
         printf ("\t %3d - I-Type instructions\n", num_i);
         printf ("\t %3d - J-Type instructions\n\n", num_j);
     }
+    // Initialise the HEX-GEN tool
+    init_hex_gen ();
+    // External call to initialise the C-models memory
     init_memory ();
+    // Begin generating instructions
     gen_instr_hex (num_r, num_i, num_j);
+    if (dir) {
+        gen_user_test ();
+    }
+    gen_end_seq ();
     pc_hex_val    = fopen ("pc_values_hex", "w");
     instr_hex_val = fopen ("instr_hex", "w");
     print_to_file (pc_hex_val, instr_hex_val);
