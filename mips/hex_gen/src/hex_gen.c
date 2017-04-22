@@ -209,7 +209,7 @@ TARGET:
 /* insert a J instr to a somewhat free space */
 void make_room () {
     int i;
-    int opcode;
+    int opcode = 0;
     // There should be space for at least
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
@@ -225,7 +225,7 @@ void make_room () {
     for (i = 4; i < 4096; i=i+4) {
         if ((PC[i] == 0) && (PC[i+4]==0)) {
             //printf("Branching to the following PC:%x\n", i);
-            opcode = gen_dir_j ((int)i);
+            //opcode = gen_dir_j ((int)i);
             load_instr_opcode ((uint32_t)opcode);
             run (1);
             update_cpu (prev_pc, opcode);
