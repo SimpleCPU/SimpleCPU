@@ -8,28 +8,10 @@
 
 #ifndef HEX_GEN_H
 #define HEX_GEN_H
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
 
-#include "mips_instr_defines.h"
+#include "hex_gen_shared.h"
 
 #define NUM_END_SEQ_INSTR 2
-
-int PC[4096]    = {0};    /* program counter arr - index using PC */
-int instr[4096] = {0};    /* the hex value of the instruction     */
-
-typedef struct CPU_State_Struct {
-  uint32_t PC;		      /* program counter */
-  uint32_t REGS[32];      /* register file. */
-  uint32_t HI, LO;        /* special regs for mult/div. */
-} CPU_State;
-
-/* Data Structure for Latch */
-extern CPU_State CURRENT_STATE;
-int instr_gen = 0;      /* keeps a count of the number of   */
-                        /* instructions generated           */
 
 /* Declare all the external functions here */
 extern int shift_const (int);
@@ -40,15 +22,11 @@ extern void init_memory ();
 
 /* Declare all the internally used functions here */
 void update_cpu (int, int);
-int check_brn_addr (int);
-int check_j_addr (int);
-void gen_r_instr ();
+int  check_brn_addr (int);
+int  check_j_addr (int);
 void print_assembled_r_instr (int, int, int, int);
-void gen_i_instr ();
 void print_assembled_i_instr (int, int, int, int);
-void gen_j_instr ();
 void print_assembled_j_instr (int, int);
-void make_room ();
 void gen_end_seq ();
 void gen_instr_hex (int, int, int);
 void print_to_file (FILE*, FILE*);
