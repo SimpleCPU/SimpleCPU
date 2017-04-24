@@ -333,7 +333,6 @@ int main (int argc, char* argv[]) {
     int num_i = 0;      /* Number of I-type instructions    */
     int num_j = 0;      /* Number of J-type instructions    */
     int n = 0;          /* Number of instructions           */
-    int dir = 0;        /* Flag to check if the run_dir_test function is required to be called */
     /* Parse argv array and extract all the information     */
     /* argv array is null terminated                        */
     int i = 0;
@@ -346,9 +345,6 @@ int main (int argc, char* argv[]) {
       }
       else if (!(strcmp (argv[i], (char*)"-j"))) {
         num_j = atoi(argv[i+1]);
-      }
-      else if (!(strcmp (argv[i], (char*)"-d"))) {
-        dir = 1;
       }
       i++;
     }
@@ -365,9 +361,9 @@ int main (int argc, char* argv[]) {
     init_memory ();
     // Begin generating instructions
     gen_instr_hex (num_r, num_i, num_j);
-    if (dir) {
-        gen_user_test ();
-    }
+#ifdef GEN_USER_TEST
+    gen_user_test ();
+#endif
     gen_end_seq ();
     pc_hex_val    = fopen ("pc_values_hex", "w");
     instr_hex_val = fopen ("instr_hex", "w");
