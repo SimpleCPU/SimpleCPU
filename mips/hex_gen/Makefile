@@ -7,4 +7,4 @@ all: src/*.c
 
 .PHONY: clean
 clean:
-	rm -rf hex_gen
+	rm -rf hex_gen pc_values_hex instr_hex
