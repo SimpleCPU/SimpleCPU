@@ -27,7 +27,7 @@ int PC[4096];           /* Program counter arr - index using PC */
 int instr[4096];        /* Stores hex value of the instruction  */
 
 typedef struct CPU_State_Struct {
-  uint32_t PC;		    /* Program counter */
+  uint32_t PC;		      /* Program counter */
   uint32_t REGS[32];    /* Register file. */
   uint32_t HI, LO;      /* Special regs for mult/div. */
 } CPU_State;
