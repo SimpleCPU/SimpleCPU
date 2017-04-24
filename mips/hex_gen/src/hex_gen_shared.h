@@ -37,7 +37,9 @@ extern CPU_State CURRENT_STATE;
 int instr_gen;          /* Keeps a count of the number of   */
                         /* instructions generated           */
 
+#ifdef GEN_USER_TEST
 extern void gen_user_test ();
+#endif
 /* Declare all the globally used functions here */
 void init_hex_gen ();
 void make_room ();
