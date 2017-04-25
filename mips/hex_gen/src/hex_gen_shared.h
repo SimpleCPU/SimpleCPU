@@ -48,7 +48,7 @@ void gen_i_instr ();
 void gen_j_instr ();
 
 /* Declare all R-type instructions here */
-void gen_r_type_ADD     (int, int, int);
+void gen_r_type_ADD     (int, int, int, int, ...);
 void gen_r_type_ADDU    (int, int, int);
 void gen_r_type_AND     (int, int, int);
 void gen_r_type_DIV     (int, int, int);
