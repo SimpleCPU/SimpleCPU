@@ -71,8 +71,8 @@ else {
         system ("rm -rf vsim.wlf wlf* transcript work/");
         print ("vlib work\n");
         system ("vlib work");
-        print ("vlog testbench/* verilog/*\n");
-        system ("vlog testbench/* verilog/*");
+        print ("vlog testbench/*.sv testbench/*.v verilog/*.v\n");
+        system ("vlog testbench/*.sv testbench/*.v verilog/*.v");
     }
     # Run the simulation
     print ("vsim -c top_tb -sv_lib lib/iss -do \"run -all; exit\" +test=$test_name  | tee sim.log");
