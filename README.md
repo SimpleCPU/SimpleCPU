@@ -83,8 +83,8 @@ Reading /home/rahul/altera/14.0/modelsim_ase/tcl/vsim/pref.tcl # 10.1e
  onElabError resume 
  resume
    run -all 
- ** Warning: (vsim-PLI-3408) Too few data words read on line 13 of file "instr_hex". Expected 1000, found 12.    : testbench/init_imem.sv(7)
-    Time: 0 ps  Iteration: 0  Instance: /top_tb
+
+Time: 0 ps  Iteration: 0  Instance: /top_tb
 MIPS Simulator
  
  Loading instr_hex
