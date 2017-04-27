@@ -22,6 +22,8 @@
 #define NUM_END_SEQ_INSTR 2
 // Define to specify the I-MEM size in Bytes (default to 4K)
 #define IMEM_SIZE 4096
+// Define to specify the number of architectural registers
+#define MIPS_REGS 32
 
 int PC[4096];           /* Program counter arr - index using PC */
 int instr[4096];        /* Stores hex value of the instruction  */
