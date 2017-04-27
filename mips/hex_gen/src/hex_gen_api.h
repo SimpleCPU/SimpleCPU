@@ -18,5 +18,8 @@ int get_rand_ls_addr ();
 int get_ls_addr ();
 // Function to get a random PC address
 int get_rand_pc ();
+// The following function returns TRUE if the required
+// value exists in any of the Architectural registers
+int find_reg (int);
 
 #endif
