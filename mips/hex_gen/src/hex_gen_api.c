@@ -8,6 +8,8 @@
 
 #include "hex_gen_api.h"
 
+// The following function returns TRUE if the required
+// value exists in any of the Architectural registers
 int find_reg (int reg_val) {
   int i;
   int found = 0;
@@ -19,4 +21,21 @@ int find_reg (int reg_val) {
     }
   }
   return found;
+}
+
+// The following function returns the reg containing the 
+// required value. If the value isn't present in any of 
+// the architectural registers, it issues a warning and
+// returns R0
+int get_reg (int reg_val) {
+  int i;
+  int reg = 0;
+  
+  for (i = 0; i < MIPS_REGS; i++) {
+    if (CURRENT_STATE.REGS[i] == reg_val) {
+      reg = i;
+      return reg;
+    }
+  }
+  return reg;
 }
