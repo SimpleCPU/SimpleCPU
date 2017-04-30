@@ -374,16 +374,14 @@ void gen_r_type_SLL (int RD, int RS, int RT, int shamt, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
-void gen_r_type_SLLV (int RD, int RS, int RT, int set_rval, ...) {
+void gen_r_type_SLLV (int RD, int RS, int RT, int shamt, int set_rval, ...) {
     int     funct;
-    int     shamt;
     int     vopt;
     int     rs_val;
     int     rt_val;
     va_list valist;
 
     funct   = SLLV;
-    shamt   = 0;
     vopt    = 5;
     if (set_rval) {
         va_start (valist, set_rval);
