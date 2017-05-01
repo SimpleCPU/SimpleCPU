@@ -441,16 +441,14 @@ void gen_r_type_SLTU (int RD, int RS, int RT, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
-void gen_r_type_SRA (int RD, int RS, int RT, int set_rval, ...) {
+void gen_r_type_SRA (int RD, int RS, int RT, int shamt, int set_rval, ...) {
     int     funct;
-    int     shamt;
     int     vopt;
     int     rs_val;
     int     rt_val;
     va_list valist;
 
     funct   = SRA;
-    shamt   = 0;
     vopt    = 5;
     if (set_rval) {
         va_start (valist, set_rval);
@@ -464,16 +462,14 @@ void gen_r_type_SRA (int RD, int RS, int RT, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
-void gen_r_type_SRAV (int RD, int RS, int RT, int set_rval, ...) {
+void gen_r_type_SRAV (int RD, int RS, int RT, int shamt, int set_rval, ...) {
     int     funct;
-    int     shamt;
     int     vopt;
     int     rs_val;
     int     rt_val;
     va_list valist;
 
     funct   = SRAV;
-    shamt   = 0;
     vopt    = 5;
     if (set_rval) {
         va_start (valist, set_rval);
@@ -487,16 +483,14 @@ void gen_r_type_SRAV (int RD, int RS, int RT, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
-void gen_r_type_SRL (int RD, int RS, int RT, int set_rval, ...) {
+void gen_r_type_SRL (int RD, int RS, int RT, int shamt, int set_rval, ...) {
     int     funct;
-    int     shamt;
     int     vopt;
     int     rs_val;
     int     rt_val;
     va_list valist;
 
     funct   = SRL;
-    shamt   = 0;
     vopt    = 5;
     if (set_rval) {
         va_start (valist, set_rval);
@@ -510,16 +504,14 @@ void gen_r_type_SRL (int RD, int RS, int RT, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
-void gen_r_type_SRLV (int RD, int RS, int RT, int set_rval, ...) {
+void gen_r_type_SRLV (int RD, int RS, int RT, int shamt, int set_rval, ...) {
     int     funct;
-    int     shamt;
     int     vopt;
     int     rs_val;
     int     rt_val;
     va_list valist;
 
     funct   = SRLV;
-    shamt   = 0;
     vopt    = 5;
     if (set_rval) {
         va_start (valist, set_rval);
