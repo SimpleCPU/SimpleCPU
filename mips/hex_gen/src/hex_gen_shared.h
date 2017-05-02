@@ -67,7 +67,7 @@ void gen_r_type_MULT    (int, int, int, int, ...);
 void gen_r_type_MULTU   (int, int, int, int, ...);
 void gen_r_type_NOR     (int, int, int, int, ...);
 void gen_r_type_OR      (int, int, int, int, ...);
-void gen_r_type_SLL     (int, int, int, int, ...);
+void gen_r_type_SLL     (int, int, int, int, int, ...);
 void gen_r_type_SLLV    (int, int, int, int, ...);
 void gen_r_type_SLT     (int, int, int, int, ...);
 void gen_r_type_SLTU    (int, int, int, int, ...);
