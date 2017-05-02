@@ -77,7 +77,7 @@ void gen_r_type_SRL     (int, int, int, int, int, ...);
 void gen_r_type_SRLV    (int, int, int, int, int, ...);
 void gen_r_type_SUB     (int, int, int, int, ...);
 void gen_r_type_SUBU    (int, int, int, int, ...);
-void gen_r_type_SYSCALL (int, int, int, int, ...);
+void gen_r_type_SYSCALL ();
 void gen_r_type_XOR     (int, int, int, int, ...);
 
 #endif
