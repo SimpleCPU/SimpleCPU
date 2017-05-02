@@ -571,25 +571,21 @@ void gen_r_type_SUBU (int RD, int RS, int RT, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
-void gen_r_type_SYSCALL (int RD, int RS, int RT, int set_rval, ...) {
+void gen_r_type_SYSCALL () {
     int     funct;
     int     shamt;
     int     vopt;
-    int     rs_val;
-    int     rt_val;
-    va_list valist;
+    int     RD;
+    int     RS;
+    int     RT;
 
     funct   = SYSCALL;
     shamt   = 0;
     vopt    = 5;
-    if (set_rval) {
-        va_start (valist, set_rval);
-        rs_val  = va_arg (valist, int);
-        rt_val  = va_arg (valist, int);
-        va_end (valist);
-        //gen_i_type_ORI (RS, R0, rs_val);
-        //gen_i_type_ORI (RT, R0, rt_val);
-    }
+    RD      = 0;
+    RS      = 0;
+    RT      = 0;
+    
     make_room ();
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
@@ -615,4 +611,22 @@ void gen_r_type_XOR (int RD, int RS, int RT, int set_rval, ...) {
     }
     make_room ();
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
+}
+
+void gen_i_type_ADDI (int RT, int RS, int imm, int set_rval, ...) {
+    int     opcode;
+    int     vopt;
+    int     rs_val;
+    va_list valist;
+
+    opcode      = ADDI;
+    vopt        = 4;
+    if (imm > MAX_16_BIT_IMM) {
+        printf ("ERROR: Expecting a 16-bit IMM value\n");
+        printf ("Given IMM value (0x%08x) greater than maximum allowed value (0x%08x)\n\n", imm, MAX_16_BIT_IMM);
+        err_count++;
+        return;
+    }
+    make_room ();
+    gen_i_instr (vopt, opcode, RT, RS, imm);
 }

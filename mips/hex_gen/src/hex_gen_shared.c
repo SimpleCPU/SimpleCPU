@@ -20,4 +20,6 @@ void init_hex_gen () {
     }
     // Set instr_gen to 0
     instr_gen = 0;
+    // Set err_count to 0
+    err_count = 0;
 }
