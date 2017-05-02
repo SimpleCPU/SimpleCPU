@@ -24,6 +24,8 @@
 #define IMEM_SIZE 4096
 // Define to specify the number of architectural registers
 #define MIPS_REGS 32
+// Define to hold the maximum 16-bit value possible
+#define MAX_16_BIT_IMM 0xFFFF
 
 int PC[4096];           /* Program counter arr - index using PC */
 int instr[4096];        /* Stores hex value of the instruction  */
@@ -38,6 +40,8 @@ typedef struct CPU_State_Struct {
 extern CPU_State CURRENT_STATE;
 int instr_gen;          /* Keeps a count of the number of   */
                         /* instructions generated           */
+int err_count;          /* Keeps a count of the number of   */
+                        /* errors generated, if any         */
 
 #ifdef GEN_USER_TEST
 extern void gen_user_test ();
@@ -46,7 +50,7 @@ extern void gen_user_test ();
 void init_hex_gen ();
 void make_room ();
 void gen_r_instr (int, ...);
-void gen_i_instr ();
+void gen_i_instr (int, ...);
 void gen_j_instr ();
 int find_reg (int);
 int get_reg (int);

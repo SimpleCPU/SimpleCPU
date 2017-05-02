@@ -82,6 +82,7 @@ void gen_r_instr (int vopt, ...) {
         for (i = 0; i < 13; i++) {
             if (funct_val_r_type[i] == funct) {
                 funct_idx = i;
+                break;
             }
         }
     }
@@ -137,41 +138,61 @@ void print_assembled_i_instr (int opcode, int rs, int rt, int imm) {
     );
 }
 
-void gen_i_instr () {
+void gen_i_instr (int vopt, ...) {
     int     opcode;
     int     rs, rt;
     int     hex_instr;
     int     imm;
-    int     rand_opcode_idx;
-    rand_opcode_idx = rand()%17;
+    int     opcode_idx;
+    int     i;
+    va_list valist;
 
-    opcode  = opcode_val_i_type [rand_opcode_idx];
-    rt      = rand() % 32;
-    if ((opcode == BGEZ) || (opcode == BGEZAL) ||
-        (opcode == BLTZ) || (opcode == BLTZAL)
-    ) {
-        // This is true for the above mentioned branch variants.
-        // ISA specifies that if opcode = 0x1 then the instruction
-        // should further be decoded using the value present
-        // at [20:16] field (which is RT itself)
-        rt = opcode;
-        opcode = 0x1;
+    opcode_idx  = 0;
+    if (vopt) {
+        va_start (valist, vopt);
+        opcode  = va_arg (valist, int);
+        rt      = va_arg (valist, int);
+        rs      = va_arg (valist, int);
+        imm     = va_arg (valist, int);
+        va_end (valist);
 
+        for (i = 0; i < 17; i++) {
+            if (opcode_val_i_type[i] == opcode) {
+                opcode_idx = i;
+                break;
+            }
+        }
     }
-RS:
-    rs      = rand() % 32;
-IMM:    
-    imm     = rand() % 0xFFFF;   /* 16-bit signal */
+    else {
+        opcode_idx  = rand()%17;
+        opcode      = opcode_val_i_type [opcode_idx];
+        rt          = rand() % 32;
+        if ((opcode == BGEZ) || (opcode == BGEZAL) ||
+            (opcode == BLTZ) || (opcode == BLTZAL)
+        ) {
+            // This is true for the above mentioned branch variants.
+            // ISA specifies that if opcode = 0x1 then the instruction
+            // should further be decoded using the value present
+            // at [20:16] field (which is RT itself)
+            rt = opcode;
+            opcode = 0x1;
 
-    if ((opcode == LW) || (opcode == SW)) {
-        if ((check_ls_addr (rs, imm)) == 2) goto RS;
-        if ((check_ls_addr (rs, imm)) == 0) goto IMM;
+        }
+    RS:
+        rs      = rand() % 32;
+    IMM:    
+        imm     = rand() % 0xFFFF;   /* 16-bit signal */
+        if ((opcode == LW) || (opcode == SW)) {
+            if ((check_ls_addr (rs, imm)) == 2) goto RS;
+            if ((check_ls_addr (rs, imm)) == 0) goto IMM;
+        }
+        if ((opcode == BVAR) || (opcode == BEQ) ||
+            (opcode == BGTZ) || (opcode == BLEZ) ||
+            (opcode == BNE)) {
+            if ((check_brn_addr (imm)) == 0) goto IMM;
+        }
     }
-    if ((opcode == BVAR) || (opcode == BEQ) ||
-        (opcode == BGTZ) || (opcode == BLEZ) ||
-        (opcode == BNE)) {
-        if ((check_brn_addr (imm)) == 0) goto IMM;
-    }
+
     hex_instr = (opcode << 26) + (rs << 21) +
                 (rt << 16)     + imm;
 
@@ -182,7 +203,7 @@ IMM:
         update_cpu (0, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
-    print_assembled_i_instr (rand_opcode_idx, rs, rt, imm);
+    print_assembled_i_instr (opcode_idx, rs, rt, imm);
     instr_gen++;
 }
 
@@ -300,7 +321,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
                     else break;
             case 1: if (i_gen < num_i) {
                         make_room();
-                        gen_i_instr ();
+                        gen_i_instr (0);
                         i_gen++;
                         i++;
                         break;
