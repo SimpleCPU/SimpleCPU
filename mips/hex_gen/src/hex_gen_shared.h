@@ -80,4 +80,6 @@ void gen_r_type_SUBU    (int, int, int, int, ...);
 void gen_r_type_SYSCALL ();
 void gen_r_type_XOR     (int, int, int, int, ...);
 
+/* Declare all I-type instructions here */
+void gen_i_type_ADDI    (int, int, int, int, ...);
 #endif
