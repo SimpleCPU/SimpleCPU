@@ -39,3 +39,9 @@ int get_reg (int reg_val) {
   }
   return reg;
 }
+
+// The following function returns the current program
+// counter value. 
+uint32_t get_curr_PC () {
+    return CURRENT_STATE.PC;
+}
