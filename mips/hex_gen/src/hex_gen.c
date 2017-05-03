@@ -167,29 +167,55 @@ void gen_i_instr (int vopt, ...) {
         opcode_idx  = rand()%17;
         opcode      = opcode_val_i_type [opcode_idx];
         rt          = rand() % 32;
-        if ((opcode == BGEZ) || (opcode == BGEZAL) ||
-            (opcode == BLTZ) || (opcode == BLTZAL)
-        ) {
-            // This is true for the above mentioned branch variants.
-            // ISA specifies that if opcode = 0x1 then the instruction
-            // should further be decoded using the value present
-            // at [20:16] field (which is RT itself)
-            rt = opcode;
-            opcode = 0x1;
-
-        }
     RS:
         rs      = rand() % 32;
     IMM:    
         imm     = rand() % 0xFFFF;   /* 16-bit signal */
-        if ((opcode == LW) || (opcode == SW)) {
-            if ((check_ls_addr (rs, imm)) == 2) goto RS;
-            if ((check_ls_addr (rs, imm)) == 0) goto IMM;
+    }
+    if ((opcode == BGEZ) || (opcode == BGEZAL) ||
+        (opcode == BLTZ) || (opcode == BLTZAL)
+    ) {
+        // This is true for the above mentioned branch variants.
+        // ISA specifies that if opcode = 0x1 then the instruction
+        // should further be decoded using the value present
+        // at [20:16] field (which is RT itself)
+        rt = opcode;
+        opcode = 0x1;
+    }
+    if ((opcode == LW) || (opcode == SW)) {
+        if ((check_ls_addr (rs, imm)) == 2) {
+            // Report an error if the above was called with vopt set
+            if (vopt) {
+                printf ("ERROR: Unknown Load/Store Address generated\n");
+                printf ("R%d cannot satisy the load/store address constraints!\n\n", rs);
+            }
+            else {
+                goto RS;
+            }
         }
-        if ((opcode == BVAR) || (opcode == BEQ) ||
-            (opcode == BGTZ) || (opcode == BLEZ) ||
-            (opcode == BNE)) {
-            if ((check_brn_addr (imm)) == 0) goto IMM;
+        if ((check_ls_addr (rs, imm)) == 0) {
+            // Report an error if the above was called with vopt set
+            if (vopt) {
+                printf ("ERROR: Unknown Load/Store Address generated\n");
+                printf ("Given IMM value (0x%08x) cannot satisy the load/store address constraints!\n\n", imm);
+            }
+            else {
+                goto IMM;
+            }
+        }
+    }
+    if ((opcode == BVAR) || (opcode == BEQ)  ||
+        (opcode == BGTZ) || (opcode == BLEZ) ||
+        (opcode == BNE)) {
+        if ((check_brn_addr (imm)) == 0) {
+            // Report an error if the above was called with vopt set
+            if (vopt) {
+                printf ("ERROR: Unknown Branch Address generated\n");
+                printf ("Given IMM value (0x%08x) cannot satisy the load/store address constraints!\n\n", imm);
+            }
+            else {
+                goto IMM;
+            }
         }
     }
 
