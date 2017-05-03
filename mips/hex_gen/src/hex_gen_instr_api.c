@@ -8,30 +8,7 @@
 
 #include "hex_gen_shared.h"
 
-void gen_i_type_ORI    (int RT, int RS, int imm, int set_rval, ...) {
-    int     opcode;
-    int     vopt;
-    int     rs_val;
-    va_list valist;
-
-    opcode      = ORI;
-    vopt        = 4;
-    if (imm > MAX_16_BIT_IMM) {
-        printf ("ERROR: Expecting a 16-bit IMM value\n");
-        printf ("Given IMM value (0x%08x) greater than maximum allowed value (0x%08x)\n\n", imm, MAX_16_BIT_IMM);
-        err_count++;
-        return;
-    }
-    if (set_rval) {
-        va_start (valist, set_rval);
-        rs_val  = va_arg (valist, int);
-        va_end (valist);
-        gen_i_type_ORI (RS, R0, rs_val, 0);
-    }
-    make_room ();
-    gen_i_instr (vopt, opcode, RT, RS, imm);
-}
-
+// All R-type instruction generation functions
 void gen_r_type_ADD (int RD, int RS, int RT, int set_rval, ...) {
     int     funct;
     int     shamt;
@@ -637,6 +614,7 @@ void gen_r_type_XOR (int RD, int RS, int RT, int set_rval, ...) {
     gen_r_instr (vopt, funct, RD, RS, RT, shamt);
 }
 
+// All I-type instruction generation functions
 void gen_i_type_ADDI (int RT, int RS, int imm, int set_rval, ...) {
     int     opcode;
     int     vopt;
@@ -1052,6 +1030,30 @@ void gen_i_type_LW     (int RT, int RS, int imm, int set_rval, ...) {
     va_list valist;
 
     opcode      = LW;
+    vopt        = 4;
+    if (imm > MAX_16_BIT_IMM) {
+        printf ("ERROR: Expecting a 16-bit IMM value\n");
+        printf ("Given IMM value (0x%08x) greater than maximum allowed value (0x%08x)\n\n", imm, MAX_16_BIT_IMM);
+        err_count++;
+        return;
+    }
+    if (set_rval) {
+        va_start (valist, set_rval);
+        rs_val  = va_arg (valist, int);
+        va_end (valist);
+        gen_i_type_ORI (RS, R0, rs_val, 0);
+    }
+    make_room ();
+    gen_i_instr (vopt, opcode, RT, RS, imm);
+}
+
+void gen_i_type_ORI    (int RT, int RS, int imm, int set_rval, ...) {
+    int     opcode;
+    int     vopt;
+    int     rs_val;
+    va_list valist;
+
+    opcode      = ORI;
     vopt        = 4;
     if (imm > MAX_16_BIT_IMM) {
         printf ("ERROR: Expecting a 16-bit IMM value\n");
