@@ -28,7 +28,6 @@ void print_assembled_r_instr (int, int, int, int);
 void print_assembled_i_instr (int, int, int, int);
 void print_assembled_j_instr (int, int);
 void gen_end_seq ();
-void gen_instr_hex (int, int, int);
 void print_to_file (FILE*, FILE*);
 
 extern int prev_pc;
