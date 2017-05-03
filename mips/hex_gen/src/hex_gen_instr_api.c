@@ -667,7 +667,7 @@ void gen_i_type_ADDIU  (int RT, int RS, int imm, int set_rval, ...) {
     int     rs_val;
     va_list valist;
 
-    opcode      = ADDIU ;
+    opcode      = ADDIU;
     vopt        = 4;
     if (imm > MAX_16_BIT_IMM) {
         printf ("ERROR: Expecting a 16-bit IMM value\n");
@@ -691,7 +691,7 @@ void gen_i_type_ANDI   (int RT, int RS, int imm, int set_rval, ...) {
     int     rs_val;
     va_list valist;
 
-    opcode      = ANDI  ;
+    opcode      = ANDI;
     vopt        = 4;
     if (imm > MAX_16_BIT_IMM) {
         printf ("ERROR: Expecting a 16-bit IMM value\n");
@@ -715,7 +715,7 @@ void gen_i_type_BEQ    (int RT, int RS, int imm, int set_rval, ...) {
     int     rs_val;
     va_list valist;
 
-    opcode      = BEQ   ;
+    opcode      = BEQ;
     vopt        = 4;
     if (imm > MAX_16_BIT_IMM) {
         printf ("ERROR: Expecting a 16-bit IMM value\n");
