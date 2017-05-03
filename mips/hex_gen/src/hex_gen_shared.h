@@ -47,13 +47,18 @@ int err_count;          /* Keeps a count of the number of   */
 extern void gen_user_test ();
 #endif
 /* Declare all the globally used functions here */
+// Function to initialise the tool
 void init_hex_gen ();
+// Function to find sufficient space for instruction generation
 void make_room ();
+// Function to generate given R-type instruction
 void gen_r_instr (int, ...);
+// Function to generate given I-type instruction
 void gen_i_instr (int, ...);
+// Function to generate given J-type instruction
 void gen_j_instr ();
-int find_reg (int);
-int get_reg (int);
+// Function to randomly generate R, I or J instruction depending on the count
+void gen_instr_hex (int, int, int);
 
 /* Declare all R-type instructions here */
 void gen_r_type_ADD     (int, int, int, int, ...);
@@ -86,4 +91,28 @@ void gen_r_type_XOR     (int, int, int, int, ...);
 
 /* Declare all I-type instructions here */
 void gen_i_type_ADDI    (int, int, int, int, ...);
+void gen_i_type_ADDIU   (int, int, int, int, ...);
+void gen_i_type_ANDI    (int, int, int, int, ...);
+void gen_i_type_BEQ     (int, int, int, int, ...);
+void gen_i_type_BGTZ    (int, int, int, int, ...);
+void gen_i_type_BLEZ    (int, int, int, int, ...);
+void gen_i_type_BNE     (int, int, int, int, ...);
+void gen_i_type_BLTZ    (int, int, int, int, ...);
+void gen_i_type_BGEZ    (int, int, int, int, ...);
+void gen_i_type_BLTZAL  (int, int, int, int, ...);
+void gen_i_type_BGEZAL  (int, int, int, int, ...);
+void gen_i_type_LB      (int, int, int, int, ...);
+void gen_i_type_LBU     (int, int, int, int, ...);
+void gen_i_type_LH      (int, int, int, int, ...);
+void gen_i_type_LHU     (int, int, int, int, ...);
+void gen_i_type_LUI     (int, int, int, int, ...);
+void gen_i_type_LW      (int, int, int, int, ...);
+void gen_i_type_ORI     (int, int, int, int, ...);
+void gen_i_type_SB      (int, int, int, int, ...);
+void gen_i_type_SH      (int, int, int, int, ...);
+void gen_i_type_SW      (int, int, int, int, ...);
+void gen_i_type_SLTI    (int, int, int, int, ...);
+void gen_i_type_SLTIU   (int, int, int, int, ...);
+void gen_i_type_XORI    (int, int, int, int, ...);
+
 #endif
