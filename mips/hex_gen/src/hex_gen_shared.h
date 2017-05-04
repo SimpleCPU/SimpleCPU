@@ -38,6 +38,7 @@
 int PC[4096];           /* Program counter arr - index using PC */
 int instr[4096];        /* Stores hex value of the instruction  */
 int ls_addr[4096];      /* Stores the addresses used by load/store instr */
+int br_addr[4096];      /* Stores the addresses used by branch instrs    */
 
 typedef struct CPU_State_Struct {
   uint32_t PC;          /* Program counter */
@@ -72,8 +73,12 @@ void gen_instr_hex (int, int, int);
 uint32_t get_curr_PC ();
 // Function to return random load/store address
 // Note: The address returned is one of the already
-// used address used by the test
+// seen address by the test
 uint32_t get_rand_ls_addr ();
+// Function to return random branch address
+// Note: The address returned is one of the 
+// already seen address by the test
+uint32_t get_rand_br_addr ();
 
 /* Declare all R-type instructions here */
 void gen_r_type_ADD     (int, int, int, int, ...);

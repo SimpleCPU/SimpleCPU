@@ -37,7 +37,7 @@ int check_ls_addr (int rs, int imm) {
 
 /* The following function checks if the calculated address      */
 /* is a valid branch address. If the address is valid, the      */
-/* function returns 1.                                          */
+/* function returns the address else -1 is returned             */
 int check_brn_addr (int imm) {
     int shift_val = shift_const(14);
     int sign = (imm & 0x8000)>>15;
@@ -46,9 +46,9 @@ int check_brn_addr (int imm) {
     unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
     //printf("BRN ADDR is %x\n", addr);
     if ((addr > 0) && (addr < (0xF00)) && (PC[addr]==0)) {
-        return 1;
+        return addr;
     }
-    return 0;
+    return -1;
 }
 
 /* The following function checks if the calculated address           */
@@ -232,15 +232,20 @@ void gen_i_instr (int vopt, ...) {
     if ((opcode == BVAR) || (opcode == BEQ)  ||
         (opcode == BGTZ) || (opcode == BLEZ) ||
         (opcode == BNE)) {
-        if ((check_brn_addr (imm)) == 0) {
+        unsigned int addr = check_brn_addr (imm);
+        if ( addr == -1) {
             // Report an error if the above was called with vopt set
             if (vopt) {
                 printf ("ERROR: Unknown Branch Address generated\n");
-                printf ("Given IMM value (0x%08x) cannot satisy the load/store address constraints!\n\n", imm);
+                printf ("Given IMM value (0x%08x) cannot satisy the branch target address constraints!\n\n", imm);
             }
             else {
                 goto IMM;
             }
+        }
+        else {
+            // The address is fine. Add it to the BR array
+            br_addr[instr_gen+1] = addr;
         }
     }
 
