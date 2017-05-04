@@ -134,7 +134,8 @@ module top
         .op2 (32'h4),
         .cin (1'b0),
         .sum (next_seq_pc_pc_reg_fetch),
-        .carry (next_seq_pc_carry_pc_reg_fetch)
+        .carry (next_seq_pc_carry_pc_reg_fetch),
+        .v_flag ()
     );
     
     one_level_bpred #(1024) BPRED (
@@ -149,7 +150,7 @@ module top
         .brn_target_addr_bpred_o (next_pred_pc_fetch_iss)
     );
 
-    assign next_cal_pc_fetch_iss    = (branch_taken_ex & ~brn_pred_ex_mem) ? next_brn_eq_pc_ex_mem : 
+    assign next_cal_pc_fetch_iss    = (branch_taken_ex & ~(brn_pred_ex_mem & brn_corr_pred_ex_mem)) ? next_brn_eq_pc_ex_mem : 
                                       jump_iss_ex ? next_jmp_pc_iss_ex :
                                       next_seq_pc_pc_reg_fetch;
     // If the branch is predicted as not taken, we should pass the next
@@ -162,8 +163,11 @@ module top
     // when an incorrect prediction is made. This is already handled in
     // the hazard unit. So, we would already see the correct PC being
     // fetched and there wouldn't be any need to update the PC again.
-    assign next_pc_fetch_iss        = (~jump_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
-                                      brn_pred_fetch_iss ? next_pred_pc_fetch_iss : 
+    // But if the prediction is made in the shadow of the jump/branch 
+    // instruction then we need to suppress it. The jump instruction 
+    // would hav ealready been resolved and the correct PC should be used
+    assign next_pc_fetch_iss        = (~jump_ex_mem & ~branch_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
+                                      (~jump_iss_ex & ~branch_ex_mem & brn_pred_fetch_iss) ? next_pred_pc_fetch_iss : 
                                       next_cal_pc_fetch_iss;
 
     // ISSUE STAGE
@@ -227,7 +231,8 @@ module top
         .op2 (sign_imm_iss_ex << 2),
         .cin (1'b0),
         .sum (next_brn_eq_pc_iss_ex),
-        .carry (next_brn_eq_pc_carry_iss_ex)
+        .carry (next_brn_eq_pc_carry_iss_ex),
+        .v_flag ()
     );
 
     regfile R1 (
@@ -320,7 +325,7 @@ module top
     // Give the feedback of the prediction made by the predictor
     // 0 - incorrect prediction
     // 1 - correct prediction
-    assign brn_corr_pred_ex_mem    = ~(brn_pred_ex_mem ^ branch_taken_ex) & |(~(next_brn_eq_pc_ex_mem ^ next_pred_pc_ex_mem));
+    assign brn_corr_pred_ex_mem    = ((brn_pred_ex_mem == branch_taken_ex)) & ((next_brn_eq_pc_ex_mem == next_pred_pc_ex_mem));
 
     // The EX stage can force the flushing of the next instruction
     // depending on the prediction result. The below mentioned code
