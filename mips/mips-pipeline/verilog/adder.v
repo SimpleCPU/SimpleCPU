@@ -7,10 +7,12 @@ module adder
         input   wire [31:0]   op2,
         input   wire          cin,
         output  wire [31:0]   sum,
-        output  wire          carry
+        output  wire          carry,
+        output  wire          v_flag
     );
 
     wire[6:0]  cout;
+    assign     v_flag = carry ^ cout[6];
 
     carry_lookahead_adder CLA1(op1[3:0],   op2[3:0],    cin,     sum[3:0],   cout[0]);
     carry_lookahead_adder CLA2(op1[7:4],   op2[7:4],    cout[0], sum[7:4],   cout[1]);
