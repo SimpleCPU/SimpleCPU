@@ -11,12 +11,4 @@
 
 #include "hex_gen_shared.h"
 
-// Declare all the functions here
-// Function to get random Load/Store addr
-int get_rand_ls_addr ();
-// Function to get an already used Load/Store addr
-int get_ls_addr ();
-// Function to get a random PC address
-int get_rand_pc ();
-
 #endif
