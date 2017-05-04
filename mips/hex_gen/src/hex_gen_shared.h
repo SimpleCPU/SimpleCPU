@@ -70,6 +70,10 @@ void gen_j_instr ();
 void gen_instr_hex (int, int, int);
 // Function to return the current PC value
 uint32_t get_curr_PC ();
+// Function to return random load/store address
+// Note: The address returned is one of the already
+// used address used by the test
+uint32_t get_rand_ls_addr ();
 
 /* Declare all R-type instructions here */
 void gen_r_type_ADD     (int, int, int, int, ...);

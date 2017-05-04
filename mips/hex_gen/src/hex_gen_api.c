@@ -45,3 +45,26 @@ int get_reg (int reg_val) {
 uint32_t get_curr_PC () {
     return CURRENT_STATE.PC;
 }
+
+// Function to return random load/store address
+// Note: The address returned is one of the already
+// used address used by the test
+uint32_t get_rand_ls_addr () {
+    int rand_idx;
+    int i;
+    for (i = 0; i < 4096; i++) {
+        rand_idx = rand () % instr_gen;
+        if (ls_addr[rand_idx] != 0) {
+            return (uint32_t) ls_addr[rand_idx];
+        }
+    }
+    printf ("Failed to find a valid random entry!\n");
+    printf ("Returning the first valid entry.\n");
+    for (i = 0; i < 4096; i++) {
+        if (ls_addr[i] != 0) {
+            return (uint32_t) ls_addr[i];
+        }
+    }
+    printf ("No valid entry exists! Returning NULL\n");
+    return 0;
+}
