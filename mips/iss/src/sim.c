@@ -892,26 +892,6 @@ void process_instruction() {
         decode_i (instr_opcode);
 }
 
-/* The following function checks if the calculated address      */
-/* is a valid address. If the address is valid, the function    */
-/* returns 1.                                                   */
-int check_ls_addr (int rs, int imm) {
-    int shift_val = shift_const(16);
-    int sign = (imm & 0x8000)>>15;
-    imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = ((unsigned)CURRENT_STATE.REGS[rs] + (unsigned)imm);
-    //printf("[LS] RS is %x\tIMM is %x\t ADDR is %x\n", CURRENT_STATE.REGS[rs], imm, addr);
-    /* For now just check if the addr > 0   */
-    /* if true, then the instruction is ok  */
-    if ((addr > MEM_DATA_START) && (addr < (MEM_DATA_START + MEM_DATA_SIZE))) {
-        return 1;
-    }
-    else if ((unsigned)(CURRENT_STATE.REGS[rs] > (MEM_DATA_START + MEM_DATA_SIZE))) {
-        return 2;
-    }
-    return 0;
-}
-
 extern int compare_r (int pc, int instr, int rd, int rs, int rt, int rd_val, int rs_val, int rt_val) {
     int instr_model  = (int) instr_opcode;
     int rs_model     = (instr_model >> 21)   & 0x1F;

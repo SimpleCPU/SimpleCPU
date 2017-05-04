@@ -16,6 +16,26 @@ void update_cpu (int pc, int hex_instr) {
 }
 
 /* The following function checks if the calculated address      */
+/* is a valid address. If the address is valid, the function    */
+/* returns the addr.                                            */
+int check_ls_addr (int rs, int imm) {
+    int shift_val = shift_const(16);
+    int sign = (imm & 0x8000)>>15;
+    imm = (sign) ? (imm | shift_val) : imm;
+    unsigned int addr = ((unsigned)CURRENT_STATE.REGS[rs] + (unsigned)imm);
+    //printf("[LS] RS is %x\tIMM is %x\t ADDR is %x\n", CURRENT_STATE.REGS[rs], imm, addr);
+    /* For now just check if the addr > 0   */
+    /* if true, then the instruction is ok  */
+    if ((addr > MEM_DATA_START) && (addr < (MEM_DATA_START + MEM_DATA_SIZE))) {
+        return addr;
+    }
+    else if ((unsigned)(CURRENT_STATE.REGS[rs] > (MEM_DATA_START + MEM_DATA_SIZE))) {
+        return 2;
+    }
+    return 0;
+}
+
+/* The following function checks if the calculated address      */
 /* is a valid branch address. If the address is valid, the      */
 /* function returns 1.                                          */
 int check_brn_addr (int imm) {
@@ -183,7 +203,8 @@ void gen_i_instr (int vopt, ...) {
         opcode = 0x1;
     }
     if ((opcode == LW) || (opcode == SW)) {
-        if ((check_ls_addr (rs, imm)) == 2) {
+        unsigned int addr = check_ls_addr (rs, imm);
+        if (addr == 2) {
             // Report an error if the above was called with vopt set
             if (vopt) {
                 printf ("ERROR: Unknown Load/Store Address generated\n");
@@ -193,7 +214,7 @@ void gen_i_instr (int vopt, ...) {
                 goto RS;
             }
         }
-        if ((check_ls_addr (rs, imm)) == 0) {
+        else if (addr == 0) {
             // Report an error if the above was called with vopt set
             if (vopt) {
                 printf ("ERROR: Unknown Load/Store Address generated\n");
@@ -202,6 +223,10 @@ void gen_i_instr (int vopt, ...) {
             else {
                 goto IMM;
             }
+        }
+        else {
+            // The address is fine. Add it to the LS array
+            ls_addr[instr_gen+1] = addr;
         }
     }
     if ((opcode == BVAR) || (opcode == BEQ)  ||
