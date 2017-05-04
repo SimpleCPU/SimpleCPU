@@ -17,6 +17,7 @@ void init_hex_gen () {
     for (i = 0; i < IMEM_SIZE; i++) {
         PC[i] = 0x0;
         instr[i] = 0x0;
+        ls_addr[i] = 0x0;
     }
     // Set instr_gen to 0
     instr_gen = 0;

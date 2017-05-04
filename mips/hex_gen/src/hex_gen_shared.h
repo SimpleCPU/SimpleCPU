@@ -26,14 +26,23 @@
 #define MIPS_REGS 32
 // Define to hold the maximum 16-bit value possible
 #define MAX_16_BIT_IMM 0xFFFF
+// Defines the start of DATA section
+#define MEM_DATA_START 0x00001000
+// Defines the size of DATA section
+#define MEM_DATA_SIZE  0x00100000
+// Defines the start of TEXT section
+#define MEM_TEXT_START 0x00000000
+// Defines the size of TEXT section
+#define MEM_TEXT_SIZE  0x00000FFF
 
 int PC[4096];           /* Program counter arr - index using PC */
 int instr[4096];        /* Stores hex value of the instruction  */
+int ls_addr[4096];      /* Stores the addresses used by load/store instr */
 
 typedef struct CPU_State_Struct {
   uint32_t PC;          /* Program counter */
-  uint32_t REGS[32];    /* Register file. */
-  uint32_t HI, LO;      /* Special regs for mult/div. */
+  uint32_t REGS[32];    /* Register file   */
+  uint32_t HI, LO;      /* Special regs for mult/div */
 } CPU_State;
 
 /* Data Structure for Latch */
