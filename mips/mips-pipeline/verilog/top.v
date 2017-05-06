@@ -57,6 +57,8 @@ module top
     wire        jump_ex_mem;
     wire        branch_ex_mem;
     wire        branch_taken_ex;
+    wire        force_pc_update_ex;
+    wire[31:0]  force_pc_val_ex;
     wire        brn_pred_ex_mem;
     wire        brn_corr_pred_ex_mem;
     wire        reg_wr_ex_mem;
@@ -150,7 +152,8 @@ module top
         .brn_target_addr_bpred_o (next_pred_pc_fetch_iss)
     );
 
-    assign next_cal_pc_fetch_iss    = (branch_taken_ex & ~(brn_pred_ex_mem & brn_corr_pred_ex_mem)) ? next_brn_eq_pc_ex_mem : 
+    assign next_cal_pc_fetch_iss    = force_pc_update_ex ? force_pc_val_ex :
+                                      (branch_taken_ex & ~(brn_pred_ex_mem & brn_corr_pred_ex_mem)) ? next_brn_eq_pc_ex_mem : 
                                       jump_iss_ex ? next_jmp_pc_iss_ex :
                                       next_seq_pc_pc_reg_fetch;
     // If the branch is predicted as not taken, we should pass the next
@@ -326,6 +329,8 @@ module top
     // 0 - incorrect prediction
     // 1 - correct prediction
     assign brn_corr_pred_ex_mem    = ((brn_pred_ex_mem == branch_taken_ex)) & ((next_brn_eq_pc_ex_mem == next_pred_pc_ex_mem));
+    assign force_pc_update_ex      = branch_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem;
+    assign force_pc_val_ex         = branch_taken_ex ? next_brn_eq_pc_ex_mem : next_seq_pc_ex_mem;
 
     // The EX stage can force the flushing of the next instruction
     // depending on the prediction result. The below mentioned code
