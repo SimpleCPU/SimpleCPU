@@ -1,323 +1,2874 @@
 Generating the hex for the following set of instructions
 	   0 - R-Type instructions
 	   0 - I-Type instructions
-	 100 - J-Type instructions
+	 650 - J-Type instructions
 
-PC:00000000	INSTR:0c000222	 JAL 888     
-PC Update: PC[0] = 1	instr[0] = c000222
+RUN_BIT - TRUE
 [0] J Type instr generated - 0xc000222	
-PC:00000888	INSTR:08000067	 J 19c     
-PC Update: PC[888] = 1	instr[888] = 8000067
+PC:00000000	INSTR:0c000222	 JAL 888     
+JAL  0x222     
+
 [1] J Type instr generated - 0x8000067	
-PC:0000019c	INSTR:0c000128	 JAL 4a0     
-PC Update: PC[19c] = 1	instr[19c] = c000128
+PC:00000888	INSTR:08000067	 J 19c     
+J    0x67      
+
 [2] J Type instr generated - 0xc000128	
-PC:000004a0	INSTR:080002c2	 J b08     
-PC Update: PC[4a0] = 1	instr[4a0] = 80002c2
+PC:0000019c	INSTR:0c000128	 JAL 4a0     
+JAL  0x128     
+
 [3] J Type instr generated - 0x80002c2	
-PC:00000b08	INSTR:0c00007c	 JAL 1f0     
-PC Update: PC[b08] = 1	instr[b08] = c00007c
+PC:000004a0	INSTR:080002c2	 J b08     
+J    0x2c2     
+
 [4] J Type instr generated - 0xc00007c	
-PC:000001f0	INSTR:08000087	 J 21c     
-PC Update: PC[1f0] = 1	instr[1f0] = 8000087
+PC:00000b08	INSTR:0c00007c	 JAL 1f0     
+JAL  0x7c      
+
 [5] J Type instr generated - 0x8000087	
-PC:0000021c	INSTR:080002d6	 J b58     
-PC Update: PC[21c] = 1	instr[21c] = 80002d6
+PC:000001f0	INSTR:08000087	 J 21c     
+J    0x87      
+
 [6] J Type instr generated - 0x80002d6	
-PC:00000b58	INSTR:0c0000f5	 JAL 3d4     
-PC Update: PC[b58] = 1	instr[b58] = c0000f5
+PC:0000021c	INSTR:080002d6	 J b58     
+J    0x2d6     
+
 [7] J Type instr generated - 0xc0000f5	
-PC:000003d4	INSTR:0800006f	 J 1bc     
-PC Update: PC[3d4] = 1	instr[3d4] = 800006f
+PC:00000b58	INSTR:0c0000f5	 JAL 3d4     
+JAL  0xf5      
+
 [8] J Type instr generated - 0x800006f	
-PC:000001bc	INSTR:080002fc	 J bf0     
-PC Update: PC[1bc] = 1	instr[1bc] = 80002fc
+PC:000003d4	INSTR:0800006f	 J 1bc     
+J    0x6f      
+
 [9] J Type instr generated - 0x80002fc	
-PC:00000bf0	INSTR:080002a7	 J a9c     
-PC Update: PC[bf0] = 1	instr[bf0] = 80002a7
+PC:000001bc	INSTR:080002fc	 J bf0     
+J    0x2fc     
+
 [10] J Type instr generated - 0x80002a7	
-PC:00000a9c	INSTR:080003b1	 J ec4     
-PC Update: PC[a9c] = 1	instr[a9c] = 80003b1
+PC:00000bf0	INSTR:080002a7	 J a9c     
+J    0x2a7     
+
 [11] J Type instr generated - 0x80003b1	
-PC:00000ec4	INSTR:08000102	 J 408     
-PC Update: PC[ec4] = 1	instr[ec4] = 8000102
+PC:00000a9c	INSTR:080003b1	 J ec4     
+J    0x3b1     
+
 [12] J Type instr generated - 0x8000102	
-PC:00000408	INSTR:08000066	 J 198     
-PC Update: PC[408] = 1	instr[408] = 8000066
+PC:00000ec4	INSTR:08000102	 J 408     
+J    0x102     
+
 [13] J Type instr generated - 0x8000066	
+PC:00000408	INSTR:08000066	 J 198     
+J    0x66      
+
 PC:00000198	INSTR:08000001	 J 4       
-PC Update: PC[198] = 1	instr[198] = 8000001
-PC:00000004	INSTR:08000359	 J d64     
-PC Update: PC[4] = 1	instr[4] = 8000359
 [14] J Type instr generated - 0x8000359	
-PC:00000d64	INSTR:0800016d	 J 5b4     
-PC Update: PC[d64] = 1	instr[d64] = 800016d
+PC:00000004	INSTR:08000359	 J d64     
+J    0x359     
+
 [15] J Type instr generated - 0x800016d	
-PC:000005b4	INSTR:08000275	 J 9d4     
-PC Update: PC[5b4] = 1	instr[5b4] = 8000275
+PC:00000d64	INSTR:0800016d	 J 5b4     
+J    0x16d     
+
 [16] J Type instr generated - 0x8000275	
-PC:000009d4	INSTR:08000072	 J 1c8     
-PC Update: PC[9d4] = 1	instr[9d4] = 8000072
+PC:000005b4	INSTR:08000275	 J 9d4     
+J    0x275     
+
 [17] J Type instr generated - 0x8000072	
-PC:000001c8	INSTR:08000161	 J 584     
-PC Update: PC[1c8] = 1	instr[1c8] = 8000161
+PC:000009d4	INSTR:08000072	 J 1c8     
+J    0x72      
+
 [18] J Type instr generated - 0x8000161	
-PC:00000584	INSTR:080003bf	 J efc     
-PC Update: PC[584] = 1	instr[584] = 80003bf
+PC:000001c8	INSTR:08000161	 J 584     
+J    0x161     
+
 [19] J Type instr generated - 0x80003bf	
-PC:00000efc	INSTR:08000137	 J 4dc     
-PC Update: PC[efc] = 1	instr[efc] = 8000137
+PC:00000584	INSTR:080003bf	 J efc     
+J    0x3bf     
+
 [20] J Type instr generated - 0x8000137	
-PC:000004dc	INSTR:0c000367	 JAL d9c     
-PC Update: PC[4dc] = 1	instr[4dc] = c000367
+PC:00000efc	INSTR:08000137	 J 4dc     
+J    0x137     
+
 [21] J Type instr generated - 0xc000367	
-PC:00000d9c	INSTR:0c0000f8	 JAL 3e0     
-PC Update: PC[d9c] = 1	instr[d9c] = c0000f8
+PC:000004dc	INSTR:0c000367	 JAL d9c     
+JAL  0x367     
+
 [22] J Type instr generated - 0xc0000f8	
-PC:000003e0	INSTR:0c0000fc	 JAL 3f0     
-PC Update: PC[3e0] = 1	instr[3e0] = c0000fc
+PC:00000d9c	INSTR:0c0000f8	 JAL 3e0     
+JAL  0xf8      
+
 [23] J Type instr generated - 0xc0000fc	
-PC:000003f0	INSTR:08000132	 J 4c8     
-PC Update: PC[3f0] = 1	instr[3f0] = 8000132
+PC:000003e0	INSTR:0c0000fc	 JAL 3f0     
+JAL  0xfc      
+
 [24] J Type instr generated - 0x8000132	
-PC:000004c8	INSTR:0c000333	 JAL ccc     
-PC Update: PC[4c8] = 1	instr[4c8] = c000333
+PC:000003f0	INSTR:08000132	 J 4c8     
+J    0x132     
+
 [25] J Type instr generated - 0xc000333	
-PC:00000ccc	INSTR:08000003	 J c       
-PC Update: PC[ccc] = 1	instr[ccc] = 8000003
+PC:000004c8	INSTR:0c000333	 JAL ccc     
+JAL  0x333     
+
 [26] J Type instr generated - 0x8000003	
-PC:0000000c	INSTR:0800022a	 J 8a8     
-PC Update: PC[c] = 1	instr[c] = 800022a
+PC:00000ccc	INSTR:08000003	 J c       
+J    0x3       
+
 [27] J Type instr generated - 0x800022a	
-PC:000008a8	INSTR:0c000013	 JAL 4c      
-PC Update: PC[8a8] = 1	instr[8a8] = c000013
+PC:0000000c	INSTR:0800022a	 J 8a8     
+J    0x22a     
+
 [28] J Type instr generated - 0xc000013	
-PC:0000004c	INSTR:080001d1	 J 744     
-PC Update: PC[4c] = 1	instr[4c] = 80001d1
+PC:000008a8	INSTR:0c000013	 JAL 4c      
+JAL  0x13      
+
 [29] J Type instr generated - 0x80001d1	
-PC:00000744	INSTR:0c0001c4	 JAL 710     
-PC Update: PC[744] = 1	instr[744] = c0001c4
+PC:0000004c	INSTR:080001d1	 J 744     
+J    0x1d1     
+
 [30] J Type instr generated - 0xc0001c4	
-PC:00000710	INSTR:08000370	 J dc0     
-PC Update: PC[710] = 1	instr[710] = 8000370
+PC:00000744	INSTR:0c0001c4	 JAL 710     
+JAL  0x1c4     
+
 [31] J Type instr generated - 0x8000370	
-PC:00000dc0	INSTR:08000232	 J 8c8     
-PC Update: PC[dc0] = 1	instr[dc0] = 8000232
+PC:00000710	INSTR:08000370	 J dc0     
+J    0x370     
+
 [32] J Type instr generated - 0x8000232	
-PC:000008c8	INSTR:0800006a	 J 1a8     
-PC Update: PC[8c8] = 1	instr[8c8] = 800006a
+PC:00000dc0	INSTR:08000232	 J 8c8     
+J    0x232     
+
 [33] J Type instr generated - 0x800006a	
-PC:000001a8	INSTR:0c00028d	 JAL a34     
-PC Update: PC[1a8] = 1	instr[1a8] = c00028d
+PC:000008c8	INSTR:0800006a	 J 1a8     
+J    0x6a      
+
 [34] J Type instr generated - 0xc00028d	
-PC:00000a34	INSTR:080002ad	 J ab4     
-PC Update: PC[a34] = 1	instr[a34] = 80002ad
+PC:000001a8	INSTR:0c00028d	 JAL a34     
+JAL  0x28d     
+
 [35] J Type instr generated - 0x80002ad	
-PC:00000ab4	INSTR:0c00011a	 JAL 468     
-PC Update: PC[ab4] = 1	instr[ab4] = c00011a
+PC:00000a34	INSTR:080002ad	 J ab4     
+J    0x2ad     
+
 [36] J Type instr generated - 0xc00011a	
-PC:00000468	INSTR:0800036d	 J db4     
-PC Update: PC[468] = 1	instr[468] = 800036d
+PC:00000ab4	INSTR:0c00011a	 JAL 468     
+JAL  0x11a     
+
 [37] J Type instr generated - 0x800036d	
-PC:00000db4	INSTR:08000205	 J 814     
-PC Update: PC[db4] = 1	instr[db4] = 8000205
+PC:00000468	INSTR:0800036d	 J db4     
+J    0x36d     
+
 [38] J Type instr generated - 0x8000205	
-PC:00000814	INSTR:0c00021a	 JAL 868     
-PC Update: PC[814] = 1	instr[814] = c00021a
+PC:00000db4	INSTR:08000205	 J 814     
+J    0x205     
+
 [39] J Type instr generated - 0xc00021a	
-PC:00000868	INSTR:0c000319	 JAL c64     
-PC Update: PC[868] = 1	instr[868] = c000319
+PC:00000814	INSTR:0c00021a	 JAL 868     
+JAL  0x21a     
+
 [40] J Type instr generated - 0xc000319	
-PC:00000c64	INSTR:08000070	 J 1c0     
-PC Update: PC[c64] = 1	instr[c64] = 8000070
+PC:00000868	INSTR:0c000319	 JAL c64     
+JAL  0x319     
+
 [41] J Type instr generated - 0x8000070	
-PC:000001c0	INSTR:080003b7	 J edc     
-PC Update: PC[1c0] = 1	instr[1c0] = 80003b7
+PC:00000c64	INSTR:08000070	 J 1c0     
+J    0x70      
+
 [42] J Type instr generated - 0x80003b7	
-PC:00000edc	INSTR:080001bf	 J 6fc     
-PC Update: PC[edc] = 1	instr[edc] = 80001bf
+PC:000001c0	INSTR:080003b7	 J edc     
+J    0x3b7     
+
 [43] J Type instr generated - 0x80001bf	
-PC:000006fc	INSTR:08000266	 J 998     
-PC Update: PC[6fc] = 1	instr[6fc] = 8000266
+PC:00000edc	INSTR:080001bf	 J 6fc     
+J    0x1bf     
+
 [44] J Type instr generated - 0x8000266	
-PC:00000998	INSTR:08000247	 J 91c     
-PC Update: PC[998] = 1	instr[998] = 8000247
+PC:000006fc	INSTR:08000266	 J 998     
+J    0x266     
+
 [45] J Type instr generated - 0x8000247	
-PC:0000091c	INSTR:08000282	 J a08     
-PC Update: PC[91c] = 1	instr[91c] = 8000282
+PC:00000998	INSTR:08000247	 J 91c     
+J    0x247     
+
 [46] J Type instr generated - 0x8000282	
-PC:00000a08	INSTR:08000116	 J 458     
-PC Update: PC[a08] = 1	instr[a08] = 8000116
+PC:0000091c	INSTR:08000282	 J a08     
+J    0x282     
+
 [47] J Type instr generated - 0x8000116	
-PC:00000458	INSTR:0c00035a	 JAL d68     
-PC Update: PC[458] = 1	instr[458] = c00035a
+PC:00000a08	INSTR:08000116	 J 458     
+J    0x116     
+
 [48] J Type instr generated - 0xc00035a	
-PC:00000d68	INSTR:080002e2	 J b88     
-PC Update: PC[d68] = 1	instr[d68] = 80002e2
+PC:00000458	INSTR:0c00035a	 JAL d68     
+JAL  0x35a     
+
 [49] J Type instr generated - 0x80002e2	
-PC:00000b88	INSTR:0c000368	 JAL da0     
-PC Update: PC[b88] = 1	instr[b88] = c000368
+PC:00000d68	INSTR:080002e2	 J b88     
+J    0x2e2     
+
 [50] J Type instr generated - 0xc000368	
-PC:00000da0	INSTR:080000c1	 J 304     
-PC Update: PC[da0] = 1	instr[da0] = 80000c1
+PC:00000b88	INSTR:0c000368	 JAL da0     
+JAL  0x368     
+
 [51] J Type instr generated - 0x80000c1	
-PC:00000304	INSTR:0c000185	 JAL 614     
-PC Update: PC[304] = 1	instr[304] = c000185
+PC:00000da0	INSTR:080000c1	 J 304     
+J    0xc1      
+
 [52] J Type instr generated - 0xc000185	
-PC:00000614	INSTR:0c0003aa	 JAL ea8     
-PC Update: PC[614] = 1	instr[614] = c0003aa
+PC:00000304	INSTR:0c000185	 JAL 614     
+JAL  0x185     
+
 [53] J Type instr generated - 0xc0003aa	
-PC:00000ea8	INSTR:0800023a	 J 8e8     
-PC Update: PC[ea8] = 1	instr[ea8] = 800023a
+PC:00000614	INSTR:0c0003aa	 JAL ea8     
+JAL  0x3aa     
+
 [54] J Type instr generated - 0x800023a	
-PC:000008e8	INSTR:0c000110	 JAL 440     
-PC Update: PC[8e8] = 1	instr[8e8] = c000110
+PC:00000ea8	INSTR:0800023a	 J 8e8     
+J    0x23a     
+
 [55] J Type instr generated - 0xc000110	
-PC:00000440	INSTR:080000fd	 J 3f4     
-PC Update: PC[440] = 1	instr[440] = 80000fd
+PC:000008e8	INSTR:0c000110	 JAL 440     
+JAL  0x110     
+
 [56] J Type instr generated - 0x80000fd	
-PC:000003f4	INSTR:0c00034a	 JAL d28     
-PC Update: PC[3f4] = 1	instr[3f4] = c00034a
+PC:00000440	INSTR:080000fd	 J 3f4     
+J    0xfd      
+
 [57] J Type instr generated - 0xc00034a	
-PC:00000d28	INSTR:08000124	 J 490     
-PC Update: PC[d28] = 1	instr[d28] = 8000124
+PC:000003f4	INSTR:0c00034a	 JAL d28     
+JAL  0x34a     
+
 [58] J Type instr generated - 0x8000124	
-PC:00000490	INSTR:0c00034c	 JAL d30     
-PC Update: PC[490] = 1	instr[490] = c00034c
+PC:00000d28	INSTR:08000124	 J 490     
+J    0x124     
+
 [59] J Type instr generated - 0xc00034c	
-PC:00000d30	INSTR:0c00037b	 JAL dec     
-PC Update: PC[d30] = 1	instr[d30] = c00037b
+PC:00000490	INSTR:0c00034c	 JAL d30     
+JAL  0x34c     
+
 [60] J Type instr generated - 0xc00037b	
-PC:00000dec	INSTR:080001f0	 J 7c0     
-PC Update: PC[dec] = 1	instr[dec] = 80001f0
+PC:00000d30	INSTR:0c00037b	 JAL dec     
+JAL  0x37b     
+
 [61] J Type instr generated - 0x80001f0	
-PC:000007c0	INSTR:080003a0	 J e80     
-PC Update: PC[7c0] = 1	instr[7c0] = 80003a0
+PC:00000dec	INSTR:080001f0	 J 7c0     
+J    0x1f0     
+
 [62] J Type instr generated - 0x80003a0	
-PC:00000e80	INSTR:0c0003a2	 JAL e88     
-PC Update: PC[e80] = 1	instr[e80] = c0003a2
+PC:000007c0	INSTR:080003a0	 J e80     
+J    0x3a0     
+
 [63] J Type instr generated - 0xc0003a2	
-PC:00000e88	INSTR:08000206	 J 818     
-PC Update: PC[e88] = 1	instr[e88] = 8000206
+PC:00000e80	INSTR:0c0003a2	 JAL e88     
+JAL  0x3a2     
+
 [64] J Type instr generated - 0x8000206	
-PC:00000818	INSTR:08000180	 J 600     
-PC Update: PC[818] = 1	instr[818] = 8000180
+PC:00000e88	INSTR:08000206	 J 818     
+J    0x206     
+
 [65] J Type instr generated - 0x8000180	
-PC:00000600	INSTR:080002cc	 J b30     
-PC Update: PC[600] = 1	instr[600] = 80002cc
+PC:00000818	INSTR:08000180	 J 600     
+J    0x180     
+
 [66] J Type instr generated - 0x80002cc	
-PC:00000b30	INSTR:08000119	 J 464     
-PC Update: PC[b30] = 1	instr[b30] = 8000119
+PC:00000600	INSTR:080002cc	 J b30     
+J    0x2cc     
+
 [67] J Type instr generated - 0x8000119	
+PC:00000b30	INSTR:08000119	 J 464     
+J    0x119     
+
 PC:00000464	INSTR:08000004	 J 10      
-PC Update: PC[464] = 1	instr[464] = 8000004
-PC:00000010	INSTR:0c00018c	 JAL 630     
-PC Update: PC[10] = 1	instr[10] = c00018c
 [68] J Type instr generated - 0xc00018c	
-PC:00000630	INSTR:08000032	 J c8      
-PC Update: PC[630] = 1	instr[630] = 8000032
+PC:00000010	INSTR:0c00018c	 JAL 630     
+JAL  0x18c     
+
 [69] J Type instr generated - 0x8000032	
-PC:000000c8	INSTR:0c0000fa	 JAL 3e8     
-PC Update: PC[c8] = 1	instr[c8] = c0000fa
+PC:00000630	INSTR:08000032	 J c8      
+J    0x32      
+
 [70] J Type instr generated - 0xc0000fa	
-PC:000003e8	INSTR:080001a8	 J 6a0     
-PC Update: PC[3e8] = 1	instr[3e8] = 80001a8
+PC:000000c8	INSTR:0c0000fa	 JAL 3e8     
+JAL  0xfa      
+
 [71] J Type instr generated - 0x80001a8	
-PC:000006a0	INSTR:08000115	 J 454     
-PC Update: PC[6a0] = 1	instr[6a0] = 8000115
+PC:000003e8	INSTR:080001a8	 J 6a0     
+J    0x1a8     
+
 [72] J Type instr generated - 0x8000115	
+PC:000006a0	INSTR:08000115	 J 454     
+J    0x115     
+
 PC:00000454	INSTR:08000005	 J 14      
-PC Update: PC[454] = 1	instr[454] = 8000005
-PC:00000014	INSTR:0c000182	 JAL 608     
-PC Update: PC[14] = 1	instr[14] = c000182
 [73] J Type instr generated - 0xc000182	
-PC:00000608	INSTR:08000136	 J 4d8     
-PC Update: PC[608] = 1	instr[608] = 8000136
+PC:00000014	INSTR:0c000182	 JAL 608     
+JAL  0x182     
+
 [74] J Type instr generated - 0x8000136	
+PC:00000608	INSTR:08000136	 J 4d8     
+J    0x136     
+
 PC:000004d8	INSTR:08000006	 J 18      
-PC Update: PC[4d8] = 1	instr[4d8] = 8000006
-PC:00000018	INSTR:0c00017f	 JAL 5fc     
-PC Update: PC[18] = 1	instr[18] = c00017f
 [75] J Type instr generated - 0xc00017f	
+PC:00000018	INSTR:0c00017f	 JAL 5fc     
+JAL  0x17f     
+
 PC:000005fc	INSTR:08000007	 J 1c      
-PC Update: PC[5fc] = 1	instr[5fc] = 8000007
-PC:0000001c	INSTR:0c000085	 JAL 214     
-PC Update: PC[1c] = 1	instr[1c] = c000085
 [76] J Type instr generated - 0xc000085	
-PC:00000214	INSTR:0c000025	 JAL 94      
-PC Update: PC[214] = 1	instr[214] = c000025
+PC:0000001c	INSTR:0c000085	 JAL 214     
+JAL  0x85      
+
 [77] J Type instr generated - 0xc000025	
-PC:00000094	INSTR:0c0000d7	 JAL 35c     
-PC Update: PC[94] = 1	instr[94] = c0000d7
+PC:00000214	INSTR:0c000025	 JAL 94      
+JAL  0x25      
+
 [78] J Type instr generated - 0xc0000d7	
-PC:0000035c	INSTR:0c000100	 JAL 400     
-PC Update: PC[35c] = 1	instr[35c] = c000100
+PC:00000094	INSTR:0c0000d7	 JAL 35c     
+JAL  0xd7      
+
 [79] J Type instr generated - 0xc000100	
-PC:00000400	INSTR:080001cb	 J 72c     
-PC Update: PC[400] = 1	instr[400] = 80001cb
+PC:0000035c	INSTR:0c000100	 JAL 400     
+JAL  0x100     
+
 [80] J Type instr generated - 0x80001cb	
-PC:0000072c	INSTR:0c000130	 JAL 4c0     
-PC Update: PC[72c] = 1	instr[72c] = c000130
+PC:00000400	INSTR:080001cb	 J 72c     
+J    0x1cb     
+
 [81] J Type instr generated - 0xc000130	
-PC:000004c0	INSTR:0c000086	 JAL 218     
-PC Update: PC[4c0] = 1	instr[4c0] = c000086
+PC:0000072c	INSTR:0c000130	 JAL 4c0     
+JAL  0x130     
+
 [82] J Type instr generated - 0xc000086	
+PC:000004c0	INSTR:0c000086	 JAL 218     
+JAL  0x86      
+
 PC:00000218	INSTR:08000008	 J 20      
-PC Update: PC[218] = 1	instr[218] = 8000008
-PC:00000020	INSTR:08000079	 J 1e4     
-PC Update: PC[20] = 1	instr[20] = 8000079
 [83] J Type instr generated - 0x8000079	
-PC:000001e4	INSTR:0c00023f	 JAL 8fc     
-PC Update: PC[1e4] = 1	instr[1e4] = c00023f
+PC:00000020	INSTR:08000079	 J 1e4     
+J    0x79      
+
 [84] J Type instr generated - 0xc00023f	
-PC:000008fc	INSTR:08000142	 J 508     
-PC Update: PC[8fc] = 1	instr[8fc] = 8000142
+PC:000001e4	INSTR:0c00023f	 JAL 8fc     
+JAL  0x23f     
+
 [85] J Type instr generated - 0x8000142	
-PC:00000508	INSTR:0c00009a	 JAL 268     
-PC Update: PC[508] = 1	instr[508] = c00009a
+PC:000008fc	INSTR:08000142	 J 508     
+J    0x142     
+
 [86] J Type instr generated - 0xc00009a	
-PC:00000268	INSTR:0c0000fe	 JAL 3f8     
-PC Update: PC[268] = 1	instr[268] = c0000fe
+PC:00000508	INSTR:0c00009a	 JAL 268     
+JAL  0x9a      
+
 [87] J Type instr generated - 0xc0000fe	
-PC:000003f8	INSTR:080000aa	 J 2a8     
-PC Update: PC[3f8] = 1	instr[3f8] = 80000aa
+PC:00000268	INSTR:0c0000fe	 JAL 3f8     
+JAL  0xfe      
+
 [88] J Type instr generated - 0x80000aa	
-PC:000002a8	INSTR:0c00013d	 JAL 4f4     
-PC Update: PC[2a8] = 1	instr[2a8] = c00013d
+PC:000003f8	INSTR:080000aa	 J 2a8     
+J    0xaa      
+
 [89] J Type instr generated - 0xc00013d	
-PC:000004f4	INSTR:08000092	 J 248     
-PC Update: PC[4f4] = 1	instr[4f4] = 8000092
+PC:000002a8	INSTR:0c00013d	 JAL 4f4     
+JAL  0x13d     
+
 [90] J Type instr generated - 0x8000092	
-PC:00000248	INSTR:080000bb	 J 2ec     
-PC Update: PC[248] = 1	instr[248] = 80000bb
+PC:000004f4	INSTR:08000092	 J 248     
+J    0x92      
+
 [91] J Type instr generated - 0x80000bb	
-PC:000002ec	INSTR:0c000034	 JAL d0      
-PC Update: PC[2ec] = 1	instr[2ec] = c000034
+PC:00000248	INSTR:080000bb	 J 2ec     
+J    0xbb      
+
 [92] J Type instr generated - 0xc000034	
-PC:000000d0	INSTR:0c000012	 JAL 48      
-PC Update: PC[d0] = 1	instr[d0] = c000012
+PC:000002ec	INSTR:0c000034	 JAL d0      
+JAL  0x34      
+
 [93] J Type instr generated - 0xc000012	
+PC:000000d0	INSTR:0c000012	 JAL 48      
+JAL  0x12      
+
 PC:00000048	INSTR:08000009	 J 24      
-PC Update: PC[48] = 1	instr[48] = 8000009
-PC:00000024	INSTR:0800035b	 J d6c     
-PC Update: PC[24] = 1	instr[24] = 800035b
 [94] J Type instr generated - 0x800035b	
-PC:00000d6c	INSTR:0800011f	 J 47c     
-PC Update: PC[d6c] = 1	instr[d6c] = 800011f
+PC:00000024	INSTR:0800035b	 J d6c     
+J    0x35b     
+
 [95] J Type instr generated - 0x800011f	
-PC:0000047c	INSTR:08000211	 J 844     
-PC Update: PC[47c] = 1	instr[47c] = 8000211
+PC:00000d6c	INSTR:0800011f	 J 47c     
+J    0x11f     
+
 [96] J Type instr generated - 0x8000211	
-PC:00000844	INSTR:080000e9	 J 3a4     
-PC Update: PC[844] = 1	instr[844] = 80000e9
+PC:0000047c	INSTR:08000211	 J 844     
+J    0x211     
+
 [97] J Type instr generated - 0x80000e9	
-PC:000003a4	INSTR:080000ec	 J 3b0     
-PC Update: PC[3a4] = 1	instr[3a4] = 80000ec
+PC:00000844	INSTR:080000e9	 J 3a4     
+J    0xe9      
+
 [98] J Type instr generated - 0x80000ec	
-PC:000003b0	INSTR:0c00038a	 JAL e28     
-PC Update: PC[3b0] = 1	instr[3b0] = c00038a
+PC:000003a4	INSTR:080000ec	 J 3b0     
+J    0xec      
+
 [99] J Type instr generated - 0xc00038a	
-PC Update: PC[e28] = 1	instr[e28] = 2402000a
-PC:00000e28	INSTR:2402000a	 SLTU R0 , R2 , 10
-PC Update: PC[e2c] = 1	instr[e2c] = c
-PC:00000e2c	INSTR:0000000c	 SYSCALL
+PC:000003b0	INSTR:0c00038a	 JAL e28     
+JAL  0x38a     
+
+[100] J Type instr generated - 0xc000035	
+PC:00000e28	INSTR:0c000035	 JAL d4      
+JAL  0x35      
+
+[101] J Type instr generated - 0x8000344	
+PC:000000d4	INSTR:08000344	 J d10     
+J    0x344     
+
+[102] J Type instr generated - 0x8000279	
+PC:00000d10	INSTR:08000279	 J 9e4     
+J    0x279     
+
+[103] J Type instr generated - 0xc0000a9	
+PC:000009e4	INSTR:0c0000a9	 JAL 2a4     
+JAL  0xa9      
+
+PC:000002a4	INSTR:0800000a	 J 28      
+[104] J Type instr generated - 0xc00022c	
+PC:00000028	INSTR:0c00022c	 JAL 8b0     
+JAL  0x22c     
+
+[105] J Type instr generated - 0x8000296	
+PC:000008b0	INSTR:08000296	 J a58     
+J    0x296     
+
+[106] J Type instr generated - 0x80002dc	
+PC:00000a58	INSTR:080002dc	 J b70     
+J    0x2dc     
+
+[107] J Type instr generated - 0x8000369	
+PC:00000b70	INSTR:08000369	 J da4     
+J    0x369     
+
+[108] J Type instr generated - 0x80002bc	
+PC:00000da4	INSTR:080002bc	 J af0     
+J    0x2bc     
+
+[109] J Type instr generated - 0xc0000bf	
+PC:00000af0	INSTR:0c0000bf	 JAL 2fc     
+JAL  0xbf      
+
+[110] J Type instr generated - 0xc000203	
+PC:000002fc	INSTR:0c000203	 JAL 80c     
+JAL  0x203     
+
+[111] J Type instr generated - 0xc000045	
+PC:0000080c	INSTR:0c000045	 JAL 114     
+JAL  0x45      
+
+[112] J Type instr generated - 0x8000053	
+PC:00000114	INSTR:08000053	 J 14c     
+J    0x53      
+
+[113] J Type instr generated - 0xc000159	
+PC:0000014c	INSTR:0c000159	 JAL 564     
+JAL  0x159     
+
+[114] J Type instr generated - 0x80001ae	
+PC:00000564	INSTR:080001ae	 J 6b8     
+J    0x1ae     
+
+[115] J Type instr generated - 0xc00024a	
+PC:000006b8	INSTR:0c00024a	 JAL 928     
+JAL  0x24a     
+
+[116] J Type instr generated - 0xc0000b2	
+PC:00000928	INSTR:0c0000b2	 JAL 2c8     
+JAL  0xb2      
+
+[117] J Type instr generated - 0xc000158	
+PC:000002c8	INSTR:0c000158	 JAL 560     
+JAL  0x158     
+
+PC:00000560	INSTR:0800000b	 J 2c      
+[118] J Type instr generated - 0xc000113	
+PC:0000002c	INSTR:0c000113	 JAL 44c     
+JAL  0x113     
+
+[119] J Type instr generated - 0xc00016c	
+PC:0000044c	INSTR:0c00016c	 JAL 5b0     
+JAL  0x16c     
+
+PC:000005b0	INSTR:0800000c	 J 30      
+[120] J Type instr generated - 0x800024c	
+PC:00000030	INSTR:0800024c	 J 930     
+J    0x24c     
+
+[121] J Type instr generated - 0x80000d1	
+PC:00000930	INSTR:080000d1	 J 344     
+J    0xd1      
+
+[122] J Type instr generated - 0xc0003b9	
+PC:00000344	INSTR:0c0003b9	 JAL ee4     
+JAL  0x3b9     
+
+[123] J Type instr generated - 0xc000274	
+PC:00000ee4	INSTR:0c000274	 JAL 9d0     
+JAL  0x274     
+
+PC:000009d0	INSTR:0800000d	 J 34      
+[124] J Type instr generated - 0xc000399	
+PC:00000034	INSTR:0c000399	 JAL e64     
+JAL  0x399     
+
+[125] J Type instr generated - 0x80001ac	
+PC:00000e64	INSTR:080001ac	 J 6b0     
+J    0x1ac     
+
+[126] J Type instr generated - 0x8000309	
+PC:000006b0	INSTR:08000309	 J c24     
+J    0x309     
+
+[127] J Type instr generated - 0xc000083	
+PC:00000c24	INSTR:0c000083	 JAL 20c     
+JAL  0x83      
+
+[128] J Type instr generated - 0x80000c7	
+PC:0000020c	INSTR:080000c7	 J 31c     
+J    0xc7      
+
+[129] J Type instr generated - 0x80001e1	
+PC:0000031c	INSTR:080001e1	 J 784     
+J    0x1e1     
+
+[130] J Type instr generated - 0x8000015	
+PC:00000784	INSTR:08000015	 J 54      
+J    0x15      
+
+[131] J Type instr generated - 0x800019f	
+PC:00000054	INSTR:0800019f	 J 67c     
+J    0x19f     
+
+[132] J Type instr generated - 0x80002ca	
+PC:0000067c	INSTR:080002ca	 J b28     
+J    0x2ca     
+
+[133] J Type instr generated - 0xc0003b8	
+PC:00000b28	INSTR:0c0003b8	 JAL ee0     
+JAL  0x3b8     
+
+PC:00000ee0	INSTR:0800000e	 J 38      
+[134] J Type instr generated - 0x8000018	
+PC:00000038	INSTR:08000018	 J 60      
+J    0x18      
+
+[135] J Type instr generated - 0xc00020d	
+PC:00000060	INSTR:0c00020d	 JAL 834     
+JAL  0x20d     
+
+[136] J Type instr generated - 0xc00001a	
+PC:00000834	INSTR:0c00001a	 JAL 68      
+JAL  0x1a      
+
+[137] J Type instr generated - 0x800031b	
+PC:00000068	INSTR:0800031b	 J c6c     
+J    0x31b     
+
+[138] J Type instr generated - 0x800006d	
+PC:00000c6c	INSTR:0800006d	 J 1b4     
+J    0x6d      
+
+[139] J Type instr generated - 0xc00005f	
+PC:000001b4	INSTR:0c00005f	 JAL 17c     
+JAL  0x5f      
+
+[140] J Type instr generated - 0x8000051	
+PC:0000017c	INSTR:08000051	 J 144     
+J    0x51      
+
+[141] J Type instr generated - 0x80003a8	
+PC:00000144	INSTR:080003a8	 J ea0     
+J    0x3a8     
+
+[142] J Type instr generated - 0xc00027c	
+PC:00000ea0	INSTR:0c00027c	 JAL 9f0     
+JAL  0x27c     
+
+[143] J Type instr generated - 0xc00018b	
+PC:000009f0	INSTR:0c00018b	 JAL 62c     
+JAL  0x18b     
+
+PC:0000062c	INSTR:0800000f	 J 3c      
+[144] J Type instr generated - 0x800033e	
+PC:0000003c	INSTR:0800033e	 J cf8     
+J    0x33e     
+
+[145] J Type instr generated - 0x800023b	
+PC:00000cf8	INSTR:0800023b	 J 8ec     
+J    0x23b     
+
+[146] J Type instr generated - 0x800026b	
+PC:000008ec	INSTR:0800026b	 J 9ac     
+J    0x26b     
+
+[147] J Type instr generated - 0x8000189	
+PC:000009ac	INSTR:08000189	 J 624     
+J    0x189     
+
+[148] J Type instr generated - 0x8000307	
+PC:00000624	INSTR:08000307	 J c1c     
+J    0x307     
+
+[149] J Type instr generated - 0xc00018f	
+PC:00000c1c	INSTR:0c00018f	 JAL 63c     
+JAL  0x18f     
+
+[150] J Type instr generated - 0x80002a5	
+PC:0000063c	INSTR:080002a5	 J a94     
+J    0x2a5     
+
+[151] J Type instr generated - 0x800007d	
+PC:00000a94	INSTR:0800007d	 J 1f4     
+J    0x7d      
+
+[152] J Type instr generated - 0x8000326	
+PC:000001f4	INSTR:08000326	 J c98     
+J    0x326     
+
+[153] J Type instr generated - 0xc000364	
+PC:00000c98	INSTR:0c000364	 JAL d90     
+JAL  0x364     
+
+[154] J Type instr generated - 0xc000041	
+PC:00000d90	INSTR:0c000041	 JAL 104     
+JAL  0x41      
+
+[155] J Type instr generated - 0xc0002d8	
+PC:00000104	INSTR:0c0002d8	 JAL b60     
+JAL  0x2d8     
+
+[156] J Type instr generated - 0xc000031	
+PC:00000b60	INSTR:0c000031	 JAL c4      
+JAL  0x31      
+
+PC:000000c4	INSTR:08000010	 J 40      
+[157] J Type instr generated - 0x80000d8	
+PC:00000040	INSTR:080000d8	 J 360     
+J    0xd8      
+
+[158] J Type instr generated - 0x8000058	
+PC:00000360	INSTR:08000058	 J 160     
+J    0x58      
+
+[159] J Type instr generated - 0xc00031d	
+PC:00000160	INSTR:0c00031d	 JAL c74     
+JAL  0x31d     
+
+[160] J Type instr generated - 0x80001fd	
+PC:00000c74	INSTR:080001fd	 J 7f4     
+J    0x1fd     
+
+[161] J Type instr generated - 0x80000ab	
+PC:000007f4	INSTR:080000ab	 J 2ac     
+J    0xab      
+
+[162] J Type instr generated - 0x8000011	
+PC:000002ac	INSTR:08000011	 J 44      
+J    0x11      
+
+PC:00000044	INSTR:08000016	 J 58      
+[163] J Type instr generated - 0x8000144	
+PC:00000058	INSTR:08000144	 J 510     
+J    0x144     
+
+[164] J Type instr generated - 0x80000a8	
+PC:00000510	INSTR:080000a8	 J 2a0     
+J    0xa8      
+
+PC:000002a0	INSTR:0800001b	 J 6c      
+[165] J Type instr generated - 0xc000375	
+PC:0000006c	INSTR:0c000375	 JAL dd4     
+JAL  0x375     
+
+[166] J Type instr generated - 0x800006c	
+PC:00000dd4	INSTR:0800006c	 J 1b0     
+J    0x6c      
+
+PC:000001b0	INSTR:0800001c	 J 70      
+[167] J Type instr generated - 0xc000126	
+PC:00000070	INSTR:0c000126	 JAL 498     
+JAL  0x126     
+
+[168] J Type instr generated - 0xc000181	
+PC:00000498	INSTR:0c000181	 JAL 604     
+JAL  0x181     
+
+PC:00000604	INSTR:0800001d	 J 74      
+[169] J Type instr generated - 0x80002d2	
+PC:00000074	INSTR:080002d2	 J b48     
+J    0x2d2     
+
+[170] J Type instr generated - 0xc00003d	
+PC:00000b48	INSTR:0c00003d	 JAL f4      
+JAL  0x3d      
+
+[171] J Type instr generated - 0x80000e1	
+PC:000000f4	INSTR:080000e1	 J 384     
+J    0xe1      
+
+[172] J Type instr generated - 0x8000349	
+PC:00000384	INSTR:08000349	 J d24     
+J    0x349     
+
+PC:00000d24	INSTR:0800001e	 J 78      
+[173] J Type instr generated - 0x8000027	
+PC:00000078	INSTR:08000027	 J 9c      
+J    0x27      
+
+[174] J Type instr generated - 0xc0001ec	
+PC:0000009c	INSTR:0c0001ec	 JAL 7b0     
+JAL  0x1ec     
+
+[175] J Type instr generated - 0xc0000fb	
+PC:000007b0	INSTR:0c0000fb	 JAL 3ec     
+JAL  0xfb      
+
+PC:000003ec	INSTR:0800001f	 J 7c      
+[176] J Type instr generated - 0x80002ef	
+PC:0000007c	INSTR:080002ef	 J bbc     
+J    0x2ef     
+
+[177] J Type instr generated - 0xc000188	
+PC:00000bbc	INSTR:0c000188	 JAL 620     
+JAL  0x188     
+
+PC:00000620	INSTR:08000020	 J 80      
+[178] J Type instr generated - 0xc0002a9	
+PC:00000080	INSTR:0c0002a9	 JAL aa4     
+JAL  0x2a9     
+
+[179] J Type instr generated - 0x80001c0	
+PC:00000aa4	INSTR:080001c0	 J 700     
+J    0x1c0     
+
+[180] J Type instr generated - 0x80000d9	
+PC:00000700	INSTR:080000d9	 J 364     
+J    0xd9      
+
+[181] J Type instr generated - 0x800010d	
+PC:00000364	INSTR:0800010d	 J 434     
+J    0x10d     
+
+[182] J Type instr generated - 0xc000033	
+PC:00000434	INSTR:0c000033	 JAL cc      
+JAL  0x33      
+
+PC:000000cc	INSTR:08000021	 J 84      
+[183] J Type instr generated - 0x80000c9	
+PC:00000084	INSTR:080000c9	 J 324     
+J    0xc9      
+
+[184] J Type instr generated - 0x80001f4	
+PC:00000324	INSTR:080001f4	 J 7d0     
+J    0x1f4     
+
+[185] J Type instr generated - 0xc00034d	
+PC:000007d0	INSTR:0c00034d	 JAL d34     
+JAL  0x34d     
+
+[186] J Type instr generated - 0x8000226	
+PC:00000d34	INSTR:08000226	 J 898     
+J    0x226     
+
+[187] J Type instr generated - 0x800026a	
+PC:00000898	INSTR:0800026a	 J 9a8     
+J    0x26a     
+
+PC:000009a8	INSTR:08000022	 J 88      
+[188] J Type instr generated - 0x800005e	
+PC:00000088	INSTR:0800005e	 J 178     
+J    0x5e      
+
+PC:00000178	INSTR:08000023	 J 8c      
+[189] J Type instr generated - 0x800014c	
+PC:0000008c	INSTR:0800014c	 J 530     
+J    0x14c     
+
+[190] J Type instr generated - 0xc00009e	
+PC:00000530	INSTR:0c00009e	 JAL 278     
+JAL  0x9e      
+
+[191] J Type instr generated - 0x80002af	
+PC:00000278	INSTR:080002af	 J abc     
+J    0x2af     
+
+[192] J Type instr generated - 0x800003c	
+PC:00000abc	INSTR:0800003c	 J f0      
+J    0x3c      
+
+PC:000000f0	INSTR:08000028	 J a0      
+[193] J Type instr generated - 0x8000264	
+PC:000000a0	INSTR:08000264	 J 990     
+J    0x264     
+
+[194] J Type instr generated - 0xc000336	
+PC:00000990	INSTR:0c000336	 JAL cd8     
+JAL  0x336     
+
+[195] J Type instr generated - 0x80001b1	
+PC:00000cd8	INSTR:080001b1	 J 6c4     
+J    0x1b1     
+
+[196] J Type instr generated - 0xc00006e	
+PC:000006c4	INSTR:0c00006e	 JAL 1b8     
+JAL  0x6e      
+
+PC:000001b8	INSTR:08000029	 J a4      
+[197] J Type instr generated - 0x8000355	
+PC:000000a4	INSTR:08000355	 J d54     
+J    0x355     
+
+[198] J Type instr generated - 0xc0002ce	
+PC:00000d54	INSTR:0c0002ce	 JAL b38     
+JAL  0x2ce     
+
+[199] J Type instr generated - 0x80002b6	
+PC:00000b38	INSTR:080002b6	 J ad8     
+J    0x2b6     
+
+[200] J Type instr generated - 0x80000f9	
+PC:00000ad8	INSTR:080000f9	 J 3e4     
+J    0xf9      
+
+PC:000003e4	INSTR:0800002a	 J a8      
+[201] J Type instr generated - 0xc0003b5	
+PC:000000a8	INSTR:0c0003b5	 JAL ed4     
+JAL  0x3b5     
+
+[202] J Type instr generated - 0xc0002d9	
+PC:00000ed4	INSTR:0c0002d9	 JAL b64     
+JAL  0x2d9     
+
+[203] J Type instr generated - 0xc00016e	
+PC:00000b64	INSTR:0c00016e	 JAL 5b8     
+JAL  0x16e     
+
+[204] J Type instr generated - 0xc000311	
+PC:000005b8	INSTR:0c000311	 JAL c44     
+JAL  0x311     
+
+[205] J Type instr generated - 0x8000225	
+PC:00000c44	INSTR:08000225	 J 894     
+J    0x225     
+
+PC:00000894	INSTR:0800002b	 J ac      
+[206] J Type instr generated - 0x80000ea	
+PC:000000ac	INSTR:080000ea	 J 3a8     
+J    0xea      
+
+[207] J Type instr generated - 0x8000187	
+PC:000003a8	INSTR:08000187	 J 61c     
+J    0x187     
+
+PC:0000061c	INSTR:0800002c	 J b0      
+[208] J Type instr generated - 0xc0003ac	
+PC:000000b0	INSTR:0c0003ac	 JAL eb0     
+JAL  0x3ac     
+
+[209] J Type instr generated - 0xc0002b0	
+PC:00000eb0	INSTR:0c0002b0	 JAL ac0     
+JAL  0x2b0     
+
+[210] J Type instr generated - 0xc00021e	
+PC:00000ac0	INSTR:0c00021e	 JAL 878     
+JAL  0x21e     
+
+[211] J Type instr generated - 0x8000165	
+PC:00000878	INSTR:08000165	 J 594     
+J    0x165     
+
+[212] J Type instr generated - 0xc00027d	
+PC:00000594	INSTR:0c00027d	 JAL 9f4     
+JAL  0x27d     
+
+[213] J Type instr generated - 0xc0001be	
+PC:000009f4	INSTR:0c0001be	 JAL 6f8     
+JAL  0x1be     
+
+PC:000006f8	INSTR:0800002d	 J b4      
+[214] J Type instr generated - 0x80003ba	
+PC:000000b4	INSTR:080003ba	 J ee8     
+J    0x3ba     
+
+[215] J Type instr generated - 0xc0001b9	
+PC:00000ee8	INSTR:0c0001b9	 JAL 6e4     
+JAL  0x1b9     
+
+[216] J Type instr generated - 0x800027f	
+PC:000006e4	INSTR:0800027f	 J 9fc     
+J    0x27f     
+
+[217] J Type instr generated - 0x8000384	
+PC:000009fc	INSTR:08000384	 J e10     
+J    0x384     
+
+[218] J Type instr generated - 0xc0001a2	
+PC:00000e10	INSTR:0c0001a2	 JAL 688     
+JAL  0x1a2     
+
+[219] J Type instr generated - 0xc0001a7	
+PC:00000688	INSTR:0c0001a7	 JAL 69c     
+JAL  0x1a7     
+
+PC:0000069c	INSTR:0800002e	 J b8      
+[220] J Type instr generated - 0xc0003a1	
+PC:000000b8	INSTR:0c0003a1	 JAL e84     
+JAL  0x3a1     
+
+PC:00000e84	INSTR:0800002f	 J bc      
+[221] J Type instr generated - 0x8000332	
+PC:000000bc	INSTR:08000332	 J cc8     
+J    0x332     
+
+PC:00000cc8	INSTR:08000036	 J d8      
+[222] J Type instr generated - 0xc0001e6	
+PC:000000d8	INSTR:0c0001e6	 JAL 798     
+JAL  0x1e6     
+
+[223] J Type instr generated - 0xc00038d	
+PC:00000798	INSTR:0c00038d	 JAL e34     
+JAL  0x38d     
+
+[224] J Type instr generated - 0xc0000a1	
+PC:00000e34	INSTR:0c0000a1	 JAL 284     
+JAL  0xa1      
+
+[225] J Type instr generated - 0xc00038b	
+PC:00000284	INSTR:0c00038b	 JAL e2c     
+JAL  0x38b     
+
+[226] J Type instr generated - 0xc000261	
+PC:00000e2c	INSTR:0c000261	 JAL 984     
+JAL  0x261     
+
+[227] J Type instr generated - 0x800014b	
+PC:00000984	INSTR:0800014b	 J 52c     
+J    0x14b     
+
+PC:0000052c	INSTR:08000037	 J dc      
+[228] J Type instr generated - 0xc000233	
+PC:000000dc	INSTR:0c000233	 JAL 8cc     
+JAL  0x233     
+
+[229] J Type instr generated - 0xc000258	
+PC:000008cc	INSTR:0c000258	 JAL 960     
+JAL  0x258     
+
+[230] J Type instr generated - 0xc0002b5	
+PC:00000960	INSTR:0c0002b5	 JAL ad4     
+JAL  0x2b5     
+
+PC:00000ad4	INSTR:08000038	 J e0      
+[231] J Type instr generated - 0xc000301	
+PC:000000e0	INSTR:0c000301	 JAL c04     
+JAL  0x301     
+
+[232] J Type instr generated - 0x80000e7	
+PC:00000c04	INSTR:080000e7	 J 39c     
+J    0xe7      
+
+[233] J Type instr generated - 0x80001c8	
+PC:0000039c	INSTR:080001c8	 J 720     
+J    0x1c8     
+
+[234] J Type instr generated - 0x800034e	
+PC:00000720	INSTR:0800034e	 J d38     
+J    0x34e     
+
+[235] J Type instr generated - 0x8000174	
+PC:00000d38	INSTR:08000174	 J 5d0     
+J    0x174     
+
+[236] J Type instr generated - 0xc000304	
+PC:000005d0	INSTR:0c000304	 JAL c10     
+JAL  0x304     
+
+[237] J Type instr generated - 0xc0002f3	
+PC:00000c10	INSTR:0c0002f3	 JAL bcc     
+JAL  0x2f3     
+
+[238] J Type instr generated - 0x800036c	
+PC:00000bcc	INSTR:0800036c	 J db0     
+J    0x36c     
+
+PC:00000db0	INSTR:08000039	 J e4      
+[239] J Type instr generated - 0xc000093	
+PC:000000e4	INSTR:0c000093	 JAL 24c     
+JAL  0x93      
+
+[240] J Type instr generated - 0x8000328	
+PC:0000024c	INSTR:08000328	 J ca0     
+J    0x328     
+
+[241] J Type instr generated - 0x8000107	
+PC:00000ca0	INSTR:08000107	 J 41c     
+J    0x107     
+
+[242] J Type instr generated - 0xc0002fb	
+PC:0000041c	INSTR:0c0002fb	 JAL bec     
+JAL  0x2fb     
+
+PC:00000bec	INSTR:0800003a	 J e8      
+[243] J Type instr generated - 0x80000de	
+PC:000000e8	INSTR:080000de	 J 378     
+J    0xde      
+
+[244] J Type instr generated - 0xc000273	
+PC:00000378	INSTR:0c000273	 JAL 9cc     
+JAL  0x273     
+
+PC:000009cc	INSTR:0800003e	 J f8      
+[245] J Type instr generated - 0xc00012c	
+PC:000000f8	INSTR:0c00012c	 JAL 4b0     
+JAL  0x12c     
+
+[246] J Type instr generated - 0xc000114	
+PC:000004b0	INSTR:0c000114	 JAL 450     
+JAL  0x114     
+
+PC:00000450	INSTR:0800003f	 J fc      
+[247] J Type instr generated - 0xc0002c0	
+PC:000000fc	INSTR:0c0002c0	 JAL b00     
+JAL  0x2c0     
+
+[248] J Type instr generated - 0x8000043	
+PC:00000b00	INSTR:08000043	 J 10c     
+J    0x43      
+
+[249] J Type instr generated - 0x800009c	
+PC:0000010c	INSTR:0800009c	 J 270     
+J    0x9c      
+
+[250] J Type instr generated - 0x80000f1	
+PC:00000270	INSTR:080000f1	 J 3c4     
+J    0xf1      
+
+[251] J Type instr generated - 0x8000140	
+PC:000003c4	INSTR:08000140	 J 500     
+J    0x140     
+
+[252] J Type instr generated - 0xc0000c4	
+PC:00000500	INSTR:0c0000c4	 JAL 310     
+JAL  0xc4      
+
+[253] J Type instr generated - 0xc0001da	
+PC:00000310	INSTR:0c0001da	 JAL 768     
+JAL  0x1da     
+
+[254] J Type instr generated - 0xc0000cf	
+PC:00000768	INSTR:0c0000cf	 JAL 33c     
+JAL  0xcf      
+
+[255] J Type instr generated - 0x800023c	
+PC:0000033c	INSTR:0800023c	 J 8f0     
+J    0x23c     
+
+[256] J Type instr generated - 0x800016a	
+PC:000008f0	INSTR:0800016a	 J 5a8     
+J    0x16a     
+
+[257] J Type instr generated - 0xc0001f5	
+PC:000005a8	INSTR:0c0001f5	 JAL 7d4     
+JAL  0x1f5     
+
+[258] J Type instr generated - 0x8000121	
+PC:000007d4	INSTR:08000121	 J 484     
+J    0x121     
+
+[259] J Type instr generated - 0xc000240	
+PC:00000484	INSTR:0c000240	 JAL 900     
+JAL  0x240     
+
+[260] J Type instr generated - 0xc000343	
+PC:00000900	INSTR:0c000343	 JAL d0c     
+JAL  0x343     
+
+PC:00000d0c	INSTR:08000046	 J 118     
+[261] J Type instr generated - 0x80001f7	
+PC:00000118	INSTR:080001f7	 J 7dc     
+J    0x1f7     
+
+[262] J Type instr generated - 0x800016b	
+PC:000007dc	INSTR:0800016b	 J 5ac     
+J    0x16b     
+
+PC:000005ac	INSTR:08000047	 J 11c     
+[263] J Type instr generated - 0x80001cd	
+PC:0000011c	INSTR:080001cd	 J 734     
+J    0x1cd     
+
+[264] J Type instr generated - 0xc000017	
+PC:00000734	INSTR:0c000017	 JAL 5c      
+JAL  0x17      
+
+PC:0000005c	INSTR:08000048	 J 120     
+[265] J Type instr generated - 0xc000353	
+PC:00000120	INSTR:0c000353	 JAL d4c     
+JAL  0x353     
+
+[266] J Type instr generated - 0xc0001cc	
+PC:00000d4c	INSTR:0c0001cc	 JAL 730     
+JAL  0x1cc     
+
+PC:00000730	INSTR:08000049	 J 124     
+[267] J Type instr generated - 0x80000b5	
+PC:00000124	INSTR:080000b5	 J 2d4     
+J    0xb5      
+
+[268] J Type instr generated - 0x800027a	
+PC:000002d4	INSTR:0800027a	 J 9e8     
+J    0x27a     
+
+[269] J Type instr generated - 0xc000133	
+PC:000009e8	INSTR:0c000133	 JAL 4cc     
+JAL  0x133     
+
+[270] J Type instr generated - 0xc00008b	
+PC:000004cc	INSTR:0c00008b	 JAL 22c     
+JAL  0x8b      
+
+[271] J Type instr generated - 0x800010b	
+PC:0000022c	INSTR:0800010b	 J 42c     
+J    0x10b     
+
+[272] J Type instr generated - 0x800034b	
+PC:0000042c	INSTR:0800034b	 J d2c     
+J    0x34b     
+
+PC:00000d2c	INSTR:0800004a	 J 128     
+[273] J Type instr generated - 0x80003a5	
+PC:00000128	INSTR:080003a5	 J e94     
+J    0x3a5     
+
+[274] J Type instr generated - 0xc0002e4	
+PC:00000e94	INSTR:0c0002e4	 JAL b90     
+JAL  0x2e4     
+
+[275] J Type instr generated - 0xc00017d	
+PC:00000b90	INSTR:0c00017d	 JAL 5f4     
+JAL  0x17d     
+
+[276] J Type instr generated - 0xc00021c	
+PC:000005f4	INSTR:0c00021c	 JAL 870     
+JAL  0x21c     
+
+[277] J Type instr generated - 0x80002f2	
+PC:00000870	INSTR:080002f2	 J bc8     
+J    0x2f2     
+
+PC:00000bc8	INSTR:0800004b	 J 12c     
+[278] J Type instr generated - 0x800032c	
+PC:0000012c	INSTR:0800032c	 J cb0     
+J    0x32c     
+
+[279] J Type instr generated - 0xc00004c	
+PC:00000cb0	INSTR:0c00004c	 JAL 130     
+JAL  0x4c      
+
+[280] J Type instr generated - 0x8000118	
+PC:00000130	INSTR:08000118	 J 460     
+J    0x118     
+
+PC:00000460	INSTR:0800004d	 J 134     
+[281] J Type instr generated - 0x8000134	
+PC:00000134	INSTR:08000134	 J 4d0     
+J    0x134     
+
+[282] J Type instr generated - 0x8000190	
+PC:000004d0	INSTR:08000190	 J 640     
+J    0x190     
+
+[283] J Type instr generated - 0x8000157	
+PC:00000640	INSTR:08000157	 J 55c     
+J    0x157     
+
+PC:0000055c	INSTR:0800004e	 J 138     
+[284] J Type instr generated - 0x8000231	
+PC:00000138	INSTR:08000231	 J 8c4     
+J    0x231     
+
+PC:000008c4	INSTR:0800004f	 J 13c     
+[285] J Type instr generated - 0xc000186	
+PC:0000013c	INSTR:0c000186	 JAL 618     
+JAL  0x186     
+
+PC:00000618	INSTR:08000054	 J 150     
+[286] J Type instr generated - 0xc00017a	
+PC:00000150	INSTR:0c00017a	 JAL 5e8     
+JAL  0x17a     
+
+[287] J Type instr generated - 0x8000256	
+PC:000005e8	INSTR:08000256	 J 958     
+J    0x256     
+
+[288] J Type instr generated - 0xc000323	
+PC:00000958	INSTR:0c000323	 JAL c8c     
+JAL  0x323     
+
+[289] J Type instr generated - 0x8000262	
+PC:00000c8c	INSTR:08000262	 J 988     
+J    0x262     
+
+[290] J Type instr generated - 0x800029d	
+PC:00000988	INSTR:0800029d	 J a74     
+J    0x29d     
+
+[291] J Type instr generated - 0xc0002bf	
+PC:00000a74	INSTR:0c0002bf	 JAL afc     
+JAL  0x2bf     
+
+PC:00000afc	INSTR:08000055	 J 154     
+[292] J Type instr generated - 0x80000dc	
+PC:00000154	INSTR:080000dc	 J 370     
+J    0xdc      
+
+[293] J Type instr generated - 0xc0000af	
+PC:00000370	INSTR:0c0000af	 JAL 2bc     
+JAL  0xaf      
+
+[294] J Type instr generated - 0x8000166	
+PC:000002bc	INSTR:08000166	 J 598     
+J    0x166     
+
+[295] J Type instr generated - 0xc0002a3	
+PC:00000598	INSTR:0c0002a3	 JAL a8c     
+JAL  0x2a3     
+
+[296] J Type instr generated - 0xc000329	
+PC:00000a8c	INSTR:0c000329	 JAL ca4     
+JAL  0x329     
+
+[297] J Type instr generated - 0xc0002f0	
+PC:00000ca4	INSTR:0c0002f0	 JAL bc0     
+JAL  0x2f0     
+
+[298] J Type instr generated - 0x8000220	
+PC:00000bc0	INSTR:08000220	 J 880     
+J    0x220     
+
+[299] J Type instr generated - 0xc000387	
+PC:00000880	INSTR:0c000387	 JAL e1c     
+JAL  0x387     
+
+[300] J Type instr generated - 0xc000374	
+PC:00000e1c	INSTR:0c000374	 JAL dd0     
+JAL  0x374     
+
+PC:00000dd0	INSTR:08000056	 J 158     
+[301] J Type instr generated - 0x8000221	
+PC:00000158	INSTR:08000221	 J 884     
+J    0x221     
+
+PC:00000884	INSTR:08000059	 J 164     
+[302] J Type instr generated - 0xc00028f	
+PC:00000164	INSTR:0c00028f	 JAL a3c     
+JAL  0x28f     
+
+[303] J Type instr generated - 0x800030e	
+PC:00000a3c	INSTR:0800030e	 J c38     
+J    0x30e     
+
+[304] J Type instr generated - 0xc0003b3	
+PC:00000c38	INSTR:0c0003b3	 JAL ecc     
+JAL  0x3b3     
+
+[305] J Type instr generated - 0x800026e	
+PC:00000ecc	INSTR:0800026e	 J 9b8     
+J    0x26e     
+
+[306] J Type instr generated - 0x80001f2	
+PC:000009b8	INSTR:080001f2	 J 7c8     
+J    0x1f2     
+
+[307] J Type instr generated - 0x800014f	
+PC:000007c8	INSTR:0800014f	 J 53c     
+J    0x14f     
+
+[308] J Type instr generated - 0xc00039d	
+PC:0000053c	INSTR:0c00039d	 JAL e74     
+JAL  0x39d     
+
+[309] J Type instr generated - 0xc000308	
+PC:00000e74	INSTR:0c000308	 JAL c20     
+JAL  0x308     
+
+PC:00000c20	INSTR:0800005a	 J 168     
+[310] J Type instr generated - 0x8000219	
+PC:00000168	INSTR:08000219	 J 864     
+J    0x219     
+
+PC:00000864	INSTR:0800005b	 J 16c     
+[311] J Type instr generated - 0xc0000a6	
+PC:0000016c	INSTR:0c0000a6	 JAL 298     
+JAL  0xa6      
+
+[312] J Type instr generated - 0x8000392	
+PC:00000298	INSTR:08000392	 J e48     
+J    0x392     
+
+[313] J Type instr generated - 0x8000063	
+PC:00000e48	INSTR:08000063	 J 18c     
+J    0x63      
+
+[314] J Type instr generated - 0x8000327	
+PC:0000018c	INSTR:08000327	 J c9c     
+J    0x327     
+
+PC:00000c9c	INSTR:0800005c	 J 170     
+[315] J Type instr generated - 0xc000269	
+PC:00000170	INSTR:0c000269	 JAL 9a4     
+JAL  0x269     
+
+PC:000009a4	INSTR:08000060	 J 180     
+[316] J Type instr generated - 0xc00007f	
+PC:00000180	INSTR:0c00007f	 JAL 1fc     
+JAL  0x7f      
+
+[317] J Type instr generated - 0xc000320	
+PC:000001fc	INSTR:0c000320	 JAL c80     
+JAL  0x320     
+
+[318] J Type instr generated - 0xc000298	
+PC:00000c80	INSTR:0c000298	 JAL a60     
+JAL  0x298     
+
+[319] J Type instr generated - 0x800012d	
+PC:00000a60	INSTR:0800012d	 J 4b4     
+J    0x12d     
+
+[320] J Type instr generated - 0xc0001ea	
+PC:000004b4	INSTR:0c0001ea	 JAL 7a8     
+JAL  0x1ea     
+
+[321] J Type instr generated - 0xc0000da	
+PC:000007a8	INSTR:0c0000da	 JAL 368     
+JAL  0xda      
+
+[322] J Type instr generated - 0x80001a0	
+PC:00000368	INSTR:080001a0	 J 680     
+J    0x1a0     
+
+[323] J Type instr generated - 0xc00022f	
+PC:00000680	INSTR:0c00022f	 JAL 8bc     
+JAL  0x22f     
+
+[324] J Type instr generated - 0xc0001b6	
+PC:000008bc	INSTR:0c0001b6	 JAL 6d8     
+JAL  0x1b6     
+
+[325] J Type instr generated - 0x80000c2	
+PC:000006d8	INSTR:080000c2	 J 308     
+J    0xc2      
+
+[326] J Type instr generated - 0x80000b7	
+PC:00000308	INSTR:080000b7	 J 2dc     
+J    0xb7      
+
+[327] J Type instr generated - 0x800008c	
+PC:000002dc	INSTR:0800008c	 J 230     
+J    0x8c      
+
+[328] J Type instr generated - 0xc00020c	
+PC:00000230	INSTR:0c00020c	 JAL 830     
+JAL  0x20c     
+
+PC:00000830	INSTR:08000061	 J 184     
+[329] J Type instr generated - 0x800038f	
+PC:00000184	INSTR:0800038f	 J e3c     
+J    0x38f     
+
+[330] J Type instr generated - 0x800019a	
+PC:00000e3c	INSTR:0800019a	 J 668     
+J    0x19a     
+
+[331] J Type instr generated - 0xc000383	
+PC:00000668	INSTR:0c000383	 JAL e0c     
+JAL  0x383     
+
+PC:00000e0c	INSTR:08000064	 J 190     
+[332] J Type instr generated - 0x80002c3	
+PC:00000190	INSTR:080002c3	 J b0c     
+J    0x2c3     
+
+[333] J Type instr generated - 0xc00019d	
+PC:00000b0c	INSTR:0c00019d	 JAL 674     
+JAL  0x19d     
+
+[334] J Type instr generated - 0xc000152	
+PC:00000674	INSTR:0c000152	 JAL 548     
+JAL  0x152     
+
+[335] J Type instr generated - 0x800014d	
+PC:00000548	INSTR:0800014d	 J 534     
+J    0x14d     
+
+[336] J Type instr generated - 0xc0001f6	
+PC:00000534	INSTR:0c0001f6	 JAL 7d8     
+JAL  0x1f6     
+
+PC:000007d8	INSTR:08000068	 J 1a0     
+[337] J Type instr generated - 0xc000147	
+PC:000001a0	INSTR:0c000147	 JAL 51c     
+JAL  0x147     
+
+[338] J Type instr generated - 0xc0000b6	
+PC:0000051c	INSTR:0c0000b6	 JAL 2d8     
+JAL  0xb6      
+
+PC:000002d8	INSTR:08000073	 J 1cc     
+[339] J Type instr generated - 0x80001f8	
+PC:000001cc	INSTR:080001f8	 J 7e0     
+J    0x1f8     
+
+[340] J Type instr generated - 0xc00030c	
+PC:000007e0	INSTR:0c00030c	 JAL c30     
+JAL  0x30c     
+
+[341] J Type instr generated - 0x80003a9	
+PC:00000c30	INSTR:080003a9	 J ea4     
+J    0x3a9     
+
+PC:00000ea4	INSTR:08000074	 J 1d0     
+[342] J Type instr generated - 0x8000151	
+PC:000001d0	INSTR:08000151	 J 544     
+J    0x151     
+
+PC:00000544	INSTR:08000075	 J 1d4     
+[343] J Type instr generated - 0xc000084	
+PC:000001d4	INSTR:0c000084	 JAL 210     
+JAL  0x84      
+
+PC:00000210	INSTR:08000076	 J 1d8     
+[344] J Type instr generated - 0xc0000c6	
+PC:000001d8	INSTR:0c0000c6	 JAL 318     
+JAL  0xc6      
+
+PC:00000318	INSTR:08000077	 J 1dc     
+[345] J Type instr generated - 0x800037a	
+PC:000001dc	INSTR:0800037a	 J de8     
+J    0x37a     
+
+PC:00000de8	INSTR:0800007a	 J 1e8     
+[346] J Type instr generated - 0x800032f	
+PC:000001e8	INSTR:0800032f	 J cbc     
+J    0x32f     
+
+[347] J Type instr generated - 0xc00013b	
+PC:00000cbc	INSTR:0c00013b	 JAL 4ec     
+JAL  0x13b     
+
+[348] J Type instr generated - 0xc000090	
+PC:000004ec	INSTR:0c000090	 JAL 240     
+JAL  0x90      
+
+[349] J Type instr generated - 0xc00029e	
+PC:00000240	INSTR:0c00029e	 JAL a78     
+JAL  0x29e     
+
+[350] J Type instr generated - 0x80002fd	
+PC:00000a78	INSTR:080002fd	 J bf4     
+J    0x2fd     
+
+[351] J Type instr generated - 0xc000193	
+PC:00000bf4	INSTR:0c000193	 JAL 64c     
+JAL  0x193     
+
+[352] J Type instr generated - 0xc000286	
+PC:0000064c	INSTR:0c000286	 JAL a18     
+JAL  0x286     
+
+[353] J Type instr generated - 0xc0002e1	
+PC:00000a18	INSTR:0c0002e1	 JAL b84     
+JAL  0x2e1     
+
+PC:00000b84	INSTR:08000080	 J 200     
+[354] J Type instr generated - 0x8000255	
+PC:00000200	INSTR:08000255	 J 954     
+J    0x255     
+
+PC:00000954	INSTR:08000081	 J 204     
+[355] J Type instr generated - 0x8000305	
+PC:00000204	INSTR:08000305	 J c14     
+J    0x305     
+
+[356] J Type instr generated - 0xc000303	
+PC:00000c14	INSTR:0c000303	 JAL c0c     
+JAL  0x303     
+
+PC:00000c0c	INSTR:08000088	 J 220     
+[357] J Type instr generated - 0xc00030a	
+PC:00000220	INSTR:0c00030a	 JAL c28     
+JAL  0x30a     
+
+[358] J Type instr generated - 0x8000291	
+PC:00000c28	INSTR:08000291	 J a44     
+J    0x291     
+
+[359] J Type instr generated - 0xc0001e5	
+PC:00000a44	INSTR:0c0001e5	 JAL 794     
+JAL  0x1e5     
+
+PC:00000794	INSTR:08000089	 J 224     
+[360] J Type instr generated - 0xc0001a9	
+PC:00000224	INSTR:0c0001a9	 JAL 6a4     
+JAL  0x1a9     
+
+[361] J Type instr generated - 0xc000246	
+PC:000006a4	INSTR:0c000246	 JAL 918     
+JAL  0x246     
+
+PC:00000918	INSTR:0800008d	 J 234     
+[362] J Type instr generated - 0x800039b	
+PC:00000234	INSTR:0800039b	 J e6c     
+J    0x39b     
+
+[363] J Type instr generated - 0x800015e	
+PC:00000e6c	INSTR:0800015e	 J 578     
+J    0x15e     
+
+[364] J Type instr generated - 0x8000120	
+PC:00000578	INSTR:08000120	 J 480     
+J    0x120     
+
+PC:00000480	INSTR:0800008e	 J 238     
+[365] J Type instr generated - 0x8000318	
+PC:00000238	INSTR:08000318	 J c60     
+J    0x318     
+
+PC:00000c60	INSTR:08000094	 J 250     
+[366] J Type instr generated - 0xc0002ec	
+PC:00000250	INSTR:0c0002ec	 JAL bb0     
+JAL  0x2ec     
+
+[367] J Type instr generated - 0x80001b7	
+PC:00000bb0	INSTR:080001b7	 J 6dc     
+J    0x1b7     
+
+[368] J Type instr generated - 0xc0000e4	
+PC:000006dc	INSTR:0c0000e4	 JAL 390     
+JAL  0xe4      
+
+[369] J Type instr generated - 0x8000358	
+PC:00000390	INSTR:08000358	 J d60     
+J    0x358     
+
+PC:00000d60	INSTR:08000095	 J 254     
+[370] J Type instr generated - 0xc000069	
+PC:00000254	INSTR:0c000069	 JAL 1a4     
+JAL  0x69      
+
+PC:000001a4	INSTR:08000096	 J 258     
+[371] J Type instr generated - 0x8000330	
+PC:00000258	INSTR:08000330	 J cc0     
+J    0x330     
+
+[372] J Type instr generated - 0x8000324	
+PC:00000cc0	INSTR:08000324	 J c90     
+J    0x324     
+
+[373] J Type instr generated - 0xc000337	
+PC:00000c90	INSTR:0c000337	 JAL cdc     
+JAL  0x337     
+
+[374] J Type instr generated - 0x800032d	
+PC:00000cdc	INSTR:0800032d	 J cb4     
+J    0x32d     
+
+[375] J Type instr generated - 0xc0002be	
+PC:00000cb4	INSTR:0c0002be	 JAL af8     
+JAL  0x2be     
+
+PC:00000af8	INSTR:08000097	 J 25c     
+[376] J Type instr generated - 0xc0001a6	
+PC:0000025c	INSTR:0c0001a6	 JAL 698     
+JAL  0x1a6     
+
+PC:00000698	INSTR:08000098	 J 260     
+[377] J Type instr generated - 0x80000df	
+PC:00000260	INSTR:080000df	 J 37c     
+J    0xdf      
+
+[378] J Type instr generated - 0x800011b	
+PC:0000037c	INSTR:0800011b	 J 46c     
+J    0x11b     
+
+[379] J Type instr generated - 0x8000197	
+PC:0000046c	INSTR:08000197	 J 65c     
+J    0x197     
+
+[380] J Type instr generated - 0x8000299	
+PC:0000065c	INSTR:08000299	 J a64     
+J    0x299     
+
+[381] J Type instr generated - 0x80003bb	
+PC:00000a64	INSTR:080003bb	 J eec     
+J    0x3bb     
+
+[382] J Type instr generated - 0x80001a3	
+PC:00000eec	INSTR:080001a3	 J 68c     
+J    0x1a3     
+
+[383] J Type instr generated - 0x800007e	
+PC:0000068c	INSTR:0800007e	 J 1f8     
+J    0x7e      
+
+PC:000001f8	INSTR:0800009f	 J 27c     
+[384] J Type instr generated - 0xc0003a7	
+PC:0000027c	INSTR:0c0003a7	 JAL e9c     
+JAL  0x3a7     
+
+PC:00000e9c	INSTR:080000a2	 J 288     
+[385] J Type instr generated - 0x80002ee	
+PC:00000288	INSTR:080002ee	 J bb8     
+J    0x2ee     
+
+PC:00000bb8	INSTR:080000a3	 J 28c     
+[386] J Type instr generated - 0x80001ba	
+PC:0000028c	INSTR:080001ba	 J 6e8     
+J    0x1ba     
+
+[387] J Type instr generated - 0x80002da	
+PC:000006e8	INSTR:080002da	 J b68     
+J    0x2da     
+
+[388] J Type instr generated - 0xc000366	
+PC:00000b68	INSTR:0c000366	 JAL d98     
+JAL  0x366     
+
+PC:00000d98	INSTR:080000a4	 J 290     
+[389] J Type instr generated - 0xc0000e5	
+PC:00000290	INSTR:0c0000e5	 JAL 394     
+JAL  0xe5      
+
+[390] J Type instr generated - 0xc000362	
+PC:00000394	INSTR:0c000362	 JAL d88     
+JAL  0x362     
+
+[391] J Type instr generated - 0xc000167	
+PC:00000d88	INSTR:0c000167	 JAL 59c     
+JAL  0x167     
+
+[392] J Type instr generated - 0xc000385	
+PC:0000059c	INSTR:0c000385	 JAL e14     
+JAL  0x385     
+
+[393] J Type instr generated - 0x800014a	
+PC:00000e14	INSTR:0800014a	 J 528     
+J    0x14a     
+
+PC:00000528	INSTR:080000ac	 J 2b0     
+[394] J Type instr generated - 0x8000168	
+PC:000002b0	INSTR:08000168	 J 5a0     
+J    0x168     
+
+[395] J Type instr generated - 0x80000ce	
+PC:000005a0	INSTR:080000ce	 J 338     
+J    0xce      
+
+PC:00000338	INSTR:080000ad	 J 2b4     
+[396] J Type instr generated - 0x800039a	
+PC:000002b4	INSTR:0800039a	 J e68     
+J    0x39a     
+
+PC:00000e68	INSTR:080000b0	 J 2c0     
+[397] J Type instr generated - 0x80001dc	
+PC:000002c0	INSTR:080001dc	 J 770     
+J    0x1dc     
+
+[398] J Type instr generated - 0xc000245	
+PC:00000770	INSTR:0c000245	 JAL 914     
+JAL  0x245     
+
+PC:00000914	INSTR:080000b3	 J 2cc     
+[399] J Type instr generated - 0x80001c5	
+PC:000002cc	INSTR:080001c5	 J 714     
+J    0x1c5     
+
+[400] J Type instr generated - 0x8000145	
+PC:00000714	INSTR:08000145	 J 514     
+J    0x145     
+
+[401] J Type instr generated - 0x80000a5	
+PC:00000514	INSTR:080000a5	 J 294     
+J    0xa5      
+
+PC:00000294	INSTR:080000b8	 J 2e0     
+[402] J Type instr generated - 0x80000d4	
+PC:000002e0	INSTR:080000d4	 J 350     
+J    0xd4      
+
+[403] J Type instr generated - 0x80001fe	
+PC:00000350	INSTR:080001fe	 J 7f8     
+J    0x1fe     
+
+[404] J Type instr generated - 0x8000377	
+PC:000007f8	INSTR:08000377	 J ddc     
+J    0x377     
+
+[405] J Type instr generated - 0xc0002c6	
+PC:00000ddc	INSTR:0c0002c6	 JAL b18     
+JAL  0x2c6     
+
+[406] J Type instr generated - 0x800010a	
+PC:00000b18	INSTR:0800010a	 J 428     
+J    0x10a     
+
+PC:00000428	INSTR:080000b9	 J 2e4     
+[407] J Type instr generated - 0x8000254	
+PC:000002e4	INSTR:08000254	 J 950     
+J    0x254     
+
+PC:00000950	INSTR:080000bc	 J 2f0     
+[408] J Type instr generated - 0xc0000ee	
+PC:000002f0	INSTR:0c0000ee	 JAL 3b8     
+JAL  0xee      
+
+[409] J Type instr generated - 0x80001e3	
+PC:000003b8	INSTR:080001e3	 J 78c     
+J    0x1e3     
+
+[410] J Type instr generated - 0xc000040	
+PC:0000078c	INSTR:0c000040	 JAL 100     
+JAL  0x40      
+
+PC:00000100	INSTR:080000bd	 J 2f4     
+[411] J Type instr generated - 0x8000321	
+PC:000002f4	INSTR:08000321	 J c84     
+J    0x321     
+
+[412] J Type instr generated - 0xc0000d3	
+PC:00000c84	INSTR:0c0000d3	 JAL 34c     
+JAL  0xd3      
+
+PC:0000034c	INSTR:080000ca	 J 328     
+[413] J Type instr generated - 0x8000146	
+PC:00000328	INSTR:08000146	 J 518     
+J    0x146     
+
+PC:00000518	INSTR:080000cb	 J 32c     
+[414] J Type instr generated - 0xc0001d5	
+PC:0000032c	INSTR:0c0001d5	 JAL 754     
+JAL  0x1d5     
+
+[415] J Type instr generated - 0x8000235	
+PC:00000754	INSTR:08000235	 J 8d4     
+J    0x235     
+
+[416] J Type instr generated - 0x8000312	
+PC:000008d4	INSTR:08000312	 J c48     
+J    0x312     
+
+[417] J Type instr generated - 0x8000106	
+PC:00000c48	INSTR:08000106	 J 418     
+J    0x106     
+
+PC:00000418	INSTR:080000cc	 J 330     
+[418] J Type instr generated - 0x80001e2	
+PC:00000330	INSTR:080001e2	 J 788     
+J    0x1e2     
+
+PC:00000788	INSTR:080000d5	 J 354     
+[419] J Type instr generated - 0xc0002c7	
+PC:00000354	INSTR:0c0002c7	 JAL b1c     
+JAL  0x2c7     
+
+[420] J Type instr generated - 0x8000290	
+PC:00000b1c	INSTR:08000290	 J a40     
+J    0x290     
+
+PC:00000a40	INSTR:080000e2	 J 388     
+[421] J Type instr generated - 0x8000212	
+PC:00000388	INSTR:08000212	 J 848     
+J    0x212     
+
+[422] J Type instr generated - 0x80002e9	
+PC:00000848	INSTR:080002e9	 J ba4     
+J    0x2e9     
+
+[423] J Type instr generated - 0x8000249	
+PC:00000ba4	INSTR:08000249	 J 924     
+J    0x249     
+
+PC:00000924	INSTR:080000ef	 J 3bc     
+[424] J Type instr generated - 0x8000154	
+PC:000003bc	INSTR:08000154	 J 550     
+J    0x154     
+
+[425] J Type instr generated - 0x800012e	
+PC:00000550	INSTR:0800012e	 J 4b8     
+J    0x12e     
+
+[426] J Type instr generated - 0xc000123	
+PC:000004b8	INSTR:0c000123	 JAL 48c     
+JAL  0x123     
+
+PC:0000048c	INSTR:080000f2	 J 3c8     
+[427] J Type instr generated - 0x8000340	
+PC:000003c8	INSTR:08000340	 J d00     
+J    0x340     
+
+[428] J Type instr generated - 0xc000394	
+PC:00000d00	INSTR:0c000394	 JAL e50     
+JAL  0x394     
+
+[429] J Type instr generated - 0x800035d	
+PC:00000e50	INSTR:0800035d	 J d74     
+J    0x35d     
+
+[430] J Type instr generated - 0x8000283	
+PC:00000d74	INSTR:08000283	 J a0c     
+J    0x283     
+
+[431] J Type instr generated - 0xc000244	
+PC:00000a0c	INSTR:0c000244	 JAL 910     
+JAL  0x244     
+
+PC:00000910	INSTR:080000f3	 J 3cc     
+[432] J Type instr generated - 0xc00010f	
+PC:000003cc	INSTR:0c00010f	 JAL 43c     
+JAL  0x10f     
+
+PC:0000043c	INSTR:080000f6	 J 3d8     
+[433] J Type instr generated - 0xc000306	
+PC:000003d8	INSTR:0c000306	 JAL c18     
+JAL  0x306     
+
+PC:00000c18	INSTR:08000103	 J 40c     
+[434] J Type instr generated - 0xc000195	
+PC:0000040c	INSTR:0c000195	 JAL 654     
+JAL  0x195     
+
+[435] J Type instr generated - 0x8000141	
+PC:00000654	INSTR:08000141	 J 504     
+J    0x141     
+
+PC:00000504	INSTR:08000104	 J 410     
+[436] J Type instr generated - 0x800020e	
+PC:00000410	INSTR:0800020e	 J 838     
+J    0x20e     
+
+[437] J Type instr generated - 0xc0002f9	
+PC:00000838	INSTR:0c0002f9	 JAL be4     
+JAL  0x2f9     
+
+[438] J Type instr generated - 0xc000127	
+PC:00000be4	INSTR:0c000127	 JAL 49c     
+JAL  0x127     
+
+PC:0000049c	INSTR:08000108	 J 420     
+[439] J Type instr generated - 0x80001b2	
+PC:00000420	INSTR:080001b2	 J 6c8     
+J    0x1b2     
+
+[440] J Type instr generated - 0x8000191	
+PC:000006c8	INSTR:08000191	 J 644     
+J    0x191     
+
+[441] J Type instr generated - 0xc00039c	
+PC:00000644	INSTR:0c00039c	 JAL e70     
+JAL  0x39c     
+
+PC:00000e70	INSTR:08000111	 J 444     
+[442] J Type instr generated - 0x8000228	
+PC:00000444	INSTR:08000228	 J 8a0     
+J    0x228     
+
+[443] J Type instr generated - 0xc0002ea	
+PC:000008a0	INSTR:0c0002ea	 JAL ba8     
+JAL  0x2ea     
+
+[444] J Type instr generated - 0x80001a1	
+PC:00000ba8	INSTR:080001a1	 J 684     
+J    0x1a1     
+
+PC:00000684	INSTR:0800011c	 J 470     
+[445] J Type instr generated - 0xc0002ab	
+PC:00000470	INSTR:0c0002ab	 JAL aac     
+JAL  0x2ab     
+
+[446] J Type instr generated - 0xc0002b9	
+PC:00000aac	INSTR:0c0002b9	 JAL ae4     
+JAL  0x2b9     
+
+[447] J Type instr generated - 0x80003b0	
+PC:00000ae4	INSTR:080003b0	 J ec0     
+J    0x3b0     
+
+PC:00000ec0	INSTR:0800011d	 J 474     
+[448] J Type instr generated - 0x8000223	
+PC:00000474	INSTR:08000223	 J 88c     
+J    0x223     
+
+[449] J Type instr generated - 0x800008a	
+PC:0000088c	INSTR:0800008a	 J 228     
+J    0x8a      
+
+PC:00000228	INSTR:08000129	 J 4a4     
+[450] J Type instr generated - 0x80002a1	
+PC:000004a4	INSTR:080002a1	 J a84     
+J    0x2a1     
+
+[451] J Type instr generated - 0xc00007b	
+PC:00000a84	INSTR:0c00007b	 JAL 1ec     
+JAL  0x7b      
+
+PC:000001ec	INSTR:0800012a	 J 4a8     
+[452] J Type instr generated - 0x80000ff	
+PC:000004a8	INSTR:080000ff	 J 3fc     
+J    0xff      
+
+PC:000003fc	INSTR:08000138	 J 4e0     
+[453] J Type instr generated - 0x80000a7	
+PC:000004e0	INSTR:080000a7	 J 29c     
+J    0xa7      
+
+PC:0000029c	INSTR:08000139	 J 4e4     
+[454] J Type instr generated - 0x8000365	
+PC:000004e4	INSTR:08000365	 J d94     
+J    0x365     
+
+PC:00000d94	INSTR:0800013e	 J 4f8     
+[455] J Type instr generated - 0x8000284	
+PC:000004f8	INSTR:08000284	 J a10     
+J    0x284     
+
+[456] J Type instr generated - 0x8000265	
+PC:00000a10	INSTR:08000265	 J 994     
+J    0x265     
+
+PC:00000994	INSTR:08000148	 J 520     
+[457] J Type instr generated - 0x80002d1	
+PC:00000520	INSTR:080002d1	 J b44     
+J    0x2d1     
+
+PC:00000b44	INSTR:08000155	 J 554     
+[458] J Type instr generated - 0x80002b2	
+PC:00000554	INSTR:080002b2	 J ac8     
+J    0x2b2     
+
+[459] J Type instr generated - 0x800012b	
+PC:00000ac8	INSTR:0800012b	 J 4ac     
+J    0x12b     
+
+PC:000004ac	INSTR:0800015a	 J 568     
+[460] J Type instr generated - 0x8000050	
+PC:00000568	INSTR:08000050	 J 140     
+J    0x50      
+
+PC:00000140	INSTR:0800015b	 J 56c     
+[461] J Type instr generated - 0xc00012f	
+PC:0000056c	INSTR:0c00012f	 JAL 4bc     
+JAL  0x12f     
+
+PC:000004bc	INSTR:0800015c	 J 570     
+[462] J Type instr generated - 0xc0002c1	
+PC:00000570	INSTR:0c0002c1	 JAL b04     
+JAL  0x2c1     
+
+PC:00000b04	INSTR:0800015f	 J 57c     
+[463] J Type instr generated - 0x80001fa	
+PC:0000057c	INSTR:080001fa	 J 7e8     
+J    0x1fa     
+
+[464] J Type instr generated - 0xc00035e	
+PC:000007e8	INSTR:0c00035e	 JAL d78     
+JAL  0x35e     
+
+[465] J Type instr generated - 0x8000250	
+PC:00000d78	INSTR:08000250	 J 940     
+J    0x250     
+
+[466] J Type instr generated - 0x8000280	
+PC:00000940	INSTR:08000280	 J a00     
+J    0x280     
+
+[467] J Type instr generated - 0x8000272	
+PC:00000a00	INSTR:08000272	 J 9c8     
+J    0x272     
+
+PC:000009c8	INSTR:08000162	 J 588     
+[468] J Type instr generated - 0xc0001bd	
+PC:00000588	INSTR:0c0001bd	 JAL 6f4     
+JAL  0x1bd     
+
+PC:000006f4	INSTR:08000163	 J 58c     
+[469] J Type instr generated - 0xc000149	
+PC:0000058c	INSTR:0c000149	 JAL 524     
+JAL  0x149     
+
+PC:00000524	INSTR:0800016f	 J 5bc     
+[470] J Type instr generated - 0x800030f	
+PC:000005bc	INSTR:0800030f	 J c3c     
+J    0x30f     
+
+[471] J Type instr generated - 0xc0000c3	
+PC:00000c3c	INSTR:0c0000c3	 JAL 30c     
+JAL  0xc3      
+
+PC:0000030c	INSTR:08000170	 J 5c0     
+[472] J Type instr generated - 0x8000278	
+PC:000005c0	INSTR:08000278	 J 9e0     
+J    0x278     
+
+PC:000009e0	INSTR:08000171	 J 5c4     
+[473] J Type instr generated - 0xc0003b2	
+PC:000005c4	INSTR:0c0003b2	 JAL ec8     
+JAL  0x3b2     
+
+PC:00000ec8	INSTR:08000172	 J 5c8     
+[474] J Type instr generated - 0xc00033a	
+PC:000005c8	INSTR:0c00033a	 JAL ce8     
+JAL  0x33a     
+
+[475] J Type instr generated - 0xc00036f	
+PC:00000ce8	INSTR:0c00036f	 JAL dbc     
+JAL  0x36f     
+
+PC:00000dbc	INSTR:08000175	 J 5d4     
+[476] J Type instr generated - 0xc0003ae	
+PC:000005d4	INSTR:0c0003ae	 JAL eb8     
+JAL  0x3ae     
+
+[477] J Type instr generated - 0x80000b1	
+PC:00000eb8	INSTR:080000b1	 J 2c4     
+J    0xb1      
+
+PC:000002c4	INSTR:08000176	 J 5d8     
+[478] J Type instr generated - 0xc00034f	
+PC:000005d8	INSTR:0c00034f	 JAL d3c     
+JAL  0x34f     
+
+[479] J Type instr generated - 0xc0001ad	
+PC:00000d3c	INSTR:0c0001ad	 JAL 6b4     
+JAL  0x1ad     
+
+PC:000006b4	INSTR:08000177	 J 5dc     
+[480] J Type instr generated - 0xc00015d	
+PC:000005dc	INSTR:0c00015d	 JAL 574     
+JAL  0x15d     
+
+PC:00000574	INSTR:08000178	 J 5e0     
+[481] J Type instr generated - 0xc000371	
+PC:000005e0	INSTR:0c000371	 JAL dc4     
+JAL  0x371     
+
+[482] J Type instr generated - 0x80002e6	
+PC:00000dc4	INSTR:080002e6	 J b98     
+J    0x2e6     
+
+[483] J Type instr generated - 0xc000026	
+PC:00000b98	INSTR:0c000026	 JAL 98      
+JAL  0x26      
+
+PC:00000098	INSTR:0800017b	 J 5ec     
+[484] J Type instr generated - 0xc0003ad	
+PC:000005ec	INSTR:0c0003ad	 JAL eb4     
+JAL  0x3ad     
+
+PC:00000eb4	INSTR:08000183	 J 60c     
+[485] J Type instr generated - 0xc0000e3	
+PC:0000060c	INSTR:0c0000e3	 JAL 38c     
+JAL  0xe3      
+
+PC:0000038c	INSTR:0800018d	 J 634     
+[486] J Type instr generated - 0x80001f9	
+PC:00000634	INSTR:080001f9	 J 7e4     
+J    0x1f9     
+
+PC:000007e4	INSTR:08000198	 J 660     
+[487] J Type instr generated - 0xc0003b6	
+PC:00000660	INSTR:0c0003b6	 JAL ed8     
+JAL  0x3b6     
+
+PC:00000ed8	INSTR:0800019b	 J 66c     
+[488] J Type instr generated - 0x8000217	
+PC:0000066c	INSTR:08000217	 J 85c     
+J    0x217     
+
+[489] J Type instr generated - 0xc000252	
+PC:0000085c	INSTR:0c000252	 JAL 948     
+JAL  0x252     
+
+[490] J Type instr generated - 0xc000071	
+PC:00000948	INSTR:0c000071	 JAL 1c4     
+JAL  0x71      
+
+PC:000001c4	INSTR:080001a4	 J 690     
+[491] J Type instr generated - 0x8000238	
+PC:00000690	INSTR:08000238	 J 8e0     
+J    0x238     
+
+[492] J Type instr generated - 0x8000345	
+PC:000008e0	INSTR:08000345	 J d14     
+J    0x345     
+
+[493] J Type instr generated - 0x80002d0	
+PC:00000d14	INSTR:080002d0	 J b40     
+J    0x2d0     
+
+PC:00000b40	INSTR:080001aa	 J 6a8     
+[494] J Type instr generated - 0xc0002a2	
+PC:000006a8	INSTR:0c0002a2	 JAL a88     
+JAL  0x2a2     
+
+PC:00000a88	INSTR:080001af	 J 6bc     
+[495] J Type instr generated - 0x8000105	
+PC:000006bc	INSTR:08000105	 J 414     
+J    0x105     
+
+PC:00000414	INSTR:080001b3	 J 6cc     
+[496] J Type instr generated - 0x800036b	
+PC:000006cc	INSTR:0800036b	 J dac     
+J    0x36b     
+
+PC:00000dac	INSTR:080001b4	 J 6d0     
+[497] J Type instr generated - 0xc00010e	
+PC:000006d0	INSTR:0c00010e	 JAL 438     
+JAL  0x10e     
+
+PC:00000438	INSTR:080001bb	 J 6ec     
+[498] J Type instr generated - 0xc000397	
+PC:000006ec	INSTR:0c000397	 JAL e5c     
+JAL  0x397     
+
+[499] J Type instr generated - 0xc00037f	
+PC:00000e5c	INSTR:0c00037f	 JAL dfc     
+JAL  0x37f     
+
+[500] J Type instr generated - 0xc000248	
+PC:00000dfc	INSTR:0c000248	 JAL 920     
+JAL  0x248     
+
+PC:00000920	INSTR:080001c1	 J 704     
+[501] J Type instr generated - 0x800018e	
+PC:00000704	INSTR:0800018e	 J 638     
+J    0x18e     
+
+PC:00000638	INSTR:080001c2	 J 708     
+[502] J Type instr generated - 0xc0000d0	
+PC:00000708	INSTR:0c0000d0	 JAL 340     
+JAL  0xd0      
+
+PC:00000340	INSTR:080001c6	 J 718     
+[503] J Type instr generated - 0x800019e	
+PC:00000718	INSTR:0800019e	 J 678     
+J    0x19e     
+
+PC:00000678	INSTR:080001c9	 J 724     
+[504] J Type instr generated - 0xc0001e0	
+PC:00000724	INSTR:0c0001e0	 JAL 780     
+JAL  0x1e0     
+
+PC:00000780	INSTR:080001ce	 J 738     
+[505] J Type instr generated - 0x800025b	
+PC:00000738	INSTR:0800025b	 J 96c     
+J    0x25b     
+
+[506] J Type instr generated - 0x8000287	
+PC:0000096c	INSTR:08000287	 J a1c     
+J    0x287     
+
+[507] J Type instr generated - 0xc000316	
+PC:00000a1c	INSTR:0c000316	 JAL c58     
+JAL  0x316     
+
+[508] J Type instr generated - 0x800029c	
+PC:00000c58	INSTR:0800029c	 J a70     
+J    0x29c     
+
+PC:00000a70	INSTR:080001cf	 J 73c     
+[509] J Type instr generated - 0x80001fb	
+PC:0000073c	INSTR:080001fb	 J 7ec     
+J    0x1fb     
+
+[510] J Type instr generated - 0xc000208	
+PC:000007ec	INSTR:0c000208	 JAL 820     
+JAL  0x208     
+
+[511] J Type instr generated - 0x8000277	
+PC:00000820	INSTR:08000277	 J 9dc     
+J    0x277     
+
+PC:000009dc	INSTR:080001d2	 J 748     
+[512] J Type instr generated - 0x800028e	
+PC:00000748	INSTR:0800028e	 J a38     
+J    0x28e     
+
+PC:00000a38	INSTR:080001d3	 J 74c     
+[513] J Type instr generated - 0x80001df	
+PC:0000074c	INSTR:080001df	 J 77c     
+J    0x1df     
+
+PC:0000077c	INSTR:080001d6	 J 758     
+[514] J Type instr generated - 0xc00010c	
+PC:00000758	INSTR:0c00010c	 JAL 430     
+JAL  0x10c     
+
+PC:00000430	INSTR:080001d7	 J 75c     
+[515] J Type instr generated - 0xc0001ef	
+PC:0000075c	INSTR:0c0001ef	 JAL 7bc     
+JAL  0x1ef     
+
+PC:000007bc	INSTR:080001d8	 J 760     
+[516] J Type instr generated - 0x8000150	
+PC:00000760	INSTR:08000150	 J 540     
+J    0x150     
+
+PC:00000540	INSTR:080001dd	 J 774     
+[517] J Type instr generated - 0x80001f1	
+PC:00000774	INSTR:080001f1	 J 7c4     
+J    0x1f1     
+
+PC:000007c4	INSTR:080001e7	 J 79c     
+[518] J Type instr generated - 0x8000153	
+PC:0000079c	INSTR:08000153	 J 54c     
+J    0x153     
+
+PC:0000054c	INSTR:080001e8	 J 7a0     
+[519] J Type instr generated - 0xc0002ae	
+PC:000007a0	INSTR:0c0002ae	 JAL ab8     
+JAL  0x2ae     
+
+PC:00000ab8	INSTR:080001ed	 J 7b4     
+[520] J Type instr generated - 0x8000334	
+PC:000007b4	INSTR:08000334	 J cd0     
+J    0x334     
+
+[521] J Type instr generated - 0x800036e	
+PC:00000cd0	INSTR:0800036e	 J db8     
+J    0x36e     
+
+PC:00000db8	INSTR:080001ff	 J 7fc     
+[522] J Type instr generated - 0x800038c	
+PC:000007fc	INSTR:0800038c	 J e30     
+J    0x38c     
+
+PC:00000e30	INSTR:08000200	 J 800     
+[523] J Type instr generated - 0xc000294	
+PC:00000800	INSTR:0c000294	 JAL a50     
+JAL  0x294     
+
+[524] J Type instr generated - 0x80000be	
+PC:00000a50	INSTR:080000be	 J 2f8     
+J    0xbe      
+
+PC:000002f8	INSTR:08000201	 J 804     
+[525] J Type instr generated - 0x80002bb	
+PC:00000804	INSTR:080002bb	 J aec     
+J    0x2bb     
+
+PC:00000aec	INSTR:08000209	 J 824     
+[526] J Type instr generated - 0x8000164	
+PC:00000824	INSTR:08000164	 J 590     
+J    0x164     
+
+PC:00000590	INSTR:0800020a	 J 828     
+[527] J Type instr generated - 0x8000379	
+PC:00000828	INSTR:08000379	 J de4     
+J    0x379     
+
+PC:00000de4	INSTR:0800020f	 J 83c     
+[528] J Type instr generated - 0x8000014	
+PC:0000083c	INSTR:08000014	 J 50      
+J    0x14      
+
+PC:00000050	INSTR:08000213	 J 84c     
+[529] J Type instr generated - 0xc00031a	
+PC:0000084c	INSTR:0c00031a	 JAL c68     
+JAL  0x31a     
+
+PC:00000c68	INSTR:08000214	 J 850     
+[530] J Type instr generated - 0xc0002ba	
+PC:00000850	INSTR:0c0002ba	 JAL ae8     
+JAL  0x2ba     
+
+PC:00000ae8	INSTR:08000215	 J 854     
+[531] J Type instr generated - 0x8000192	
+PC:00000854	INSTR:08000192	 J 648     
+J    0x192     
+
+PC:00000648	INSTR:0800022d	 J 8b4     
+[532] J Type instr generated - 0xc000253	
+PC:000008b4	INSTR:0c000253	 JAL 94c     
+JAL  0x253     
+
+PC:0000094c	INSTR:08000236	 J 8d8     
+[533] J Type instr generated - 0xc0002cb	
+PC:000008d8	INSTR:0c0002cb	 JAL b2c     
+JAL  0x2cb     
+
+PC:00000b2c	INSTR:0800023d	 J 8f4     
+[534] J Type instr generated - 0xc0002f8	
+PC:000008f4	INSTR:0c0002f8	 JAL be0     
+JAL  0x2f8     
+
+PC:00000be0	INSTR:08000241	 J 904     
+[535] J Type instr generated - 0xc00026c	
+PC:00000904	INSTR:0c00026c	 JAL 9b0     
+JAL  0x26c     
+
+[536] J Type instr generated - 0xc00039e	
+PC:000009b0	INSTR:0c00039e	 JAL e78     
+JAL  0x39e     
+
+[537] J Type instr generated - 0x80003bd	
+PC:00000e78	INSTR:080003bd	 J ef4     
+J    0x3bd     
+
+[538] J Type instr generated - 0x800014e	
+PC:00000ef4	INSTR:0800014e	 J 538     
+J    0x14e     
+
+PC:00000538	INSTR:08000242	 J 908     
+[539] J Type instr generated - 0xc000341	
+PC:00000908	INSTR:0c000341	 JAL d04     
+JAL  0x341     
+
+[540] J Type instr generated - 0xc000339	
+PC:00000d04	INSTR:0c000339	 JAL ce4     
+JAL  0x339     
+
+PC:00000ce4	INSTR:0800024d	 J 934     
+[541] J Type instr generated - 0x80002cf	
+PC:00000934	INSTR:080002cf	 J b3c     
+J    0x2cf     
+
+PC:00000b3c	INSTR:0800024e	 J 938     
+[542] J Type instr generated - 0x8000156	
+PC:00000938	INSTR:08000156	 J 558     
+J    0x156     
+
+PC:00000558	INSTR:08000259	 J 964     
+[543] J Type instr generated - 0xc00035f	
+PC:00000964	INSTR:0c00035f	 JAL d7c     
+JAL  0x35f     
+
+[544] J Type instr generated - 0x800027b	
+PC:00000d7c	INSTR:0800027b	 J 9ec     
+J    0x27b     
+
+PC:000009ec	INSTR:0800025c	 J 970     
+[545] J Type instr generated - 0xc000099	
+PC:00000970	INSTR:0c000099	 JAL 264     
+JAL  0x99      
+
+PC:00000264	INSTR:0800025d	 J 974     
+[546] J Type instr generated - 0xc0002d4	
+PC:00000974	INSTR:0c0002d4	 JAL b50     
+JAL  0x2d4     
+
+[547] J Type instr generated - 0x800021f	
+PC:00000b50	INSTR:0800021f	 J 87c     
+J    0x21f     
+
+PC:0000087c	INSTR:0800025e	 J 978     
+[548] J Type instr generated - 0xc0002ed	
+PC:00000978	INSTR:0c0002ed	 JAL bb4     
+JAL  0x2ed     
+
+PC:00000bb4	INSTR:0800025f	 J 97c     
+[549] J Type instr generated - 0xc0002b7	
+PC:0000097c	INSTR:0c0002b7	 JAL adc     
+JAL  0x2b7     
+
+[550] J Type instr generated - 0xc000210	
+PC:00000adc	INSTR:0c000210	 JAL 840     
+JAL  0x210     
+
+PC:00000840	INSTR:08000267	 J 99c     
+[551] J Type instr generated - 0x80001c7	
+PC:0000099c	INSTR:080001c7	 J 71c     
+J    0x1c7     
+
+PC:0000071c	INSTR:0800026f	 J 9bc     
+[552] J Type instr generated - 0x8000117	
+PC:000009bc	INSTR:08000117	 J 45c     
+J    0x117     
+
+PC:0000045c	INSTR:08000270	 J 9c0     
+[553] J Type instr generated - 0x8000184	
+PC:000009c0	INSTR:08000184	 J 610     
+J    0x184     
+
+PC:00000610	INSTR:08000288	 J a20     
+[554] J Type instr generated - 0x800038e	
+PC:00000a20	INSTR:0800038e	 J e38     
+J    0x38e     
+
+PC:00000e38	INSTR:08000289	 J a24     
+[555] J Type instr generated - 0x8000019	
+PC:00000a24	INSTR:08000019	 J 64      
+J    0x19      
+
+PC:00000064	INSTR:0800028a	 J a28     
+[556] J Type instr generated - 0x80000b4	
+PC:00000a28	INSTR:080000b4	 J 2d0     
+J    0xb4      
+
+PC:000002d0	INSTR:0800028b	 J a2c     
+[557] J Type instr generated - 0xc000398	
+PC:00000a2c	INSTR:0c000398	 JAL e60     
+JAL  0x398     
+
+PC:00000e60	INSTR:08000292	 J a48     
+[558] J Type instr generated - 0xc00009b	
+PC:00000a48	INSTR:0c00009b	 JAL 26c     
+JAL  0x9b      
+
+PC:0000026c	INSTR:0800029a	 J a68     
+[559] J Type instr generated - 0xc000196	
+PC:00000a68	INSTR:0c000196	 JAL 658     
+JAL  0x196     
+
+PC:00000658	INSTR:0800029f	 J a7c     
+[560] J Type instr generated - 0x80002f1	
+PC:00000a7c	INSTR:080002f1	 J bc4     
+J    0x2f1     
+
+PC:00000bc4	INSTR:080002b3	 J acc     
+[561] J Type instr generated - 0xc0002f5	
+PC:00000acc	INSTR:0c0002f5	 JAL bd4     
+JAL  0x2f5     
+
+[562] J Type instr generated - 0xc000360	
+PC:00000bd4	INSTR:0c000360	 JAL d80     
+JAL  0x360     
+
+[563] J Type instr generated - 0x80002ff	
+PC:00000d80	INSTR:080002ff	 J bfc     
+J    0x2ff     
+
+[564] J Type instr generated - 0xc000389	
+PC:00000bfc	INSTR:0c000389	 JAL e24     
+JAL  0x389     
+
+PC:00000e24	INSTR:080002c4	 J b10     
+[565] J Type instr generated - 0xc000378	
+PC:00000b10	INSTR:0c000378	 JAL de0     
+JAL  0x378     
+
+PC:00000de0	INSTR:080002c8	 J b20     
+[566] J Type instr generated - 0x80001d9	
+PC:00000b20	INSTR:080001d9	 J 764     
+J    0x1d9     
+
+PC:00000764	INSTR:080002dd	 J b74     
+[567] J Type instr generated - 0x8000227	
+PC:00000b74	INSTR:08000227	 J 89c     
+J    0x227     
+
+PC:0000089c	INSTR:080002de	 J b78     
+[568] J Type instr generated - 0xc000179	
+PC:00000b78	INSTR:0c000179	 JAL 5e4     
+JAL  0x179     
+
+PC:000005e4	INSTR:080002df	 J b7c     
+[569] J Type instr generated - 0x80000f7	
+PC:00000b7c	INSTR:080000f7	 J 3dc     
+J    0xf7      
+
+PC:000003dc	INSTR:080002e7	 J b9c     
+[570] J Type instr generated - 0x8000173	
+PC:00000b9c	INSTR:08000173	 J 5cc     
+J    0x173     
+
+PC:000005cc	INSTR:080002f6	 J bd8     
+[571] J Type instr generated - 0x8000325	
+PC:00000bd8	INSTR:08000325	 J c94     
+J    0x325     
+
+PC:00000c94	INSTR:08000313	 J c4c     
+[572] J Type instr generated - 0x800022b	
+PC:00000c4c	INSTR:0800022b	 J 8ac     
+J    0x22b     
+
+PC:000008ac	INSTR:08000314	 J c50     
+[573] J Type instr generated - 0xc000381	
+PC:00000c50	INSTR:0c000381	 JAL e04     
+JAL  0x381     
+
+[574] J Type instr generated - 0xc00033c	
+PC:00000e04	INSTR:0c00033c	 JAL cf0     
+JAL  0x33c     
+
+[575] J Type instr generated - 0x8000388	
+PC:00000cf0	INSTR:08000388	 J e20     
+J    0x388     
+
+PC:00000e20	INSTR:0800031e	 J c78     
+[576] J Type instr generated - 0x800033b	
+PC:00000c78	INSTR:0800033b	 J cec     
+J    0x33b     
+
+PC:00000cec	INSTR:0800032a	 J ca8     
+[577] J Type instr generated - 0x8000281	
+PC:00000ca8	INSTR:08000281	 J a04     
+J    0x281     
+
+PC:00000a04	INSTR:08000346	 J d18     
+[578] J Type instr generated - 0x8000229	
+PC:00000d18	INSTR:08000229	 J 8a4     
+J    0x229     
+
+PC:000008a4	INSTR:08000347	 J d1c     
+[579] J Type instr generated - 0xc0000e0	
+PC:00000d1c	INSTR:0c0000e0	 JAL 380     
+JAL  0xe0      
+
+PC:00000380	INSTR:08000350	 J d40     
+[580] J Type instr generated - 0x80002a6	
+PC:00000d40	INSTR:080002a6	 J a98     
+J    0x2a6     
+
+PC:00000a98	INSTR:08000351	 J d44     
+[581] J Type instr generated - 0x8000382	
+PC:00000d44	INSTR:08000382	 J e08     
+J    0x382     
+
+PC:00000e08	INSTR:08000356	 J d58     
+[582] J Type instr generated - 0x8000361	
+PC:00000d58	INSTR:08000361	 J d84     
+J    0x361     
+
+PC:00000d84	INSTR:08000372	 J dc8     
+[583] J Type instr generated - 0x80000c8	
+PC:00000dc8	INSTR:080000c8	 J 320     
+J    0xc8      
+
+PC:00000320	INSTR:0800037c	 J df0     
+[584] J Type instr generated - 0x80000ae	
+PC:00000df0	INSTR:080000ae	 J 2b8     
+J    0xae      
+
+PC:000002b8	INSTR:0800037d	 J df4     
+[585] J Type instr generated - 0xc000243	
+PC:00000df4	INSTR:0c000243	 JAL 90c     
+JAL  0x243     
+
+PC:0000090c	INSTR:08000390	 J e40     
+[586] J Type instr generated - 0x80002aa	
+PC:00000e40	INSTR:080002aa	 J aa8     
+J    0x2aa     
+
+PC:00000aa8	INSTR:08000395	 J e54     
+[587] J Type instr generated - 0xc0001b8	
+PC:00000e54	INSTR:0c0001b8	 JAL 6e0     
+JAL  0x1b8     
+
+PC:000006e0	INSTR:080003a3	 J e8c     
+[588] J Type instr generated - 0x80000d6	
+PC:00000e8c	INSTR:080000d6	 J 358     
+J    0xd6      
+
+PC:00000358	INSTR:080003c0	 J f00     
+[589] J Type instr generated - 0xc000002	
+PC:00000f00	INSTR:0c000002	 JAL 8       
+JAL  0x2       
+
+PC:00000008	INSTR:080003c1	 J f04     
+[590] J Type instr generated - 0xc0002cd	
+PC:00000f04	INSTR:0c0002cd	 JAL b34     
+JAL  0x2cd     
+
+PC:00000b34	INSTR:080003c2	 J f08     
+[591] J Type instr generated - 0x80000c5	
+PC:00000f08	INSTR:080000c5	 J 314     
+J    0xc5      
+
+PC:00000314	INSTR:080003c3	 J f0c     
+[592] J Type instr generated - 0x8000354	
+PC:00000f0c	INSTR:08000354	 J d50     
+J    0x354     
+
+PC:00000d50	INSTR:080003c4	 J f10     
+[593] J Type instr generated - 0xc00028c	
+PC:00000f10	INSTR:0c00028c	 JAL a30     
+JAL  0x28c     
+
+PC:00000a30	INSTR:080003c5	 J f14     
+[594] J Type instr generated - 0xc000295	
+PC:00000f14	INSTR:0c000295	 JAL a54     
+JAL  0x295     
+
+PC:00000a54	INSTR:080003c6	 J f18     
+[595] J Type instr generated - 0xc0000c0	
+PC:00000f18	INSTR:0c0000c0	 JAL 300     
+JAL  0xc0      
+
+PC:00000300	INSTR:080003c7	 J f1c     
+[596] J Type instr generated - 0x800032b	
+PC:00000f1c	INSTR:0800032b	 J cac     
+J    0x32b     
+
+PC:00000cac	INSTR:080003c8	 J f20     
+[597] J Type instr generated - 0xc00029b	
+PC:00000f20	INSTR:0c00029b	 JAL a6c     
+JAL  0x29b     
+
+PC:00000a6c	INSTR:080003c9	 J f24     
+[598] J Type instr generated - 0xc000230	
+PC:00000f24	INSTR:0c000230	 JAL 8c0     
+JAL  0x230     
+
+PC:000008c0	INSTR:080003ca	 J f28     
+[599] J Type instr generated - 0x80001eb	
+PC:00000f28	INSTR:080001eb	 J 7ac     
+J    0x1eb     
+
+PC:000007ac	INSTR:080003cb	 J f2c     
+[600] J Type instr generated - 0x80002b8	
+PC:00000f2c	INSTR:080002b8	 J ae0     
+J    0x2b8     
+
+PC:00000ae0	INSTR:080003cc	 J f30     
+[601] J Type instr generated - 0x80001d0	
+PC:00000f30	INSTR:080001d0	 J 740     
+J    0x1d0     
+
+PC:00000740	INSTR:080003cd	 J f34     
+[602] J Type instr generated - 0x80002b4	
+PC:00000f34	INSTR:080002b4	 J ad0     
+J    0x2b4     
+
+PC:00000ad0	INSTR:080003ce	 J f38     
+[603] J Type instr generated - 0x8000393	
+PC:00000f38	INSTR:08000393	 J e4c     
+J    0x393     
+
+PC:00000e4c	INSTR:080003cf	 J f3c     
+[604] J Type instr generated - 0xc00032e	
+PC:00000f3c	INSTR:0c00032e	 JAL cb8     
+JAL  0x32e     
+
+PC:00000cb8	INSTR:080003d0	 J f40     
+[605] J Type instr generated - 0xc000194	
+PC:00000f40	INSTR:0c000194	 JAL 650     
+JAL  0x194     
+
+PC:00000650	INSTR:080003d1	 J f44     
+[606] J Type instr generated - 0xc000135	
+PC:00000f44	INSTR:0c000135	 JAL 4d4     
+JAL  0x135     
+
+PC:000004d4	INSTR:080003d2	 J f48     
+[607] J Type instr generated - 0x8000396	
+PC:00000f48	INSTR:08000396	 J e58     
+J    0x396     
+
+PC:00000e58	INSTR:080003d3	 J f4c     
+[608] J Type instr generated - 0x80001db	
+PC:00000f4c	INSTR:080001db	 J 76c     
+J    0x1db     
+
+PC:0000076c	INSTR:080003d4	 J f50     
+[609] J Type instr generated - 0xc0002d5	
+PC:00000f50	INSTR:0c0002d5	 JAL b54     
+JAL  0x2d5     
+
+PC:00000b54	INSTR:080003d5	 J f54     
+[610] J Type instr generated - 0xc000091	
+PC:00000f54	INSTR:0c000091	 JAL 244     
+JAL  0x91      
+
+PC:00000244	INSTR:080003d6	 J f58     
+[611] J Type instr generated - 0x8000380	
+PC:00000f58	INSTR:08000380	 J e00     
+J    0x380     
+
+PC:00000e00	INSTR:080003d7	 J f5c     
+[612] J Type instr generated - 0xc000065	
+PC:00000f5c	INSTR:0c000065	 JAL 194     
+JAL  0x65      
+
+PC:00000194	INSTR:080003d8	 J f60     
+[613] J Type instr generated - 0xc000373	
+PC:00000f60	INSTR:0c000373	 JAL dcc     
+JAL  0x373     
+
+PC:00000dcc	INSTR:080003d9	 J f64     
+[614] J Type instr generated - 0xc000078	
+PC:00000f64	INSTR:0c000078	 JAL 1e0     
+JAL  0x78      
+
+PC:000001e0	INSTR:080003da	 J f68     
+[615] J Type instr generated - 0xc0000cd	
+PC:00000f68	INSTR:0c0000cd	 JAL 334     
+JAL  0xcd      
+
+PC:00000334	INSTR:080003db	 J f6c     
+[616] J Type instr generated - 0xc0002e0	
+PC:00000f6c	INSTR:0c0002e0	 JAL b80     
+JAL  0x2e0     
+
+PC:00000b80	INSTR:080003dc	 J f70     
+[617] J Type instr generated - 0xc00020b	
+PC:00000f70	INSTR:0c00020b	 JAL 82c     
+JAL  0x20b     
+
+PC:0000082c	INSTR:080003dd	 J f74     
+[618] J Type instr generated - 0xc000317	
+PC:00000f74	INSTR:0c000317	 JAL c5c     
+JAL  0x317     
+
+PC:00000c5c	INSTR:080003de	 J f78     
+[619] J Type instr generated - 0xc00031f	
+PC:00000f78	INSTR:0c00031f	 JAL c7c     
+JAL  0x31f     
+
+PC:00000c7c	INSTR:080003df	 J f7c     
+[620] J Type instr generated - 0x80003b4	
+PC:00000f7c	INSTR:080003b4	 J ed0     
+J    0x3b4     
+
+PC:00000ed0	INSTR:080003e0	 J f80     
+[621] J Type instr generated - 0xc000125	
+PC:00000f80	INSTR:0c000125	 JAL 494     
+JAL  0x125     
+
+PC:00000494	INSTR:080003e1	 J f84     
+[622] J Type instr generated - 0xc000331	
+PC:00000f84	INSTR:0c000331	 JAL cc4     
+JAL  0x331     
+
+PC:00000cc4	INSTR:080003e2	 J f88     
+[623] J Type instr generated - 0xc0003be	
+PC:00000f88	INSTR:0c0003be	 JAL ef8     
+JAL  0x3be     
+
+PC:00000ef8	INSTR:080003e3	 J f8c     
+[624] J Type instr generated - 0x8000122	
+PC:00000f8c	INSTR:08000122	 J 488     
+J    0x122     
+
+PC:00000488	INSTR:080003e4	 J f90     
+[625] J Type instr generated - 0x80002a8	
+PC:00000f90	INSTR:080002a8	 J aa0     
+J    0x2a8     
+
+PC:00000aa0	INSTR:080003e5	 J f94     
+[626] J Type instr generated - 0xc000342	
+PC:00000f94	INSTR:0c000342	 JAL d08     
+JAL  0x342     
+
+PC:00000d08	INSTR:080003e6	 J f98     
+[627] J Type instr generated - 0x800027e	
+PC:00000f98	INSTR:0800027e	 J 9f8     
+J    0x27e     
+
+PC:000009f8	INSTR:080003e7	 J f9c     
+[628] J Type instr generated - 0xc0002b1	
+PC:00000f9c	INSTR:0c0002b1	 JAL ac4     
+JAL  0x2b1     
+
+PC:00000ac4	INSTR:080003e8	 J fa0     
+[629] J Type instr generated - 0xc0001e4	
+PC:00000fa0	INSTR:0c0001e4	 JAL 790     
+JAL  0x1e4     
+
+PC:00000790	INSTR:080003e9	 J fa4     
+[630] J Type instr generated - 0xc000338	
+PC:00000fa4	INSTR:0c000338	 JAL ce0     
+JAL  0x338     
+
+PC:00000ce0	INSTR:080003ea	 J fa8     
+[631] J Type instr generated - 0x80000f0	
+PC:00000fa8	INSTR:080000f0	 J 3c0     
+J    0xf0      
+
+PC:000003c0	INSTR:080003eb	 J fac     
+[632] J Type instr generated - 0x8000204	
+PC:00000fac	INSTR:08000204	 J 810     
+J    0x204     
+
+PC:00000810	INSTR:080003ec	 J fb0     
+[633] J Type instr generated - 0xc00023e	
+PC:00000fb0	INSTR:0c00023e	 JAL 8f8     
+JAL  0x23e     
+
+PC:000008f8	INSTR:080003ed	 J fb4     
+[634] J Type instr generated - 0x8000082	
+PC:00000fb4	INSTR:08000082	 J 208     
+J    0x82      
+
+PC:00000208	INSTR:080003ee	 J fb8     
+[635] J Type instr generated - 0xc0001b5	
+PC:00000fb8	INSTR:0c0001b5	 JAL 6d4     
+JAL  0x1b5     
+
+PC:000006d4	INSTR:080003ef	 J fbc     
+[636] J Type instr generated - 0xc0001de	
+PC:00000fbc	INSTR:0c0001de	 JAL 778     
+JAL  0x1de     
+
+PC:00000778	INSTR:080003f0	 J fc0     
+[637] J Type instr generated - 0xc000207	
+PC:00000fc0	INSTR:0c000207	 JAL 81c     
+JAL  0x207     
+
+PC:0000081c	INSTR:080003f1	 J fc4     
+[638] J Type instr generated - 0x80001f3	
+PC:00000fc4	INSTR:080001f3	 J 7cc     
+J    0x1f3     
+
+PC:000007cc	INSTR:080003f2	 J fc8     
+[639] J Type instr generated - 0x80000dd	
+PC:00000fc8	INSTR:080000dd	 J 374     
+J    0xdd      
+
+PC:00000374	INSTR:080003f3	 J fcc     
+[640] J Type instr generated - 0x800030d	
+PC:00000fcc	INSTR:0800030d	 J c34     
+J    0x30d     
+
+PC:00000c34	INSTR:080003f4	 J fd0     
+[641] J Type instr generated - 0x80001c3	
+PC:00000fd0	INSTR:080001c3	 J 70c     
+J    0x1c3     
+
+PC:0000070c	INSTR:080003f5	 J fd4     
+[642] J Type instr generated - 0xc0002a0	
+PC:00000fd4	INSTR:0c0002a0	 JAL a80     
+JAL  0x2a0     
+
+PC:00000a80	INSTR:080003f6	 J fd8     
+[643] J Type instr generated - 0xc00018a	
+PC:00000fd8	INSTR:0c00018a	 JAL 628     
+JAL  0x18a     
+
+PC:00000628	INSTR:080003f7	 J fdc     
+[644] J Type instr generated - 0x800003b	
+PC:00000fdc	INSTR:0800003b	 J ec      
+J    0x3b      
+
+PC:000000ec	INSTR:080003f8	 J fe0     
+[645] J Type instr generated - 0x800025a	
+PC:00000fe0	INSTR:0800025a	 J 968     
+J    0x25a     
+
+PC:00000968	INSTR:080003f9	 J fe4     
+[646] J Type instr generated - 0xc00036a	
+PC:00000fe4	INSTR:0c00036a	 JAL da8     
+JAL  0x36a     
+
+PC:00000da8	INSTR:080003fa	 J fe8     
+[647] J Type instr generated - 0x80002c5	
+PC:00000fe8	INSTR:080002c5	 J b14     
+J    0x2c5     
+
+PC:00000b14	INSTR:080003fb	 J fec     
+[648] J Type instr generated - 0xc000234	
+PC:00000fec	INSTR:0c000234	 JAL 8d0     
+JAL  0x234     
+
+PC:000008d0	INSTR:080003fc	 J ff0     
+[649] J Type instr generated - 0x8000315	
+PC:00000ff0	INSTR:08000315	 J c54     
+J    0x315     
+
+PC:00000c54	INSTR:080003fd	 J ff4     
+PC:00000ff4	INSTR:2002000a	 ADDI R2 , R0 , 0xa                               
+PC:00000ff8	INSTR:0000000c	 SYSCALL
