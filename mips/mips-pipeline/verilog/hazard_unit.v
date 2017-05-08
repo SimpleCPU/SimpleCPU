@@ -47,6 +47,9 @@ module hazard_unit
                                : (reg_wr_wb_ret_hz_i & |rd_wb_ret_hz_i &
                                  (rd_wb_ret_hz_i == rt_ex_mem_hz_i)) ? 2'b01 
                                  : 2'b00;
+    // All forwarding paths have been implemented
+    // There is not need to stall either Fetch or
+    // the Issue stage of the pipelines
     assign stall_fetch_hz = 1'b0;
     assign stall_iss_hz = 1'b0;
     // Branches would be resolved in the EXECUTE stage
