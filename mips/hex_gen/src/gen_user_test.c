@@ -10,4 +10,5 @@ void gen_user_test () {
     pc = get_curr_PC ();
     gen_i_type_ADDI (R1, R2, 4, 1, pc & 0xFFFF);
     gen_i_type_ADDIU (R1, R2, 4, 1, (pc>>16) & 0xFFFF);
+    // Demonstrate the usage of get_ls_addr here
 }
