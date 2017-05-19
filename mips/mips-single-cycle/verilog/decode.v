@@ -56,12 +56,12 @@ module decode
     assign target_dec        = instr_dec_i[25:0];
     assign funct_dec         = instr_dec_i[5:0];
     assign shamt_dec         = instr_dec_i[10:6];
-    assign is_r_type_dec     = (op_dec == 6'h0) ? 1'b1 : 1'b0;
-    assign is_i_type_dec     = ((op_dec != 6'h0) && ((op_dec != `J) && (op_dec != `JAL))) ? 1'b1 : 1'b0;
-    assign is_j_type_dec     = ((op_dec == `J) || (op_dec == `JAL)) ? 1'b1 : 1'b0;
+    assign is_r_type_dec     = (op_dec == 6'h0);
+    assign is_i_type_dec     = ((op_dec != 6'h0) && ((op_dec != `J) && (op_dec != `JAL)));
+    assign is_j_type_dec     = ((op_dec == `J) || (op_dec == `JAL));
     assign use_link_reg_dec  = (((op_dec == `BVAR) && ((rt_dec == `BLTZAL) || (rt_dec == `BGEZAL))) ||
                                ((is_r_type_dec) && ((funct_dec == `JALR))) ||
-                               ((is_j_type_dec) && ((op_dec == `JAL)))) ? 1'b1 : 1'b0;
+                               ((is_j_type_dec) && ((op_dec == `JAL))));
                                
     
 endmodule
