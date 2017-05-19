@@ -53,6 +53,8 @@ module  one_level_bpred #(
     assign  brn_takeness_bpred      = bpred[brn_addr_bpred_i][1];
     // If branch is predicted to be taken then return the target address
     // from the BTB else default to 0
+    // TODO: Instead of defaulting to 0 shouldn't the predicted address be
+    // CURRENT_PC + 4 ?
     assign  brn_target_addr_bpred   = brn_takeness_bpred ? btb[brn_addr_bpred_i] : 32'h0;
 
     two_bit_sat_counter COUNTER (
