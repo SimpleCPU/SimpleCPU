@@ -125,7 +125,7 @@ module ex_pipe_reg
         brn_pred_ex_pipe_reg       <=  0;
         curr_pc_ex_pipe_reg        <=  0;
         next_pred_pc_ex_pipe_reg   <=  0;
-        next_seq_pc_ex_pipe_reg     <=  0;
+        next_seq_pc_ex_pipe_reg    <=  0;
         use_link_reg_ex_pipe_reg   <=  0;
     end
     else
