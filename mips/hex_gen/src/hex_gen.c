@@ -45,7 +45,9 @@ int check_brn_addr (int imm) {
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = (unsigned) CURRENT_STATE.PC + 4 + (unsigned)imm;
     //printf("BRN ADDR is %x\n", addr);
-    if ((addr > 0) && (addr < (0xF00)) && (PC[addr]==0)) {
+    if ((addr > MEM_TEXT_START) && 
+        (addr <= (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) && 
+        (PC[addr]==0)) {
         return addr;
     }
     return -1;
@@ -58,7 +60,9 @@ int check_j_addr (int addr) {
     // printf("Target is %x\t ADDR is %x\n", target, addr);
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
-    if ((addr > 0) && (addr < (0xF00))) {
+    if ((addr > MEM_TEXT_START) && 
+        (addr < (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) && 
+        (PC[addr]==0)) {
         return 1;
     }
     return 0;
@@ -328,7 +332,7 @@ void make_room () {
     // no need to check the [0] index since
     // it will always be valid
     //printf ("PC:%x\n", CURRENT_STATE.PC);
-    for (i = 4; i < 4096; i=i+4) {
+    for (i = 4; i < IMEM_SIZE; i=i+4) {
         if ((PC[i] == 0) && (PC[i+4]==0)) {
             //printf("Branching to the following PC:%x\n", i);
             opcode = gen_j ((int)i);
@@ -397,7 +401,7 @@ void gen_instr_hex (int num_r, int num_i, int num_j) {
 
 void print_to_file (FILE* pc_hex_val, FILE* instr_hex_val) {
     int i = 0;
-    for (i = 0; i < 4096; i=i+4) {
+    for (i = 0; i < IMEM_SIZE; i=i+4) {
         if (PC[i]) {
             fprintf(pc_hex_val, "%x\n", i);
             fprintf(instr_hex_val, "%x\n", instr[i]);
