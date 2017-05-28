@@ -20,25 +20,25 @@
 
 // Define to specify the number of instructions in the end code
 #define NUM_END_SEQ_INSTR 2
-// Define to specify the I-MEM size in Bytes (default to 4K)
-#define IMEM_SIZE 4096
+// Define to specify the I-MEM size in Bytes
+#define IMEM_SIZE 0x2000
 // Define to specify the number of architectural registers
 #define MIPS_REGS 32
 // Define to hold the maximum 16-bit value possible
 #define MAX_16_BIT_IMM 0xFFFF
 // Defines the start of DATA section
-#define MEM_DATA_START 0x00001000
+#define MEM_DATA_START 0x00002000
 // Defines the size of DATA section
 #define MEM_DATA_SIZE  0x00100000
 // Defines the start of TEXT section
 #define MEM_TEXT_START 0x00000000
 // Defines the size of TEXT section
-#define MEM_TEXT_SIZE  0x00000FFF
+#define MEM_TEXT_SIZE  0x00001FFF
 
-int PC[4096];           /* Program counter arr - index using PC */
-int instr[4096];        /* Stores hex value of the instruction  */
-int ls_addr[4096];      /* Stores the addresses used by load/store instr */
-int br_addr[4096];      /* Stores the addresses used by branch instrs    */
+int PC     [IMEM_SIZE];      /* Program counter arr - index using PC */
+int instr  [IMEM_SIZE];      /* Stores hex value of the instruction  */
+int ls_addr[IMEM_SIZE];      /* Stores the addresses used by load/store instr */
+int br_addr[IMEM_SIZE];      /* Stores the addresses used by branch instrs    */
 
 typedef struct CPU_State_Struct {
   uint32_t PC;          /* Program counter */
