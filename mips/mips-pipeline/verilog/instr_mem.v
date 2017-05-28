@@ -10,7 +10,7 @@ module instr_mem
     );
 
     // 4K mem Byte Addressable
-    reg [31:0] imem [1023:0];
+    reg [31:0] imem [2047:0];
 
     wire[31:0] read_instr;
     wire[31:0] shifted_read_addr;
