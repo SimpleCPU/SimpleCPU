@@ -52,7 +52,7 @@ uint32_t get_curr_PC () {
 uint32_t get_rand_ls_addr () {
     int rand_idx;
     int i;
-    for (i = 0; i < 4096; i++) {
+    for (i = 0; i < IMEM_SIZE; i++) {
         rand_idx = rand () % instr_gen;
         if (ls_addr[rand_idx] != 0) {
             return (uint32_t) ls_addr[rand_idx];
@@ -60,7 +60,7 @@ uint32_t get_rand_ls_addr () {
     }
     printf ("Failed to find a valid random Load/Store address!\n");
     printf ("Returning the first valid entry.\n");
-    for (i = 0; i < 4096; i++) {
+    for (i = 0; i < IMEM_SIZE; i++) {
         if (ls_addr[i] != 0) {
             return (uint32_t) ls_addr[i];
         }
@@ -75,7 +75,7 @@ uint32_t get_rand_ls_addr () {
 uint32_t get_rand_br_addr () {
     int rand_idx;
     int i;
-    for (i = 0; i < 4096; i++) {
+    for (i = 0; i < IMEM_SIZE; i++) {
         rand_idx = rand () % instr_gen;
         if (br_addr[rand_idx] != 0) {
             return (uint32_t) br_addr[rand_idx];
@@ -83,7 +83,7 @@ uint32_t get_rand_br_addr () {
     }
     printf ("Failed to find a valid random branch address!\n");
     printf ("Returning the first valid entry.\n");
-    for (i = 0; i < 4096; i++) {
+    for (i = 0; i < IMEM_SIZE; i++) {
         if (br_addr[i] != 0) {
             return (uint32_t) br_addr[i];
         }
