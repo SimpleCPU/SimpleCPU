@@ -94,12 +94,13 @@ add wave -noupdate -group RF -radix hexadecimal /top_tb/T1/R1/reset
 add wave -noupdate -group RF -radix hexadecimal /top_tb/T1/R1/w_data_rf_i
 add wave -noupdate -group RF -radix hexadecimal /top_tb/T1/R1/w_en_rf_i
 add wave -noupdate -group RF -radix hexadecimal /top_tb/T1/R1/w_reg_rf_i
-add wave -noupdate -group ALU -radix hexadecimal /top_tb/T1/A1/opr_a_alu_i
-add wave -noupdate -group ALU -radix hexadecimal /top_tb/T1/A1/opr_b_alu_i
-add wave -noupdate -group ALU -radix hexadecimal /top_tb/T1/A1/op_alu_i
-add wave -noupdate -group ALU -radix hexadecimal /top_tb/T1/A1/res_alu_o
-add wave -noupdate -group ALU -radix hexadecimal /top_tb/T1/A1/n_alu_o
-add wave -noupdate -group ALU -radix hexadecimal /top_tb/T1/A1/z_alu_o
+add wave -noupdate -expand -group ALU -radix hexadecimal /top_tb/T1/A1/opr_a_alu_i
+add wave -noupdate -expand -group ALU -radix hexadecimal /top_tb/T1/A1/opr_b_alu_i
+add wave -noupdate -expand -group ALU -radix hexadecimal /top_tb/T1/A1/op_alu_i
+add wave -noupdate -expand -group ALU -radix hexadecimal /top_tb/T1/A1/res_alu_o
+add wave -noupdate -expand -group ALU -radix hexadecimal /top_tb/T1/A1/n_alu_o
+add wave -noupdate -expand -group ALU /top_tb/T1/A1/v_alu
+add wave -noupdate -expand -group ALU -radix hexadecimal /top_tb/T1/A1/z_alu_o
 add wave -noupdate -expand -group HAZARD -radix hexadecimal /top_tb/T1/hazard/rs_ex_mem_hz_i
 add wave -noupdate -expand -group HAZARD -radix hexadecimal /top_tb/T1/hazard/rt_ex_mem_hz_i
 add wave -noupdate -expand -group HAZARD -radix hexadecimal /top_tb/T1/hazard/rd_mem_wb_hz_i
