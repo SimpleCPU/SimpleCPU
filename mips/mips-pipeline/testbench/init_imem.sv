@@ -1,8 +1,8 @@
 // Memory initialisation
 
 function void init_imem (string test_name);
-    logic [31:0] instr_hex [1023:0];
-    logic [31:0] pc_val [2048:0];
+    logic [31:0] instr_hex [2047:0];
+    logic [31:0] pc_val [2047:0];
     
     string instr_hex_s;
     string pc_values_hex_s;
