@@ -16,14 +16,26 @@
 #define R_TYPE          0x0
 #define J_TYPE          0x1
 #define I_TYPE          0x2
+// Exception/Interrups causes
+// External interrupt
+#define INT             0x0
+// Invalid Opcode
+#define IOPC            0x1
+// Overflow
+#define OVF             0x2
+// SYSCALL
+#define SYS             0x3
 
 #define MIPS_REGS 32
 
 typedef struct CPU_State_Struct {
 
-  uint32_t PC;		          /* program counter */
-  uint32_t REGS[MIPS_REGS]; /* register file. */
-  uint32_t HI, LO;          /* special regs for mult/div. */
+  uint32_t PC;		            /* program counter */
+  uint32_t REGS[MIPS_REGS];     /* register file. */
+  uint32_t HI, LO;              /* special regs for mult/div. */
+  uint32_t EPC;                 /* Exception link register to hold current PC */
+  uint32_t ESR;                 /* Exception syndrome register -- Cause of EXC */
+  uint32_t ECR;                 /* Exception conntrol register -- Status reg */
 } CPU_State;
 
 /* Data Structure for Latch */
