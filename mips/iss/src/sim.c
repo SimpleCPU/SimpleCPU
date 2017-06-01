@@ -726,7 +726,8 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15;
             imm = (sign) ? (imm | shift_val) : imm;
-            address = CURRENT_STATE.REGS[rs] + imm;
+            // Align the address to a word boundary
+            address = (CURRENT_STATE.REGS[rs] + imm) & 0xFFFFFFFC;
             mem_write_32(address, NEXT_STATE.REGS[rt]);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("PC:%.8x\tINSTR:%.8x\t SW R%-2d, R%-2d, 0x%-32x\n", 
