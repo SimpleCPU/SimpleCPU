@@ -14,7 +14,7 @@ module adder
     wire[6:0]  cout;
     wire[7:0]  flag_v;
 
-    assign  v_flag = flag_v;
+    assign  v_flag = flag_v[7];
     
     carry_lookahead_adder CLA1(op1[3:0],   op2[3:0],    cin,     sum[3:0],   cout[0], flag_v[0]);
     carry_lookahead_adder CLA2(op1[7:4],   op2[7:4],    cout[0], sum[7:4],   cout[1], flag_v[1]);
