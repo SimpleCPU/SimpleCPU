@@ -1,0 +1,35 @@
+#include <stdint.h>
+
+#define FALSE 0
+#define TRUE  1
+#define MEM_DATA_START  0x00002000
+#define MEM_DATA_SIZE   0x00100000
+#define MEM_TEXT_START  0x00000000
+#define MEM_TEXT_SIZE   0x00001FFF
+#define MEM_STACK_START 0x7ff00000
+#define MEM_STACK_SIZE  0x00100000
+#define MEM_KDATA_START 0x90000000
+#define MEM_KDATA_SIZE  0x00100000
+#define MEM_KTEXT_START 0x80000000
+#define MEM_KTEXT_SIZE  0x00100000
+
+#define RISCV_REGS 32
+
+typedef struct CPU_State_Struct {
+  uint32_t PC;                  /* program counter */
+  uint32_t REGS[RISCV_REGS];    /* register file. */
+} CPU_State;
+
+/* Data Structure for Latch */
+extern CPU_State CURRENT_STATE, NEXT_STATE;
+
+extern int RUN_BIT; 	/* run bit                  */
+extern int prev_pc;     /* previous program counter */
+uint32_t   instr_opcode;
+
+uint32_t mem_read_32(uint32_t address);
+void     mem_write_32(uint32_t address, uint32_t value);
+
+void process_instruction();
+extern void init();
+extern void run(int num_cycles);
