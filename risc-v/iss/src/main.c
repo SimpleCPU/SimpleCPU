@@ -35,7 +35,6 @@ CPU_State CURRENT_STATE, NEXT_STATE;
 int RUN_BIT;	/* run bit */
 int INSTRUCTION_COUNT;
 int prev_pc;
-int rt_as_src = 0;
 
 /***************************************************************/
 /*                                                             */
@@ -155,13 +154,6 @@ void mdump(/*FILE * dumpsim_file,*/ int start, int stop) {
   for (address = start; address <= stop; address += 4)
     printf("  0x%08x (%d) : 0x%08x\n", address, address, mem_read_32(address));
   printf("\n");
-
-  /* dump the memory contents into the dumpsim file */
-  //fprintf(dumpsim_file, "\nMemory content [0x%08x..0x%08x] :\n", start, stop);
-  //fprintf(dumpsim_file, "-------------------------------------\n");
-  //for (address = start; address <= stop; address += 4)
-  //  fprintf(dumpsim_file, "  0x%08x (%d) : 0x%08x\n", address, address, mem_read_32(address));
-  //fprintf(dumpsim_file, "\n");
 }
 
 /***************************************************************/
@@ -185,18 +177,6 @@ void rdump(FILE * dumpsim_file) {
   printf("HI: 0x%08x\n", CURRENT_STATE.HI);
   printf("LO: 0x%08x\n", CURRENT_STATE.LO);
   printf("\n");
-
-  ///* dump the state information into the dumpsim file */
-  //fprintf(dumpsim_file, "\nCurrent register/bus values :\n");
-  //fprintf(dumpsim_file, "-------------------------------------\n");
-  //fprintf(dumpsim_file, "Instruction Count : %u\n", INSTRUCTION_COUNT);
-  //fprintf(dumpsim_file, "PC                : 0x%08x\n", CURRENT_STATE.PC);
-  //fprintf(dumpsim_file, "Registers:\n");
-  //for (k = 0; k < RISCV_REGS; k++)
-  //  fprintf(dumpsim_file, "R%d: 0x%08x\n", k, CURRENT_STATE.REGS[k]);
-  //fprintf(dumpsim_file, "HI: 0x%08x\n", CURRENT_STATE.HI);
-  //fprintf(dumpsim_file, "LO: 0x%08x\n", CURRENT_STATE.LO);
-  //fprintf(dumpsim_file, "\n");
 }
 
 /***************************************************************/
@@ -295,25 +275,10 @@ void initialize(char *program_filename, int num_prog_files, char *pc_filename) {
 /*                                                             */
 /***************************************************************/
 void sim(char *instr_hex, char *pc_values_hex) {                              
-  //FILE * dumpsim_file;
-
-  ///* Error Checking */
-  //if (argc < 2) {
-  //  printf("Error: usage: %s <program_file> <pc_file> \n",
-  //         argv[0]);
-  //  exit(1);
-  //}
-
-  
+ 
   printf("RISC-V Simulator\n\n");
 
   initialize(instr_hex, 1, pc_values_hex);
-
-  //if ( (dumpsim_file = fopen( "dumpsim", "w" )) == NULL ) {
-  //  printf("Error: Can't open dumpsim file\n");
-  //  exit(-1);
-  //}
-
 }
 
 extern void init (char *test_name) {
