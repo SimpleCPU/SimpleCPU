@@ -3,16 +3,30 @@
 
 int decode_instr_type (uint32_t instr_opcode) {
     int type;
-    if ((instr_opcode >> 26) == 0) { //R type
+    if ((instr_opcode & 0x7F) == 0x33) {        // R-Type
         type = R_TYPE;
         return type;
     }
-    else if (((instr_opcode >> 26) == 2 ) || ((instr_opcode >> 26) == 3)) { //J type
-        type = J_TYPE;
+    else if ((instr_opcode & 0x7F) == 0x13) {   // I-Type
+        type = I_TYPE;
         return type;
     }
-    else { //I type
-        type = I_TYPE;
+    else if ((instr_opcode & 0x7F) == 0x23) {   // S-Type
+        type = S_TYPE;
+        return type;
+    }
+    else if ((instr_opcode & 0x7F) == 0x63) {   // B-Type
+        type = B_TYPE;
+        return type;
+    }
+    else if (((instr_opcode & 0x7F) == 0x37) || 
+             ((instr_opcode & 0x7F) == 0x27)) { // U-Type
+        type = U_TYPE;
+        return type;
+    }
+    else if (((instr_opcode & 0x7F) == 0x6F) || 
+             ((instr_opcode & 0x7F) == 0x67)) { // J-Type
+        type = J_TYPE;
         return type;
     }
     printf("No valid type found for instruction: %32x\n", instr_opcode);

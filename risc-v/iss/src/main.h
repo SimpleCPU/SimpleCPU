@@ -12,6 +12,12 @@
 #define MEM_KDATA_SIZE  0x00100000
 #define MEM_KTEXT_START 0x80000000
 #define MEM_KTEXT_SIZE  0x00100000
+#define R_TYPE          0x0
+#define I_TYPE          0x1
+#define S_TYPE          0x2
+#define B_TYPE          0x3
+#define U_TYPE          0x4
+#define J_TYPE          0x5
 
 #define RISCV_REGS 32
 
