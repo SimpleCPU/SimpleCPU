@@ -57,7 +57,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
-                rs,
+                rt,
                 shamt
             );
         break;
@@ -96,7 +96,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
-                rs,
+                rt,
                 shamt
             );
         break;
@@ -108,7 +108,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
-                rs,
+                rt,
                 shamt
             );
         break;
@@ -123,7 +123,7 @@ void execute_r (uint32_t rs, uint32_t rt, uint32_t rd, unsigned int shamt, unsig
                 CURRENT_STATE.PC,
                 instr_opcode,
                 rd,
-                rs,
+                rt,
                 shamt
             );
         break;
