@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "riscv_instr_defines.h"
 
 #define FALSE 0
 #define TRUE  1

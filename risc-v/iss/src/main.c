@@ -182,8 +182,6 @@ void rdump(FILE * dumpsim_file) {
   printf("Registers:\n");
   for (k = 0; k < RISCV_REGS; k++)
     printf("R%d: 0x%08x\n", k, CURRENT_STATE.REGS[k]);
-  printf("HI: 0x%08x\n", CURRENT_STATE.HI);
-  printf("LO: 0x%08x\n", CURRENT_STATE.LO);
   printf("\n");
 
   ///* dump the state information into the dumpsim file */
@@ -194,8 +192,6 @@ void rdump(FILE * dumpsim_file) {
   //fprintf(dumpsim_file, "Registers:\n");
   //for (k = 0; k < RISCV_REGS; k++)
   //  fprintf(dumpsim_file, "R%d: 0x%08x\n", k, CURRENT_STATE.REGS[k]);
-  //fprintf(dumpsim_file, "HI: 0x%08x\n", CURRENT_STATE.HI);
-  //fprintf(dumpsim_file, "LO: 0x%08x\n", CURRENT_STATE.LO);
   //fprintf(dumpsim_file, "\n");
 }
 
