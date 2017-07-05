@@ -198,13 +198,14 @@ void decode_r (uint32_t instr_opcode) {
     execute_r (rs1, rs2, rd, funct7, funct3);
 }
 
-void execute_i (unsigned int funct3, uint32_t rs1, uint32_t rd, int imm) {
+void execute_i (unsigned int funct3, int opcode, uint32_t rs1, uint32_t rd, int imm) {
     int sign, mem_content;
     int shift_val;
     uint32_t address;
+    unsigned int funct = ((opcode>>4 & 0x1) << 3) | funct3;
     //printf ("I-type instruction\tOpcode is :0x%x\n", opcode);
     // TODO: Add SLLI, SRLI, SRAI instructions
-    switch (funct3) {
+    switch (funct) {
         case (ADDI): //ADDI
             printf ("PC:%.8x\tINSTR:%.8x\t ADDI X%-2d, X%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
@@ -223,24 +224,6 @@ void execute_i (unsigned int funct3, uint32_t rs1, uint32_t rd, int imm) {
             NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs1] + imm;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             
-        break;
-        case (ADDIU): //ADDIU
-            printf ("PC:%.8x\tINSTR:%.8x\t ADDIU X%-2d, X%-2d, 0x%-32x\n", 
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            shift_val = shift_const(12);
-            sign = (imm & 0x800)>>11;
-            imm = (sign) ? (imm | shift_val) : imm;
-            NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs1] + imm;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
         case (SLTI): //SLTI
             shift_val = shift_const(12);
@@ -441,13 +424,14 @@ void execute_i (unsigned int funct3, uint32_t rs1, uint32_t rd, int imm) {
 void decode_i (uint32_t instr_opcode) {
     uint32_t rs1, rd;
     unsigned int funct3; 
-    int imm;
+    int imm, opcode;
     funct3 = (instr_opcode >> 12)   & 0x07;
+    opcode = (instr_opcode      )   & 0x7F;
     rs1    = (instr_opcode >> 15)   & 0x1F;
     rd     = (instr_opcode >> 16)   & 0x1F;
     imm    = (instr_opcode)         & 0xFFFF;
 
-    execute_i (funct3, rs1, rd, imm);
+    execute_i (funct3, opcode, rs1, rd, imm);
 }
 
 void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
