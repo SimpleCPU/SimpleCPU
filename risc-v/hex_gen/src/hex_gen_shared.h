@@ -67,7 +67,7 @@ void gen_i_instr (int, ...);
 // Function to generate given J-type instruction
 void gen_j_instr ();
 // Function to randomly generate R, I or J instruction depending on the count
-void gen_instr_hex (int, int, int);
+void gen_instr_hex (int, int, int, int, int, int);
 // Function to return the current PC value
 uint32_t get_curr_PC ();
 // Function to return random load/store address
