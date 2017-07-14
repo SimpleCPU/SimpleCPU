@@ -64,8 +64,10 @@ void make_room ();
 void gen_r_instr (int, ...);
 // Function to generate given I-type instruction
 void gen_i_instr (int, ...);
+// Function to generate given S-type instruction
+void gen_s_instr (int, ...);
 // Function to generate given J-type instruction
-void gen_j_instr ();
+void gen_j_instr (int, ...);
 // Function to randomly generate R, I or J instruction depending on the count
 void gen_instr_hex (int, int, int, int, int, int);
 // Function to return the current PC value
