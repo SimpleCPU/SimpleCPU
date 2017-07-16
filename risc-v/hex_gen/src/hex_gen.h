@@ -22,13 +22,13 @@ extern void init_memory ();
 
 /* Declare all the internally used functions here */
 void update_cpu (int, int);
-int  check_brn_addr (int);
+int  check_brn_addr (int, int);
 int  check_ls_addr (int, int);
 int  check_j_addr (int);
 void print_assembled_r_instr (int, int, int, int);
 void print_assembled_i_instr (int, int, int, int);
 void print_assembled_s_instr (int, int, int, int);
-void print_assembled_j_instr (int, int);
+void print_assembled_j_instr (int, int, int);
 void gen_end_seq ();
 void print_to_file (FILE*, FILE*);
 
