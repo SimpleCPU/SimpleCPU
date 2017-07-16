@@ -27,7 +27,7 @@
 // Define to hold the maximum 16-bit value possible
 #define MAX_16_BIT_IMM 0xFFFF
 // Defines the start of DATA section
-#define MEM_DATA_START 0x00002000
+#define MEM_DATA_START 0x00000000
 // Defines the size of DATA section
 #define MEM_DATA_SIZE  0x00100000
 // Defines the start of TEXT section

@@ -115,7 +115,7 @@ void gen_r_instr (int vopt, ...) {
         }
     }
     else {
-        funct_idx   = rand()%13;
+        funct_idx   = rand()%10;
         funct3      = funct_val_r_type [funct_idx] & 0x7;
         funct7      = 0x0 | (((funct_val_r_type [funct_idx] >> 3) & 0x1) << 6);
         rs1         = rand ()%32;
@@ -298,7 +298,7 @@ void gen_s_instr (int vopt, ...) {
         }
     }
     else {
-        funct_idx   = rand()%12;
+        funct_idx   = rand()%3;
         opcode      = 0x23;
         funct3      = opcode_val_s_type [funct_idx];
         rs1         = rand() % 32;
