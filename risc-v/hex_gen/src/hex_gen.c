@@ -128,8 +128,8 @@ void gen_r_instr (int vopt, ...) {
                 (rd << 7) + opcode;
 
     printf ("[%d] R Type instr generated - 0x%.7x\t\n", instr_gen, hex_instr);
-    //load_instr_opcode ((uint32_t) hex_instr);
-    //run (1);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
     else
@@ -239,8 +239,8 @@ void gen_i_instr (int vopt, ...) {
                 (rd << 7)   + opcode;
 
     printf ("[%d] I Type instr generated - 0x%-8x\n", instr_gen, hex_instr);
-    //load_instr_opcode ((uint32_t) hex_instr);
-    //run (1);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
     else
@@ -343,8 +343,8 @@ void gen_s_instr (int vopt, ...) {
                 (funct3 << 12) + ((imm & 0x1F) << 7) + opcode;
 
     printf ("[%d] S Type instr generated - 0x%-8x\n", instr_gen, hex_instr);
-    //load_instr_opcode ((uint32_t) hex_instr);
-    //run (1);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
     else
@@ -436,8 +436,8 @@ void gen_b_instr (int vopt, ...) {
                 opcode;
 
     printf ("[%d] B Type instr generated - 0x%-8x\n", instr_gen, hex_instr);
-    //load_instr_opcode ((uint32_t) hex_instr);
-    //run (1);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
     else
@@ -492,8 +492,8 @@ void gen_u_instr (int vopt, ...) {
     hex_instr = (imm << 12) + (rd << 7) + opcode;
 
     printf ("[%d] U Type instr generated - 0x%-8x\n", instr_gen, hex_instr);
-    //load_instr_opcode ((uint32_t) hex_instr);
-    //run (1);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
     else
@@ -554,8 +554,8 @@ void gen_j_instr (int vopt, ...) {
                 (((imm >> 11) & 0x1) << 20) + (((imm >> 12) & 0xFF) << 12) +
                 (rd << 7) + opcode;
     printf ("[%d] J Type instr generated - 0x%.7x\t\n", instr_gen, hex_instr);
-    //load_instr_opcode ((uint32_t) hex_instr);
-    //run (1);
+    load_instr_opcode ((uint32_t) hex_instr);
+    run (1);
     print_assembled_j_instr (opcode_idx, rd, imm);
     if (instr_gen == 0)
         update_cpu (0, hex_instr);
@@ -595,7 +595,7 @@ void make_room () {
         if ((PC[i] == 0) && (PC[i+4]==0)) {
             //printf("Branching to the following PC:%x\n", i);
             //opcode = gen_j ((int)i);
-            load_instr_opcode ((uint32_t)opcode);
+            //load_instr_opcode ((uint32_t)opcode);
             //run (1);
             //update_cpu (prev_pc, opcode);
             return;
