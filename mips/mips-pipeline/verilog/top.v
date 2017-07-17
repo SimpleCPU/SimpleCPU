@@ -168,7 +168,7 @@ module top
     // fetched and there wouldn't be any need to update the PC again.
     // But if the prediction is made in the shadow of the jump/branch 
     // instruction then we need to suppress it. The jump instruction 
-    // would hav ealready been resolved and the correct PC should be used
+    // would have already been resolved and the correct PC should be used
     assign next_pc_fetch_iss        = (~jump_ex_mem & ~branch_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
                                       (~jump_iss_ex & ~branch_ex_mem & brn_pred_fetch_iss) ? next_pred_pc_fetch_iss : 
                                       next_cal_pc_fetch_iss;
@@ -340,7 +340,7 @@ module top
     // For incorrect predictions made on jump instruction there is 
     // no need to flush the DEC stage. They resolve in the DEC stage 
     // and hazard unit flushes the next incorrect instruction entering
-    // the DEC stage thus there is no need of flushing any stage.
+    // the DEC stage.
     // For incorrect predictions made on non-jump instructions the
     // next two instructions are speculatively fetched. Hence the 
     // DEC and EX stage need to be flushed on the next cycle.
