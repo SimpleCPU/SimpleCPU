@@ -11,8 +11,6 @@
 
 #include "hex_gen_shared.h"
 
-#define NUM_END_SEQ_INSTR 2
-
 /* Declare all the external functions here */
 extern int shift_const (int);
 extern void load_instr_opcode (uint32_t);
