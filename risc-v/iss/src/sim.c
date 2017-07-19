@@ -8,7 +8,7 @@ int decode_instr_type (uint32_t instr_opcode) {
         return type;
     }
     else if (((instr_opcode & 0x7F) == 0x13) ||
-             ((instr_opcode & 0x7F) == 0x67)) { // I-Type
+             ((instr_opcode & 0x7F) == 0x03)) { // I-Type
         type = I_TYPE;
         return type;
     }
