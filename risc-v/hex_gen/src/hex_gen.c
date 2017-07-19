@@ -197,7 +197,7 @@ void gen_i_instr (int vopt, ...) {
     }
     else {
         funct_idx   = rand()%12;
-        opcode      = ((opcode_val_i_type [funct_idx] >> 3) & 0x1) << 4;
+        opcode      = (((opcode_val_i_type [funct_idx] >> 4) & 0x1) << 4) | 0x3;
         funct3      = ((opcode_val_i_type [funct_idx]) & 0x7);
         rd          = rand() % 32;
     RS1_I:
@@ -522,7 +522,7 @@ void gen_j_instr (int vopt, ...) {
     int     i;
     int     opcode_idx = rand()%1;
 
-    opcode  = opcode_val_j_type [opcode_idx];
+    opcode  = 0x6F;
     if (vopt) {
         va_start (valist, vopt);
         opcode  = va_arg (valist, int);
