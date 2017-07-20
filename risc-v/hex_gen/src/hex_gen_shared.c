@@ -18,6 +18,7 @@ void init_hex_gen () {
         PC[i]       = 0x0;
         instr[i]    = 0x0;
         ls_addr[i]  = 0x0;
+        br_addr[i]  = 0x0;
     }
     // Set instr_gen to 0
     instr_gen = 0;
