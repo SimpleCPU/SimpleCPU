@@ -24,7 +24,7 @@ module regfile
     reg [31:0] reg_file [31:0];
     
     always @ (negedge clk)
-        if (w_en_rf_i)
+    if (w_en_rf_i)
         reg_file [w_reg_rf_i] = w_data_rf_i;
 
     always @ (negedge clk)
