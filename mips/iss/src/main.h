@@ -16,7 +16,7 @@
 #define R_TYPE          0x0
 #define J_TYPE          0x1
 #define I_TYPE          0x2
-// Exception/Interrups causes
+// Exception/Interrupts causes
 // External interrupt
 #define INT             0x0
 // Invalid Opcode
@@ -30,7 +30,7 @@
 
 typedef struct CPU_State_Struct {
 
-  uint32_t PC;		              /* program counter */
+  uint32_t PC;                  /* program counter */
   uint32_t REGS[MIPS_REGS];     /* register file. */
   uint32_t HI, LO;              /* special regs for mult/div. */
   uint32_t EPC;                 /* Exception link register to hold current PC */
