@@ -13,7 +13,7 @@ module data_mem
     parameter data_seg_begin = 32'h2000,
               data_seg_size  = 32'h100000;
     // Byte Addressable mem
-    reg [31:0] dmem [0:data_seg_size];
+    reg [31:0] dmem [0:(data_seg_size>>2)];
 
     wire[31:0] read_data;
     wire[31:0] wr_strb = {wr_strb_dmem_ram_i[3],wr_strb_dmem_ram_i[3],wr_strb_dmem_ram_i[3],wr_strb_dmem_ram_i[3],
