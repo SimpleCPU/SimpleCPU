@@ -27,6 +27,7 @@ module ex_pipe_reg
         input   wire[31:0]  curr_pc_ex_pipe_reg_i,
         input   wire[31:0]  next_pred_pc_ex_pipe_reg_i,
         input   wire[31:0]  next_seq_pc_ex_pipe_reg_i,
+        input   wire        is_lw_ex_pipe_reg_i,
         input   wire        use_link_reg_ex_pipe_reg_i,
         output  wire        valid_ex_pipe_reg_o,
         output  wire[5:0]   op_ex_pipe_reg_o,
@@ -50,6 +51,7 @@ module ex_pipe_reg
         output  wire[31:0]  curr_pc_ex_pipe_reg_o,
         output  wire[31:0]  next_pred_pc_ex_pipe_reg_o,
         output  wire[31:0]  next_seq_pc_ex_pipe_reg_o,
+        output  wire        is_lw_ex_pipe_reg_o,
         output  wire        use_link_reg_ex_pipe_reg_o
     );
 
@@ -75,6 +77,7 @@ module ex_pipe_reg
     reg[31:0]  curr_pc_ex_pipe_reg;
     reg[31:0]  next_pred_pc_ex_pipe_reg;
     reg[31:0]  next_seq_pc_ex_pipe_reg;
+    reg        is_lw_ex_pipe_reg;
     reg        use_link_reg_ex_pipe_reg;
 
     assign valid_ex_pipe_reg_o          =  valid_ex_pipe_reg;
@@ -99,6 +102,7 @@ module ex_pipe_reg
     assign curr_pc_ex_pipe_reg_o        =  curr_pc_ex_pipe_reg;
     assign next_pred_pc_ex_pipe_reg_o   =  next_pred_pc_ex_pipe_reg;
     assign next_seq_pc_ex_pipe_reg_o    =  next_seq_pc_ex_pipe_reg;
+    assign is_lw_ex_pipe_reg_o          =  is_lw_ex_pipe_reg;
     assign use_link_reg_ex_pipe_reg_o   =  use_link_reg_ex_pipe_reg;
 
     always @(posedge clk or posedge reset)
@@ -126,6 +130,7 @@ module ex_pipe_reg
         curr_pc_ex_pipe_reg        <=  0;
         next_pred_pc_ex_pipe_reg   <=  0;
         next_seq_pc_ex_pipe_reg    <=  0;
+        is_lw_ex_pipe_reg          <=  0;
         use_link_reg_ex_pipe_reg   <=  0;
     end
     else
@@ -152,6 +157,7 @@ module ex_pipe_reg
         curr_pc_ex_pipe_reg        <=  curr_pc_ex_pipe_reg_i;
         next_pred_pc_ex_pipe_reg   <=  next_pred_pc_ex_pipe_reg_i;
         next_seq_pc_ex_pipe_reg    <=  next_seq_pc_ex_pipe_reg_i;
+        is_lw_ex_pipe_reg          <=  is_lw_ex_pipe_reg_i;
         use_link_reg_ex_pipe_reg   <=  use_link_reg_ex_pipe_reg_i;
     end
 

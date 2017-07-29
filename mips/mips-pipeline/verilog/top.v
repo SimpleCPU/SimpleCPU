@@ -34,6 +34,7 @@ module top
     wire        is_r_type_iss_ex;
     wire        is_i_type_iss_ex;
     wire        is_j_type_iss_ex;
+    wire        is_lw_iss_ex;
     wire        use_link_reg_iss_ex;
     wire[4:0]   rs_dec_iss_ex; 
     wire[4:0]   rd_dec_iss_ex; 
@@ -83,6 +84,7 @@ module top
     wire[31:0]  curr_pc_ex_mem;
     wire[31:0]  next_pred_pc_ex_mem;
     wire[31:0]  next_seq_pc_ex_mem;
+    wire        is_lw_ex_mem;
     wire        use_link_reg_ex_mem;
     wire        reg_wr_mem_wb;
     wire        mem_to_reg_mem_wb;
@@ -92,6 +94,7 @@ module top
     wire[31:0]  read_data_dmem_ram_mem_wb;
     wire[31:0]  r_data_p2_mem_wb;
     wire[31:0]  next_seq_pc_mem_wb;
+    wire        is_lw_mem_wb;
     wire        use_link_reg_mem_wb;
     wire        reg_wr_wb_ret;
     wire        mem_to_reg_wb_ret;
@@ -205,6 +208,7 @@ module top
         .is_r_type_dec_o (is_r_type_iss_ex),
         .is_i_type_dec_o (is_i_type_iss_ex),
         .is_j_type_dec_o (is_j_type_iss_ex),
+        .is_lw_dec_o (is_lw_iss_ex),
         .use_link_reg_dec_o (use_link_reg_iss_ex)
     );
     assign rd_iss_ex        = use_link_reg_iss_ex ? 5'h1F :
@@ -279,6 +283,7 @@ module top
         .curr_pc_ex_pipe_reg_i (curr_pc_iss_ex),
         .next_pred_pc_ex_pipe_reg_i (next_pred_pc_iss_ex),
         .next_seq_pc_ex_pipe_reg_i (next_seq_pc_iss_ex),
+        .is_lw_ex_pipe_reg_i (is_lw_iss_ex),
         .use_link_reg_ex_pipe_reg_i (use_link_reg_iss_ex),
         .valid_ex_pipe_reg_o (valid_ex_mem),
         .op_ex_pipe_reg_o (op_ex_mem),
@@ -302,12 +307,15 @@ module top
         .curr_pc_ex_pipe_reg_o (curr_pc_ex_mem),
         .next_pred_pc_ex_pipe_reg_o (next_pred_pc_ex_mem),
         .next_seq_pc_ex_pipe_reg_o (next_seq_pc_ex_mem),
+        .is_lw_ex_pipe_reg_o (is_lw_ex_mem),
         .use_link_reg_ex_pipe_reg_o (use_link_reg_ex_mem)
     );
 
-    assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? res_alu_mem_wb :
+    assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? 
+                                  (is_lw_mem_wb ? read_data_dmem_ram_mem_wb : res_alu_mem_wb) : 
                                   fwd_r_data_p1_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p1_rf_ex_mem;
+
     assign r_data_p2_ex_mem     = fwd_r_data_p2_alu_ex[1] ? res_alu_mem_wb :
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
@@ -373,6 +381,7 @@ module top
         .res_alu_mem_pipe_reg_i (res_alu_ex_mem),
         .r_data_p2_mem_pipe_reg_i (r_data_p2_ex_mem),
         .use_link_reg_mem_pipe_reg_i (use_link_reg_ex_mem),
+        .is_lw_mem_pipe_reg_i (is_lw_ex_mem),
         .next_seq_pc_mem_pipe_reg_i (next_seq_pc_ex_mem),
         .valid_mem_pipe_reg_o (valid_mem_wb),
         .reg_wr_mem_pipe_reg_o (reg_wr_mem_wb),
@@ -381,6 +390,7 @@ module top
         .rd_mem_pipe_reg_o (rd_mem_wb),
         .res_alu_mem_pipe_reg_o (res_alu_mem_wb),
         .r_data_p2_mem_pipe_reg_o (r_data_p2_mem_wb),
+        .is_lw_mem_pipe_reg_o (is_lw_mem_wb),
         .use_link_reg_mem_pipe_reg_o (use_link_reg_mem_wb),
         .next_seq_pc_mem_pipe_reg_o (next_seq_pc_mem_wb)
     );

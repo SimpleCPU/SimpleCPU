@@ -16,6 +16,7 @@ module decode
         output  wire        is_r_type_dec_o,
         output  wire        is_i_type_dec_o,
         output  wire        is_j_type_dec_o,
+        output  wire        is_lw_dec_o,
         output  wire        use_link_reg_dec_o
     );
 
@@ -31,6 +32,7 @@ module decode
     wire        is_r_type_dec;
     wire        is_i_type_dec;
     wire        is_j_type_dec;
+    wire        is_lw_dec;
     wire        use_link_reg_dec;
 
 
@@ -45,6 +47,7 @@ module decode
     assign is_r_type_dec_o    = is_r_type_dec;
     assign is_i_type_dec_o    = is_i_type_dec;
     assign is_j_type_dec_o    = is_j_type_dec;
+    assign is_lw_dec_o        = is_lw_dec;
     assign use_link_reg_dec_o = use_link_reg_dec;
 
     assign sign_imm_dec      = (sign_ext_i) ? {{16{instr_dec_i[15]}},instr_dec_i[15:0]} : 
@@ -64,6 +67,8 @@ module decode
     assign use_link_reg_dec  = (((op_dec == `BVAR) && ((rt_dec == `BLTZAL) || (rt_dec == `BGEZAL))) ||
                                ((is_r_type_dec) && ((funct_dec == `JALR))) ||
                                ((is_j_type_dec) && ((op_dec == `JAL))));
+
+    assign is_lw_dec         = is_i_type_dec & (op_dec == `LW);
                                
     
 endmodule
