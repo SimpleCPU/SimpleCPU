@@ -636,8 +636,8 @@ void execute_i (unsigned int opcode, uint32_t rs, uint32_t rt, int imm) {
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15;
             imm = (sign) ? (imm | shift_val) : imm;
-            address = CURRENT_STATE.REGS[rs] + imm;
-            mem_content = mem_read_32((uint32_t)address) ;
+            address = (CURRENT_STATE.REGS[rs] + imm) & 0xFFFFFFFC;
+            mem_content = mem_read_32((uint32_t)address);
             printf ("PC:%.8x\tINSTR:%.8x\t LW R%-2d, R%-2d, 0x%-32x\n", 
                 CURRENT_STATE.PC,
                 instr_opcode,
