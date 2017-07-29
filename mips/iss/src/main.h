@@ -50,6 +50,7 @@ int        wr_link_reg; /* Instr updates R31 reg    */
 
 uint32_t mem_read_32(uint32_t address);
 void     mem_write_32(uint32_t address, uint32_t value);
+void     mdump (int, int);
 
 void process_instruction();
 extern void init();
