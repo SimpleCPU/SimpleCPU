@@ -36,7 +36,7 @@ module alu
                                   ((op_alu_i == `OR_OP) || (op_alu_i == `AND_OP) || (op_alu_i == `NOR_OP) || (op_alu_i == `XOR_OP)) ? logical_out_alu :
                                   ((op_alu_i == `SLTU_OP)) ? comparator_out_alu :
                                   ((op_alu_i == `SLT_OP)) ? {{31{1'b0}}, n_alu}:
-                                  31'hxxxx_xxxx;
+                                  32'hxxxx_xxxx;
     adder A1 (
         .op1 (opr_a_alu_i), 
         .op2 (opr_b_negated_alu), 
