@@ -29,9 +29,9 @@
 // Defines the start of DATA section
 #define MEM_DATA_START 0x00000000
 // Defines the size of DATA section
-#define MEM_DATA_SIZE  0x00100000
+#define MEM_DATA_SIZE  0x00001FFF
 // Defines the start of TEXT section
-#define MEM_TEXT_START 0x00000000
+#define MEM_TEXT_START 0x00002000
 // Defines the size of TEXT section
 #define MEM_TEXT_SIZE  0x00001FFF
 

@@ -9,9 +9,9 @@
 #include "hex_gen.h"
 
 void update_cpu (int pc, int hex_instr) {
-    PC[pc]           = 1;
-    instr[pc]        = hex_instr;
-    //printf ("PC Update: PC[%x] = %d\tinstr[%x] = %x\n", pc, PC[pc], pc, instr[pc]);
+    PC[pc-MEM_TEXT_START]           = 1;
+    instr[pc-MEM_TEXT_START]        = hex_instr;
+    //printf ("PC Update: PC[%x] = %d\tinstr[%x] = %x\n", pc-MEM_TEXT_START, PC[pc-MEM_TEXT_START], pc-MEM_TEXT_START, instr[pc-MEM_TEXT_START]);
     prev_pc = CURRENT_STATE.PC;
 }
 
@@ -45,9 +45,10 @@ int check_brn_addr (int rs, int imm) {
     unsigned int addr = (unsigned) CURRENT_STATE.PC + (unsigned)imm;
     //printf("BRN ADDR is %x\n", addr);
     if ((addr > MEM_TEXT_START) && 
-        (addr <= (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) && 
-        (PC[addr]==0)) {
-        return addr;
+        (addr <= (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF))) {
+        if ((PC[addr-MEM_TEXT_START]==0)) {
+            return addr;
+        }
     }
     return -1;
 }
@@ -56,16 +57,16 @@ int check_brn_addr (int rs, int imm) {
 /* is a valid jump address. If the address is valid, the function    */
 /* returns 1.                                                        */
 int check_j_addr (int imm) {
-    int shift_val = shift_const(13);
-    int sign = (imm & 0x1000)>>12;
+    int shift_val = shift_const(21);
+    int sign = (imm & 0x100000)>>20;
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = (unsigned) CURRENT_STATE.PC + (unsigned)imm;
-    // printf("Target is %x\t ADDR is %x\n", target, addr);
+    //printf("ADDR is %x\n", addr);
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
     if ((addr > MEM_TEXT_START) && 
         (addr < (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) && 
-        (PC[addr]==0)) {
+        (PC[addr-MEM_TEXT_START]==0)) {
         return 1;
     }
     return 0;
@@ -131,7 +132,7 @@ void gen_r_instr (int vopt, ...) {
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr);
+        update_cpu (MEM_TEXT_START, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
     print_assembled_r_instr (funct_idx, rs1, rs2, rd);
@@ -242,7 +243,7 @@ void gen_i_instr (int vopt, ...) {
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr);
+        update_cpu (MEM_TEXT_START, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
     print_assembled_i_instr (funct_idx, rs1, rd, imm);
@@ -346,7 +347,7 @@ void gen_s_instr (int vopt, ...) {
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr);
+        update_cpu (MEM_TEXT_START, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
     print_assembled_s_instr (funct_idx, rs1, rs2, imm);
@@ -439,7 +440,7 @@ void gen_b_instr (int vopt, ...) {
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr);
+        update_cpu (MEM_TEXT_START, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
     print_assembled_b_instr (funct_idx, rs1, rs2, imm);
@@ -495,7 +496,7 @@ void gen_u_instr (int vopt, ...) {
     load_instr_opcode ((uint32_t) hex_instr);
     run (1);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr);
+        update_cpu (MEM_TEXT_START, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
     print_assembled_u_instr (opcode_idx, rd, imm);
@@ -540,11 +541,8 @@ void gen_j_instr (int vopt, ...) {
     else {
         rd    = rand() % 32;
     IMM_J:
-        //imm   = rand() % 0xFFFFF;   /* 20-bit signal */
-        // Using MEM_TEXT_SIZE as otherwise PC would flow easily
-        imm     = rand() % MEM_TEXT_SIZE;
+        imm   = (rand() % 0xFFFFF);   /* 20-bit signal */
     }
-    imm = imm << 1;
 
     if ((check_j_addr(imm) == 0)) {
         goto IMM_J;
@@ -558,7 +556,7 @@ void gen_j_instr (int vopt, ...) {
     run (1);
     print_assembled_j_instr (opcode_idx, rd, imm);
     if (instr_gen == 0)
-        update_cpu (0, hex_instr);
+        update_cpu (MEM_TEXT_START, hex_instr);
     else
         update_cpu (prev_pc, hex_instr);
     instr_gen++;
@@ -579,11 +577,13 @@ void gen_j_instr (int vopt, ...) {
 void make_room () {
     int i;
     int opcode = 0;
+    int pc      = CURRENT_STATE.PC - MEM_TEXT_START;
+    int pc_q    = CURRENT_STATE.PC + 4 - MEM_TEXT_START;
     // There should be space for at least
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
-    if (((PC[CURRENT_STATE.PC] == 0) && (PC[CURRENT_STATE.PC+4]==0)) &&
-        !(CURRENT_STATE.PC == 0xFFC)) {
+    if (((PC[pc] == 0) && (PC[pc_q]==0)) &&
+        !(pc == (MEM_TEXT_START+MEM_TEXT_SIZE-4))) {
         return;
     }
     // No space available. Inset Jump instr
@@ -591,8 +591,8 @@ void make_room () {
     // no need to check the [0] index since
     // it will always be valid
     //printf ("PC:%x\n", CURRENT_STATE.PC);
-    for (i = 4; i < IMEM_SIZE; i=i+4) {
-        if ((PC[i] == 0) && (PC[i+4]==0)) {
+    for (i = MEM_TEXT_START+4; i < (MEM_TEXT_START+MEM_TEXT_SIZE); i=i+4) {
+        if ((PC[i-MEM_TEXT_START] == 0) && (PC[i+4-MEM_TEXT_START]==0)) {
             //printf("Branching to the following PC:%x\n", i);
             //opcode = gen_j ((int)i);
             //load_instr_opcode ((uint32_t)opcode);
@@ -685,9 +685,9 @@ void gen_instr_hex (int num_r, int num_i, int num_s, int num_b, int num_u, int n
 
 void print_to_file (FILE* pc_hex_val, FILE* instr_hex_val) {
     int i = 0;
-    for (i = 0; i < IMEM_SIZE; i=i+4) {
+    for (i = 0; i < (IMEM_SIZE); i=i+4) {
         if (PC[i]) {
-            fprintf(pc_hex_val, "%x\n", i);
+            fprintf(pc_hex_val, "%x\n", i+MEM_TEXT_START);
             fprintf(instr_hex_val, "%x\n", instr[i]);
         }
     }
