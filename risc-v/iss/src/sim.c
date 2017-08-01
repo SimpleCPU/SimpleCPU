@@ -52,7 +52,7 @@ int shift_const (unsigned int shamt) {
 void execute_r (uint32_t rs1, uint32_t rs2, uint32_t rd, unsigned int funct7, unsigned int funct3) {
     int sign;
     int shift_val;
-    unsigned int funct = ((funct7>>6 & 0x1) << 3) | funct3;
+    unsigned int funct = ((funct7>>5 & 0x1) << 3) | funct3;
     if ((rd == 0)) {
         NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         return;
