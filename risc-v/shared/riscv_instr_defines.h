@@ -25,7 +25,7 @@
 #define SH      0x1
 #define SW      0x2
 #define SLL     0x1
-#define SLLI    0x11
+#define SLLI    0x1
 #define SLT     0x2
 #define SLTI    0x12
 #define SLTIU   0x1b
@@ -33,7 +33,7 @@
 #define SRA     0xd
 #define SRAI    0x15
 #define SRL     0x5
-#define SRLI    0x15
+#define SRLI    0x5
 #define SUB     0x8
 #define XOR     0x4
 #define XORI    0x14
