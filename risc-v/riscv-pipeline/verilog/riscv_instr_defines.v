@@ -25,7 +25,7 @@
 `define SH      6'h1
 `define SW      6'h2
 `define SLL     6'h1
-`define SLLI    6'h11
+`define SLLI    6'h1
 `define SLT     6'h2
 `define SLTI    6'h12
 `define SLTIU   6'h1b
@@ -33,7 +33,7 @@
 `define SRA     6'hd
 `define SRAI    6'h15
 `define SRL     6'h5
-`define SRLI    6'h15
+`define SRLI    6'h5
 `define SUB     6'h8
 `define XOR     6'h4
 `define XORI    6'h14
