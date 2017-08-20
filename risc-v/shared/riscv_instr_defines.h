@@ -1,7 +1,7 @@
 // Declare all the instruction related defines here
-// funct7[6]/funct3 field for all the supported instructions
+// funct7[5]/funct3 field for all the supported instructions
 #define ADD     0x0
-#define ADDI    0x17
+#define ADDI    0x10
 #define AND     0x7
 #define ANDI    0x1c
 #define BEQ     0x0
@@ -11,7 +11,7 @@
 #define BLTU    0x6
 #define BGEU    0x7
 #define JAL     0x3
-#define JALR    0x9
+#define JALR    0x0
 #define LB      0x0
 #define LBU     0x4
 #define LH      0x1
