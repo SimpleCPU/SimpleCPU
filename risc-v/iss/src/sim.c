@@ -213,7 +213,7 @@ void execute_i (unsigned int funct3, int opcode, uint32_t rs1, uint32_t rd, int 
     int sign, mem_content;
     int shift_val;
     uint32_t address;
-    unsigned int funct = ((opcode>>4 & 0x1) << 3) | funct3;
+    unsigned int funct = ((opcode>>4 & 0x1) << 4) | funct3;
     //printf ("I-type instruction\tOpcode is :0x%x\n", opcode);
     // TODO: Add SLLI, SRLI, SRAI instructions
     switch (funct) {

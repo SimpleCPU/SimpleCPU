@@ -28,7 +28,7 @@
 #define SLLI    0x1
 #define SLT     0x2
 #define SLTI    0x12
-#define SLTIU   0x1b
+#define SLTIU   0x13
 #define SLTU    0x3
 #define SRA     0xd
 #define SRAI    0x15
