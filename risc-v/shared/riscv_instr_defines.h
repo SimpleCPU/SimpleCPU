@@ -11,7 +11,7 @@
 #define BLTU    0x6
 #define BGEU    0x7
 #define JAL     0x3
-#define JALR    0x0
+#define JALR    0x7
 #define LB      0x0
 #define LBU     0x4
 #define LH      0x1
@@ -28,7 +28,7 @@
 #define SLLI    0x1
 #define SLT     0x2
 #define SLTI    0x12
-#define SLTIU   0x1b
+#define SLTIU   0x13
 #define SLTU    0x3
 #define SRA     0xd
 #define SRAI    0x15

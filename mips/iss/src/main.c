@@ -35,7 +35,8 @@ CPU_State CURRENT_STATE, NEXT_STATE;
 int RUN_BIT;	/* run bit */
 int INSTRUCTION_COUNT;
 int prev_pc;
-int rt_as_src = 0;
+int rt_as_src;
+int instr_count;
 
 /***************************************************************/
 /*                                                             */
@@ -319,6 +320,8 @@ void sim(char *instr_hex, char *pc_values_hex) {
 extern void init (char *test_name) {
   char instr_hex[99];
   char pc_values_hex[99];
+
+  instr_count = 0;
 
   strcpy (instr_hex, test_name);
   strcpy (pc_values_hex, test_name);

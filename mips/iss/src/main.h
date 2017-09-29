@@ -42,9 +42,10 @@ typedef struct CPU_State_Struct {
 
 extern CPU_State CURRENT_STATE, NEXT_STATE;
 
-extern int RUN_BIT; 	/* run bit                  */
-extern int prev_pc;     /* previous program counter */
+extern int RUN_BIT; 	/* Run bit                  */
+extern int prev_pc;     /* Previous program counter */
 extern int rt_as_src;   /* Use RT reg as source     */
+extern int instr_count;
 uint32_t   instr_opcode;
 int        wr_link_reg; /* Instr updates R31 reg    */
 
