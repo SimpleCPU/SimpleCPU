@@ -19,7 +19,8 @@ module ex_pipe_reg
         input   wire        is_j_type_ex_pipe_reg_i,
         // Inputs from the control unit
         input   wire[1:0]   pc_sel_ex_pipe_reg_i,
-        input   wire[2:0]   op2sel_ex_pipe_reg_i,
+        input   wire        op1sel_ex_pipe_reg_i,
+        input   wire[1:0]   op2sel_ex_pipe_reg_i,
         input   wire[1:0]   wb_sel_ex_pipe_reg_i,
         input   wire        pc4_sel_ex_pipe_reg_i,
         input   wire        mem_wr_ex_pipe_reg_i,
@@ -32,6 +33,9 @@ module ex_pipe_reg
         input   wire[31:0]  curr_pc_ex_pipe_reg_i,
         input   wire[31:0]  next_brn_pc_ex_pipe_reg_i,
         input   wire[31:0]  next_pred_pc_ex_pipe_reg_i,
+        // Inputs from sign extend units
+        input   wire[31:0]  sext_imm_12bit_ex_pipe_reg_i,
+        input   wire[31:0]  sext_imm_20bit_ex_pipe_reg_i,
         // Inputs from register file
         input   wire[31:0]  r_data_p1_ex_pipe_reg_i,
         input   wire[31:0]  r_data_p2_ex_pipe_reg_i,
@@ -51,7 +55,8 @@ module ex_pipe_reg
         output  wire        is_u_type_ex_pipe_reg_o,
         output  wire        is_j_type_ex_pipe_reg_o,
         output  wire[1:0]   pc_sel_ex_pipe_reg_o,
-        output  wire[2:0]   op2sel_ex_pipe_reg_o,
+        output  wire        op1sel_ex_pipe_reg_o,
+        output  wire[1:0]   op2sel_ex_pipe_reg_o,
         output  wire[1:0]   wb_sel_ex_pipe_reg_o,
         output  wire        pc4_sel_ex_pipe_reg_o,
         output  wire        mem_wr_ex_pipe_reg_o,
@@ -63,6 +68,8 @@ module ex_pipe_reg
         output  wire[31:0]  curr_pc_ex_pipe_reg_o,
         output  wire[31:0]  next_brn_pc_ex_pipe_reg_o,
         output  wire[31:0]  next_pred_pc_ex_pipe_reg_o,
+        output  wire[31:0]  sext_imm_12bit_ex_pipe_reg_o,
+        output  wire[31:0]  sext_imm_20bit_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p1_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p2_ex_pipe_reg_o,
         output  wire        jump_ex_pipe_reg_o,
@@ -81,7 +88,8 @@ module ex_pipe_reg
     reg        is_u_type_ex_pipe_reg;
     reg        is_j_type_ex_pipe_reg;
     reg[1:0]   pc_sel_ex_pipe_reg;
-    reg[2:0]   op2sel_ex_pipe_reg;
+    reg        op1sel_ex_pipe_reg;
+    reg[1:0]   op2sel_ex_pipe_reg;
     reg[1:0]   wb_sel_ex_pipe_reg;
     reg        pc4_sel_ex_pipe_reg;
     reg        mem_wr_ex_pipe_reg;
@@ -93,39 +101,44 @@ module ex_pipe_reg
     reg[31:0]  curr_pc_ex_pipe_reg;
     reg[31:0]  next_brn_pc_ex_pipe_reg;
     reg[31:0]  next_pred_pc_ex_pipe_reg;
+    reg[31:0]  sext_imm_12bit_ex_pipe_reg;    
+    reg[31:0]  sext_imm_20bit_ex_pipe_reg;
     reg[31:0]  r_data_p1_ex_pipe_reg;
     reg[31:0]  r_data_p2_ex_pipe_reg;
     reg        jump_ex_pipe_reg;
     reg        brn_pred_ex_pipe_reg;
 
-    assign valid_ex_pipe_reg_o        = valid_ex_pipe_reg;
-    assign funct3_ex_pipe_reg_o       = funct3_ex_pipe_reg;
-    assign rs1_ex_pipe_reg_o          = rs1_ex_pipe_reg;
-    assign rs2_ex_pipe_reg_o          = rs2_ex_pipe_reg;
-    assign rd_ex_pipe_reg_o           = rd_ex_pipe_reg;
-    assign is_r_type_ex_pipe_reg_o    = is_r_type_ex_pipe_reg;
-    assign is_i_type_ex_pipe_reg_o    = is_i_type_ex_pipe_reg;
-    assign is_s_type_ex_pipe_reg_o    = is_s_type_ex_pipe_reg;
-    assign is_b_type_ex_pipe_reg_o    = is_b_type_ex_pipe_reg;
-    assign is_u_type_ex_pipe_reg_o    = is_u_type_ex_pipe_reg;
-    assign is_j_type_ex_pipe_reg_o    = is_j_type_ex_pipe_reg;
-    assign pc_sel_ex_pipe_reg_o       = pc_sel_ex_pipe_reg;
-    assign op2sel_ex_pipe_reg_o       = op2sel_ex_pipe_reg;
-    assign wb_sel_ex_pipe_reg_o       = wb_sel_ex_pipe_reg;
-    assign pc4_sel_ex_pipe_reg_o      = pc4_sel_ex_pipe_reg;
-    assign mem_wr_ex_pipe_reg_o       = mem_wr_ex_pipe_reg;
-    assign cpr_en_ex_pipe_reg_o       = cpr_en_ex_pipe_reg;
-    assign wa_sel_ex_pipe_reg_o       = wa_sel_ex_pipe_reg;
-    assign rf_en_ex_pipe_reg_o        = rf_en_ex_pipe_reg;
-    assign alu_fun_ex_pipe_reg_o      = alu_fun_ex_pipe_reg;
-    assign next_seq_pc_ex_pipe_reg_o  = next_seq_pc_ex_pipe_reg;
-    assign curr_pc_ex_pipe_reg_o      = curr_pc_ex_pipe_reg;
-    assign next_brn_pc_ex_pipe_reg_o  = next_brn_pc_ex_pipe_reg;
-    assign next_pred_pc_ex_pipe_reg_o = next_pred_pc_ex_pipe_reg;
-    assign r_data_p1_ex_pipe_reg_o    = r_data_p1_ex_pipe_reg;
-    assign r_data_p2_ex_pipe_reg_o    = r_data_p2_ex_pipe_reg;
-    assign jump_ex_pipe_reg_o         = jump_ex_pipe_reg;
-    assign brn_pred_ex_pipe_reg_o     = brn_pred_ex_pipe_reg;
+    assign valid_ex_pipe_reg_o          = valid_ex_pipe_reg;
+    assign funct3_ex_pipe_reg_o         = funct3_ex_pipe_reg;
+    assign rs1_ex_pipe_reg_o            = rs1_ex_pipe_reg;
+    assign rs2_ex_pipe_reg_o            = rs2_ex_pipe_reg;
+    assign rd_ex_pipe_reg_o             = rd_ex_pipe_reg;
+    assign is_r_type_ex_pipe_reg_o      = is_r_type_ex_pipe_reg;
+    assign is_i_type_ex_pipe_reg_o      = is_i_type_ex_pipe_reg;
+    assign is_s_type_ex_pipe_reg_o      = is_s_type_ex_pipe_reg;
+    assign is_b_type_ex_pipe_reg_o      = is_b_type_ex_pipe_reg;
+    assign is_u_type_ex_pipe_reg_o      = is_u_type_ex_pipe_reg;
+    assign is_j_type_ex_pipe_reg_o      = is_j_type_ex_pipe_reg;
+    assign pc_sel_ex_pipe_reg_o         = pc_sel_ex_pipe_reg;
+    assign op1sel_ex_pipe_reg_o         = op1sel_ex_pipe_reg;
+    assign op2sel_ex_pipe_reg_o         = op2sel_ex_pipe_reg;
+    assign wb_sel_ex_pipe_reg_o         = wb_sel_ex_pipe_reg;
+    assign pc4_sel_ex_pipe_reg_o        = pc4_sel_ex_pipe_reg;
+    assign mem_wr_ex_pipe_reg_o         = mem_wr_ex_pipe_reg;
+    assign cpr_en_ex_pipe_reg_o         = cpr_en_ex_pipe_reg;
+    assign wa_sel_ex_pipe_reg_o         = wa_sel_ex_pipe_reg;
+    assign rf_en_ex_pipe_reg_o          = rf_en_ex_pipe_reg;
+    assign alu_fun_ex_pipe_reg_o        = alu_fun_ex_pipe_reg;
+    assign next_seq_pc_ex_pipe_reg_o    = next_seq_pc_ex_pipe_reg;
+    assign curr_pc_ex_pipe_reg_o        = curr_pc_ex_pipe_reg;
+    assign next_brn_pc_ex_pipe_reg_o    = next_brn_pc_ex_pipe_reg;
+    assign next_pred_pc_ex_pipe_reg_o   = next_pred_pc_ex_pipe_reg;
+    assign sext_imm_12bit_ex_pipe_reg_o = sext_imm_12bit_ex_pipe_reg;
+    assign sext_imm_20bit_ex_pipe_reg_o = sext_imm_20bit_ex_pipe_reg;
+    assign r_data_p1_ex_pipe_reg_o      = r_data_p1_ex_pipe_reg;
+    assign r_data_p2_ex_pipe_reg_o      = r_data_p2_ex_pipe_reg;
+    assign jump_ex_pipe_reg_o           = jump_ex_pipe_reg;
+    assign brn_pred_ex_pipe_reg_o       = brn_pred_ex_pipe_reg;
 
     always @ (posedge clk)
     if (reset)
@@ -142,7 +155,8 @@ module ex_pipe_reg
         is_u_type_ex_pipe_reg       <= 1'b0;
         is_j_type_ex_pipe_reg       <= 1'b0;
         pc_sel_ex_pipe_reg          <= 2'b0;
-        op2sel_ex_pipe_reg          <= 3'b0;
+        op1sel_ex_pipe_reg          <= 1'b0;
+        op2sel_ex_pipe_reg          <= 2'b0;
         wb_sel_ex_pipe_reg          <= 2'b0;
         pc4_sel_ex_pipe_reg         <= 1'b0;
         mem_wr_ex_pipe_reg          <= 1'b0;
@@ -154,6 +168,8 @@ module ex_pipe_reg
         curr_pc_ex_pipe_reg         <= 31'b0;
         next_brn_pc_ex_pipe_reg     <= 31'b0;
         next_pred_pc_ex_pipe_reg    <= 31'b0;
+        sext_imm_12bit_ex_pipe_reg  <= 31'b0;
+        sext_imm_20bit_ex_pipe_reg  <= 31'b0;
         r_data_p1_ex_pipe_reg       <= 31'b0;
         r_data_p2_ex_pipe_reg       <= 31'b0;
         jump_ex_pipe_reg            <= 1'b0;
@@ -173,6 +189,7 @@ module ex_pipe_reg
         is_u_type_ex_pipe_reg       <=  is_u_type_ex_pipe_reg_i;
         is_j_type_ex_pipe_reg       <=  is_j_type_ex_pipe_reg_i;
         pc_sel_ex_pipe_reg          <=  pc_sel_ex_pipe_reg_i;
+        op1sel_ex_pipe_reg          <=  op1sel_ex_pipe_reg_i;
         op2sel_ex_pipe_reg          <=  op2sel_ex_pipe_reg_i;
         wb_sel_ex_pipe_reg          <=  wb_sel_ex_pipe_reg_i;
         pc4_sel_ex_pipe_reg         <=  pc4_sel_ex_pipe_reg_i;
@@ -185,6 +202,8 @@ module ex_pipe_reg
         curr_pc_ex_pipe_reg         <=  curr_pc_ex_pipe_reg_i;
         next_brn_pc_ex_pipe_reg     <=  next_brn_pc_ex_pipe_reg_i;
         next_pred_pc_ex_pipe_reg    <=  next_pred_pc_ex_pipe_reg_i;
+        sext_imm_12bit_ex_pipe_reg  <=  sext_imm_12bit_ex_pipe_reg_i;
+        sext_imm_20bit_ex_pipe_reg  <=  sext_imm_20bit_ex_pipe_reg_i;
         r_data_p1_ex_pipe_reg       <=  r_data_p1_ex_pipe_reg_i;
         r_data_p2_ex_pipe_reg       <=  r_data_p2_ex_pipe_reg_i;
         jump_ex_pipe_reg            <=  jump_ex_pipe_reg_i;
