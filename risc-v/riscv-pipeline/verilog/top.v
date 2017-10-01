@@ -38,7 +38,8 @@ module top
     wire        is_u_type_iss_ex;
     wire        is_j_type_iss_ex;
     wire[1:0]   pc_sel_iss_ex;
-    wire[2:0]   op2sel_iss_ex;
+    wire        op1sel_iss_ex;
+    wire[1:0]   op2sel_iss_ex;
     wire[1:0]   wb_sel_iss_ex;
     wire        pc4_sel_iss_ex;
     wire        mem_wr_iss_ex;
@@ -79,7 +80,8 @@ module top
     wire        is_j_type_ex_mem;
     wire        jump_ex_mem;
     wire[1:0]   pc_sel_ex_mem;
-    wire[2:0]   op2sel_ex_mem;
+    wire        op1sel_ex_mem;
+    wire[1:0]   op2sel_ex_mem;
     wire[1:0]   wb_sel_ex_mem;
     wire        pc4_sel_ex_mem;
     wire        mem_wr_ex_mem;
@@ -91,10 +93,13 @@ module top
     wire[31:0]  next_pred_pc_ex_mem;
     wire        brn_pred_ex_mem;
     wire[31:0]  next_brn_pc_ex_mem;
+    wire[31:0]  sign_extnd_imm_12bit_ex;
+    wire[31:0]  sign_extnd_imm_20bit_ex;
     wire[31:0]  r_data_p1_rf_ex_mem;
     wire[31:0]  r_data_p2_rf_ex_mem;
     wire[31:0]  r_data_p1_alu_ex_mem;
     wire[31:0]  r_data_p2_alu_ex_mem;
+    wire[31:0]  r_data_p1_ex_mem;
     wire[31:0]  r_data_p2_ex_mem;
     wire[1:0]   fwd_r_data_p1_alu_ex;
     wire[1:0]   fwd_r_data_p2_alu_ex;
@@ -243,6 +248,7 @@ module top
         .is_u_type_ctl_i    (is_u_type_iss_ex),
         .is_j_type_ctl_i    (is_j_type_iss_ex),
         .pc_sel_ctl_o       (pc_sel_iss_ex),
+        .op1sel_ctl_o       (op1sel_iss_ex),
         .op2sel_ctl_o       (op2sel_iss_ex),
         .wb_sel_ctl_o       (wb_sel_iss_ex),
         .pc4_sel_ctl_o      (pc4_sel_iss_ex),
@@ -303,68 +309,74 @@ module top
 
     // EXECUTE STAGE
     ex_pipe_reg ISS_EX_REG (
-        .clk                        (clk),
-        .reset                      (reset),
-        .clr                        (flush_ex | flush_incorr_pred_ex),
-        .valid_ex_pipe_reg_i        (valid_iss_ex),
-        .funct3_ex_pipe_reg_i       (funct3_iss_ex),
-        .rs1_ex_pipe_reg_i          (rs1_iss_ex),
-        .rs2_ex_pipe_reg_i          (rs2_iss_ex),
-        .rd_ex_pipe_reg_i           (rd_iss_ex),
-        .is_r_type_ex_pipe_reg_i    (is_r_type_iss_ex),
-        .is_i_type_ex_pipe_reg_i    (is_i_type_iss_ex),
-        .is_s_type_ex_pipe_reg_i    (is_s_type_iss_ex),
-        .is_b_type_ex_pipe_reg_i    (is_b_type_iss_ex),
-        .is_u_type_ex_pipe_reg_i    (is_u_type_iss_ex),
-        .is_j_type_ex_pipe_reg_i    (is_j_type_iss_ex),
-        .pc_sel_ex_pipe_reg_i       (pc_sel_iss_ex),
-        .op2sel_ex_pipe_reg_i       (op2sel_iss_ex),
-        .wb_sel_ex_pipe_reg_i       (wb_sel_iss_ex),
-        .pc4_sel_ex_pipe_reg_i      (pc4_sel_iss_ex),
-        .mem_wr_ex_pipe_reg_i       (mem_wr_iss_ex),
-        .cpr_en_ex_pipe_reg_i       (cpr_en_iss_ex),
-        .wa_sel_ex_pipe_reg_i       (wa_sel_iss_ex),
-        .rf_en_ex_pipe_reg_i        (rf_en_iss_ex),
-        .alu_fun_ex_pipe_reg_i      (alu_fn_iss_ex),
-        .next_seq_pc_ex_pipe_reg_i  (next_seq_pc_iss_ex),
-        .curr_pc_ex_pipe_reg_i      (curr_pc_iss_ex),
-        .next_brn_pc_ex_pipe_reg_i  (next_brn_pc_iss_ex),
-        .next_pred_pc_ex_pipe_reg_i (next_pred_pc_iss_ex),
-        .r_data_p1_ex_pipe_reg_i    (r_data_p1_rf_iss_ex),
-        .r_data_p2_ex_pipe_reg_i    (r_data_p2_rf_iss_ex),
-        .jump_ex_pipe_reg_i         (jump_iss_ex),
-        .brn_pred_ex_pipe_reg_i     (brn_pred_iss_ex),
-        .valid_ex_pipe_reg_o        (valid_ex_mem),
-        .funct3_ex_pipe_reg_o       (funct3_ex_mem),
-        .rs1_ex_pipe_reg_o          (rs1_ex_mem),
-        .rs2_ex_pipe_reg_o          (rs2_ex_mem),
-        .rd_ex_pipe_reg_o           (rd_ex_mem),
-        .is_r_type_ex_pipe_reg_o    (is_r_type_ex_mem),
-        .is_i_type_ex_pipe_reg_o    (is_i_type_ex_mem),
-        .is_s_type_ex_pipe_reg_o    (is_s_type_ex_mem),
-        .is_b_type_ex_pipe_reg_o    (is_b_type_ex_mem),
-        .is_u_type_ex_pipe_reg_o    (is_u_type_ex_mem),
-        .is_j_type_ex_pipe_reg_o    (is_j_type_ex_mem),
-        .pc_sel_ex_pipe_reg_o       (pc_sel_ex_mem),
-        .op2sel_ex_pipe_reg_o       (op2sel_ex_mem),
-        .wb_sel_ex_pipe_reg_o       (wb_sel_ex_mem),
-        .pc4_sel_ex_pipe_reg_o      (pc4_sel_ex_mem),
-        .mem_wr_ex_pipe_reg_o       (mem_wr_ex_mem),
-        .cpr_en_ex_pipe_reg_o       (cpr_en_ex_mem),
-        .wa_sel_ex_pipe_reg_o       (wa_sel_ex_mem),
-        .rf_en_ex_pipe_reg_o        (rf_en_ex_mem),
-        .alu_fun_ex_pipe_reg_o      (alu_fn_ex_mem),
-        .next_seq_pc_ex_pipe_reg_o  (next_seq_pc_ex_mem),
-        .curr_pc_ex_pipe_reg_o      (curr_pc_ex_mem),
-        .next_brn_pc_ex_pipe_reg_o  (next_brn_pc_ex_mem),
-        .next_pred_pc_ex_pipe_reg_o (next_pred_pc_ex_mem),
-        .r_data_p1_ex_pipe_reg_o    (r_data_p1_rf_ex_mem),
-        .r_data_p2_ex_pipe_reg_o    (r_data_p2_rf_ex_mem),
-        .jump_ex_pipe_reg_o         (jump_ex_mem),
-        .brn_pred_ex_pipe_reg_o     (brn_pred_ex_mem)
+        .clk                            (clk),
+        .reset                          (reset),
+        .clr                            (flush_ex | flush_incorr_pred_ex),
+        .valid_ex_pipe_reg_i            (valid_iss_ex),
+        .funct3_ex_pipe_reg_i           (funct3_iss_ex),
+        .rs1_ex_pipe_reg_i              (rs1_iss_ex),
+        .rs2_ex_pipe_reg_i              (rs2_iss_ex),
+        .rd_ex_pipe_reg_i               (rd_iss_ex),
+        .is_r_type_ex_pipe_reg_i        (is_r_type_iss_ex),
+        .is_i_type_ex_pipe_reg_i        (is_i_type_iss_ex),
+        .is_s_type_ex_pipe_reg_i        (is_s_type_iss_ex),
+        .is_b_type_ex_pipe_reg_i        (is_b_type_iss_ex),
+        .is_u_type_ex_pipe_reg_i        (is_u_type_iss_ex),
+        .is_j_type_ex_pipe_reg_i        (is_j_type_iss_ex),
+        .pc_sel_ex_pipe_reg_i           (pc_sel_iss_ex),
+        .op1sel_ex_pipe_reg_i           (op1sel_iss_ex),
+        .op2sel_ex_pipe_reg_i           (op2sel_iss_ex),
+        .wb_sel_ex_pipe_reg_i           (wb_sel_iss_ex),
+        .pc4_sel_ex_pipe_reg_i          (pc4_sel_iss_ex),
+        .mem_wr_ex_pipe_reg_i           (mem_wr_iss_ex),
+        .cpr_en_ex_pipe_reg_i           (cpr_en_iss_ex),
+        .wa_sel_ex_pipe_reg_i           (wa_sel_iss_ex),
+        .rf_en_ex_pipe_reg_i            (rf_en_iss_ex),
+        .alu_fun_ex_pipe_reg_i          (alu_fn_iss_ex),
+        .next_seq_pc_ex_pipe_reg_i      (next_seq_pc_iss_ex),
+        .curr_pc_ex_pipe_reg_i          (curr_pc_iss_ex),
+        .next_brn_pc_ex_pipe_reg_i      (next_brn_pc_iss_ex),
+        .next_pred_pc_ex_pipe_reg_i     (next_pred_pc_iss_ex),
+        .sext_imm_12bit_ex_pipe_reg_i   (sign_extnd_imm_12bit_iss),
+        .sext_imm_20bit_ex_pipe_reg_i   (sign_extnd_imm_20bit_iss),
+        .r_data_p1_ex_pipe_reg_i        (r_data_p1_rf_iss_ex),
+        .r_data_p2_ex_pipe_reg_i        (r_data_p2_rf_iss_ex),
+        .jump_ex_pipe_reg_i             (jump_iss_ex),
+        .brn_pred_ex_pipe_reg_i         (brn_pred_iss_ex),
+        .valid_ex_pipe_reg_o            (valid_ex_mem),
+        .funct3_ex_pipe_reg_o           (funct3_ex_mem),
+        .rs1_ex_pipe_reg_o              (rs1_ex_mem),
+        .rs2_ex_pipe_reg_o              (rs2_ex_mem),
+        .rd_ex_pipe_reg_o               (rd_ex_mem),
+        .is_r_type_ex_pipe_reg_o        (is_r_type_ex_mem),
+        .is_i_type_ex_pipe_reg_o        (is_i_type_ex_mem),
+        .is_s_type_ex_pipe_reg_o        (is_s_type_ex_mem),
+        .is_b_type_ex_pipe_reg_o        (is_b_type_ex_mem),
+        .is_u_type_ex_pipe_reg_o        (is_u_type_ex_mem),
+        .is_j_type_ex_pipe_reg_o        (is_j_type_ex_mem),
+        .pc_sel_ex_pipe_reg_o           (pc_sel_ex_mem),
+        .op1sel_ex_pipe_reg_o           (op1sel_ex_mem),
+        .op2sel_ex_pipe_reg_o           (op2sel_ex_mem),
+        .wb_sel_ex_pipe_reg_o           (wb_sel_ex_mem),
+        .pc4_sel_ex_pipe_reg_o          (pc4_sel_ex_mem),
+        .mem_wr_ex_pipe_reg_o           (mem_wr_ex_mem),
+        .cpr_en_ex_pipe_reg_o           (cpr_en_ex_mem),
+        .wa_sel_ex_pipe_reg_o           (wa_sel_ex_mem),
+        .rf_en_ex_pipe_reg_o            (rf_en_ex_mem),
+        .alu_fun_ex_pipe_reg_o          (alu_fn_ex_mem),
+        .next_seq_pc_ex_pipe_reg_o      (next_seq_pc_ex_mem),
+        .curr_pc_ex_pipe_reg_o          (curr_pc_ex_mem),
+        .next_brn_pc_ex_pipe_reg_o      (next_brn_pc_ex_mem),
+        .next_pred_pc_ex_pipe_reg_o     (next_pred_pc_ex_mem),
+        .sext_imm_12bit_ex_pipe_reg_o   (sign_extnd_imm_12bit_ex),
+        .sext_imm_20bit_ex_pipe_reg_o   (sign_extnd_imm_20bit_ex),
+        .r_data_p1_ex_pipe_reg_o        (r_data_p1_rf_ex_mem),
+        .r_data_p2_ex_pipe_reg_o        (r_data_p2_rf_ex_mem),
+        .jump_ex_pipe_reg_o             (jump_ex_mem),
+        .brn_pred_ex_pipe_reg_o         (brn_pred_ex_mem)
     );
 
-    assign r_data_p1_alu_ex_mem = fwd_r_data_p1_alu_ex[1] ? 
+    assign r_data_p1_ex_mem     = fwd_r_data_p1_alu_ex[1] ? 
                                   (is_lw_mem_wb ? read_data_dmem_ram_mem_wb : alu_res_mem_wb) : 
                                   fwd_r_data_p1_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p1_rf_ex_mem;
@@ -372,6 +384,12 @@ module top
     assign r_data_p2_ex_mem     = fwd_r_data_p2_alu_ex[1] ? alu_res_mem_wb :
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
+
+    assign r_data_p1_alu_ex_mem = op1sel_ex_mem ? sign_extnd_imm_20bit_ex : r_data_p1_ex_mem;
+
+    assign r_data_p2_alu_ex_mem = ~|op2sel_ex_mem ? r_data_p2_ex_mem :
+                                  op2sel_ex_mem[0]? sign_extnd_imm_12bit_ex :
+                                  op2sel_ex_mem[1]? curr_pc_ex_mem : 32'b0;
     
     assign branch_taken_ex      = (branch_ex_mem & ((funct3_ex_mem == `BEQ))    & (z_ex_mem))     |
                                   (branch_ex_mem & ((funct3_ex_mem == `BLT)     | 
