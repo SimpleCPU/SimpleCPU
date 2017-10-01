@@ -6,7 +6,7 @@ module hazard_unit
         input   wire[4:0]   rs2_ex_mem_hz_i,
         input   wire[4:0]   rd_mem_wb_hz_i,
         input   wire[4:0]   rd_wb_ret_hz_i,
-        input   wire[2:0]   op2sel_ex_mem_hz_i,
+        input   wire[1:0]   op2sel_ex_mem_hz_i,
         input   wire        rf_en_mem_wb_hz_i,
         input   wire        rf_en_wb_ret_hz_i,
         input   wire        branch_taken_ex_mem_hz_i,
