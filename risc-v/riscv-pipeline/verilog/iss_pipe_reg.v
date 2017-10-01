@@ -5,12 +5,14 @@ module iss_pipe_reg
         input   wire        clk,
         input   wire        reset,
         input   wire        clr,
-        input   wire        enable,     // Active Low enable signal
+        input   wire        enable,
+        // PC related inputs from fetch stage
         input   wire[31:0]  next_pc_iss_pipe_reg_i,
         input   wire[31:0]  instr_iss_pipe_reg_i,
         input   wire        brn_pred_iss_pipe_reg_i,
         input   wire[31:0]  curr_pc_iss_pipe_reg_i,
         input   wire[31:0]  next_pred_pc_iss_pipe_reg_i,
+        // Register outputs
         output  wire[31:0]  next_pc_iss_pipe_reg_o,
         output  wire[31:0]  instr_iss_pipe_reg_o,
         output  wire        brn_pred_iss_pipe_reg_o,
