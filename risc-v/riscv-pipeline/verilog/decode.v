@@ -15,7 +15,12 @@ module decode
         output  wire        is_s_type_dec_o,
         output  wire        is_b_type_dec_o,
         output  wire        is_u_type_dec_o,
-        output  wire        is_j_type_dec_o
+        output  wire        is_j_type_dec_o,
+        output  wire[11:0]  i_type_imm_dec_o,
+        output  wire[11:0]  s_type_imm_dec_o,
+        output  wire[11:0]  b_type_imm_dec_o,
+        output  wire[19:0]  u_type_imm_dec_o,
+        output  wire[19:0]  j_type_imm_dec_o
     );
 
     //Populate the output fields using the input instruction
@@ -31,6 +36,11 @@ module decode
     wire        is_b_type_dec;
     wire        is_u_type_dec;
     wire        is_j_type_dec;
+    wire[11:0]  i_type_imm_dec;
+    wire[11:0]  s_type_imm_dec;
+    wire[11:0]  b_type_imm_dec;
+    wire[19:0]  u_type_imm_dec;
+    wire[19:0]  j_type_imm_dec;
 
 
     assign rs1_dec_o          = rs1_dec;
@@ -45,6 +55,11 @@ module decode
     assign is_i_type_dec_o    = is_b_type_dec;
     assign is_i_type_dec_o    = is_u_type_dec;
     assign is_j_type_dec_o    = is_j_type_dec;
+    assign i_type_imm_dec_o   = i_type_imm_dec;
+    assign s_type_imm_dec_o   = s_type_imm_dec;
+    assign b_type_imm_dec_o   = b_type_imm_dec;
+    assign u_type_imm_dec_o   = u_type_imm_dec;
+    assign j_type_imm_dec_o   = j_type_imm_dec;
 
     assign rd_dec             = instr_dec_i[11:7];
     assign rs1_dec            = instr_dec_i[19:15];
@@ -59,5 +74,14 @@ module decode
     assign is_b_type_dec      = op_dec  == `B_TYPE;
     assign is_u_type_dec      = (op_dec == `AUIPC) | (op_dec == `LUI);
     assign is_j_type_dec      = op_dec  == `J_TYPE;
+
+    assign i_type_imm_dec     = instr_dec_i[31:20];
+    assign s_type_imm_dec     = {instr_dec_i[31:25], instr_dec_i[11:7]};
+    assign b_type_imm_dec     = {instr_dec_i[31], instr_dec_i[7],
+                                 instr_dec_i[30:25], 
+                                 instr_dec_i[11:8]};
+    assign u_type_imm_dec     = instr_dec_i[31:12];
+    assign j_type_imm_dec     = {instr_dec_i[31], instr_dec_i[19:12],
+                                 instr_dec_i[20], instr_dec_i[30:21]};
 
 endmodule
