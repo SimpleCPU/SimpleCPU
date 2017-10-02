@@ -51,9 +51,9 @@ module decode
     assign funct7_dec_o       = funct7_dec;
     assign is_r_type_dec_o    = is_r_type_dec;
     assign is_i_type_dec_o    = is_i_type_dec;
-    assign is_i_type_dec_o    = is_s_type_dec;
-    assign is_i_type_dec_o    = is_b_type_dec;
-    assign is_i_type_dec_o    = is_u_type_dec;
+    assign is_s_type_dec_o    = is_s_type_dec;
+    assign is_b_type_dec_o    = is_b_type_dec;
+    assign is_u_type_dec_o    = is_u_type_dec;
     assign is_j_type_dec_o    = is_j_type_dec;
     assign i_type_imm_dec_o   = i_type_imm_dec;
     assign s_type_imm_dec_o   = s_type_imm_dec;
