@@ -15,7 +15,7 @@ module fetch_pipe_reg
 
     always @(posedge clk or posedge reset)
     if (reset)
-        next_pc_pc_reg <= 31'b0;
+        next_pc_pc_reg <= 31'h2000;
     else if (~enable)
         next_pc_pc_reg <= next_pc_pc_reg_i;
 
