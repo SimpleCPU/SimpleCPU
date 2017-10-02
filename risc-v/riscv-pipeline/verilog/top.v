@@ -163,7 +163,7 @@ module top
         .clk                        (clk),
         .reset                      (reset),
         .brn_addr_bpred_i           (curr_pc_pc_reg_fetch[9:0]),
-        .brn_ex_mem_bpred_i         (branch_ex_mem),
+        .brn_ex_mem_bpred_i         (is_b_type_ex_mem),
         .brn_fdback_addr_bpred_i    (curr_pc_ex_mem[9:0]),
         .brn_fdback_bpred_i         (brn_corr_pred_ex_mem),
         .brn_btb_addr_bpred_i       (next_brn_pc_ex_mem),
@@ -188,8 +188,8 @@ module top
     // But if the prediction is made in the shadow of the jump/branch 
     // instruction then we need to suppress it. The jump instruction 
     // would have already been resolved and the correct PC should be used
-    assign next_pc_fetch_iss        = (~jump_ex_mem & ~branch_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
-                                      (~jump_iss_ex & ~branch_ex_mem & brn_pred_fetch_iss) ? next_pred_pc_fetch_iss : 
+    assign next_pc_fetch_iss        = (~jump_ex_mem & ~is_b_type_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem) ? next_seq_pc_ex_mem :
+                                      (~jump_iss_ex & ~is_b_type_ex_mem & brn_pred_fetch_iss) ? next_pred_pc_fetch_iss : 
                                       next_cal_pc_fetch_iss;
 
     // ISSUE STAGE
@@ -212,9 +212,9 @@ module top
 
     decode D1 (
         .instr_dec_i        (instr_iss_ex),
-        .rs1_dec_o          (rt_iss_ex),
-        .rs2_dec_o          (rs_dec_iss_ex),
-        .rd_dec_o           (rd_dec_iss_ex),
+        .rs1_dec_o          (rs1_iss_ex),
+        .rs2_dec_o          (rs2_iss_ex),
+        .rd_dec_o           (rd_iss_ex),
         .op_dec_o           (op_iss_ex),
         .funct3_dec_o       (funct3_iss_ex),
         .funct7_dec_o       (funct7_iss_ex),
@@ -254,7 +254,6 @@ module top
         .pc4_sel_ctl_o      (pc4_sel_iss_ex),
         .mem_wr_ctl_o       (mem_wr_iss_ex),
         .cpr_en_ctl_o       (cpr_en_iss_ex),
-        .wa_sel_ctl_o       (wa_sel_iss_ex),
         .rf_en_ctl_o        (rf_en_iss_ex),
         .alu_fun_ctl_o      (alu_fn_iss_ex)
     );
@@ -263,7 +262,7 @@ module top
                                   ({12{is_s_type_iss_ex}} & s_type_imm_iss_ex) |
                                   ({12{is_b_type_iss_ex}} & b_type_imm_iss_ex);
 
-    assign instr_imm_20_bit_iss = ({20{is_u_type_iss_ex}} & u_type_imm_iss_ex) |
+    assign instr_imm_20bit_iss  = ({20{is_u_type_iss_ex}} & u_type_imm_iss_ex) |
                                   ({20{is_j_type_iss_ex}} & j_type_imm_iss_ex);
 
     sign_extnd_12bit SIGN_EXTND_12BIT (
@@ -391,18 +390,18 @@ module top
                                   op2sel_ex_mem[0]? sign_extnd_imm_12bit_ex :
                                   op2sel_ex_mem[1]? curr_pc_ex_mem : 32'b0;
     
-    assign branch_taken_ex      = (branch_ex_mem & ((funct3_ex_mem == `BEQ))    & (z_ex_mem))     |
-                                  (branch_ex_mem & ((funct3_ex_mem == `BLT)     | 
+    assign branch_taken_ex      = (is_b_type_ex_mem & ((funct3_ex_mem == `BEQ))    & (z_ex_mem))     |
+                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BLT)     | 
                                                     (funct3_ex_mem == `BLTU))   & (n_ex_mem))     |
-                                  (branch_ex_mem & ((funct3_ex_mem == `BNE))    & (~z_ex_mem))    |
-                                  (branch_ex_mem & ((funct3_ex_mem == `BGE)     | 
+                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BNE))    & (~z_ex_mem))    |
+                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BGE)     | 
                                                     (funct3_ex_mem == `BGEU))   & (~n_ex_mem      | 
                                                                                   (z_ex_mem)));
     // Give the feedback of the prediction made by the predictor
     // 0 - incorrect prediction
     // 1 - correct prediction
     assign brn_corr_pred_ex_mem    = ((brn_pred_ex_mem == branch_taken_ex)) & ((next_brn_pc_ex_mem == next_pred_pc_ex_mem));
-    assign force_pc_update_ex      = branch_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem;
+    assign force_pc_update_ex      = is_b_type_ex_mem & brn_pred_ex_mem & ~brn_corr_pred_ex_mem;
     assign force_pc_val_ex         = branch_taken_ex ? next_brn_pc_ex_mem : next_seq_pc_ex_mem;
 
     // The EX stage can force the flushing of the next instruction
@@ -489,12 +488,12 @@ module top
 
     assign instr_retired     = valid_wb_ret;
     assign wr_data_rf_wb_ret = |rd_wb_ret ? 
-                               (wb_sel_wb_ret ? read_data_wb_ret : alu_res_wb_ret) :
+                               (wb_sel_wb_ret[0] ? alu_res_wb_ret : read_data_wb_ret) :
                                32'h0;
 
     hazard_unit hazard (
-        .rs_ex_mem_hz_i             (rs1_ex_mem),
-        .rt_ex_mem_hz_i             (rs2_ex_mem),
+        .rs1_ex_mem_hz_i            (rs1_ex_mem),
+        .rs2_ex_mem_hz_i            (rs2_ex_mem),
         .rd_mem_wb_hz_i             (rd_mem_wb),
         .rd_wb_ret_hz_i             (rd_wb_ret),
         .op2sel_ex_mem_hz_i         (op2sel_ex_mem),
