@@ -10,8 +10,8 @@ module data_mem
         output  wire[31:0]  read_data_dmem_ram_o
     );
 
-    parameter data_seg_begin = 32'h2000,
-              data_seg_size  = 32'h100000;
+    parameter data_seg_begin = 32'h0,
+              data_seg_size  = 32'h1FFF;
     // Byte Addressable mem
     reg [31:0] dmem [0:data_seg_size];
 
