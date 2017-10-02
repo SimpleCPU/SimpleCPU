@@ -118,7 +118,7 @@ void gen_r_instr (int vopt, ...) {
     else {
         funct_idx   = rand()%10;
         funct3      = funct_val_r_type [funct_idx] & 0x7;
-        funct7      = 0x0 | (((funct_val_r_type [funct_idx] >> 3) & 0x1) << 6);
+        funct7      = 0x0 | (((funct_val_r_type [funct_idx] >> 3) & 0x1) << 5);
         rs1         = rand ()%32;
         rs2         = rand ()%32;
         rd          = rand ()%32;
