@@ -9,6 +9,8 @@ module instr_mem
         output  wire[31:0]  read_instr_imem_ram_o
     );
 
+    parameter instr_seg_begin = 32'h2000,
+              instr_seg_size  = 32'h1FFF;
     // 4K mem Byte Addressable
     reg [31:0] imem [2047:0];
 
@@ -16,7 +18,7 @@ module instr_mem
     wire[31:0] shifted_read_addr;
 
     assign read_instr_imem_ram_o = read_instr;
-    assign shifted_read_addr = (addr_imem_ram_i & 32'hFFFF_FFFC)>>2;
+    assign shifted_read_addr = ((addr_imem_ram_i - instr_seg_begin) & 32'hFFFF_FFFC)>>2;
 
     always @(posedge clk)
     if (wr_en_imem_ram_i)
