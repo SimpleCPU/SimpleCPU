@@ -8,6 +8,9 @@ hex: src/*.c
 iss: src/*.c
 	gcc -fPIC $(CFLAGS) -shared -g -m32 -O2 $^ -o $@.so
 
+iss_preload: src/*.c
+	gcc -fPIC $(CFLAGS) -shared -g -m32 -O2 $^ -o $@.so -D PRELOAD_ARCH_REGS
+
 sim: src/*.c
 	gcc $(CFLAGS) -g -O2 $^ -o $@
 
