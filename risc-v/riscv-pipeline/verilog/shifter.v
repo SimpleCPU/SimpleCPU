@@ -3,7 +3,7 @@
 module shifter
     (
         input   wire [31:0]   op1,
-        input   wire [5:0]    shamt,
+        input   wire [4:0]    shamt,
         input   wire [1:0]    operation,
         output  wire [31:0]   res
     );

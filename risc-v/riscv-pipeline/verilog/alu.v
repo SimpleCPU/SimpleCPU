@@ -48,7 +48,7 @@ module alu
 
     shifter S1 (
         .op1 (opr_a_alu_i),
-        .shamt (opr_b_alu_i[5:0]),
+        .shamt (opr_b_alu_i[4:0]),
         .operation (op_alu_i[2:1]),
         .res (shifter_out_alu)
     );
