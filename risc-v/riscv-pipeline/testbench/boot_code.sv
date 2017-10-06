@@ -5,7 +5,10 @@
 function void boot_code ();
     for (int i = 0; i < 32; i++)
     begin
-        T1.R1.reg_file [i] = 0;
+        if ($test$plusargs("preload_arch_regs"))
+            T1.R1.reg_file [i] = (i*32 + i%3);
+        else
+            T1.R1.reg_file [i] = 0;
     end
     for (int i = 0; i < 1023; i++)
     begin
