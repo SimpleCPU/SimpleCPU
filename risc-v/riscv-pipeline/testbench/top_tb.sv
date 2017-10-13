@@ -8,6 +8,8 @@ import "DPI-C" function void init (string test_name);
 import "DPI-C" function void run (int cycles);
 import "DPI-C" function int  compare_r (int pc, int instr, int rd, int rs1, int rs2,
                                         int rd_val, int rs1_val, int rs2_val);
+import "DPI-C" function int  compare_i (int pc, int instr, int rd, int rs1,
+                                        int rd_val, int rs1_val);
 
     logic   clk_tb, reset_tb;
     string  test_name;
@@ -193,11 +195,12 @@ import "DPI-C" function int  compare_r (int pc, int instr, int rd, int rs1, int 
                             rd_val_wb, rs1_val_wb, rs2_val_wb))
                 $fatal(1, "TEST FAILED\n");
         end
-        //else if (is_i_type_wb)
-        //begin
-        //    if ()
-        //        $fatal(1, "TEST FAILED\n");
-        //end
+        else if (is_i_type_wb)
+        begin
+            if (!compare_i (pc_wb, instr_wb, rd_wb, rs1_wb, 
+                            rd_val_wb, rs1_val_wb))
+                $fatal(1, "TEST FAILED\n");
+        end
         //else if (is_s_type_wb)
         //begin
         //    if ()
