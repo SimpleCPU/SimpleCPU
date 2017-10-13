@@ -45,9 +45,9 @@
 `define JAL         6'h3
 
 `define R_TYPE      7'h33
-`define I_TYPE_0    7'h03
-`define I_TYPE_1    7'h13
-`define I_TYPE_2    7'h67
+`define I_TYPE_0    7'h03   // LW
+`define I_TYPE_1    7'h13   // Data processing
+`define I_TYPE_2    7'h67   // JALR
 `define S_TYPE      7'h23
 `define B_TYPE      7'h63
 `define J_TYPE      7'h6F

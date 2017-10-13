@@ -1,4 +1,5 @@
 // Top module connecting all the other modules
+`include "verilog/riscv_instr_defines.v"
 
 module top
     (
@@ -72,6 +73,7 @@ module top
     wire[4:0]   rs1_ex_mem;
     wire[4:0]   rs2_ex_mem;
     wire[4:0]   rd_ex_mem;
+    wire[6:0]   op_ex_mem;
     wire        is_r_type_ex_mem;
     wire        is_i_type_ex_mem;
     wire        is_s_type_ex_mem;
@@ -267,6 +269,7 @@ module top
 
     sign_extnd_12bit SIGN_EXTND_12BIT (
         .instr_imm_i            (instr_imm_12bit_iss),
+        .instr_type_i           (`I_TYPE_0),
         .sign_extnd_instr_imm_o (sign_extnd_imm_12bit_iss)
     );
 
@@ -341,6 +344,7 @@ module top
         .r_data_p1_ex_pipe_reg_i        (r_data_p1_rf_iss_ex),
         .r_data_p2_ex_pipe_reg_i        (r_data_p2_rf_iss_ex),
         .jump_ex_pipe_reg_i             (jump_iss_ex),
+        .op_ex_pipe_reg_i               (op_iss_ex),
         .brn_pred_ex_pipe_reg_i         (brn_pred_iss_ex),
         .valid_ex_pipe_reg_o            (valid_ex_mem),
         .funct3_ex_pipe_reg_o           (funct3_ex_mem),
@@ -372,6 +376,7 @@ module top
         .r_data_p1_ex_pipe_reg_o        (r_data_p1_rf_ex_mem),
         .r_data_p2_ex_pipe_reg_o        (r_data_p2_rf_ex_mem),
         .jump_ex_pipe_reg_o             (jump_ex_mem),
+        .op_ex_pipe_reg_o               (op_ex_mem),
         .brn_pred_ex_pipe_reg_o         (brn_pred_ex_mem)
     );
 
@@ -431,6 +436,8 @@ module top
         .z_alu_o        (z_ex_mem),
         .n_alu_o        (n_ex_mem)
     );
+
+    assign is_lw_ex_mem = {7{is_i_type_ex_mem}} & (`I_TYPE_0 == op_ex_mem);
 
     // MEMORY STAGE
     mem_pipe_reg EX_MEM_REG (
