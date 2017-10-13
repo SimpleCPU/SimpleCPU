@@ -46,23 +46,23 @@ const char* funct_str_r_type[10] = {
     "OR",      "XOR",       "SLT",
     "SLTU"
 };
-const int opcode_val_i_type[12] = {
+const int opcode_val_i_type[7] = {
     ADDI,       SLTI,       SLTIU,
     ANDI,       ORI,        XORI,
-    JALR,       LB,         LH,
-    LW,         LBU,        LHU
+   /*JALR,       LB,         LH,*/
+    LW         /*LBU,        LHU*/
 };
-const char* opcode_str_i_type[12] = {
+const char* opcode_str_i_type[7] = {
     "ADDI",       "SLTI",       "SLTIU",
     "ANDI",       "ORI",        "XORI",
-    "JALR",       "LB",         "LH",
-    "LW",         "LBU",        "LHU"
+    /*"JALR",       "LB",         "LH",*/
+    "LW"         /*"LBU",        "LHU"*/
 };
-const int opcode_val_s_type[3] = {
-    SB,         SH,         SW
+const int opcode_val_s_type[1] = {
+    /*SB,         SH,*/         SW
 };
-const char* opcode_str_s_type[3] = {
-    "SB",         "SH",         "SW"
+const char* opcode_str_s_type[1] = {
+    /*"SB",         "SH",*/         "SW"
 };
 const int opcode_val_b_type[6] = {
     BEQ,        BNE,        BLT,

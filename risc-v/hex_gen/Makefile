@@ -8,6 +8,9 @@ all: src/*.c
 hex: src/*.c
 	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -l :lib/libhex.so
 
+hex_preload: src/*.c
+	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -l :lib/libhex_preload.so
+
 .PHONY: clean
 clean:
 	rm -rf hex_gen pc_values_hex instr_hex

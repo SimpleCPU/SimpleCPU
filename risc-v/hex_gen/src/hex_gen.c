@@ -11,7 +11,6 @@
 void update_cpu (int pc, int hex_instr) {
     PC[pc-MEM_TEXT_START]           = 1;
     instr[pc-MEM_TEXT_START]        = hex_instr;
-    //printf ("PC Update: PC[%x] = %d\tinstr[%x] = %x\n", pc-MEM_TEXT_START, PC[pc-MEM_TEXT_START], pc-MEM_TEXT_START, instr[pc-MEM_TEXT_START]);
     prev_pc = CURRENT_STATE.PC;
 }
 
@@ -189,7 +188,7 @@ void gen_i_instr (int vopt, ...) {
         va_end (valist);
         funct   = ((opcode>>4 & 0x1) << 3) | funct3;
 
-        for (i = 0; i < 12; i++) {
+        for (i = 0; i < 7; i++) {
             if (opcode_val_i_type[i] == funct) {
                 funct_idx = i;
                 break;
@@ -197,7 +196,7 @@ void gen_i_instr (int vopt, ...) {
         }
     }
     else {
-        funct_idx   = rand()%12;
+        funct_idx   = rand()%7;
         opcode      = (((opcode_val_i_type [funct_idx] >> 4) & 0x1) << 4) | 0x3;
         funct3      = ((opcode_val_i_type [funct_idx]) & 0x7);
         rd          = rand() % 32;
@@ -291,7 +290,7 @@ void gen_s_instr (int vopt, ...) {
         imm     = va_arg (valist, int);
         va_end (valist);
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 1; i++) {
             if (opcode_val_s_type[i] == funct3) {
                 funct_idx = i;
                 break;
