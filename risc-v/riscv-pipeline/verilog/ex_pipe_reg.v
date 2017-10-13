@@ -8,6 +8,7 @@ module ex_pipe_reg
         input   wire        valid_ex_pipe_reg_i,
         // Inputs from the instr decoder
         input   wire[2:0]   funct3_ex_pipe_reg_i,
+        input   wire[6:0]   op_ex_pipe_reg_i,
         input   wire[4:0]   rs1_ex_pipe_reg_i,
         input   wire[4:0]   rs2_ex_pipe_reg_i,
         input   wire[4:0]   rd_ex_pipe_reg_i,
@@ -45,6 +46,7 @@ module ex_pipe_reg
         // Register outputs
         output  wire        valid_ex_pipe_reg_o,
         output  wire[2:0]   funct3_ex_pipe_reg_o,
+        output  wire[6:0]   op_ex_pipe_reg_o,
         output  wire[4:0]   rs1_ex_pipe_reg_o,
         output  wire[4:0]   rs2_ex_pipe_reg_o,
         output  wire[4:0]   rd_ex_pipe_reg_o,
@@ -78,6 +80,7 @@ module ex_pipe_reg
 
     reg        valid_ex_pipe_reg;
     reg[2:0]   funct3_ex_pipe_reg;
+    reg[6:0]   op_ex_pipe_reg;
     reg[4:0]   rs1_ex_pipe_reg;
     reg[4:0]   rs2_ex_pipe_reg;
     reg[4:0]   rd_ex_pipe_reg;
@@ -110,6 +113,7 @@ module ex_pipe_reg
 
     assign valid_ex_pipe_reg_o          = valid_ex_pipe_reg;
     assign funct3_ex_pipe_reg_o         = funct3_ex_pipe_reg;
+    assign op_ex_pipe_reg_o             = op_ex_pipe_reg;
     assign rs1_ex_pipe_reg_o            = rs1_ex_pipe_reg;
     assign rs2_ex_pipe_reg_o            = rs2_ex_pipe_reg;
     assign rd_ex_pipe_reg_o             = rd_ex_pipe_reg;
@@ -145,6 +149,7 @@ module ex_pipe_reg
     begin
         valid_ex_pipe_reg           <= 1'b0;
         funct3_ex_pipe_reg          <= 3'b0;
+        op_ex_pipe_reg              <= 7'b0;
         rs1_ex_pipe_reg             <= 4'b0;
         rs2_ex_pipe_reg             <= 4'b0;
         rd_ex_pipe_reg              <= 4'b0;
@@ -179,6 +184,7 @@ module ex_pipe_reg
     begin
         valid_ex_pipe_reg           <=  valid_ex_pipe_reg_i;
         funct3_ex_pipe_reg          <=  funct3_ex_pipe_reg_i;
+        op_ex_pipe_reg              <=  op_ex_pipe_reg_i;
         rs1_ex_pipe_reg             <=  rs1_ex_pipe_reg_i;
         rs2_ex_pipe_reg             <=  rs2_ex_pipe_reg_i;
         rd_ex_pipe_reg              <=  rd_ex_pipe_reg_i;
