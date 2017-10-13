@@ -5,6 +5,9 @@ DEPS = riscv_instr_defines.h
 hex: src/*.c
 	gcc -fPIC $(CFLAGS) -shared -g -O2 $^ -o lib$@.so
 
+hex_preload: src/*.c
+	gcc -fPIC $(CFLAGS) -shared -g -O2 $^ -o lib$@.so -D PRELOAD_ARCH_REGS
+
 iss: src/*.c
 	gcc -fPIC $(CFLAGS) -shared -g -m32 -O2 $^ -o $@.so
 

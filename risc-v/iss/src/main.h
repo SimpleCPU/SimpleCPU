@@ -34,6 +34,7 @@ extern int RUN_BIT; 	/* Run bit                  */
 extern int prev_pc;     /* Previous program counter */
 extern int instr_count; /* Instruction count        */
 uint32_t   instr_opcode;
+extern int my_count;
 
 uint32_t mem_read_32(uint32_t address);
 void     mem_write_32(uint32_t address, uint32_t value);

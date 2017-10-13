@@ -36,6 +36,7 @@ int RUN_BIT;	/* run bit */
 int INSTRUCTION_COUNT;
 int prev_pc;
 int instr_count;
+int my_count = 0;
 
 /***************************************************************/
 /*                                                             */
@@ -191,6 +192,12 @@ void init_memory() {
         MEM_REGIONS[i].mem = malloc(MEM_REGIONS[i].size);
         memset(MEM_REGIONS[i].mem, 0xdeadbeef, MEM_REGIONS[i].size);
     }
+    #ifdef PRELOAD_ARCH_REGS
+    printf ("Preloading architecture registers\n");
+    for (i = 0; i < RISCV_REGS; i++) {
+        CURRENT_STATE.REGS[i] = (i*32 + i%3);
+    }
+    #endif
     CURRENT_STATE.PC = MEM_TEXT_START;
     prev_pc = MEM_TEXT_START;
     NEXT_STATE = CURRENT_STATE;
