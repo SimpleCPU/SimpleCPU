@@ -99,17 +99,18 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `LB       :   controls = 17'b00_0_01_01_0_0_0_1_000000;
-          `LBU      :   controls = 17'b00_0_01_01_0_0_0_1_000000;
-          `LH       :   controls = 17'b00_0_01_01_0_0_0_1_000000;
-          `LHU      :   controls = 17'b00_0_01_01_0_0_0_1_000000;
-          `LW       :   controls = 17'b00_0_01_01_0_0_0_1_000000;
+          `LB       :   controls = 17'b00_0_01_00_0_0_0_1_000000;
+          `LBU      :   controls = 17'b00_0_01_00_0_0_0_1_000000;
+          `LH       :   controls = 17'b00_0_01_00_0_0_0_1_000000;
+          `LHU      :   controls = 17'b00_0_01_00_0_0_0_1_000000;
+          `LW       :   controls = 17'b00_0_01_00_0_0_0_1_000000;
           `ADDI     :   controls = 17'b00_0_01_01_0_0_0_1_000000;
           `ANDI     :   controls = 17'b00_0_01_01_0_0_0_1_010000;
           `ORI      :   controls = 17'b00_0_01_01_0_0_0_1_001000;
           `SLLI     :   controls = 17'b00_0_01_01_0_0_0_1_000010;
           `SRLI     :   controls = 17'b00_0_01_01_0_0_0_1_000100;
-          `SLTIU    :   controls = 17'b00_0_01_01_0_0_0_1_000001;
+          `SLTI     :   controls = 17'b00_0_01_01_0_0_0_1_101001;
+          `SLTIU    :   controls = 17'b00_0_01_01_0_0_0_1_110001;
           `SRAI     :   controls = 17'b00_0_01_01_0_0_0_1_000110;
           `XORI     :   controls = 17'b00_0_01_01_0_0_0_1_100000;
           `JALR     :   controls = 17'b10_0_01_01_1_0_0_1_000000;
