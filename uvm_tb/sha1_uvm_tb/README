@@ -1,0 +1,10 @@
+SHA1 UVM based Testbench
+
+The RTL files are present inside the "verilog" directory.
+The UVM based testbench files are inside the "tb_uvm" directory.
+
+uvm_tb.vc - This file contains the list and order on how the different files should be compiled.
+            It should be used as a "-f" option in the "vlog" command.
+
+uvm_tb.run - This file contains a sample "vlog" command to run the compilation. Please update the
+             incdir as per your directory structure. 

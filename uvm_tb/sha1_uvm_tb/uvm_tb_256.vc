@@ -1,0 +1,9 @@
+uvm_tb/sha256_uvm_tb/uvm/sha256_top.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_interface.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_transaction.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_sequencer.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_driver.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_agent.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_env.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_sequence.sv
+uvm_tb/sha256_uvm_tb/uvm/sha256_test.sv
