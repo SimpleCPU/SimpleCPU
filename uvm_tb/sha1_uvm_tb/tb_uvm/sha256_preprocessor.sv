@@ -1,6 +1,6 @@
 `ifndef SHA256_PREPROCESSOR_SV
 `define SHA256_PREPROCESSOR_SV
-// The SHA256 Messge Preprocessor
+// The SHA256 Message Preprocessor
 // This class implements the preprocessing before hash computations.
 // The following logic is implemented:
 //      - Padding the message

@@ -65,12 +65,13 @@ class sha256_compute extends sha256_function;
                     this.W [t] = (sigma1(this.W[t-2]) + this.W[t-7] + sigma0(this.W[t-15]) + this.W[t-16]);
                 end
                 this.T1 = (this.h + sum1 (this.e) + ch (this.e, this.f, this.g) + K[t] + this.W[t]); // 54DA50E8 ffcd6031
+                //$display ("T1 is %x\tW[t]: %x", this.T1, this.W[t]);
                 this.T2 = (sum0 (this.a) + maj (this.a, this.b, this.c));
                 this.h  = this.g;
                 this.g  = this.f;
                 this.f  = this.e;
                 this.e  = (this.d + this.T1);
-                $display ("e[%0d] is %x", t, this.e);
+                //$display ("E[%0d]: %x", t, this.e);
                 this.d  = this.c;
                 this.c  = this.b;
                 this.b  = this.a;
@@ -88,11 +89,12 @@ class sha256_compute extends sha256_function;
         // Compute the final hash value
         // Copy the final value of the hash
         k = 0;
+        $display ("\nHash is:");
         for (int i = 255; i >= 0; i=i-32) begin
             hashed_msg [i-:32] = preprocessor.H[k];
+            $display ("%8x\n", hashed_msg[i-:32]);
             k++;
         end
-        $display ("Hash is %64x", hashed_msg);
     endfunction
 
 endclass
