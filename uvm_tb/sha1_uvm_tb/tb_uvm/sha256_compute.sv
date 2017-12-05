@@ -4,6 +4,7 @@
 // This class implements the hash computations on the padded message.
 `include "sha256_preprocessor.sv"
 `include "sha256_function.sv"
+`include "sha256_generator.sv"
 
 class sha256_compute extends sha256_function;
 
@@ -32,6 +33,8 @@ class sha256_compute extends sha256_function;
     // Two temporary variables
     logic [31:0]      T1;
     logic [31:0]      T2;
+
+    logic [31:0]      H_[1023:0];
 
     function new (bit [2**20:0] message, longint len);
         this.message = message;
@@ -102,11 +105,15 @@ endclass
 module test_class ();
     
     sha256_compute sha;
-    bit [2**20:0] msg = 24'h61_62_63;
-    longint len = 24;
+    bit [2**20:0] msg;
+    longint len;
+    sha256_generator sha_gen;
     initial
     begin
-        sha = new(msg, len);
+        sha_gen = new();
+        void'(sha_gen.randomize());
+        sha_gen.generate_msg();
+        sha = new(sha_gen.message, sha_gen.msg_len);
         $finish  (1);
     end
 endmodule
