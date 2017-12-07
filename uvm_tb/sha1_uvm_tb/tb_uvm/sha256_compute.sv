@@ -46,16 +46,17 @@ class sha256_compute extends sha256_function;
     // Computation Engine
     function void compute_hash ();
         int k = 0;
+        int l = preprocessor.N-1;
         // Process each of the message block
         for (int i = 0; i < preprocessor.N; i++) begin
             int j = 511;
             // Form the initial 16 message schedules
-            for (k = 0; i < 16; k++) begin
-                this.W[k] = preprocessor.padded_msg[((512*i)+j)-:32];
-                $display ("W[%0d] msg[%3d:%3d]", k,((512*i)+j), ((512*i)+j)-32);
-                k++;
+            for (k = 0; k < 16; k++) begin
+                this.W[k] = preprocessor.padded_msg[((512*l)+j)-:32];
+                //$display ("W[%0d] msg[%3d:%3d]", k,((512*l)+j), ((512*l)+j)-31);
                 j = j - 32;
             end
+            l--;
             // Initialise the eight working variables
             this.a = preprocessor.H[0];
             this.b = preprocessor.H[1];
