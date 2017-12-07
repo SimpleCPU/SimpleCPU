@@ -19,6 +19,7 @@ class sha256_sequence extends uvm_sequence #(sha256_transaction);
         txn = sha256_transaction::type_id::create ("txn");
         start_item (txn);
         finish_item (txn);
+        // Call the checker function
     endtask
 
 endclass

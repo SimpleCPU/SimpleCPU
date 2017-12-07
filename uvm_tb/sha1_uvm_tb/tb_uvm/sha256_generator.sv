@@ -2,6 +2,7 @@
 `define SHA256_GENERATOR_SV
 // The SHA256 Message Generator 
 // This class generates the message load for the hash computation
+`include "sha256_preprocessor.sv"
 
 class sha256_generator;
     
@@ -10,6 +11,8 @@ class sha256_generator;
     // Define the message as a random property
     bit [2**20:0]       message;
     string              msg_string;
+    // Handle to the preprocessor class
+    sha256_preprocessor preprocessor;
 
     rand logic [7:0]    ascii_char;
 
@@ -69,6 +72,7 @@ class sha256_generator;
             end
         end
         $display ("Message is %s", msg_string);
+        preprocessor = new (message, msg_len);
 
     endfunction
 

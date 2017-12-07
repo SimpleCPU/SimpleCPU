@@ -7,19 +7,19 @@
 // and signals to be used.
 `include "uvm_macros.svh"
 `include "uvm_pkg.sv"
+`include "sha256_generator.sv"
 import uvm_pkg::*;
 
 class sha256_transaction extends uvm_sequence_item;
     `uvm_object_utils (sha256_transaction)
 
-    // Declare all the properties
-    bit         start;
-    bit[159:0]  cv;
-    bit         use_prev_cv;
-    bit[511:0]  y;
+    sha256_generator    sha_gen;
 
     function new (string name = "sha256_transaction");
         super.new (name);
+        sha_gen  = new ();
+        void'(sha_gen.randomize());
+        sha_gen.generate_msg();
     endfunction
 
 endclass

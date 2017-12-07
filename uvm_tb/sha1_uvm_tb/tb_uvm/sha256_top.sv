@@ -35,13 +35,17 @@ module sha256_top ();
 
     initial begin
         reset = 1;
-        repeat (3) @(posedge clk);
+        repeat (21) @(posedge clk);
         reset = 0;
     end
 
     initial begin
         uvm_config_db #(virtual sha256_interface)::set (null, "*", "sha256_vif", sha256_if);
         `uvm_info ("TOP", "sha256_vif set in the configdb", UVM_NONE)
+        sha256_vif.cmd_w_i = 'h0;
+        sha256_vif.cmd_i   = 'h0;
+        @ (negedge reset);
+        `uvm_info ("TOP", "Starting UVM_TEST now", UVM_NONE)
         run_test ();
     end
 
