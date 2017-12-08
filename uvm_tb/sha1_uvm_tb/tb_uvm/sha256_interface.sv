@@ -12,7 +12,8 @@ interface sha256_interface (
     logic [31:0]        text_o; 
     logic [2:0]         cmd_i; 
     logic               cmd_w_i; 
-    logic               cmd_o;
+    logic [3:0]         cmd_o;
+    logic [255:0]       sha256_hash;
 
 endinterface
 `endif

@@ -31,4 +31,5 @@ class sha256_test extends uvm_test;
     endtask
 
 endclass
+
 `endif

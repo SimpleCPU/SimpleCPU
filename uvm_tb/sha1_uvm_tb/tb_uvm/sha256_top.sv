@@ -20,11 +20,11 @@ module sha256_top ();
         .text_i   (sha256_if.text_i),
         .text_o   (sha256_if.text_o),
         .cmd_i    (sha256_if.cmd_i),
-        .cm_w_i   (sha256_if.cmd_w_i),
+        .cmd_w_i  (sha256_if.cmd_w_i),
         .cmd_o    (sha256_if.cmd_o)
     );
 
-    localparam SYSTEM_CLK = 20;
+    localparam SYSTEM_CLK = 10;
 
     always begin
         clk = 1;
@@ -42,9 +42,8 @@ module sha256_top ();
     initial begin
         uvm_config_db #(virtual sha256_interface)::set (null, "*", "sha256_vif", sha256_if);
         `uvm_info ("TOP", "sha256_vif set in the configdb", UVM_NONE)
-        sha256_vif.cmd_w_i = 'h0;
-        sha256_vif.cmd_i   = 'h0;
-        @ (negedge reset);
+        sha256_if.cmd_w_i = 'h0;
+        sha256_if.cmd_i   = 'h0;
         `uvm_info ("TOP", "Starting UVM_TEST now", UVM_NONE)
         run_test ();
     end
