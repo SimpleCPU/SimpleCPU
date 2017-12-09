@@ -28,8 +28,8 @@ class sha256_checker;
             $display ("TEST PASSED\n");
         else begin
             $display ("TEST FAILED");
-            $display ("Expected: %x, Got: %x", compute.hashed_msg, rtl_sha256);
         end
+        $display ("Expected: %256x, Got: %256x", compute.hashed_msg, rtl_sha256);
     endfunction
 
 endclass

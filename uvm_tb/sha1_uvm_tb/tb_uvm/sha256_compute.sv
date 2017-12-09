@@ -11,7 +11,7 @@ class sha256_compute extends sha256_function;
     // Message length
     longint         msg_len;
     // Hashed Message
-    bit [256:0]     hashed_msg;
+    bit [255:0]     hashed_msg;
 
     // Local variables
     // Message schedule of 64 32-bit words
@@ -99,10 +99,9 @@ class sha256_compute extends sha256_function;
         // Compute the final hash value
         // Copy the final value of the hash
         k = 0;
-        $display ("\nHash is:");
         for (int i = 255; i >= 0; i=i-32) begin
             hashed_msg [i-:32] = this.H[k];
-            $display ("%8x\n", hashed_msg[i-:32]);
+            //$display ("%8x\n", hashed_msg[i-:32]);
             k++;
         end
     endfunction

@@ -92,10 +92,6 @@ class sha256_preprocessor;
         $display ("Padded message len: %3d", this.msg_len);
         $display ("Number of zeros added: %3d", this.num_zeros);
         $display ("Number of 512-bit blocks: %3d", this.N);
-        $display ("Initial hash value:");
-        for (int i = 0; i < 8; i++) begin
-            $display ("%x", H[i]);
-        end
     endfunction
 
 endclass

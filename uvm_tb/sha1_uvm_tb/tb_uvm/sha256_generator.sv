@@ -23,7 +23,7 @@ class sha256_generator;
     //        the message will be an ascii
     constraint msg_len_c {
         msg_len > 0;
-        msg_len < 1024;
+        msg_len < 10*1024;
         msg_len % 8 == 0;
     }
 

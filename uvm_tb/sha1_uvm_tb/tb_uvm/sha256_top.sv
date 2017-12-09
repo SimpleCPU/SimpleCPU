@@ -35,7 +35,7 @@ module sha256_top ();
 
     initial begin
         reset = 1;
-        repeat (21) @(posedge clk);
+        repeat (5) @(posedge clk);
         reset = 0;
     end
 

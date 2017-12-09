@@ -33,7 +33,7 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
         forever
         begin
             seq_item_port.get_next_item (sha256_req);
-            `uvm_info ("DRIVER", $sformatf ("Input is %d", sha256_req.sha_gen.msg_string), UVM_NONE)
+            `uvm_info ("DRIVER", $sformatf ("Input is %s", sha256_req.sha_gen.msg_string), UVM_NONE)
             #100;
             @(posedge sha256_vif.clk);
             sha256_vif.cmd_i    = 'b010;
@@ -41,13 +41,12 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
             l = sha256_req.sha_gen.preprocessor.N-1;
             for (int i = 0; i < sha256_req.sha_gen.preprocessor.N; i++) begin
                 int j = 511;
-                @(posedge sha256_vif.clk);
-                sha256_vif.cmd_w_i  = 'b0;
                 // Form the initial 16 message schedules
                 for (k = 0; k < 16; k++) begin
                     @(posedge sha256_vif.clk);
+                    sha256_vif.cmd_w_i  = 'b0;
                     sha256_vif.text_i = sha256_req.sha_gen.preprocessor.padded_msg[((512*l)+j)-:32];
-                    $display ("msg[%3d:%3d]: %x", ((512*l)+j), ((512*l)+j)-32, sha256_vif.text_i) ;
+                    //$display ("msg[%3d:%3d]: %x", ((512*l)+j), ((512*l)+j)-32, sha256_vif.text_i) ;
                     j = j - 32;
                 end
                 l--;
@@ -58,6 +57,7 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
                 #100;
                 sha256_vif.cmd_i = 'b110;
                 sha256_vif.cmd_w_i = 'b1;
+                @(posedge sha256_vif.clk);
             end
             sha256_vif.cmd_i = 'b1;
             sha256_vif.cmd_w_i = 'b1;
@@ -69,7 +69,7 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
               #1;
               sha256_vif.cmd_w_i = 'b0;
               sha256_vif.sha256_hash[(32*i-1)-:32] = sha256_vif.text_o;
-              $display ("Text[%3d:%3d] is %x", 32*i-1, (32*i-1)-31, sha256_vif.text_o);
+              //$display ("Text[%3d:%3d] is %x", 32*i-1, (32*i-1)-31, sha256_vif.text_o);
             end
             sha256_req.check (sha256_vif.sha256_hash);
             seq_item_port.item_done();
