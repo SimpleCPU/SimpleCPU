@@ -41,11 +41,11 @@ class sha256_generator;
               }) begin
                   if (i) begin
                     message     = {message, ascii_char};
-                    msg_string  = {msg_string, ascii_char};
+                    msg_string  = {msg_string, string'(ascii_char)};
                   end
                   else begin
                     message     = {ascii_char};
-                    msg_string  = {ascii_char};
+                    msg_string  = {string'(ascii_char)};
                   end
                   //$display ("Appending %2x", ascii_char);
               end
@@ -59,11 +59,11 @@ class sha256_generator;
               }) begin
                   if (i) begin
                     message     = {message, ascii_char};
-                    msg_string  = {msg_string, ascii_char};
+                    msg_string  = {msg_string, string'(ascii_char)};
                   end
                   else begin
                     message     = ascii_char;
-                    msg_string  = '{ascii_char};
+                    msg_string  = string'(ascii_char);
                   end
                   //$display ("Appending %2x", ascii_char);
               end

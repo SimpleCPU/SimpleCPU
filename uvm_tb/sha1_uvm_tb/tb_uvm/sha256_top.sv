@@ -1,8 +1,8 @@
 // The SHA256 Top module
 
 `include "uvm_pkg.sv"
+`include "sha256_interface.sv"
 module sha256_top ();
-    `include "sha256_interface.sv"
     `include "sha256_test.sv"
     import uvm_pkg::*;
 

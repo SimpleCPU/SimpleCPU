@@ -34,12 +34,11 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
         begin
             seq_item_port.get_next_item (sha256_req);
             `uvm_info ("DRIVER", $sformatf ("Input is %d", sha256_req.sha_gen.msg_string), UVM_NONE)
+            #100;
             @(posedge sha256_vif.clk);
             sha256_vif.cmd_i    = 'b010;
             sha256_vif.cmd_w_i  = 'b1;
-            `uvm_info ("DRIVER", $sformatf ("Input is %3dx512-bits long", sha256_req.sha_gen.preprocessor.N), UVM_NONE)
             l = sha256_req.sha_gen.preprocessor.N-1;
-            sha256_req.sha_gen.preprocessor.padded_msg = {"abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", 1'b1,63'b0,448'b0,64'd448};
             for (int i = 0; i < sha256_req.sha_gen.preprocessor.N; i++) begin
                 int j = 511;
                 @(posedge sha256_vif.clk);
@@ -52,7 +51,7 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
                     j = j - 32;
                 end
                 l--;
-                repeat (10) @(posedge sha256_vif.clk);
+                repeat (5) @(posedge sha256_vif.clk);
                 while (sha256_vif.cmd_o[3])
                     @(posedge sha256_vif.clk);
                 repeat (5) @(posedge sha256_vif.clk);
