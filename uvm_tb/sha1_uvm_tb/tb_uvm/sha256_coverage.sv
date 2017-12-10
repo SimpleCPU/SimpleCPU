@@ -23,13 +23,19 @@ class sha256_coverage;
     logic [31:0]  h;
 
     // New function for the class
-    function new ();
+    function new (longint msg_len, bit [9:0] padded_zeros);
         // Create all the covergroups
+        this.msg_len = msg_len;
+        this.padded_zeros = padded_zeros;
+        msg_len_1 = new ();
+        num_zeros_1 = new();
+        msg_len_1.sample();
+        num_zeros_1.sample();
     endfunction
 
     // Covergroups for message length
     // Coverage even should be message length
-    covergroup msg_len_1 @(msg_len);
+    covergroup msg_len_1 ;
         coverpoint msg_len {
             // Long message bin
             bins long  = {[512:$]};
@@ -39,7 +45,7 @@ class sha256_coverage;
     endgroup
 
     // Covergroups for the number of zeros added
-    covergroup num_zeros_1 @(padded_zeros);
+    covergroup num_zeros_1 ;
         coverpoint padded_zeros {
             bins valid    = {[0:511]};
             bins others[] = default;

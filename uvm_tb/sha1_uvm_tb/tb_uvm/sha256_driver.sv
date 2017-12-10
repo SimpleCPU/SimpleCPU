@@ -8,11 +8,13 @@ import uvm_pkg::*;
 
 `include "sha256_interface.sv"
 `include "sha256_transaction.sv"
+`include "sha256_coverage.sv"
 
 class sha256_driver extends uvm_driver # (sha256_transaction);
     `uvm_component_utils (sha256_driver)
 
     virtual sha256_interface sha256_vif;
+    sha256_coverage coverage;
 
     function new (string name = "sha256_agent", uvm_component parent);
         super.new (name, parent);
@@ -34,6 +36,7 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
         begin
             seq_item_port.get_next_item (sha256_req);
             `uvm_info ("DRIVER", $sformatf ("Input is %s", sha256_req.sha_gen.msg_string), UVM_NONE)
+            coverage = new (sha256_req.sha_gen.msg_len, sha256_req.sha_gen.preprocessor.num_zeros);
             #100;
             @(posedge sha256_vif.clk);
             sha256_vif.cmd_i    = 'b010;
