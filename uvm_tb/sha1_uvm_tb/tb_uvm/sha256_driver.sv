@@ -36,7 +36,11 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
         begin
             seq_item_port.get_next_item (sha256_req);
             `uvm_info ("DRIVER", $sformatf ("Input is %s", sha256_req.sha_gen.msg_string), UVM_NONE)
-            coverage = new (sha256_req.sha_gen.msg_len, sha256_req.sha_gen.preprocessor.num_zeros);
+            coverage = new (sha256_req.sha_gen.msg_len, 
+                            sha256_req.sha_gen.preprocessor.num_zeros);
+            for (int p=0; p < sha256_req.sha_gen.msg_len; p = p+8) begin
+                coverage.sample_msg_byte (sha256_req.sha_gen.message [p+7-:8]);
+            end
             #100;
             @(posedge sha256_vif.clk);
             sha256_vif.cmd_i    = 'b010;
@@ -51,23 +55,30 @@ class sha256_driver extends uvm_driver # (sha256_transaction);
                     sha256_vif.text_i = sha256_req.sha_gen.preprocessor.padded_msg[((512*l)+j)-:32];
                     //$display ("msg[%3d:%3d]: %x", ((512*l)+j), ((512*l)+j)-32, sha256_vif.text_i) ;
                     j = j - 32;
+                    coverage.sample_cmd_o (sha256_vif.cmd_o);
                 end
                 l--;
+                coverage.sample_cmd_o (sha256_vif.cmd_o);
                 repeat (5) @(posedge sha256_vif.clk);
-                while (sha256_vif.cmd_o[3])
+                while (sha256_vif.cmd_o[3]) begin
                     @(posedge sha256_vif.clk);
+                    coverage.sample_cmd_o (sha256_vif.cmd_o);
+                end
                 repeat (5) @(posedge sha256_vif.clk);
                 #100;
                 sha256_vif.cmd_i = 'b110;
                 sha256_vif.cmd_w_i = 'b1;
+                coverage.sample_cmd_o (sha256_vif.cmd_o);
                 @(posedge sha256_vif.clk);
             end
+            coverage.sample_cmd_o (sha256_vif.cmd_o);
             sha256_vif.cmd_i = 'b1;
             sha256_vif.cmd_w_i = 'b1;
             repeat (5) @(posedge sha256_vif.clk);
             @(posedge sha256_vif.clk);
             sha256_vif.cmd_w_i = 'b0;
             for (int i = 8; i > 0; i--) begin
+              coverage.sample_cmd_o (sha256_vif.cmd_o);
               @(posedge sha256_vif.clk);
               #1;
               sha256_vif.cmd_w_i = 'b0;

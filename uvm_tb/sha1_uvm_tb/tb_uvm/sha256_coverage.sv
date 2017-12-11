@@ -12,26 +12,55 @@ class sha256_coverage;
     // For padding the message
     bit [9:0]     padded_zeros;
     // RTL signals to be covered
-    // Various internal variables should be flipped
-    logic [31:0]  a;
-    logic [31:0]  b;
-    logic [31:0]  c;
-    logic [31:0]  d;
-    logic [31:0]  e;
-    logic [31:0]  f;
-    logic [31:0]  g;
-    logic [31:0]  h;
+    // Check that we cover different states
+    // for the "cmd" output
+    bit [3:0]     cmd_o;
+    // Check the generated message covers entire
+    // alphabetic ascii range
+    bit [7:0] msg_byte;
 
     // New function for the class
     function new (longint msg_len, bit [9:0] padded_zeros);
-        // Create all the covergroups
         this.msg_len = msg_len;
         this.padded_zeros = padded_zeros;
+        // Create all the covergroups
         msg_len_1 = new ();
         num_zeros_1 = new();
+        cmd_o_1 = new ();
+        ascii_msg_1  = new ();
         msg_len_1.sample();
         num_zeros_1.sample();
     endfunction
+
+    function sample_cmd_o (bit [3:0] cmd_o);
+        this.cmd_o = cmd_o;
+        cmd_o_1.sample ();
+    endfunction
+
+    function sample_msg_byte (bit [7:0] msg_byte);
+        this.msg_byte = msg_byte;
+        ascii_msg_1.sample ();
+    endfunction
+
+    // Covergroups for checking message
+    covergroup ascii_msg_1 ;
+        coverpoint msg_byte {
+            bins valid_ascii = {[8'd65:8'd90], [8'd97:8'd122]};
+            bins invalid[] = default;
+        }
+    endgroup
+
+    // Covergroups for cmd state output
+    covergroup cmd_o_1 ;
+        coverpoint cmd_o {
+            // Covering different state as
+            // per the RTL
+            bins r_state      = {cmd_o[0]};
+            bins w_state      = {cmd_o[1]};
+            bins rnd_state    = {cmd_o[2]};
+            bins busy_state   = {cmd_o[3]};
+        }
+    endgroup
 
     // Covergroups for message length
     // Coverage even should be message length
