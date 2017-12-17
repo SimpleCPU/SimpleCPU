@@ -186,7 +186,7 @@ void gen_i_instr (int vopt, ...) {
         rs1     = va_arg (valist, int);
         imm     = va_arg (valist, int);
         va_end (valist);
-        funct   = ((opcode>>4 & 0x1) << 3) | funct3;
+        funct   = ((opcode>>4 & 0x1) << 4) | funct3;
 
         for (i = 0; i < 7; i++) {
             if (opcode_val_i_type[i] == funct) {
@@ -205,9 +205,10 @@ void gen_i_instr (int vopt, ...) {
     IMM_I:    
         imm         = rand() % 0xFFF;   /* 12-bit signal */
     }
-    if (((opcode == LW) || (opcode == LB))  ||
-       ((opcode == LH) || (opcode == LBU)) ||
-       ((opcode == LHU))) {
+    funct   = ((opcode>>4 & 0x1) << 4) | funct3;
+    if (((funct == LW) || (funct == LB))  ||
+        ((funct == LH) || (funct == LBU)) ||
+        ((funct == LHU))) {
         unsigned int addr = check_ls_addr (rs1, imm);
         if (addr == 2) {
             // Report an error if the above was called with vopt set
