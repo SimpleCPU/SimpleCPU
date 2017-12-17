@@ -299,7 +299,7 @@ void gen_s_instr (int vopt, ...) {
         }
     }
     else {
-        funct_idx   = rand()%3;
+        funct_idx   = rand()%1;
         opcode      = 0x23;
         funct3      = opcode_val_s_type [funct_idx];
         rs1         = rand() % 32;
