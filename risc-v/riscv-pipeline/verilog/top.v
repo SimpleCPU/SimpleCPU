@@ -269,7 +269,7 @@ module top
 
     sign_extnd_12bit SIGN_EXTND_12BIT (
         .instr_imm_i            (instr_imm_12bit_iss),
-        .instr_type_i           (`I_TYPE_0),
+        .instr_type_i           (op_iss_ex),
         .sign_extnd_instr_imm_o (sign_extnd_imm_12bit_iss)
     );
 
@@ -395,13 +395,13 @@ module top
                                   op2sel_ex_mem[0]? sign_extnd_imm_12bit_ex :
                                   op2sel_ex_mem[1]? curr_pc_ex_mem : 32'b0;
     
-    assign branch_taken_ex      = (is_b_type_ex_mem & ((funct3_ex_mem == `BEQ))    & (z_ex_mem))     |
-                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BLT)     | 
-                                                    (funct3_ex_mem == `BLTU))   & (n_ex_mem))     |
-                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BNE))    & (~z_ex_mem))    |
-                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BGE)     | 
-                                                    (funct3_ex_mem == `BGEU))   & (~n_ex_mem      | 
-                                                                                  (z_ex_mem)));
+    assign branch_taken_ex      = (is_b_type_ex_mem & ((funct3_ex_mem == `BEQ))  & (z_ex_mem))  |
+                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BLT)                  | 
+                                                    (funct3_ex_mem == `BLTU))    & (n_ex_mem))  |
+                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BNE))  & (~z_ex_mem)) |
+                                  (is_b_type_ex_mem & ((funct3_ex_mem == `BGE)                  | 
+                                                    (funct3_ex_mem == `BGEU)) & (~n_ex_mem      | 
+                                                                                (z_ex_mem)));
     // Give the feedback of the prediction made by the predictor
     // 0 - incorrect prediction
     // 1 - correct prediction

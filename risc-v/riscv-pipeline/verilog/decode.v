@@ -30,12 +30,12 @@ module decode
     wire[6:0]   op_dec;
     wire[2:0]   funct3_dec;
     wire[6:0]   funct7_dec;
-    wire        is_r_type_dec;
-    wire        is_i_type_dec;
-    wire        is_s_type_dec;
-    wire        is_b_type_dec;
-    wire        is_u_type_dec;
-    wire        is_j_type_dec;
+    reg         is_r_type_dec;
+    reg         is_i_type_dec;
+    reg         is_s_type_dec;
+    reg         is_b_type_dec;
+    reg         is_u_type_dec;
+    reg         is_j_type_dec;
     wire[11:0]  i_type_imm_dec;
     wire[11:0]  s_type_imm_dec;
     wire[11:0]  b_type_imm_dec;
@@ -68,12 +68,25 @@ module decode
     assign funct3_dec         = instr_dec_i[14:12];
     assign funct7_dec         = instr_dec_i[31:25];
 
-    assign is_r_type_dec      = op_dec  == `R_TYPE;
-    assign is_i_type_dec      = (op_dec == `I_TYPE_0) | (op_dec == `I_TYPE_1);
-    assign is_s_type_dec      = op_dec  == `S_TYPE;
-    assign is_b_type_dec      = op_dec  == `B_TYPE;
-    assign is_u_type_dec      = (op_dec == `AUIPC) | (op_dec == `LUI);
-    assign is_j_type_dec      = op_dec  == `J_TYPE;
+    always @ *
+    begin
+        is_r_type_dec = 1'b0;
+        is_i_type_dec = 1'b0;
+        is_s_type_dec = 1'b0;
+        is_b_type_dec = 1'b0;
+        is_u_type_dec = 1'b0;
+        is_j_type_dec = 1'b0;
+        case (op_dec)
+            `R_TYPE:    is_r_type_dec = 1'b1;
+            `I_TYPE_0,
+            `I_TYPE_1:  is_i_type_dec = 1'b1;
+            `S_TYPE:    is_s_type_dec = 1'b1;
+            `B_TYPE:    is_b_type_dec = 1'b1;
+            `AUIPC,
+            `LUI:       is_u_type_dec = 1'b1;
+            `J_TYPE:    is_j_type_dec = 1'b1;
+        endcase
+    end
 
     assign i_type_imm_dec     = instr_dec_i[31:20];
     assign s_type_imm_dec     = {instr_dec_i[31:25], instr_dec_i[11:7]};
