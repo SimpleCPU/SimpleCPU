@@ -193,7 +193,7 @@ module control
       
       else
       begin
-          controls = 18'bx;
+          controls = 18'b00_000_00_0_0_0_0_0_000000;
       end
     end
 
