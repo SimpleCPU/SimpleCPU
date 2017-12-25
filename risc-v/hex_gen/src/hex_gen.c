@@ -409,11 +409,11 @@ void gen_b_instr (int vopt, ...) {
         rs1         = rand() % 32;
         rs2         = rand() % 32;
         imm         = rand() % 0xFFF;   /* 12-bit signal */
-        imm         = imm << 1;
+        imm         = imm << 2;
         goto OUT_B;
     IMM_B:    
         imm         = rand() % 0xFFF;   /* 12-bit signal */
-        imm         = imm << 1;
+        imm         = imm << 2;
     }
     OUT_B:
     addr = check_brn_addr (rs1, imm);
@@ -433,8 +433,8 @@ void gen_b_instr (int vopt, ...) {
     }
 
     hex_instr = ((imm >> 12) << 31) + (((imm >> 5) & 0x3F) << 25) + (rs2 << 20) + 
-                (rs1 << 15) + (funct3 << 12) + (((imm >> 1) & 0xF) << 8) + (((imm >> 11) & 0x1) << 7) +
-                opcode;
+                (rs1 << 15) + (funct3 << 12) + (((imm >> 1) & 0xF) << 8) +
+                (((imm >> 11) & 0x1) << 7)   + opcode;
 
     printf ("[%d] B Type instr generated - 0x%-8x\n", instr_gen, hex_instr);
     load_instr_opcode ((uint32_t) hex_instr);
