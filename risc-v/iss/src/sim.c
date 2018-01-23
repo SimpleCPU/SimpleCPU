@@ -967,6 +967,40 @@ extern int compare_b (int pc, int instr, int rs1, int rs2, int rs1_val, int rs2_
     prev_pc = CURRENT_STATE.PC;
     return 1;
 }
+
+extern int compare_u (int pc, int instr, int rs1, int rs1_val) {
+    int instr_model   = (int) instr_opcode;
+    int rs1_model     = (instr_model >> 15)   & 0x1F;
+    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
+    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n", pc, instr, rs1, rs1_val);
+    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rs1_model, rs1_val_model);
+    if (prev_pc != pc) {
+        RUN_BIT = 0;
+        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+        printf ("PC Mismatch\n");
+        return 0;
+    }
+    else if (instr != instr_model) {
+        RUN_BIT = 0;
+        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+        printf ("INSTR Mismatch\n");
+        return 0;
+    }
+    else if (rs1 != rs1_model) {
+        RUN_BIT = 0;
+        printf ("Unexpected X%d Register\n", rs1);
+        printf ("Expecting  X%d Register\n", rs1_model);
+        return 0;
+    }
+    else if (rs1_val != rs1_val_model) {
+        RUN_BIT = 0;
+        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
+        printf ("RS1 Value Mismatch\n");
+        return 0;
+    }
+    prev_pc = CURRENT_STATE.PC;
+    return 1;
+}
 //
 //extern int compare_j (int pc, int instr, int rt, int rt_val) {
 //    int instr_model  = (int) instr_opcode;
