@@ -95,8 +95,7 @@ module top
     wire[31:0]  next_pred_pc_ex_mem;
     wire        brn_pred_ex_mem;
     wire[31:0]  next_brn_pc_ex_mem;
-    wire[31:0]  sign_extnd_imm_12bit_ex;
-    wire[31:0]  sign_extnd_imm_20bit_ex;
+    wire[31:0]  sign_extnd_imm_ex;
     wire[31:0]  r_data_p1_rf_ex_mem;
     wire[31:0]  r_data_p2_rf_ex_mem;
     wire[31:0]  r_data_p1_alu_ex_mem;
@@ -279,6 +278,7 @@ module top
     );
 
     assign sign_extnd_imm_iss_ex = is_j_type_iss_ex ? sign_extnd_imm_20bit_iss :
+                                   is_u_type_iss_ex ? {instr_imm_20bit_iss, 12'b0} :
                                                       sign_extnd_imm_12bit_iss;
 
     adder ADD2 (
@@ -339,8 +339,7 @@ module top
         .curr_pc_ex_pipe_reg_i          (curr_pc_iss_ex),
         .next_brn_pc_ex_pipe_reg_i      (next_brn_pc_iss_ex),
         .next_pred_pc_ex_pipe_reg_i     (next_pred_pc_iss_ex),
-        .sext_imm_12bit_ex_pipe_reg_i   (sign_extnd_imm_12bit_iss),
-        .sext_imm_20bit_ex_pipe_reg_i   (sign_extnd_imm_20bit_iss),
+        .sext_imm_ex_pipe_reg_i         (sign_extnd_imm_iss_ex),
         .r_data_p1_ex_pipe_reg_i        (r_data_p1_rf_iss_ex),
         .r_data_p2_ex_pipe_reg_i        (r_data_p2_rf_iss_ex),
         .jump_ex_pipe_reg_i             (jump_iss_ex),
@@ -371,8 +370,7 @@ module top
         .curr_pc_ex_pipe_reg_o          (curr_pc_ex_mem),
         .next_brn_pc_ex_pipe_reg_o      (next_brn_pc_ex_mem),
         .next_pred_pc_ex_pipe_reg_o     (next_pred_pc_ex_mem),
-        .sext_imm_12bit_ex_pipe_reg_o   (sign_extnd_imm_12bit_ex),
-        .sext_imm_20bit_ex_pipe_reg_o   (sign_extnd_imm_20bit_ex),
+        .sext_imm_ex_pipe_reg_o         (sign_extnd_imm_ex),
         .r_data_p1_ex_pipe_reg_o        (r_data_p1_rf_ex_mem),
         .r_data_p2_ex_pipe_reg_o        (r_data_p2_rf_ex_mem),
         .jump_ex_pipe_reg_o             (jump_ex_mem),
@@ -389,10 +387,10 @@ module top
                                   fwd_r_data_p2_alu_ex[0] ? wr_data_rf_wb_ret :
                                   r_data_p2_rf_ex_mem;
 
-    assign r_data_p1_alu_ex_mem = op1sel_ex_mem ? sign_extnd_imm_20bit_ex : r_data_p1_ex_mem;
+    assign r_data_p1_alu_ex_mem = op1sel_ex_mem ? sign_extnd_imm_ex : r_data_p1_ex_mem;
 
-    assign r_data_p2_alu_ex_mem = ~|op2sel_ex_mem ? r_data_p2_ex_mem :
-                                  op2sel_ex_mem[0]? sign_extnd_imm_12bit_ex :
+    assign r_data_p2_alu_ex_mem = &op2sel_ex_mem  ? r_data_p2_ex_mem :
+                                  op2sel_ex_mem[0]? sign_extnd_imm_ex :
                                   op2sel_ex_mem[1]? curr_pc_ex_mem : 32'b0;
     
     assign branch_taken_ex      = (is_b_type_ex_mem & ((funct3_ex_mem == `BEQ))  & (z_ex_mem))  |

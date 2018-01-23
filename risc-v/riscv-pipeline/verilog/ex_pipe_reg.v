@@ -35,8 +35,7 @@ module ex_pipe_reg
         input   wire[31:0]  next_brn_pc_ex_pipe_reg_i,
         input   wire[31:0]  next_pred_pc_ex_pipe_reg_i,
         // Inputs from sign extend units
-        input   wire[31:0]  sext_imm_12bit_ex_pipe_reg_i,
-        input   wire[31:0]  sext_imm_20bit_ex_pipe_reg_i,
+        input   wire[31:0]  sext_imm_ex_pipe_reg_i,
         // Inputs from register file
         input   wire[31:0]  r_data_p1_ex_pipe_reg_i,
         input   wire[31:0]  r_data_p2_ex_pipe_reg_i,
@@ -70,8 +69,7 @@ module ex_pipe_reg
         output  wire[31:0]  curr_pc_ex_pipe_reg_o,
         output  wire[31:0]  next_brn_pc_ex_pipe_reg_o,
         output  wire[31:0]  next_pred_pc_ex_pipe_reg_o,
-        output  wire[31:0]  sext_imm_12bit_ex_pipe_reg_o,
-        output  wire[31:0]  sext_imm_20bit_ex_pipe_reg_o,
+        output  wire[31:0]  sext_imm_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p1_ex_pipe_reg_o,
         output  wire[31:0]  r_data_p2_ex_pipe_reg_o,
         output  wire        jump_ex_pipe_reg_o,
@@ -104,8 +102,7 @@ module ex_pipe_reg
     reg[31:0]  curr_pc_ex_pipe_reg;
     reg[31:0]  next_brn_pc_ex_pipe_reg;
     reg[31:0]  next_pred_pc_ex_pipe_reg;
-    reg[31:0]  sext_imm_12bit_ex_pipe_reg;    
-    reg[31:0]  sext_imm_20bit_ex_pipe_reg;
+    reg[31:0]  sext_imm_ex_pipe_reg;    
     reg[31:0]  r_data_p1_ex_pipe_reg;
     reg[31:0]  r_data_p2_ex_pipe_reg;
     reg        jump_ex_pipe_reg;
@@ -137,8 +134,7 @@ module ex_pipe_reg
     assign curr_pc_ex_pipe_reg_o        = curr_pc_ex_pipe_reg;
     assign next_brn_pc_ex_pipe_reg_o    = next_brn_pc_ex_pipe_reg;
     assign next_pred_pc_ex_pipe_reg_o   = next_pred_pc_ex_pipe_reg;
-    assign sext_imm_12bit_ex_pipe_reg_o = sext_imm_12bit_ex_pipe_reg;
-    assign sext_imm_20bit_ex_pipe_reg_o = sext_imm_20bit_ex_pipe_reg;
+    assign sext_imm_ex_pipe_reg_o       = sext_imm_ex_pipe_reg;
     assign r_data_p1_ex_pipe_reg_o      = r_data_p1_ex_pipe_reg;
     assign r_data_p2_ex_pipe_reg_o      = r_data_p2_ex_pipe_reg;
     assign jump_ex_pipe_reg_o           = jump_ex_pipe_reg;
@@ -173,8 +169,7 @@ module ex_pipe_reg
         curr_pc_ex_pipe_reg         <= 31'b0;
         next_brn_pc_ex_pipe_reg     <= 31'b0;
         next_pred_pc_ex_pipe_reg    <= 31'b0;
-        sext_imm_12bit_ex_pipe_reg  <= 31'b0;
-        sext_imm_20bit_ex_pipe_reg  <= 31'b0;
+        sext_imm_ex_pipe_reg        <= 31'b0;
         r_data_p1_ex_pipe_reg       <= 31'b0;
         r_data_p2_ex_pipe_reg       <= 31'b0;
         jump_ex_pipe_reg            <= 1'b0;
@@ -208,8 +203,7 @@ module ex_pipe_reg
         curr_pc_ex_pipe_reg         <=  curr_pc_ex_pipe_reg_i;
         next_brn_pc_ex_pipe_reg     <=  next_brn_pc_ex_pipe_reg_i;
         next_pred_pc_ex_pipe_reg    <=  next_pred_pc_ex_pipe_reg_i;
-        sext_imm_12bit_ex_pipe_reg  <=  sext_imm_12bit_ex_pipe_reg_i;
-        sext_imm_20bit_ex_pipe_reg  <=  sext_imm_20bit_ex_pipe_reg_i;
+        sext_imm_ex_pipe_reg        <=  sext_imm_ex_pipe_reg_i;
         r_data_p1_ex_pipe_reg       <=  r_data_p1_ex_pipe_reg_i;
         r_data_p2_ex_pipe_reg       <=  r_data_p2_ex_pipe_reg_i;
         jump_ex_pipe_reg            <=  jump_ex_pipe_reg_i;
