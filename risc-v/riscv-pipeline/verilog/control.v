@@ -70,16 +70,16 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `ADD      :   controls = 17'b00_0_00_01_0_0_0_1_000000;
-          `AND      :   controls = 17'b00_0_00_01_0_0_0_1_010000;
-          `OR       :   controls = 17'b00_0_00_01_0_0_0_1_001000;
-          `SLL      :   controls = 17'b00_0_00_01_0_0_0_1_000010;
-          `SLT      :   controls = 17'b00_0_00_01_0_0_0_1_101001;
-          `SLTU     :   controls = 17'b00_0_00_01_0_0_0_1_110001;
-          `SRA      :   controls = 17'b00_0_00_01_0_0_0_1_000110;
-          `SRL      :   controls = 17'b00_0_00_01_0_0_0_1_000100;
-          `SUB      :   controls = 17'b00_0_00_01_0_0_0_1_000001;
-          `XOR      :   controls = 17'b00_0_00_01_0_0_0_1_100000;
+          `ADD      :   controls = 17'b00_0_11_01_0_0_0_1_000000;
+          `AND      :   controls = 17'b00_0_11_01_0_0_0_1_010000;
+          `OR       :   controls = 17'b00_0_11_01_0_0_0_1_001000;
+          `SLL      :   controls = 17'b00_0_11_01_0_0_0_1_000010;
+          `SLT      :   controls = 17'b00_0_11_01_0_0_0_1_101001;
+          `SLTU     :   controls = 17'b00_0_11_01_0_0_0_1_110001;
+          `SRA      :   controls = 17'b00_0_11_01_0_0_0_1_000110;
+          `SRL      :   controls = 17'b00_0_11_01_0_0_0_1_000100;
+          `SUB      :   controls = 17'b00_0_11_01_0_0_0_1_000001;
+          `XOR      :   controls = 17'b00_0_11_01_0_0_0_1_100000;
           default   :   controls = 17'b00_0_00_01_0_0_0_0_100000;
         endcase
       end
@@ -133,10 +133,10 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `SB       :   controls = 18'b00_0_01_01_0_1_0_0_000000;
-          `SH       :   controls = 18'b00_0_01_01_0_1_0_0_000000;
-          `SW       :   controls = 18'b00_0_01_01_0_1_0_0_000000;
-          default   :   controls = 18'b00_0_01_01_0_0_0_0_000000;
+          `SB       :   controls = 17'b00_0_01_01_0_1_0_0_000000;
+          `SH       :   controls = 17'b00_0_01_01_0_1_0_0_000000;
+          `SW       :   controls = 17'b00_0_01_01_0_1_0_0_000000;
+          default   :   controls = 17'b00_0_01_01_0_0_0_0_000000;
         endcase
       end
 
@@ -155,13 +155,13 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `BEQ      :   controls = 18'b01_0_00_00_0_0_0_0_000000;
-          `BNE      :   controls = 18'b01_0_00_00_0_0_0_0_000000;
-          `BLT      :   controls = 18'b01_0_00_00_0_0_0_0_000000;
-          `BGE      :   controls = 18'b01_0_00_00_0_0_0_0_000000;
-          `BLTU     :   controls = 18'b01_0_00_00_0_0_0_0_000000;
-          `BGEU     :   controls = 18'b01_0_00_00_0_0_0_0_000000;
-          default   :   controls = 18'b01_0_00_00_0_0_0_0_000000;
+          `BEQ      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
+          `BNE      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
+          `BLT      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
+          `BGE      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
+          `BLTU     :   controls = 17'b01_0_11_00_0_0_0_0_000000;
+          `BGEU     :   controls = 17'b01_0_11_00_0_0_0_0_000000;
+          default   :   controls = 17'b01_0_00_00_0_0_0_0_000000;
         endcase
       end
 
@@ -180,20 +180,20 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `AUIPC    :   controls = 18'b00_1_10_01_0_0_0_1_000000;
-          `LUI      :   controls = 18'b00_1_10_01_0_0_0_1_000000;
-          default   :   controls = 18'b01_1_10_00_0_0_0_0_000000;
+          `AUIPC    :   controls = 17'b00_1_00_01_0_0_0_1_000000;
+          `LUI      :   controls = 17'b00_1_10_01_0_0_0_1_000000;
+          default   :   controls = 17'b01_1_10_00_0_0_0_0_000000;
         endcase
       end
 
       else if (is_j_type_ctl_i)
       begin
-          controls = 18'b01_100_01_0_0_0_0_0_000000;
+          controls = 17'b01_100_01_0_0_0_0_0_000000;
       end
       
       else
       begin
-          controls = 18'b00_000_00_0_0_0_0_0_000000;
+          controls = 17'b00_000_00_0_0_0_0_0_000000;
       end
     end
 
