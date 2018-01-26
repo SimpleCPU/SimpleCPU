@@ -10,6 +10,11 @@ import "DPI-C" function int  compare_r (int pc, int instr, int rd, int rs1, int 
                                         int rd_val, int rs1_val, int rs2_val);
 import "DPI-C" function int  compare_i (int pc, int instr, int rd, int rs1,
                                         int rd_val, int rs1_val);
+import "DPI-C" function int  compare_s (int pc, int instr, int rs1, int rs2,
+                                        int rs1_val, int rs2_val);
+import "DPI-C" function int  compare_b (int pc, int instr, int rs1, int rs2,
+                                        int rs1_val, int rs2_val);
+import "DPI-C" function int  compare_u (int pc, int instr, int rd, int rd_val);
 
     logic   clk_tb, reset_tb;
     string  test_name;
@@ -75,6 +80,9 @@ import "DPI-C" function int  compare_i (int pc, int instr, int rd, int rs1,
     logic[31:0]   rs1_val_wb;
     logic[31:0]   rs2_val_wb;
     logic         instr_retired_wb;  
+
+    // Testbench internal variables
+    int           instr_count;
 
     // FETCH STAGE
     // Signals tapped from the Fetch stage
@@ -188,6 +196,7 @@ import "DPI-C" function int  compare_i (int pc, int instr, int rd, int rs1,
     always @ (posedge clk_tb)
     if (instr_retired_wb)
     begin
+        instr_count++;
         run (1);
         if (is_r_type_wb) 
         begin
@@ -201,11 +210,23 @@ import "DPI-C" function int  compare_i (int pc, int instr, int rd, int rs1,
                             rd_val_wb, rs1_val_wb))
                 $fatal(1, "TEST FAILED\n");
         end
-        //else if (is_s_type_wb)
-        //begin
-        //    if ()
-        //        $fatal(1, "TEST FAILED\n");
-        //end
+        else if (is_s_type_wb)
+        begin
+            if (!compare_s (pc_wb, instr_wb, rs1_wb, rs2_wb, 
+                            rs1_val_wb, rs2_val_wb))
+                $fatal(1, "TEST FAILED\n");
+        end
+        else if (is_b_type_wb)
+        begin
+            if (!compare_b (pc_wb, instr_wb, rs1_wb, rs2_wb, 
+                            rs1_val_wb, rs2_val_wb))
+                $fatal(1, "TEST FAILED\n");
+        end
+        else if (is_u_type_wb)
+        begin
+            if (!compare_u (pc_wb, instr_wb, rd_wb, rd_val_wb))
+                $fatal(1, "TEST FAILED\n");
+        end
         //else if (is_b_type_wb)
         //begin
         //    if ()
@@ -223,6 +244,8 @@ import "DPI-C" function int  compare_i (int pc, int instr, int rd, int rs1,
         //end
         else
             $fatal (1, "Incorrect instruction opcode");
+        if (instr_count == 50)
+            $finish ();
     end
 
 endmodule
