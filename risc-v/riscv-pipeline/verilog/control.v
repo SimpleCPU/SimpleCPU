@@ -180,8 +180,8 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `AUIPC    :   controls = 17'b00_1_00_01_0_0_0_1_000000;
-          `LUI      :   controls = 17'b00_1_10_01_0_0_0_1_000000;
+          `AUIPC    :   controls = 17'b00_1_10_01_0_0_0_1_000000;
+          `LUI      :   controls = 17'b00_1_00_01_0_0_0_1_000000;
           default   :   controls = 17'b01_1_10_00_0_0_0_0_000000;
         endcase
       end
