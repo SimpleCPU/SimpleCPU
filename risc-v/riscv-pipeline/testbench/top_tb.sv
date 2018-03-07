@@ -147,7 +147,6 @@ import "DPI-C" function int  compare_u (int pc, int instr, int rd, int rd_val);
     // EXECUTE
     always @ (posedge clk_tb)
     begin
-        //$display ("RD is %x\tRS is %x\tRT is %x\n", rd_iss, rs_iss, rt_iss);
         pc_ex           <=  pc_iss;
         instr_ex        <=  instr_iss;
         is_r_type_ex    <=  is_r_type_iss;
