@@ -693,14 +693,16 @@ void decode_u (uint32_t instr_opcode) {
 }
 
 void execute_j (uint32_t rd, int imm) {
-    uint32_t address;
+    int address;
     int sign;
     int shift_val;
 
     shift_val = shift_const(21);
     sign = (imm & 0x100000)>>20;
     address = (sign) ? (imm | shift_val) : imm;
+    printf ("[ISS] ADDR is %.8d\n", address);
     NEXT_STATE.PC = CURRENT_STATE.PC + address;
+    printf ("[ISS] CURRENT PC:0x%.8x\tNEXT PC:0x%.8x\n", CURRENT_STATE.PC, NEXT_STATE.PC);
     NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
     printf ("[%d] PC:%.8x\tINSTR:%.8x\t JAL X%-2d, 0x%-8x\n", 
         instr_count,

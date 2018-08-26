@@ -10,6 +10,7 @@
 
 void update_cpu (int pc, int hex_instr) {
     PC[pc-MEM_TEXT_START]           = 1;
+    printf ("PC[0x%x] = %d\n", pc-MEM_TEXT_START, PC[pc-MEM_TEXT_START]);
     instr[pc-MEM_TEXT_START]        = hex_instr;
     prev_pc = CURRENT_STATE.PC;
 }
@@ -59,7 +60,7 @@ int check_j_addr (int imm) {
     int shift_val = shift_const(21);
     int sign = (imm & 0x100000)>>20;
     imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = (unsigned) CURRENT_STATE.PC + (unsigned)imm;
+    unsigned int addr = CURRENT_STATE.PC + imm;
     //printf("ADDR is %x\n", addr);
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
@@ -541,7 +542,7 @@ void gen_j_instr (int vopt, ...) {
     else {
         rd    = rand() % 32;
     IMM_J:
-        imm   = (rand() % 0xFFFFF);   /* 20-bit signal */
+        imm   = (rand() % 0x100000) + 1;
     }
 
     if ((check_j_addr(imm) == 0)) {
@@ -562,13 +563,16 @@ void gen_j_instr (int vopt, ...) {
     instr_gen++;
 }
 
-//int gen_j (int address) {		
-//    int opcode;		
-//    int target;		
-//    target = (address & 0xFFFFFFC)>>2;		
-//    opcode = (J << 26) + target;		
-//    return opcode;		
-//}
+int gen_j (int address) {
+    int opcode = 0;
+    int target;
+    target = (address - CURRENT_STATE.PC);
+    printf ("TARGET:0x%.8x\n", target);
+    opcode = (((target >> 19) & 0x1) << 31) + (((target >> 0) & 0x3FF) << 21) +
+             (((target >> 10) & 0x1) << 20) + (((target >> 11) & 0xFF) << 12) +
+             ((rand()%32) << 7) + 0x6F;
+    return opcode;
+}
 
 /* Function to check if there is enough      */
 /* space available to generate the instr     */
@@ -583,21 +587,21 @@ void make_room () {
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
     if (((PC[pc] == 0) && (PC[pc_q]==0)) &&
-        !(pc == (MEM_TEXT_START+MEM_TEXT_SIZE-4))) {
+        !(pc == (MEM_TEXT_START+MEM_TEXT_SIZE-0xFF))) {
         return;
     }
-    // No space available. Inset Jump instr
+    // No space available. Insert Jump instr
     // Start the loop from 4 as there is
     // no need to check the [0] index since
     // it will always be valid
     //printf ("PC:%x\n", CURRENT_STATE.PC);
     for (i = MEM_TEXT_START+4; i < (MEM_TEXT_START+MEM_TEXT_SIZE); i=i+4) {
         if ((PC[i-MEM_TEXT_START] == 0) && (PC[i+4-MEM_TEXT_START]==0)) {
-            //printf("Branching to the following PC:%x\n", i);
-            //opcode = gen_j ((int)i);
-            //load_instr_opcode ((uint32_t)opcode);
-            //run (1);
-            //update_cpu (prev_pc, opcode);
+            printf("Branching to the following PC:0x%.8x\n", i);
+            opcode = gen_j ((int)i);
+            load_instr_opcode ((uint32_t)opcode);
+            run (1);
+            update_cpu (prev_pc, opcode);
             return;
         }
     }
@@ -744,7 +748,7 @@ int main (int argc, char* argv[]) {
 //#ifdef GEN_USER_TEST
 //    gen_user_test ();
 //#endif
-    gen_end_seq ();
+    //gen_end_seq ();
     pc_hex_val    = fopen ("pc_values_hex", "w");
     instr_hex_val = fopen ("instr_hex", "w");
     print_to_file (pc_hex_val, instr_hex_val);

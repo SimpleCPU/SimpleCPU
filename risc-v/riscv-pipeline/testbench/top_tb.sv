@@ -15,6 +15,7 @@ import "DPI-C" function int  compare_s (int pc, int instr, int rs1, int rs2,
 import "DPI-C" function int  compare_b (int pc, int instr, int rs1, int rs2,
                                         int rs1_val, int rs2_val);
 import "DPI-C" function int  compare_u (int pc, int instr, int rd, int rd_val);
+import "DPI-C" function int  compare_j (int pc, int instr, int rd, int rd_val);
 
     logic   clk_tb, reset_tb;
     string  test_name;
@@ -227,21 +228,11 @@ import "DPI-C" function int  compare_u (int pc, int instr, int rd, int rd_val);
             if (!compare_u (pc_wb, instr_wb, rd_wb, rd_val_wb))
                 $fatal(1, "TEST FAILED\n");
         end
-        //else if (is_b_type_wb)
-        //begin
-        //    if ()
-        //        $fatal(1, "TEST FAILED\n");
-        //end
-        //else if (is_u_type_wb)
-        //begin
-        //    if ()
-        //        $fatal(1, "TEST FAILED\n");
-        //end
-        //else if (is_j_type_wb)
-        //begin
-        //    if ()
-        //        $fatal(1, "TEST FAILED\n");
-        //end
+        else if (is_j_type_wb)
+        begin
+            if (!compare_j (pc_wb, instr_wb, rd_wb, rd_val_wb))
+                $fatal(1, "TEST FAILED\n");
+        end
         else
             $fatal (1, "Incorrect instruction opcode");
         if (instr_count == 50)
