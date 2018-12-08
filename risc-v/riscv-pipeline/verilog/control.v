@@ -33,7 +33,7 @@ module control
     wire        rf_en_ctl;
     wire[5:0]   alu_fun_ctl;
 
-    wire[4:0]   instr_funct_ctl;
+    wire[3:0]   instr_funct_ctl;
     wire[4:0]   instr_opc_ctl;
     reg[16:0]   controls;
 
