@@ -202,39 +202,39 @@ import "DPI-C" function int  compare_j (int pc, int instr, int rd, int rd_val);
         begin
             if (!compare_r (pc_wb, instr_wb, rd_wb, rs1_wb, rs2_wb, 
                             rd_val_wb, rs1_val_wb, rs2_val_wb))
-                $fatal(1, "TEST FAILED\n");
+                $fatal(1, "[Compare-R] TEST FAILED\n");
         end
         else if (is_i_type_wb)
         begin
             if (!compare_i (pc_wb, instr_wb, rd_wb, rs1_wb, 
                             rd_val_wb, rs1_val_wb))
-                $fatal(1, "TEST FAILED\n");
+                $fatal(1, "[Compare-I] TEST FAILED\n");
         end
         else if (is_s_type_wb)
         begin
             if (!compare_s (pc_wb, instr_wb, rs1_wb, rs2_wb, 
                             rs1_val_wb, rs2_val_wb))
-                $fatal(1, "TEST FAILED\n");
+                $fatal(1, "[Compare-S] TEST FAILED\n");
         end
         else if (is_b_type_wb)
         begin
             if (!compare_b (pc_wb, instr_wb, rs1_wb, rs2_wb, 
                             rs1_val_wb, rs2_val_wb))
-                $fatal(1, "TEST FAILED\n");
+                $fatal(1, "[Compare-B] TEST FAILED\n");
         end
         else if (is_u_type_wb)
         begin
             if (!compare_u (pc_wb, instr_wb, rd_wb, rd_val_wb))
-                $fatal(1, "TEST FAILED\n");
+                $fatal(1, "[Compare-U] TEST FAILED\n");
         end
         else if (is_j_type_wb)
         begin
             if (!compare_j (pc_wb, instr_wb, rd_wb, rd_val_wb))
-                $fatal(1, "TEST FAILED\n");
+                $fatal(1, "[Compare-J] TEST FAILED\n");
         end
         else
             $fatal (1, "Incorrect instruction opcode");
-        if (instr_count == 50)
+        if (instr_count == 200)
             $finish ();
     end
 
