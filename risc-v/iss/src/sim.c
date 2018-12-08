@@ -36,14 +36,14 @@ int decode_instr_type (uint32_t instr_opcode) {
 
 int shift_const (unsigned int shamt) {
     switch (shamt) {
-        case 31: return 0x80000000;          case 30: return 0xC0000000;          case 29: return 0xE0000000;          case 28: return 0xF0000000;
-        case 27: return 0xF8000000;          case 26: return 0xFC000000;          case 25: return 0xFE000000;          case 24: return 0xFF000000;
-        case 23: return 0xFF800000;          case 22: return 0xFFC00000;          case 21: return 0xFFE00000;          case 20: return 0xFFF00000;
-        case 19: return 0xFFF80000;          case 18: return 0xFFFC0000;          case 17: return 0xFFFE0000;          case 16: return 0xFFFF0000;
-        case 15: return 0xFFFF8000;          case 14: return 0xFFFFC000;          case 13: return 0xFFFFE000;          case 12: return 0xFFFFF000;
-        case 11: return 0xFFFFF800;          case 10: return 0xFFFFFC00;          case 9 : return 0xFFFFFE00;          case 8 : return 0xFFFFFF00;
-        case 7 : return 0xFFFFFF80;          case 6 : return 0xFFFFFFC0;          case 5 : return 0xFFFFFFE0;          case 4 : return 0xFFFFFFF0;
-        case 3 : return 0xFFFFFFF8;          case 2 : return 0xFFFFFFFC;          case 1 : return 0xFFFFFFFE;          case 0 : return 0x00000000;
+        case 1 : return 0x80000000;          case 2 : return 0xC0000000;          case 3 : return 0xE0000000;          case 4 : return 0xF0000000;
+        case 5 : return 0xF8000000;          case 6 : return 0xFC000000;          case 7 : return 0xFE000000;          case 8 : return 0xFF000000;
+        case 9 : return 0xFF800000;          case 10: return 0xFFC00000;          case 11: return 0xFFE00000;          case 12: return 0xFFF00000;
+        case 13: return 0xFFF80000;          case 14: return 0xFFFC0000;          case 15: return 0xFFFE0000;          case 16: return 0xFFFF0000;
+        case 17: return 0xFFFF8000;          case 18: return 0xFFFFC000;          case 19: return 0xFFFFE000;          case 20: return 0xFFFFF000;
+        case 21: return 0xFFFFF800;          case 22: return 0xFFFFFC00;          case 23: return 0xFFFFFE00;          case 24: return 0xFFFFFF00;
+        case 25: return 0xFFFFFF80;          case 26: return 0xFFFFFFC0;          case 27: return 0xFFFFFFE0;          case 28: return 0xFFFFFFF0;
+        case 29: return 0xFFFFFFF8;          case 30: return 0xFFFFFFFC;          case 31: return 0xFFFFFFFE;          case 0 : return 0x00000000;
     }
     return 0;
 }
@@ -216,7 +216,7 @@ void execute_i (unsigned int funct3, int opcode, uint32_t rs1, uint32_t rd, int 
     unsigned int funct = ((opcode>>4 & 0x1) << 4) | funct3;
     //printf ("I-type instruction\tOpcode is :0x%x\n", opcode);
     // TODO: Add SLLI, SRLI, SRAI instructions
-    shift_val = shift_const(12);
+    shift_val = shift_const(20);
     sign = (imm & 0x800)>>11;
     imm = (sign) ? (imm | shift_val) : imm;
     switch (funct) {
@@ -817,9 +817,6 @@ extern int compare_r (int pc, int instr, int rd, int rs1, int rs2, int rd_val, i
         return 0;
     }
     prev_pc = CURRENT_STATE.PC;
-    my_count++;
-    if (my_count == 9)
-        return 0;
     return 1;
 }
 
