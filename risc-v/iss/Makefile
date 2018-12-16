@@ -22,8 +22,8 @@ iss_comp: src/*.c
 	gcc -fPIC $(CFLAGS) -g -O2 $^ -o $@
 
 iss_run: iss_comp
-	./iss_run $(TESTNAME)
+	./iss_comp $(TESTNAME)
 
 .PHONY: clean
 clean:
-	rm -rf *.so *~ sim
+	rm -rf *.so *~ sim iss*
