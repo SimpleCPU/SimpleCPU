@@ -29,8 +29,9 @@ int decode_instr_type (uint32_t instr_opcode) {
         type = J_TYPE;
         return type;
     }
-    printf("No valid type found for instruction: %32x\n", instr_opcode);
+    printf("No valid type found for instruction: 0x%-.8x\n", instr_opcode);
     type = -1;
+    RUN_BIT = 0;
     return type;
 }
 
@@ -517,7 +518,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
     switch (funct3) {
         case (BEQ): //BEQ
             if (CURRENT_STATE.REGS[rs1] == CURRENT_STATE.REGS[rs2]) {
-                shift_val = shift_const(13);
+                shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + address;
@@ -536,7 +537,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
         break;
         case (BNE): //BNE
             if (CURRENT_STATE.REGS[rs1] != CURRENT_STATE.REGS[rs2]) {
-                shift_val = shift_const(13);
+                shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + address;
@@ -555,7 +556,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
         break;
         case (BLT): //BLT
             if ((signed)CURRENT_STATE.REGS[rs1] < (signed)CURRENT_STATE.REGS[rs2]) {
-                shift_val = shift_const(13);
+                shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + address;
@@ -574,7 +575,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
         break;
         case (BLTU): //BLTU
             if (CURRENT_STATE.REGS[rs1] < CURRENT_STATE.REGS[rs2]) {
-                shift_val = shift_const(13);
+                shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + address;
@@ -593,7 +594,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
         break;
         case (BGE): //BGE
             if ((signed)CURRENT_STATE.REGS[rs1] >= (signed)CURRENT_STATE.REGS[rs2]) {
-                shift_val = shift_const(13);
+                shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + address;
@@ -612,7 +613,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
         break;
         case (BGEU): //BGEU
             if (CURRENT_STATE.REGS[rs1] >= CURRENT_STATE.REGS[rs2]) {
-                shift_val = shift_const(13);
+                shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
                 NEXT_STATE.PC = CURRENT_STATE.PC + address;
@@ -697,12 +698,10 @@ void execute_j (uint32_t rd, int imm) {
     int sign;
     int shift_val;
 
-    shift_val = shift_const(21);
+    shift_val = shift_const(11);
     sign = (imm & 0x100000)>>20;
     address = (sign) ? (imm | shift_val) : imm;
-    printf ("[ISS] ADDR is %.8d\n", address);
     NEXT_STATE.PC = CURRENT_STATE.PC + address;
-    printf ("[ISS] CURRENT PC:0x%.8x\tNEXT PC:0x%.8x\n", CURRENT_STATE.PC, NEXT_STATE.PC);
     NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
     printf ("[%d] PC:%.8x\tINSTR:%.8x\t JAL X%-2d, 0x%-8x\n", 
         instr_count,
@@ -744,8 +743,10 @@ void process_instruction() {
         decode_u (instr_opcode);
     else if (type == J_TYPE)
         decode_j (instr_opcode);
-    else
+    else {
         printf ("\nERROR: Invalid instruction type\n");
+        RUN_BIT = 0;
+    }
     instr_count++;
 }
 

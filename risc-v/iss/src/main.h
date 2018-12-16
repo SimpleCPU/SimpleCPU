@@ -30,7 +30,7 @@ typedef struct CPU_State_Struct {
 /* Data Structure for Latch */
 extern CPU_State CURRENT_STATE, NEXT_STATE;
 
-extern int RUN_BIT; 	/* Run bit                  */
+extern int RUN_BIT;     /* Run bit                  */
 extern int prev_pc;     /* Previous program counter */
 extern int instr_count; /* Instruction count        */
 uint32_t   instr_opcode;
