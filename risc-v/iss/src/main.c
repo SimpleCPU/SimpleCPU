@@ -95,7 +95,7 @@ void mem_write_32(uint32_t address, uint32_t value)
 /* Purpose   : Execute a cycle                                 */
 /*                                                             */
 /***************************************************************/
-void cycle() {                                                
+void cycle() {
 
   process_instruction();
   CURRENT_STATE = NEXT_STATE;
@@ -109,7 +109,7 @@ void cycle() {
 /* Purpose   : Simulate RISC-V for n cycles                      */
 /*                                                             */
 /***************************************************************/
-extern void run(int num_cycles) {                                      
+extern void run(int num_cycles) {
   int i;
 
   for (i = 0; i < num_cycles; i++) {
@@ -128,7 +128,7 @@ extern void run(int num_cycles) {
 /* Purpose   : Simulate RISC-V until HALTed                      */
 /*                                                             */
 /***************************************************************/
-void go() {                                                     
+void go() {
   if (RUN_BIT == FALSE) {
     printf("Can't simulate, Simulator is halted\n");
     return;
@@ -140,7 +140,7 @@ void go() {
   printf("Simulator halted\n");
 }
 
-/***************************************************************/ 
+/***************************************************************/
 /*                                                             */
 /* Procedure : mdump                                           */
 /*                                                             */
@@ -148,7 +148,7 @@ void go() {
 /*             output file.                                    */
 /*                                                             */
 /***************************************************************/
-void mdump(/*FILE * dumpsim_file,*/ int start, int stop) {          
+void mdump(/*FILE * dumpsim_file,*/ int start, int stop) {
   int address;
 
   printf("\nMemory content [0x%08x..0x%08x] :\n", start, stop);
@@ -162,12 +162,12 @@ void mdump(/*FILE * dumpsim_file,*/ int start, int stop) {
 /*                                                             */
 /* Procedure : rdump                                           */
 /*                                                             */
-/* Purpose   : Dump current register and bus values to the     */   
+/* Purpose   : Dump current register and bus values to the     */
 /*             output file.                                    */
 /*                                                             */
 /***************************************************************/
-void rdump(FILE * dumpsim_file) {                               
-  int k; 
+void rdump(FILE * dumpsim_file) {
+  int k;
 
   printf("\nCurrent register/bus values :\n");
   printf("-------------------------------------\n");
@@ -186,7 +186,7 @@ void rdump(FILE * dumpsim_file) {
 /* Purpose   : Allocate and zero memory                        */
 /*                                                             */
 /***************************************************************/
-void init_memory() {                                           
+void init_memory() {
     uint32_t i;
     for (i = 0; i < MEM_NREGIONS; i++) {
         MEM_REGIONS[i].mem = malloc(MEM_REGIONS[i].size);
@@ -201,7 +201,7 @@ void init_memory() {
     CURRENT_STATE.PC = MEM_TEXT_START;
     prev_pc = MEM_TEXT_START;
     NEXT_STATE = CURRENT_STATE;
-      
+
     RUN_BIT = TRUE;
 }
 
@@ -223,8 +223,8 @@ void load_instr_opcode (uint32_t instr_opcode) {
 /* Purpose   : Load program and service routines into mem.    */
 /*                                                            */
 /**************************************************************/
-void load_program(char *program_filename, char *pc_filename) {                   
-  FILE * prog; 
+void load_program(char *program_filename, char *pc_filename) {
+  FILE * prog;
   FILE * pc_file;
   int ii, word, pc_word;
 
@@ -259,11 +259,11 @@ void load_program(char *program_filename, char *pc_filename) {
 /*                                                          */
 /* Procedure : initialize                                   */
 /*                                                          */
-/* Purpose   : Load machine language program                */ 
+/* Purpose   : Load machine language program                */
 /*             and set up initial state of the machine.     */
 /*                                                          */
 /************************************************************/
-void initialize(char *program_filename, int num_prog_files, char *pc_filename) { 
+void initialize(char *program_filename, int num_prog_files, char *pc_filename) {
   int i;
 
   init_memory();
@@ -280,8 +280,8 @@ void initialize(char *program_filename, int num_prog_files, char *pc_filename) {
 /* Procedure : sim                                             */
 /*                                                             */
 /***************************************************************/
-void sim(char *instr_hex, char *pc_values_hex) {                              
- 
+void sim(char *instr_hex, char *pc_values_hex) {
+
   printf("RISC-V Simulator\n\n");
 
   initialize(instr_hex, 1, pc_values_hex);
