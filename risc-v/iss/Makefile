@@ -1,6 +1,7 @@
 INC_DIR = ../shared
 CFLAGS = -Wall -I $(INC_DIR)
 DEPS = riscv_instr_defines.h
+TESTNAME =
 
 hex: src/*.c
 	gcc -fPIC $(CFLAGS) -shared -g -O2 $^ -o lib$@.so
@@ -16,6 +17,12 @@ iss_preload: src/*.c
 
 sim: src/*.c
 	gcc $(CFLAGS) -g -O2 $^ -o $@
+
+iss_comp: src/*.c
+	gcc -fPIC $(CFLAGS) -g -O2 $^ -o $@
+
+iss_run: iss_comp
+	./iss_run $(TESTNAME)
 
 .PHONY: clean
 clean:
