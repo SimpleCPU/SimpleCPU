@@ -11,7 +11,7 @@
 void update_cpu (int pc, int hex_instr) {
     PC[pc-MEM_TEXT_START]           = 1;
     printf ("PC[0x%x] = %d\n", pc-MEM_TEXT_START, PC[pc-MEM_TEXT_START]);
-    instr[pc-MEM_TEXT_START]        = hex_instr;
+    instr[pc-MEM_TEXT_START] = hex_instr;
     prev_pc = CURRENT_STATE.PC;
 }
 
@@ -19,7 +19,7 @@ void update_cpu (int pc, int hex_instr) {
 /* is a valid address. If the address is valid, the function    */
 /* returns the addr.                                            */
 int check_ls_addr (int rs, int imm) {
-    int shift_val = shift_const(12);
+    int shift_val = shift_const(20);
     int sign = (imm & 0x800)>>11;
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = ((unsigned)CURRENT_STATE.REGS[rs] + (unsigned)imm);
@@ -39,13 +39,13 @@ int check_ls_addr (int rs, int imm) {
 /* is a valid branch address. If the address is valid, the      */
 /* function returns the address else -1 is returned             */
 int check_brn_addr (int rs, int imm) {
-    int shift_val = shift_const(13);
+    int shift_val = shift_const(19);
     int sign = (imm & 0x1000)>>12;
     imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = (unsigned) CURRENT_STATE.PC + (unsigned)imm;
+    unsigned addr = (unsigned) CURRENT_STATE.PC + (unsigned)imm;
     //printf("BRN ADDR is %x\n", addr);
-    if ((addr > MEM_TEXT_START) && 
-        (addr <= (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF))) {
+    if (((unsigned)addr > (unsigned)MEM_TEXT_START) &&
+        ((unsigned)addr <= (unsigned)(MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF))) {
         if ((PC[addr-MEM_TEXT_START]==0)) {
             return addr;
         }
@@ -57,15 +57,15 @@ int check_brn_addr (int rs, int imm) {
 /* is a valid jump address. If the address is valid, the function    */
 /* returns 1.                                                        */
 int check_j_addr (int imm) {
-    int shift_val = shift_const(21);
+    int shift_val = shift_const(11);
     int sign = (imm & 0x100000)>>20;
     imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = CURRENT_STATE.PC + imm;
+    unsigned int addr = (unsigned) CURRENT_STATE.PC + (unsigned) imm;
     //printf("ADDR is %x\n", addr);
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
-    if ((addr > MEM_TEXT_START) && 
-        (addr < (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) && 
+    if (((unsigned)addr > (unsigned)MEM_TEXT_START) &&
+        ((unsigned)addr < (unsigned)(MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) &&
         (PC[addr-MEM_TEXT_START]==0)) {
         return 1;
     }
@@ -566,8 +566,8 @@ void gen_j_instr (int vopt, ...) {
 int gen_j (int address) {
     int opcode = 0;
     int target;
-    target = (address - CURRENT_STATE.PC);
-    printf ("TARGET:0x%.8x\n", target);
+    target = (address - CURRENT_STATE.PC)>>1;
+    //printf ("TARGET:0x%.8x\tCURRENT_PC:0x%.8x\n", target, CURRENT_STATE.PC);
     opcode = (((target >> 19) & 0x1) << 31) + (((target >> 0) & 0x3FF) << 21) +
              (((target >> 10) & 0x1) << 20) + (((target >> 11) & 0xFF) << 12) +
              ((rand()%32) << 7) + 0x6F;
@@ -579,10 +579,10 @@ int gen_j (int address) {
 /* If need more space the function would     */
 /* insert a J instr to a somewhat free space */
 void make_room () {
-    int i;
+    unsigned i;
     int opcode = 0;
-    int pc      = CURRENT_STATE.PC - MEM_TEXT_START;
-    int pc_q    = CURRENT_STATE.PC + 4 - MEM_TEXT_START;
+    unsigned int pc   = (unsigned)(CURRENT_STATE.PC - MEM_TEXT_START);
+    unsigned int pc_q = (unsigned)(CURRENT_STATE.PC + 4 - MEM_TEXT_START);
     // There should be space for at least
     // two instructions. Check for PC valid
     //  if valid -> no space else it is okay
