@@ -155,13 +155,13 @@ module control
           //6'b100_00_0: logical XOR
           //pc_sel_ctl, op1sel_ctl, op2sel_ctl, wb_sel_ctl,
           //pc4_sel_ctl,mem_wr_ctl, cpr_en_ctl, rf_en_ctl, alu_fun_ctl 
-          `BEQ      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
-          `BNE      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
-          `BLT      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
-          `BGE      :   controls = 17'b01_0_11_00_0_0_0_0_000000;
-          `BLTU     :   controls = 17'b01_0_11_00_0_0_0_0_000000;
-          `BGEU     :   controls = 17'b01_0_11_00_0_0_0_0_000000;
-          default   :   controls = 17'b01_0_00_00_0_0_0_0_000000;
+          `BEQ      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          `BNE      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          `BLT      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          `BGE      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          `BLTU     :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          `BGEU     :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          default   :   controls = 17'b01_0_00_00_0_0_0_0_000001;
         endcase
       end
 
@@ -188,12 +188,12 @@ module control
 
       else if (is_j_type_ctl_i)
       begin
-          controls = 17'b01_100_01_0_0_0_0_0_000000;
+          controls = 17'b01_1_01_00_0_0_0_0_000000;
       end
       
       else
       begin
-          controls = 17'b00_000_00_0_0_0_0_0_000000;
+          controls = 17'b00_0_00_00_0_0_0_0_000000;
       end
     end
 
