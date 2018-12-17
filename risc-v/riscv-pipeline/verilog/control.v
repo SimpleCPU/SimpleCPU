@@ -113,7 +113,7 @@ module control
           `SLTIU    :   controls = 17'b00_0_01_01_0_0_0_1_110001;
           `SRAI     :   controls = 17'b00_0_01_01_0_0_0_1_000110;
           `XORI     :   controls = 17'b00_0_01_01_0_0_0_1_100000;
-          `JALR     :   controls = 17'b10_0_01_01_1_0_0_1_000000;
+          `JALR     :   controls = 17'b10_0_01_10_1_0_0_1_000000;
           default   :   controls = 17'b00_0_01_01_0_0_0_0_000000;
         endcase
       end
@@ -159,8 +159,8 @@ module control
           `BNE      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
           `BLT      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
           `BGE      :   controls = 17'b01_0_11_00_0_0_0_0_000001;
-          `BLTU     :   controls = 17'b01_0_11_00_0_0_0_0_000001;
-          `BGEU     :   controls = 17'b01_0_11_00_0_0_0_0_000001;
+          `BLTU     :   controls = 17'b01_0_11_00_0_0_0_0_110001;
+          `BGEU     :   controls = 17'b01_0_11_00_0_0_0_0_010001;
           default   :   controls = 17'b01_0_00_00_0_0_0_0_000001;
         endcase
       end
@@ -188,7 +188,7 @@ module control
 
       else if (is_j_type_ctl_i)
       begin
-          controls = 17'b01_1_01_00_0_0_0_0_000000;
+          controls = 17'b01_1_01_10_0_0_0_1_000000;
       end
       
       else

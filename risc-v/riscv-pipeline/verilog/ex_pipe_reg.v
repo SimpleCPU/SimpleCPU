@@ -141,7 +141,7 @@ module ex_pipe_reg
     assign brn_pred_ex_pipe_reg_o       = brn_pred_ex_pipe_reg;
 
     always @ (posedge clk)
-    if (reset)
+    if (reset | clr)
     begin
         valid_ex_pipe_reg           <= 1'b0;
         funct3_ex_pipe_reg          <= 3'b0;

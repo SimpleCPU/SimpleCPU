@@ -492,8 +492,10 @@ module top
     );
 
     assign instr_retired     = valid_wb_ret;
-    assign wr_data_rf_wb_ret = |rd_wb_ret ? 
-                               (wb_sel_wb_ret[0] ? alu_res_wb_ret : read_data_wb_ret) :
+    assign wr_data_rf_wb_ret = (|rd_wb_ret) ?
+                               (wb_sel_wb_ret[0]) ? alu_res_wb_ret :
+                               (wb_sel_wb_ret[1]) ? next_seq_pc_wb_ret:
+                                                    read_data_wb_ret :
                                32'h0;
 
     hazard_unit hazard (
@@ -505,7 +507,7 @@ module top
         .rf_en_mem_wb_hz_i          (rf_en_mem_wb),
         .rf_en_wb_ret_hz_i          (rf_en_wb_ret),
         .branch_taken_ex_mem_hz_i   (branch_taken_ex),
-        .jump_iss_ex_hz_i           (),
+        .jump_iss_ex_hz_i           (jump_iss_ex),
         .brn_pred_ex_mem_hz_i       (brn_corr_pred_ex_mem),
         .stall_fetch_hz_o           (stall_fetch),
         .stall_iss_hz_o             (stall_iss),

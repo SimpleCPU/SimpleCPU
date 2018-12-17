@@ -11,3 +11,4 @@
 `define XOR_OP     6'b100_00_0
 `define SLT_OP     6'b101_00_1
 `define SLTU_OP    6'b110_00_1
+`define BGEU_OP    6'b010_00_1
