@@ -29,13 +29,10 @@ module alu
     assign  opr_b_negated_alu   = op_alu_i[0] ? ~opr_b_alu_i : opr_b_alu_i;
     assign  cin_alu             = op_alu_i[0];
     assign  z_alu               = ~|adder_out_alu;
-    assign  n_alu               = (v_alu) ?
-                                    opr_a_alu_i[31] :
-                                    (op_alu_i == `SLTU_OP) ?
-                                        comparator_out_alu :
-                                        (op_alu_i == `BGEU_OP) ?
-                                          ~comparator_out_alu :
-                                          adder_out_alu[31];
+    assign  n_alu               = (op_alu_i == `SLTU_OP)  ?  comparator_out_alu :
+                                  (op_alu_i == `BGEU_OP)  ? ~comparator_out_alu :
+                                  (v_alu)                 ?  opr_a_alu_i[31] :
+                                                             adder_out_alu[31];
 
     assign res_alu              = ((op_alu_i == `ADD_OP) || (op_alu_i == `SUB_OP)) ?   adder_out_alu :
                                   ((op_alu_i == `SHL_OP) || (op_alu_i == `LSR_OP) || (op_alu_i == `ASR_OP)) ? shifter_out_alu :
