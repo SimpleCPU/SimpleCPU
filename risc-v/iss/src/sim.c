@@ -320,7 +320,9 @@ void execute_i (unsigned int funct3, int opcode, uint32_t rs1, uint32_t rd, int 
         break;
         case (JALR): //JALR
             NEXT_STATE.PC = CURRENT_STATE.REGS[rs1];
-            NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
+            if (rd) {
+              NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
+            }
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t JALR %-2d", 
                 instr_count,
                 CURRENT_STATE.PC,
@@ -447,8 +449,8 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
             shift_val = shift_const(12);
             sign = (imm & 0x800)>>11;
             imm = (sign) ? (imm | shift_val) : imm;
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_write_32(address, CURRENT_STATE.REGS[rs2]&0xFF);
+            address = CURRENT_STATE.REGS[rs2] + imm;
+            mem_write_32(address, CURRENT_STATE.REGS[rs1]&0xFF);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t SB X%-2d, X%-2d, 0x%-32x\n", 
                 instr_count,
@@ -463,8 +465,8 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
             shift_val = shift_const(16);
             sign = (imm & 0x8000)>>15;
             imm = (sign) ? (imm | shift_val) : imm;
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_write_32(address, CURRENT_STATE.REGS[rs2]&0xFFFF);
+            address = CURRENT_STATE.REGS[rs2] + imm;
+            mem_write_32(address, CURRENT_STATE.REGS[rs1]&0xFFFF);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t SH X%-2d, X%-2d, 0x%-32x\n", 
                 instr_count,
@@ -480,8 +482,9 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
             sign = (imm & 0x8000)>>15;
             imm = (sign) ? (imm | shift_val) : imm;
             // Align the address to a word boundary
-            address = (CURRENT_STATE.REGS[rs1] + imm) & 0xFFFFFFFC;
-            mem_write_32(address, CURRENT_STATE.REGS[rs2]);
+            address = (CURRENT_STATE.REGS[rs2] + imm) & 0xFFFFFFFC;
+            mem_write_32(address, CURRENT_STATE.REGS[rs1]);
+            //printf ("Writing to: 0x%-8x", address);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t SW X%-2d, X%-2d, 0x%-32x\n", 
                 instr_count,
@@ -574,7 +577,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
             );
         break;
         case (BLTU): //BLTU
-            if (CURRENT_STATE.REGS[rs1] < CURRENT_STATE.REGS[rs2]) {
+            if ((unsigned)CURRENT_STATE.REGS[rs1] < (unsigned)CURRENT_STATE.REGS[rs2]) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
@@ -655,7 +658,7 @@ void execute_u (int opcode, uint32_t rd, int imm) {
     switch (opcode) {
         case (LUI): //LUI
             u_val = imm << 12;
-            NEXT_STATE.REGS[rd] = u_val;
+            NEXT_STATE.REGS[rd] = rd ? u_val : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t LUI X%-2d, 0x%-32x\n", 
                 instr_count,
@@ -667,7 +670,7 @@ void execute_u (int opcode, uint32_t rd, int imm) {
         break;
         case (AUIPC): //AUIPC
             u_val = imm << 12;
-            NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + u_val;
+            NEXT_STATE.REGS[rd] = rd ? CURRENT_STATE.PC + u_val : 0;
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t AUIPC X%-2d, 0x%-32x\n", 
                 instr_count,
@@ -702,7 +705,9 @@ void execute_j (uint32_t rd, int imm) {
     sign = (imm & 0x100000)>>20;
     address = (sign) ? (imm | shift_val) : imm;
     NEXT_STATE.PC = CURRENT_STATE.PC + address;
-    NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
+    if (rd) {
+      NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
+    }
     printf ("[%d] PC:%.8x\tINSTR:%.8x\t JAL X%-2d, 0x%-8x\n", 
         instr_count,
         CURRENT_STATE.PC,
