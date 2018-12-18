@@ -21,6 +21,7 @@ extern void init_memory ();
 /* Declare all the internally used functions here */
 void update_cpu (int, int);
 int  check_brn_addr (int, int);
+int  decode_brn_result (int, int, int);
 int  check_ls_addr (int, int);
 int  check_j_addr (int);
 void print_assembled_r_instr (int, int, int, int);

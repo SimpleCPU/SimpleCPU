@@ -22,11 +22,11 @@ int check_ls_addr (int rs, int imm) {
     int shift_val = shift_const(20);
     int sign = (imm & 0x800)>>11;
     imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = ((unsigned)CURRENT_STATE.REGS[rs] + (unsigned)imm);
-    //printf("[LS] RS is %x\tIMM is %x\t ADDR is %x\n", CURRENT_STATE.REGS[rs], imm, addr);
+    unsigned int addr = (CURRENT_STATE.REGS[rs] + imm) & 0xFFFFFFFC;
+    //printf("[LS] RS is %x\tIMM is 0x%-8x\t ADDR is 0x%-8x\n", CURRENT_STATE.REGS[rs], imm, addr);
     /* For now just check if the addr > 0   */
     /* if true, then the instruction is ok  */
-    if ((addr > MEM_DATA_START) && (addr < (MEM_DATA_START + MEM_DATA_SIZE))) {
+    if (((unsigned)addr > MEM_DATA_START) && ((unsigned)addr < (MEM_DATA_START + MEM_DATA_SIZE))) {
         return addr;
     }
     else if ((unsigned)(CURRENT_STATE.REGS[rs] > (MEM_DATA_START + MEM_DATA_SIZE))) {
@@ -44,8 +44,8 @@ int check_brn_addr (int rs, int imm) {
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned addr = (unsigned) CURRENT_STATE.PC + (unsigned)imm;
     //printf("BRN ADDR is %x\n", addr);
-    if (((unsigned)addr > (unsigned)MEM_TEXT_START) &&
-        ((unsigned)addr <= (unsigned)(MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF))) {
+    if (((unsigned)addr > MEM_TEXT_START) &&
+        ((unsigned)addr <= (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF))) {
         if ((PC[addr-MEM_TEXT_START]==0)) {
             return addr;
         }
@@ -60,12 +60,12 @@ int check_j_addr (int imm) {
     int shift_val = shift_const(11);
     int sign = (imm & 0x100000)>>20;
     imm = (sign) ? (imm | shift_val) : imm;
-    unsigned int addr = (unsigned) CURRENT_STATE.PC + (unsigned) imm;
+    unsigned int addr = CURRENT_STATE.PC + (imm<<1);
     //printf("ADDR is %x\n", addr);
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
-    if (((unsigned)addr > (unsigned)MEM_TEXT_START) &&
-        ((unsigned)addr < (unsigned)(MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) &&
+    if (((unsigned)addr > MEM_TEXT_START) &&
+        ((unsigned)addr <= (MEM_TEXT_START + MEM_TEXT_SIZE - 0xFF)) &&
         (PC[addr-MEM_TEXT_START]==0)) {
         return 1;
     }
@@ -384,6 +384,7 @@ void gen_b_instr (int vopt, ...) {
     int     funct3;
     int     i;
     int     opcode;
+    int     branch_taken;
     unsigned int addr;
     va_list valist;
 
@@ -409,28 +410,27 @@ void gen_b_instr (int vopt, ...) {
         funct3      = opcode_val_b_type [funct_idx];
         rs1         = rand() % 32;
         rs2         = rand() % 32;
-        imm         = rand() % 0xFFF;   /* 12-bit signal */
-        imm         = imm << 2;
-        goto OUT_B;
     IMM_B:    
         imm         = rand() % 0xFFF;   /* 12-bit signal */
         imm         = imm << 2;
     }
-    OUT_B:
-    addr = check_brn_addr (rs1, imm);
-    if (addr == -1) {
-        // Report an error if the above was called with vopt set
-        if (vopt) {
-            printf ("ERROR: Unknown Branch Address generated\n");
-            printf ("Given IMM value (0x%08x) cannot satisy the Branch address constraints!\n\n", imm);
-        }
-        else {
-            goto IMM_B;
-        }
-    }
-    else {
-        // The address is fine. Add it to the BR array
-        br_addr[instr_gen+1] = addr;
+    branch_taken = decode_brn_result (rs1, rs2, funct3);
+    if (branch_taken) {
+      addr = check_brn_addr (rs1, imm);
+      if (addr == -1) {
+          // Report an error if the above was called with vopt set
+          if (vopt) {
+              printf ("ERROR: Unknown Branch Address generated\n");
+              printf ("Given IMM value (0x%08x) cannot satisy the Branch address constraints!\n\n", imm);
+          }
+          else {
+              goto IMM_B;
+          }
+      }
+      else {
+          // The address is fine. Add it to the BR array
+          br_addr[instr_gen+1] = addr;
+      }
     }
 
     hex_instr = ((imm >> 12) << 31) + (((imm >> 5) & 0x3F) << 25) + (rs2 << 20) + 
@@ -446,6 +446,44 @@ void gen_b_instr (int vopt, ...) {
         update_cpu (prev_pc, hex_instr);
     print_assembled_b_instr (funct_idx, rs1, rs2, imm);
     instr_gen++;
+}
+
+int decode_brn_result (rs1, rs2, funct3) {
+  int branch_taken = 0;
+
+  switch (funct3) {
+      case (BEQ): //BEQ
+          if (CURRENT_STATE.REGS[rs1] == CURRENT_STATE.REGS[rs2]) {
+            branch_taken = 1;
+          }
+      break;
+      case (BNE): //BNE
+          if (CURRENT_STATE.REGS[rs1] != CURRENT_STATE.REGS[rs2]) {
+            branch_taken = 1;
+          }
+      break;
+      case (BLT): //BLT
+          if ((signed)CURRENT_STATE.REGS[rs1] < (signed)CURRENT_STATE.REGS[rs2]) {
+            branch_taken = 1;
+          }
+      break;
+      case (BLTU): //BLTU
+          if ((unsigned)CURRENT_STATE.REGS[rs1] < (unsigned)CURRENT_STATE.REGS[rs2]) {
+            branch_taken = 1;
+          }
+      break;
+      case (BGE): //BGE
+          if ((signed)CURRENT_STATE.REGS[rs1] >= (signed)CURRENT_STATE.REGS[rs2]) {
+            branch_taken = 1;
+          }
+      break;
+      case (BGEU): //BGEU
+          if (CURRENT_STATE.REGS[rs1] >= CURRENT_STATE.REGS[rs2]) {
+            branch_taken = 1;
+          }
+      break;
+  }
+  return branch_taken;
 }
 
 /* U instruction format     */
@@ -540,9 +578,10 @@ void gen_j_instr (int vopt, ...) {
         }
     }
     else {
-        rd    = rand() % 32;
+        rd = rand() % 32;
     IMM_J:
-        imm   = (rand() % 0x100000) + 1;
+        imm = (rand() % 0x100000) + 1;
+        imm = imm << 2;
     }
 
     if ((check_j_addr(imm) == 0)) {
@@ -597,7 +636,7 @@ void make_room () {
     //printf ("PC:%x\n", CURRENT_STATE.PC);
     for (i = MEM_TEXT_START+4; i < (MEM_TEXT_START+MEM_TEXT_SIZE); i=i+4) {
         if ((PC[i-MEM_TEXT_START] == 0) && (PC[i+4-MEM_TEXT_START]==0)) {
-            printf("Branching to the following PC:0x%.8x\n", i);
+            //printf("Branching to the following PC:0x%.8x\n", i);
             opcode = gen_j ((int)i);
             load_instr_opcode ((uint32_t)opcode);
             run (1);
