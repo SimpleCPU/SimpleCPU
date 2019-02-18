@@ -10,7 +10,7 @@
 
 void update_cpu (int pc, int hex_instr) {
     PC[pc-MEM_TEXT_START]           = 1;
-    printf ("PC[0x%x] = %d\n", pc-MEM_TEXT_START, PC[pc-MEM_TEXT_START]);
+    //printf ("PC[0x%x] = %d\n", pc-MEM_TEXT_START, PC[pc-MEM_TEXT_START]);
     instr[pc-MEM_TEXT_START] = hex_instr;
     prev_pc = CURRENT_STATE.PC;
 }
@@ -56,12 +56,21 @@ int check_brn_addr (int rs, int imm) {
 /* The following function checks if the calculated address           */
 /* is a valid jump address. If the address is valid, the function    */
 /* returns 1.                                                        */
-int check_j_addr (int imm) {
+int check_j_addr (int imm, int funct, int rs1) {
     int shift_val = shift_const(11);
     int sign = (imm & 0x100000)>>20;
+    if (funct == JALR) {
+      shift_val = shift_const(20);
+      sign = (imm & 0x800)>>11;
+    }
     imm = (sign) ? (imm | shift_val) : imm;
     unsigned int addr = CURRENT_STATE.PC + (imm<<1);
-    //printf("ADDR is %x\n", addr);
+    if (funct == JALR) {
+      printf("RS[%d]: %x\tIMM: %x\n", rs1, CURRENT_STATE.REGS[rs1], imm<<1);
+      addr = CURRENT_STATE.REGS[rs1]+ imm<<1;
+    }
+    printf("ADDR is %x\t\n", addr);
+    //printf("PC: %x\n", CURRENT_STATE.PC); 
     // Reducing the range of jump address to avoid
     // PC from overflowing the memory region
     if (((unsigned)addr > MEM_TEXT_START) &&
@@ -189,7 +198,7 @@ void gen_i_instr (int vopt, ...) {
         va_end (valist);
         funct   = ((opcode>>4 & 0x1) << 4) | funct3;
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 8; i++) {
             if (opcode_val_i_type[i] == funct) {
                 funct_idx = i;
                 break;
@@ -197,7 +206,7 @@ void gen_i_instr (int vopt, ...) {
         }
     }
     else {
-        funct_idx   = rand()%7;
+        funct_idx   = rand()%8;
         opcode      = (((opcode_val_i_type [funct_idx] >> 4) & 0x1) << 4) | 0x3;
         funct3      = ((opcode_val_i_type [funct_idx]) & 0x7);
         rd          = rand() % 32;
@@ -235,6 +244,11 @@ void gen_i_instr (int vopt, ...) {
             // The address is fine. Add it to the LS array
             ls_addr[instr_gen+1] = addr;
         }
+    }
+    else if ((funct == JALR)) {
+      if (check_j_addr (imm, JALR, rs1) == 0) {
+        goto RS1_I;
+      }
     }
 
     hex_instr = (imm << 20) + (rs1 << 15) + (funct3 << 12) +
@@ -584,7 +598,7 @@ void gen_j_instr (int vopt, ...) {
         imm = imm << 2;
     }
 
-    if ((check_j_addr(imm) == 0)) {
+    if ((check_j_addr(imm, 0, 0) == 0)) {
         goto IMM_J;
     }
     

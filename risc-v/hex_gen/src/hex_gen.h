@@ -23,7 +23,7 @@ void update_cpu (int, int);
 int  check_brn_addr (int, int);
 int  decode_brn_result (int, int, int);
 int  check_ls_addr (int, int);
-int  check_j_addr (int);
+int  check_j_addr (int, int, int);
 void print_assembled_r_instr (int, int, int, int);
 void print_assembled_i_instr (int, int, int, int);
 void print_assembled_s_instr (int, int, int, int);
@@ -47,16 +47,16 @@ const char* funct_str_r_type[10] = {
     "OR",      "XOR",       "SLT",
     "SLTU"
 };
-const int opcode_val_i_type[7] = {
+const int opcode_val_i_type[8] = {
     ADDI,       SLTI,       SLTIU,
     ANDI,       ORI,        XORI,
-   /*JALR,       LB,         LH,*/
+    JALR,       /*LB,         LH,*/
     LW         /*LBU,        LHU*/
 };
-const char* opcode_str_i_type[7] = {
+const char* opcode_str_i_type[8] = {
     "ADDI",       "SLTI",       "SLTIU",
     "ANDI",       "ORI",        "XORI",
-    /*"JALR",       "LB",         "LH",*/
+    "JALR",      /*"LB",         "LH",*/
     "LW"         /*"LBU",        "LHU"*/
 };
 const int opcode_val_s_type[1] = {
