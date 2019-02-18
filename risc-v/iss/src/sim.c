@@ -319,11 +319,11 @@ void execute_i (unsigned int funct3, int opcode, uint32_t rs1, uint32_t rd, int 
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         break;
         case (JALR): //JALR
-            NEXT_STATE.PC = CURRENT_STATE.REGS[rs1];
+            NEXT_STATE.PC = CURRENT_STATE.REGS[rs1] + imm;
             if (rd) {
               NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
             }
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t JALR %-2d", 
+            printf ("[%d] PC:%.8x\tINSTR:%.8x\t JALR %-2d\n", 
                 instr_count,
                 CURRENT_STATE.PC,
                 instr_opcode,
