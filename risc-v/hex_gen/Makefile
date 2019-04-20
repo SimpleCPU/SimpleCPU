@@ -3,13 +3,13 @@ CFLAGS = -Wall -I $(INC_DIR)
 DEPS = riscv_instr_defines.h
 
 all: src/*.c
-	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -l :lib/libhex.so -D GEN_USER_TEST
+	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -L. lib/libhex.so -D GEN_USER_TEST
 
 hex: src/*.c
-	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -l :lib/libhex.so
+	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -L. lib/libhex.so
 
 hex_preload: src/*.c
-	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -l :lib/libhex_preload.so
+	gcc $(CFLAGS) -g -O2 $^ -o hex_gen -L. lib/libhex_preload.so
 
 .PHONY: clean
 clean:
