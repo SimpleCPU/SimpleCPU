@@ -1,1 +1,0 @@
-vlog -work work -sv  hello_world.sv +incdir+/home/rahul/uvm-1.2/src +define+UVM_CMDLINE_NO_DPI +define+UVM_REGEX_NO_DPI +define+UVM_NO_DPI

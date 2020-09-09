@@ -1,1 +1,0 @@
-vlog -work work -f ~/hope/SimpleCPU/uvm_tb/sha1_uvm_tb/uvm_tb.vc verilog/*.v +incdir+/home/rahul/uvm-1.2/src +incdir+/home/rahul/hope/SimpleCPU/uvm_tb/sha1_uvm_tb/tb_uvm +define+UVM_CMDLINE_NO_DPI +define+UVM_REGEX_NO_DPI +define+UVM_NO_DPI
