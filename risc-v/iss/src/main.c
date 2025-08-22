@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdint.h>
 
+#include "uthash.h"
 #include "main.h"
 
 /***************************************************************/
@@ -19,10 +20,10 @@ typedef struct {
 /* memory will be dynamically allocated at initialization */
 mem_region_t MEM_REGIONS[] = {
     { MEM_TEXT_START, MEM_TEXT_SIZE, NULL },
-    { MEM_DATA_START, MEM_DATA_SIZE, NULL },
-    { MEM_STACK_START, MEM_STACK_SIZE, NULL },
-    { MEM_KDATA_START, MEM_KDATA_SIZE, NULL },
-    { MEM_KTEXT_START, MEM_KTEXT_SIZE, NULL }
+    { MEM_DATA_START, MEM_DATA_SIZE, NULL }
+    //{ MEM_STACK_START, MEM_STACK_SIZE, NULL },
+    //{ MEM_KDATA_START, MEM_KDATA_SIZE, NULL },
+    //{ MEM_KTEXT_START, MEM_KTEXT_SIZE, NULL }
 };
 
 #define MEM_NREGIONS (sizeof(MEM_REGIONS)/sizeof(mem_region_t))
@@ -31,12 +32,53 @@ mem_region_t MEM_REGIONS[] = {
 /* CPU State info.                                             */
 /***************************************************************/
 
-CPU_State CURRENT_STATE, NEXT_STATE;
-int RUN_BIT;	/* run bit */
+CPU_State PREV_STATE, CURRENT_STATE, NEXT_STATE;
+int RUN_BIT = TRUE;	/* run bit */
 int INSTRUCTION_COUNT;
 int prev_pc;
 int instr_count;
 int my_count = 0;
+AssocEntry* data_mem = NULL;  // global hash map
+
+// Set a key
+void assoc_set(int key, int val) {
+    AssocEntry* entry;
+    HASH_FIND_INT(data_mem, &key, entry);  // find by int key
+
+    if (entry == NULL) {
+        entry = malloc(sizeof(AssocEntry));
+        entry->key = key;
+        HASH_ADD_INT(data_mem, key, entry);
+    }
+
+    entry->value = val;
+}
+
+// Get a pointer to value
+int assoc_get(int key) {
+    AssocEntry* entry;
+    HASH_FIND_INT(data_mem, &key, entry);
+    return entry ? entry->value : 0x0;
+}
+
+// Delete a key
+void assoc_delete(int key) {
+    AssocEntry* entry;
+    HASH_FIND_INT(data_mem, &key, entry);
+    if (entry) {
+        HASH_DEL(data_mem, entry);
+        free(entry);
+    }
+}
+
+// Cleanup
+void assoc_free() {
+    AssocEntry *current, *tmp;
+    HASH_ITER(hh, data_mem, current, tmp) {
+        HASH_DEL(data_mem, current);
+        free(current);
+    }
+}
 
 /***************************************************************/
 /*                                                             */
@@ -47,21 +89,19 @@ int my_count = 0;
 /***************************************************************/
 uint32_t mem_read_32(uint32_t address)
 {
-    uint32_t i;
-    for (i = 0; i < MEM_NREGIONS; i++) {
-        if (address >= MEM_REGIONS[i].start &&
-                address < (MEM_REGIONS[i].start + MEM_REGIONS[i].size)) {
-            uint32_t offset = address - MEM_REGIONS[i].start;
+    return
+        (assoc_get(address+3) << 24) |
+        (assoc_get(address+2) << 16) |
+        (assoc_get(address+1) <<  8) |
+        (assoc_get(address+0) <<  0);
+    //for (i = 0; i < MEM_NREGIONS; i++) {
+    //    //if (address >= MEM_REGIONS[i].start &&
+    //    //        address < (MEM_REGIONS[i].start + MEM_REGIONS[i].size)) {
+    //        uint32_t offset = address - MEM_REGIONS[i].start;
 
-            return
-                (MEM_REGIONS[i].mem[offset+3] << 24) |
-                (MEM_REGIONS[i].mem[offset+2] << 16) |
-                (MEM_REGIONS[i].mem[offset+1] <<  8) |
-                (MEM_REGIONS[i].mem[offset+0] <<  0);
-        }
-    }
+    //    //}
+    //}
 
-    return 0;
 }
 
 /***************************************************************/
@@ -73,19 +113,19 @@ uint32_t mem_read_32(uint32_t address)
 /***************************************************************/
 void mem_write_32(uint32_t address, uint32_t value)
 {
-    uint32_t i;
-    for (i = 0; i < MEM_NREGIONS; i++) {
-        if (address >= MEM_REGIONS[i].start &&
-                address < (MEM_REGIONS[i].start + MEM_REGIONS[i].size)) {
-            uint32_t offset = address - MEM_REGIONS[i].start;
+    //uint32_t i;
+    assoc_set(address+3, (value >> 24) & 0xFF);
+    assoc_set(address+2, (value >> 16) & 0xFF);
+    assoc_set(address+1, (value >>  8) & 0xFF);
+    assoc_set(address+0, (value >>  0) & 0xFF);
+    return;
+    //for (i = 0; i < MEM_NREGIONS; i++) {
+    //    //if (address >= MEM_REGIONS[i].start &&
+    //    //        address < (MEM_REGIONS[i].start + MEM_REGIONS[i].size)) {
+    //    //    uint32_t offset = address - MEM_REGIONS[i].start;
 
-            MEM_REGIONS[i].mem[offset+3] = (value >> 24) & 0xFF;
-            MEM_REGIONS[i].mem[offset+2] = (value >> 16) & 0xFF;
-            MEM_REGIONS[i].mem[offset+1] = (value >>  8) & 0xFF;
-            MEM_REGIONS[i].mem[offset+0] = (value >>  0) & 0xFF;
-            return;
-        }
-    }
+    //    //}
+    //}
 }
 
 /***************************************************************/
@@ -97,7 +137,7 @@ void mem_write_32(uint32_t address, uint32_t value)
 /***************************************************************/
 void cycle() {
 
-  process_instruction();
+  PREV_STATE = CURRENT_STATE;
   CURRENT_STATE = NEXT_STATE;
   INSTRUCTION_COUNT++;
 }
@@ -109,13 +149,20 @@ void cycle() {
 /* Purpose   : Simulate RISC-V for n cycles                      */
 /*                                                             */
 /***************************************************************/
-extern void run(int num_cycles) {
+extern void step(int instruction) {
+
   int i;
+  int num_cycles = 1;
+
+  instr_opcode = instruction;
+
+  process_instruction(instr_opcode);
 
   for (i = 0; i < num_cycles; i++) {
     if (RUN_BIT == FALSE) {
 	    printf("Simulator halted\n");
-	    exit (0);
+	    //exit (0);
+      continue;
     }
     cycle();
   }
@@ -201,8 +248,11 @@ void init_memory() {
     CURRENT_STATE.PC = MEM_TEXT_START;
     prev_pc = MEM_TEXT_START;
     NEXT_STATE = CURRENT_STATE;
+    PREV_STATE = CURRENT_STATE;
 
     RUN_BIT = TRUE;
+
+    printf("RISC-V Simulator Initialised\n\n");
 }
 
 /**************************************************************/
@@ -287,26 +337,38 @@ void sim(char *instr_hex, char *pc_values_hex) {
   initialize(instr_hex, 1, pc_values_hex);
 }
 
-extern void init (char *test_name) {
-  char instr_hex[99];
-  char pc_values_hex[99];
+//void init (char *test_name) {
+//  char instr_hex[99];
+//  char pc_values_hex[99];
+//
+//  instr_count = 0;
+//
+//  strcpy (instr_hex, test_name);
+//  strcpy (pc_values_hex, test_name);
+//
+//  //printf ("%s\t%s\n", instr_hex, pc_values_hex);
+//  strcat (instr_hex, (const char*)".hex");
+//  strcat (pc_values_hex, (const char*)"_pc.hex");
+//
+//  //printf ("%s\t%s\n", instr_hex, pc_values_hex);
+//  sim (instr_hex, pc_values_hex);
+//}
 
-  instr_count = 0;
+extern void init () {
+    CURRENT_STATE.PC = MEM_TEXT_START;
+    NEXT_STATE = CURRENT_STATE;
+    PREV_STATE = CURRENT_STATE;
 
-  strcpy (instr_hex, test_name);
-  strcpy (pc_values_hex, test_name);
+    RUN_BIT = TRUE;
 
-  //printf ("%s\t%s\n", instr_hex, pc_values_hex);
-  strcat (instr_hex, (const char*)".hex");
-  strcat (pc_values_hex, (const char*)"_pc.hex");
-
-  //printf ("%s\t%s\n", instr_hex, pc_values_hex);
-  sim (instr_hex, pc_values_hex);
+    printf("RISC-V Simulator Initialised\n\n");
 }
 
 int main (int argc, char* test_name[]) {
     //printf ("Test name is %s\n", test_name[1]);
-    init (test_name[1]);
+    //init (test_name[1]);
     go();
     return 0;
 }
+
+

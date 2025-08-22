@@ -8,6 +8,7 @@ int decode_instr_type (uint32_t instr_opcode) {
         return type;
     }
     else if (((instr_opcode & 0x7F) == 0x13) ||
+             ((instr_opcode & 0x7F) == 0x67) ||
              ((instr_opcode & 0x7F) == 0x03)) { // I-Type
         type = I_TYPE;
         return type;
@@ -54,7 +55,7 @@ void execute_r (uint32_t rs1, uint32_t rs2, uint32_t rd, unsigned int funct7, un
     int sign;
     int shift_val;
     unsigned int funct = ((funct7>>5 & 0x1) << 3) | funct3;
-    if ((rd == 0)) {
+    if (rd == 0) {
         NEXT_STATE.PC = CURRENT_STATE.PC + 4;
         return;
     }
@@ -220,209 +221,305 @@ void execute_i (unsigned int funct3, int opcode, uint32_t rs1, uint32_t rd, int 
     shift_val = shift_const(20);
     sign = (imm & 0x800)>>11;
     imm = (sign) ? (imm | shift_val) : imm;
-    switch (funct) {
-        case (ADDI): //ADDI
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t ADDI X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs1] + imm;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-            
-        break;
-        case (SLTI): //SLTI
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t SLTI X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = ((int32_t)CURRENT_STATE.REGS[rs1] < (int32_t)imm);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (SLTIU): //SLTIU
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t SLTIU X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] < (uint32_t)imm);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (ANDI): //ANDI
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t ANDI X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] & (uint32_t)imm);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (ORI): //ORI
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t ORI X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] | (uint32_t)imm);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (XORI): //XORI
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t XORI X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] ^ (uint32_t)imm);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (JALR): //JALR
-            NEXT_STATE.PC = CURRENT_STATE.REGS[rs1] + imm;
-            if (rd) {
-              NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
-            }
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t JALR %-2d\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                NEXT_STATE.PC
-            );
-        break;
-        case (LB): //LB
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_content = mem_read_32((uint32_t)address) & 0xFF;
-            shift_val = shift_const(24);
-            sign = (mem_content >> 7);
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t LB X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = (sign) ? (mem_content | shift_val) : mem_content;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (LH): //LH
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_content = mem_read_32((uint32_t)address) & 0xFFFF;
-            sign = (mem_content >> 15);
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t LH X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = (sign) ? (mem_content | shift_val) : mem_content;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (LW): //LW
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_content = mem_read_32((uint32_t)address) ;
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t LW X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = mem_content;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (LBU): //LBU
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_content = mem_read_32((uint32_t)address) & 0xFF;
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t LBU X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = mem_content;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
-        case (LHU): //LHU
-            address = CURRENT_STATE.REGS[rs1] + imm;
-            mem_content = mem_read_32((uint32_t)address) & 0xFFFF;
-            printf ("[%d] PC:%.8x\tINSTR:%.8x\t LHU X%-2d, X%-2d, 0x%-32x\n", 
-                instr_count,
-                CURRENT_STATE.PC,
-                instr_opcode,
-                rd,
-                rs1,
-                imm
-            );
-            if (rd == 0) {
-                NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-                return;
-            }
-            NEXT_STATE.REGS[rd] = mem_content;
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
-        break;
+    if (opcode == 0x67) { // JALR
+      NEXT_STATE.PC = (CURRENT_STATE.REGS[rs1] + imm) & 0xFFFFFFFC;
+      if (rd) {
+        NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
+      }
+      printf ("[%d] PC:%.8x\tINSTR:%.8x\t JALR %.8x\n", 
+          instr_count,
+          CURRENT_STATE.PC,
+          instr_opcode,
+          NEXT_STATE.PC
+      );
+    } else {
+      switch (funct) {
+          case (ADDI): //ADDI
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t ADDI X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = CURRENT_STATE.REGS[rs1] + imm;
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              
+          break;
+          case (SLTI): //SLTI
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t SLTI X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = ((int32_t)CURRENT_STATE.REGS[rs1] < (int32_t)imm);
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+          break;
+          case (SLTIU): //SLTIU
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t SLTIU X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] < (uint32_t)imm);
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+          break;
+          case (ANDI): //ANDI
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t ANDI X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] & (uint32_t)imm);
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+          break;
+          case (ORI): //ORI
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t ORI X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] | (uint32_t)imm);
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+          break;
+          case (XORI): //XORI
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t XORI X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] ^ (uint32_t)imm);
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+          break;
+          case (SLLI): //SLLI
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t SLLI X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] << (uint32_t)(imm & 0x1F));
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+          break;
+          case (SRXI): //SRXI
+              if ((imm>>10) & 0x1) { // SRAI
+                  printf ("[%d] PC:%.8x\tINSTR:%.8x\t SRAI X%-2d, X%-2d, 0x%-32x\n", 
+                      instr_count,
+                      CURRENT_STATE.PC,
+                      instr_opcode,
+                      rd,
+                      rs1,
+                      imm
+                  );
+                  if (rd == 0) {
+                      NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                      return;
+                  }
+                  NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] >> (uint32_t)(imm & 0x1F));
+                  if ((CURRENT_STATE.REGS[rs1]>>31) & 0x1) {
+                    NEXT_STATE.REGS[rd] = NEXT_STATE.REGS[rd] | (0xFFFFFFFF<<(uint32_t)(31 - (imm & 0x1F)));
+                  }
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              } else { //SRLI
+                  printf ("[%d] PC:%.8x\tINSTR:%.8x\t SRLI X%-2d, X%-2d, 0x%-32x\n", 
+                      instr_count,
+                      CURRENT_STATE.PC,
+                      instr_opcode,
+                      rd,
+                      rs1,
+                      imm
+                  );
+                  if (rd == 0) {
+                      NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                      return;
+                  }
+                  NEXT_STATE.REGS[rd] = ((uint32_t)CURRENT_STATE.REGS[rs1] >> (uint32_t)(imm & 0x1F));
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              }
+          break;
+          case (LB): //LB
+              address = CURRENT_STATE.REGS[rs1] + imm;
+              mem_content = mem_read_32((uint32_t)address) & 0xFF;
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t LB X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  NEXT_STATE.LOAD_OP = 1;
+                  NEXT_STATE.DATA_MEM_ADDR = address;
+                  NEXT_STATE.DATA_MEM_DATA = mem_content;
+                  NEXT_STATE.BYTE_EN = BYTE;
+                  return;
+              }
+              shift_val = shift_const(24);
+              sign = (mem_content >> 7);
+              mem_content = sign ? (mem_content | shift_val) : mem_content;
+              NEXT_STATE.REGS[rd] = mem_content;
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              NEXT_STATE.LOAD_OP = 1;
+              NEXT_STATE.DATA_MEM_ADDR = address;
+              NEXT_STATE.DATA_MEM_DATA = mem_content;
+              NEXT_STATE.BYTE_EN = BYTE;
+          break;
+          case (LH): //LH
+              address = CURRENT_STATE.REGS[rs1] + imm;
+              mem_content = mem_read_32((uint32_t)address) & 0xFFFF;
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t LH X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  NEXT_STATE.LOAD_OP = 1;
+                  NEXT_STATE.DATA_MEM_ADDR = address;
+                  NEXT_STATE.DATA_MEM_DATA = mem_content;
+                  NEXT_STATE.BYTE_EN = HALF_WORD;
+                  return;
+              }
+              shift_val = shift_const(16);
+              sign = (mem_content >> 15);
+              mem_content = sign ? (mem_content | shift_val) : mem_content;
+              NEXT_STATE.REGS[rd] = mem_content;
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              NEXT_STATE.LOAD_OP = 1;
+              NEXT_STATE.DATA_MEM_ADDR = address;
+              NEXT_STATE.DATA_MEM_DATA = mem_content;
+              NEXT_STATE.BYTE_EN = HALF_WORD;
+          break;
+          case (LW): //LW
+              address = CURRENT_STATE.REGS[rs1] + imm;
+              mem_content = mem_read_32((uint32_t)address) ;
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t LW X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  NEXT_STATE.LOAD_OP = 1;
+                  NEXT_STATE.DATA_MEM_ADDR = address;
+                  NEXT_STATE.DATA_MEM_DATA = mem_content;
+                  NEXT_STATE.BYTE_EN = WORD;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = mem_content;
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              NEXT_STATE.LOAD_OP = 1;
+              NEXT_STATE.DATA_MEM_ADDR = address;
+              NEXT_STATE.DATA_MEM_DATA = mem_content;
+              NEXT_STATE.BYTE_EN = WORD;
+          break;
+          case (LBU): //LBU
+              address = CURRENT_STATE.REGS[rs1] + imm;
+              mem_content = mem_read_32((uint32_t)address) & 0xFF;
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t LBU X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  NEXT_STATE.LOAD_OP = 1;
+                  NEXT_STATE.DATA_MEM_ADDR = address;
+                  NEXT_STATE.DATA_MEM_DATA = mem_content;
+                  NEXT_STATE.BYTE_EN = BYTE;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = mem_content;
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              NEXT_STATE.LOAD_OP = 1;
+              NEXT_STATE.DATA_MEM_ADDR = address;
+              NEXT_STATE.DATA_MEM_DATA = mem_content;
+              NEXT_STATE.BYTE_EN = BYTE;
+          break;
+          case (LHU): //LHU
+              address = CURRENT_STATE.REGS[rs1] + imm;
+              mem_content = mem_read_32((uint32_t)address) & 0xFFFF;
+              printf ("[%d] PC:%.8x\tINSTR:%.8x\t LHU X%-2d, X%-2d, 0x%-32x\n", 
+                  instr_count,
+                  CURRENT_STATE.PC,
+                  instr_opcode,
+                  rd,
+                  rs1,
+                  imm
+              );
+              if (rd == 0) {
+                  NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+                  NEXT_STATE.LOAD_OP = 1;
+                  NEXT_STATE.DATA_MEM_ADDR = address;
+                  NEXT_STATE.DATA_MEM_DATA = mem_content;
+                  NEXT_STATE.BYTE_EN = HALF_WORD;
+                  return;
+              }
+              NEXT_STATE.REGS[rd] = mem_content;
+              NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+              NEXT_STATE.LOAD_OP = 1;
+              NEXT_STATE.DATA_MEM_ADDR = address;
+              NEXT_STATE.DATA_MEM_DATA = mem_content;
+              NEXT_STATE.BYTE_EN = HALF_WORD;
+          break;
+      }
     }
 }
 
@@ -446,12 +543,11 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
     //printf ("B-type instruction\tOpcode is :0x%x\n", opcode);
     switch (funct3) {
         case (SB): //SB
-            shift_val = shift_const(12);
+            shift_val = shift_const(20);
             sign = (imm & 0x800)>>11;
             imm = (sign) ? (imm | shift_val) : imm;
-            address = CURRENT_STATE.REGS[rs2] + imm;
+            address = CURRENT_STATE.REGS[rs1] + imm;
             mem_write_32(address, CURRENT_STATE.REGS[rs1]&0xFF);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t SB X%-2d, X%-2d, 0x%-32x\n", 
                 instr_count,
                 CURRENT_STATE.PC,
@@ -460,14 +556,18 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 rs2,
                 imm
             );
+            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            NEXT_STATE.STORE_OP = 1;
+            NEXT_STATE.DATA_MEM_ADDR = address;
+            NEXT_STATE.DATA_MEM_DATA = CURRENT_STATE.REGS[rs2]&0xFF;
+            NEXT_STATE.BYTE_EN = BYTE;
         break;
         case (SH): //SH
-            shift_val = shift_const(16);
-            sign = (imm & 0x8000)>>15;
+            shift_val = shift_const(20);
+            sign = (imm & 0x800)>>11;
             imm = (sign) ? (imm | shift_val) : imm;
-            address = CURRENT_STATE.REGS[rs2] + imm;
+            address = (CURRENT_STATE.REGS[rs1] + imm) & 0xFFFFFFFE;
             mem_write_32(address, CURRENT_STATE.REGS[rs1]&0xFFFF);
-            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
             printf ("[%d] PC:%.8x\tINSTR:%.8x\t SH X%-2d, X%-2d, 0x%-32x\n", 
                 instr_count,
                 CURRENT_STATE.PC,
@@ -476,13 +576,18 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 rs2,
                 imm
             );
+            NEXT_STATE.PC = CURRENT_STATE.PC + 4;
+            NEXT_STATE.STORE_OP = 1;
+            NEXT_STATE.DATA_MEM_ADDR = address;
+            NEXT_STATE.DATA_MEM_DATA = CURRENT_STATE.REGS[rs2]&0xFFFF;
+            NEXT_STATE.BYTE_EN = HALF_WORD;
         break;
         case (SW): //SW
-            shift_val = shift_const(16);
-            sign = (imm & 0x8000)>>15;
+            shift_val = shift_const(20);
+            sign = (imm & 0x800)>>11;
             imm = (sign) ? (imm | shift_val) : imm;
             // Align the address to a word boundary
-            address = (CURRENT_STATE.REGS[rs2] + imm) & 0xFFFFFFFC;
+            address = (CURRENT_STATE.REGS[rs1] + imm) & 0xFFFFFFFC;
             mem_write_32(address, CURRENT_STATE.REGS[rs1]);
             //printf ("Writing to: 0x%-8x", address);
             NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -494,6 +599,10 @@ void execute_s (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 rs2,
                 imm
             );
+            NEXT_STATE.STORE_OP = 1;
+            NEXT_STATE.DATA_MEM_ADDR = address;
+            NEXT_STATE.DATA_MEM_DATA = CURRENT_STATE.REGS[rs2];
+            NEXT_STATE.BYTE_EN = WORD;
         break;
         default:
             printf ("ERROR. Incorrect S-type instruction opcode %8x\n", instr_opcode);
@@ -524,7 +633,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
-                NEXT_STATE.PC = CURRENT_STATE.PC + address;
+                NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
             }
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -543,7 +652,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
-                NEXT_STATE.PC = CURRENT_STATE.PC + address;
+                NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
             }
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -562,7 +671,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
-                NEXT_STATE.PC = CURRENT_STATE.PC + address;
+                NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
             }
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -581,7 +690,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
-                NEXT_STATE.PC = CURRENT_STATE.PC + address;
+                NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
             }
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -596,11 +705,11 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
             );
         break;
         case (BGE): //BGE
-            if ((signed)CURRENT_STATE.REGS[rs1] >= (signed)CURRENT_STATE.REGS[rs2]) {
+            if ((int32_t)CURRENT_STATE.REGS[rs1] >= (int32_t)CURRENT_STATE.REGS[rs2]) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
-                NEXT_STATE.PC = CURRENT_STATE.PC + address;
+                NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
             }
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -619,7 +728,7 @@ void execute_b (unsigned int funct3, uint32_t rs1, uint32_t rs2, int imm) {
                 shift_val = shift_const(19);
                 sign = (imm & 0x1000)>>12;
                 address = (sign) ? (imm | shift_val) : imm;
-                NEXT_STATE.PC = CURRENT_STATE.PC + address;
+                NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
             }
             else {
                 NEXT_STATE.PC = CURRENT_STATE.PC + 4;
@@ -704,7 +813,7 @@ void execute_j (uint32_t rd, int imm) {
     shift_val = shift_const(11);
     sign = (imm & 0x100000)>>20;
     address = (sign) ? (imm | shift_val) : imm;
-    NEXT_STATE.PC = CURRENT_STATE.PC + address;
+    NEXT_STATE.PC = (CURRENT_STATE.PC + address) & 0xFFFFFFFC;
     if (rd) {
       NEXT_STATE.REGS[rd] = CURRENT_STATE.PC + 4;
     }
@@ -729,12 +838,17 @@ void decode_j (uint32_t instr_opcode) {
     execute_j (rd, imm);
 }
 
-void process_instruction() {
+void process_instruction(uint32_t instr_opcode) {
     /* Execute one instruction here. You should use CURRENT_STATE and modify
      * values in NEXT_STATE. You can call mem_read_32() and mem_write_32() to
      * access memory. */
-    instr_opcode = mem_read_32(CURRENT_STATE.PC);
+    //instr_opcode = mem_read_32(CURRENT_STATE.PC);
     //printf ("Instr Read: %-8x from %-8x\n", instr_opcode, CURRENT_STATE.PC);
+    NEXT_STATE.STORE_OP = 0;
+    NEXT_STATE.LOAD_OP = 0;
+    NEXT_STATE.DATA_MEM_ADDR = 0xDEADBEEF;
+    NEXT_STATE.DATA_MEM_DATA = 0xDEADBEEF;
+    NEXT_STATE.BYTE_EN = WORD;
     int type = decode_instr_type (instr_opcode);
     if (type == R_TYPE)
         decode_r (instr_opcode);
@@ -755,288 +869,372 @@ void process_instruction() {
     instr_count++;
 }
 
-extern int compare_r (int pc, int instr, int rd, int rs1, int rs2, int rd_val, int rs1_val, int rs2_val) {
-    int instr_model   = (int) instr_opcode;
-    int rs1_model     = (instr_opcode >> 15)   & 0x1F;
-    int rs2_model     = (instr_opcode >> 20)   & 0x1F;
-    int rd_model      = (instr_opcode >> 7)    & 0x1F;
-    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
-    int rs2_val_model = CURRENT_STATE.REGS[rs2_model];
-    int rd_val_model  = CURRENT_STATE.REGS[rd_model];
+//extern int compare_r (int pc, int instr, int rd, int rs1, int rs2, int rd_val, int rs1_val, int rs2_val) {
+//    int instr_model   = (int) instr_opcode;
+//    int rs1_model     = (instr_opcode >> 15)   & 0x1F;
+//    int rs2_model     = (instr_opcode >> 20)   & 0x1F;
+//    int rd_model      = (instr_opcode >> 7)    & 0x1F;
+//    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
+//    int rs2_val_model = CURRENT_STATE.REGS[rs2_model];
+//    int rd_val_model  = CURRENT_STATE.REGS[rd_model];
+//
+//
+//    if ((rs1 == rd)) {
+//        rs1_val = rd_val;
+//    }
+//    if ((rs2 == rd)) {
+//        rs2_val = rd_val;
+//    }
+//    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rd, rd_val, rs1, rs1_val, rs2, rs2_val);
+//    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model, 
+//                                                                              rs1_model, rs1_val_model, rs2_model, rs2_val_model);
+//    if (prev_pc != pc) {
+//        RUN_BIT = 0;
+//        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+//        printf ("PC Mismatch\n");
+//        return 0;
+//    }
+//    else if (instr != instr_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+//        printf ("INSTR Mismatch\n");
+//        return 0;
+//    }
+//    else if (rd != rd_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rd);
+//        printf ("Expecting  X%d Register\n", rd_model);
+//        return 0;
+//    }
+//    else if (rs1 != rs1_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs1);
+//        printf ("Expecting  X%d Register\n", rs1_model);
+//        return 0;
+//    }
+//    else if (rs2 != rs2_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs2);
+//        printf ("Expecting  X%d Register\n", rs2_model);
+//        return 0;
+//    }
+//    else if (rd_val != rd_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
+//        printf ("RD Value Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1_val != rs1_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
+//        printf ("RS1 Value Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs2_val != rs2_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs2, rs2_val, rs2_model, rs2_val_model);
+//        printf ("RS2 Value Mismatch\n");
+//        return 0;
+//    }
+//    prev_pc = CURRENT_STATE.PC;
+//    return 1;
+//}
+//
+//extern int compare_i (int pc, int instr, int rd, int rs1, int rd_val, int rs1_val) {
+//    int instr_model   = (int) instr_opcode;
+//    int rd_model      = (instr_model >>  7)   & 0x1F;
+//    int rs1_model     = (instr_model >> 15)   & 0x1F;
+//    int rd_val_model  = CURRENT_STATE.REGS[rd_model];
+//    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
+//    if ((rs1 == rd)) {
+//        rs1_val = rd_val;
+//    }
+//    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rd, rd_val, rs1, rs1_val);
+//    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model, rs1_model, rs1_val_model);
+//    if (prev_pc != pc) {
+//        RUN_BIT = 0;
+//        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+//        printf ("PC Mismatch\n");
+//        return 0;
+//    }
+//    else if (instr != instr_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+//        printf ("INSTR Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1 != rs1_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs1);
+//        printf ("Expecting  X%d Register\n", rs1_model);
+//        return 0;
+//    }
+//    else if (rd != rd_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rd);
+//        printf ("Expecting  X%d Register\n", rd_model);
+//        return 0;
+//    }
+//    else if (rd_val != rd_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
+//        printf ("RD Value Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1_val != rs1_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
+//        printf ("RS1 Value Mismatch\n");
+//        return 0;
+//    }
+//    prev_pc = CURRENT_STATE.PC;
+//    return 1;
+//}
+//
+//extern int compare_s (int pc, int instr, int rs1, int rs2, int rs1_val, int rs2_val) {
+//    int instr_model   = (int) instr_opcode;
+//    int rs1_model     = (instr_model >> 15)   & 0x1F;
+//    int rs2_model     = (instr_model >> 20)   & 0x1F;
+//    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
+//    int rs2_val_model = CURRENT_STATE.REGS[rs2_model];
+//    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rs1, rs1_val, rs2, rs2_val);
+//    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rs1_model, rs1_val_model, rs2_model, rs2_val_model);
+//    if (prev_pc != pc) {
+//        RUN_BIT = 0;
+//        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+//        printf ("PC Mismatch\n");
+//        return 0;
+//    }
+//    else if (instr != instr_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+//        printf ("INSTR Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1 != rs1_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs1);
+//        printf ("Expecting  X%d Register\n", rs1_model);
+//        return 0;
+//    }
+//    else if (rs2 != rs2_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs2);
+//        printf ("Expecting  X%d Register\n", rs2_model);
+//        return 0;
+//    }
+//    else if (rs2_val != rs2_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs2, rs2_val, rs2_model, rs2_val_model);
+//        printf ("RS2 Value Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1_val != rs1_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
+//        printf ("RS1 Value Mismatch\n");
+//        return 0;
+//    }
+//    prev_pc = CURRENT_STATE.PC;
+//    return 1;
+//}
+//
+//extern int compare_b (int pc, int instr, int rs1, int rs2, int rs1_val, int rs2_val) {
+//    int instr_model   = (int) instr_opcode;
+//    int rs1_model     = (instr_model >> 15)   & 0x1F;
+//    int rs2_model     = (instr_model >> 20)   & 0x1F;
+//    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
+//    int rs2_val_model = CURRENT_STATE.REGS[rs2_model];
+//    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rs1, rs1_val, rs2, rs2_val);
+//    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rs1_model, rs1_val_model, rs2_model, rs2_val_model);
+//    if (prev_pc != pc) {
+//        RUN_BIT = 0;
+//        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+//        printf ("PC Mismatch\n");
+//        return 0;
+//    }
+//    else if (instr != instr_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+//        printf ("INSTR Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1 != rs1_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs1);
+//        printf ("Expecting  X%d Register\n", rs1_model);
+//        return 0;
+//    }
+//    else if (rs2 != rs2_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rs2);
+//        printf ("Expecting  X%d Register\n", rs2_model);
+//        return 0;
+//    }
+//    else if (rs2_val != rs2_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs2, rs2_val, rs2_model, rs2_val_model);
+//        printf ("RS2 Value Mismatch\n");
+//        return 0;
+//    }
+//    else if (rs1_val != rs1_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
+//        printf ("RS1 Value Mismatch\n");
+//        return 0;
+//    }
+//    prev_pc = CURRENT_STATE.PC;
+//    return 1;
+//}
+//
+//extern int compare_u (int pc, int instr, int rd, int rd_val) {
+//    int instr_model   = (int) instr_opcode;
+//    int rd_model      = (instr_model >>  7)   & 0x1F;
+//    int rd_val_model  = CURRENT_STATE.REGS[rd_model];
+//    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n", pc, instr, rd, rd_val);
+//    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model);
+//    if (prev_pc != pc) {
+//        RUN_BIT = 0;
+//        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+//        printf ("PC Mismatch\n");
+//        return 0;
+//    }
+//    else if (instr != instr_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+//        printf ("INSTR Mismatch\n");
+//        return 0;
+//    }
+//    else if (rd != rd_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rd);
+//        printf ("Expecting  X%d Register\n", rd_model);
+//        return 0;
+//    }
+//    else if (rd_val != rd_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
+//        printf ("RD Value Mismatch\n");
+//        return 0;
+//    }
+//    prev_pc = CURRENT_STATE.PC;
+//    return 1;
+//}
+//
+//extern int compare_j (int pc, int instr, int rd, int rd_val) {
+//    int instr_model  = (int) instr_opcode;
+//    int rd_model     = (instr_model >> 7) & 0x1F;
+//    int rd_val_model = CURRENT_STATE.REGS[rd_model];
+//    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n", pc, instr,rd, rd_val);
+//    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model);
+//    if (prev_pc != pc) {
+//        RUN_BIT = 0;
+//        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+//        printf ("PC Mismatch\n");
+//        return 0;
+//    }
+//    else if (instr != instr_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
+//        printf ("INSTR Mismatch\n");
+//        return 0;
+//    }
+//    else if (rd != rd_model) {
+//        RUN_BIT = 0;
+//        printf ("Unexpected X%d Register\n", rd);
+//        printf ("Expecting  X%d Register\n", rd_model);
+//        return 0;
+//    }
+//    else if (rd_val != rd_val_model) {
+//        RUN_BIT = 0;
+//        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
+//        printf ("RD Value Mismatch\n");
+//        return 0;
+//    }
+//    prev_pc = CURRENT_STATE.PC;
+//    return 1;
+//}
 
-
-    if ((rs1 == rd)) {
-        rs1_val = rd_val;
-    }
-    if ((rs2 == rd)) {
-        rs2_val = rd_val;
-    }
-    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rd, rd_val, rs1, rs1_val, rs2, rs2_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model, 
-                                                                              rs1_model, rs1_val_model, rs2_model, rs2_val_model);
-    if (prev_pc != pc) {
+int compare_instruction_address(int address) {
+    if (PREV_STATE.PC != address) {
         RUN_BIT = 0;
-        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
+        printf ("RTL PC: %x\t ISS PC: %x\n", address, PREV_STATE.PC);
         printf ("PC Mismatch\n");
         return 0;
     }
-    else if (instr != instr_model) {
-        RUN_BIT = 0;
-        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
-        printf ("INSTR Mismatch\n");
-        return 0;
-    }
-    else if (rd != rd_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rd);
-        printf ("Expecting  X%d Register\n", rd_model);
-        return 0;
-    }
-    else if (rs1 != rs1_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs1);
-        printf ("Expecting  X%d Register\n", rs1_model);
-        return 0;
-    }
-    else if (rs2 != rs2_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs2);
-        printf ("Expecting  X%d Register\n", rs2_model);
-        return 0;
-    }
-    else if (rd_val != rd_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
-        printf ("RD Value Mismatch\n");
-        return 0;
-    }
-    else if (rs1_val != rs1_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
-        printf ("RS1 Value Mismatch\n");
-        return 0;
-    }
-    else if (rs2_val != rs2_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs2, rs2_val, rs2_model, rs2_val_model);
-        printf ("RS2 Value Mismatch\n");
-        return 0;
-    }
-    prev_pc = CURRENT_STATE.PC;
     return 1;
 }
 
-extern int compare_i (int pc, int instr, int rd, int rs1, int rd_val, int rs1_val) {
-    int instr_model   = (int) instr_opcode;
-    int rd_model      = (instr_model >>  7)   & 0x1F;
-    int rs1_model     = (instr_model >> 15)   & 0x1F;
-    int rd_val_model  = CURRENT_STATE.REGS[rd_model];
-    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
-    if ((rs1 == rd)) {
-        rs1_val = rd_val;
+int compare_data_memory_access(int address, int byte_en, int write, int write_data) {
+    int masked_write_data;
+
+    if (byte_en == 0) {
+      masked_write_data = write_data & 0xFF;
+    } else if (byte_en == 1) {
+      masked_write_data = write_data & 0xFFFF;
+    } else {
+      masked_write_data = write_data;
     }
-    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rd, rd_val, rs1, rs1_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model, rs1_model, rs1_val_model);
-    if (prev_pc != pc) {
+
+    if (CURRENT_STATE.STORE_OP || CURRENT_STATE.LOAD_OP) {
+      if (CURRENT_STATE.STORE_OP) {
+          if (!write) {
+              RUN_BIT = 0;
+              printf ("RTL Write: %d\t ISS Write: %d\n", write, CURRENT_STATE.STORE_OP);
+              printf ("Expected a STORE transaction\n");
+              return 0;
+          } else if (CURRENT_STATE.DATA_MEM_ADDR != address) {
+              RUN_BIT = 0;
+              printf ("RTL Address: %x\t ISS Address: %x\n", address, CURRENT_STATE.DATA_MEM_ADDR);
+              printf ("Store Address Mismatch\n");
+              return 0;
+          } else if (CURRENT_STATE.DATA_MEM_DATA != masked_write_data) {
+              RUN_BIT = 0;
+              printf ("RTL Data: %x\t ISS Data: %x\n", masked_write_data, CURRENT_STATE.DATA_MEM_DATA);
+              printf ("Store Data Mismatch\n");
+              return 0;
+          } else if (CURRENT_STATE.BYTE_EN != byte_en) {
+              RUN_BIT = 0;
+              printf ("RTL Byte Enable: %x\t ISS Byte Enable: %x\n", byte_en, CURRENT_STATE.BYTE_EN);
+              printf ("Store Byte Enable Mismatch\n");
+              return 0;
+          } else {
+              return 1;
+          }
+      } else {
+          if (write) {
+              RUN_BIT = 0;
+              printf ("RTL Write: %d\t ISS Write: %d\n", write, CURRENT_STATE.STORE_OP);
+              printf ("Expected a LOAD transaction\n");
+              return 0;
+          } else if (CURRENT_STATE.DATA_MEM_ADDR != address) {
+              RUN_BIT = 0;
+              printf ("RTL Address: %x\t ISS Address: %x\n", address, CURRENT_STATE.DATA_MEM_ADDR);
+              printf ("Load Address Mismatch\n");
+              return 0;
+          } else if (CURRENT_STATE.BYTE_EN != byte_en) {
+              RUN_BIT = 0;
+              printf ("RTL PC: %x\t ISS PC: %x\n", byte_en, CURRENT_STATE.BYTE_EN);
+              printf ("Load Byte Enable Mismatch\n");
+              return 0;
+          } else {
+              return 1;
+          }
+      }
+    } else {
         RUN_BIT = 0;
-        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
-        printf ("PC Mismatch\n");
+        printf ("Data Memory Access Mismatch. No access expected\n");
         return 0;
     }
-    else if (instr != instr_model) {
-        RUN_BIT = 0;
-        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
-        printf ("INSTR Mismatch\n");
-        return 0;
-    }
-    else if (rs1 != rs1_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs1);
-        printf ("Expecting  X%d Register\n", rs1_model);
-        return 0;
-    }
-    else if (rd != rd_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rd);
-        printf ("Expecting  X%d Register\n", rd_model);
-        return 0;
-    }
-    else if (rd_val != rd_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
-        printf ("RD Value Mismatch\n");
-        return 0;
-    }
-    else if (rs1_val != rs1_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
-        printf ("RS1 Value Mismatch\n");
-        return 0;
-    }
-    prev_pc = CURRENT_STATE.PC;
     return 1;
 }
 
-extern int compare_s (int pc, int instr, int rs1, int rs2, int rs1_val, int rs2_val) {
-    int instr_model   = (int) instr_opcode;
-    int rs1_model     = (instr_model >> 15)   & 0x1F;
-    int rs2_model     = (instr_model >> 20)   & 0x1F;
-    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
-    int rs2_val_model = CURRENT_STATE.REGS[rs2_model];
-    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rs1, rs1_val, rs2, rs2_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rs1_model, rs1_val_model, rs2_model, rs2_val_model);
-    if (prev_pc != pc) {
-        RUN_BIT = 0;
-        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
-        printf ("PC Mismatch\n");
+int compare_architecture_register(int regnum, int value) {
+    if (CURRENT_STATE.REGS[regnum] != value) {
+        RUN_BIT = 1;
+        printf ("[%d] RTL X[%d]: %x\t ISS X[%d]: %x\n", instr_count, regnum, value, regnum, CURRENT_STATE.REGS[regnum]);
+        printf ("Register Mismatch\n");
         return 0;
     }
-    else if (instr != instr_model) {
-        RUN_BIT = 0;
-        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
-        printf ("INSTR Mismatch\n");
-        return 0;
-    }
-    else if (rs1 != rs1_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs1);
-        printf ("Expecting  X%d Register\n", rs1_model);
-        return 0;
-    }
-    else if (rs2 != rs2_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs2);
-        printf ("Expecting  X%d Register\n", rs2_model);
-        return 0;
-    }
-    else if (rs2_val != rs2_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs2, rs2_val, rs2_model, rs2_val_model);
-        printf ("RS2 Value Mismatch\n");
-        return 0;
-    }
-    else if (rs1_val != rs1_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
-        printf ("RS1 Value Mismatch\n");
-        return 0;
-    }
-    prev_pc = CURRENT_STATE.PC;
-    return 1;
-}
-
-extern int compare_b (int pc, int instr, int rs1, int rs2, int rs1_val, int rs2_val) {
-    int instr_model   = (int) instr_opcode;
-    int rs1_model     = (instr_model >> 15)   & 0x1F;
-    int rs2_model     = (instr_model >> 20)   & 0x1F;
-    int rs1_val_model = CURRENT_STATE.REGS[rs1_model];
-    int rs2_val_model = CURRENT_STATE.REGS[rs2_model];
-    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n", pc, instr, rs1, rs1_val, rs2, rs2_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rs1_model, rs1_val_model, rs2_model, rs2_val_model);
-    if (prev_pc != pc) {
-        RUN_BIT = 0;
-        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
-        printf ("PC Mismatch\n");
-        return 0;
-    }
-    else if (instr != instr_model) {
-        RUN_BIT = 0;
-        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
-        printf ("INSTR Mismatch\n");
-        return 0;
-    }
-    else if (rs1 != rs1_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs1);
-        printf ("Expecting  X%d Register\n", rs1_model);
-        return 0;
-    }
-    else if (rs2 != rs2_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rs2);
-        printf ("Expecting  X%d Register\n", rs2_model);
-        return 0;
-    }
-    else if (rs2_val != rs2_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs2, rs2_val, rs2_model, rs2_val_model);
-        printf ("RS2 Value Mismatch\n");
-        return 0;
-    }
-    else if (rs1_val != rs1_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rs1, rs1_val, rs1_model, rs1_val_model);
-        printf ("RS1 Value Mismatch\n");
-        return 0;
-    }
-    prev_pc = CURRENT_STATE.PC;
-    return 1;
-}
-
-extern int compare_u (int pc, int instr, int rd, int rd_val) {
-    int instr_model   = (int) instr_opcode;
-    int rd_model      = (instr_model >>  7)   & 0x1F;
-    int rd_val_model  = CURRENT_STATE.REGS[rd_model];
-    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n", pc, instr, rd, rd_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model);
-    if (prev_pc != pc) {
-        RUN_BIT = 0;
-        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
-        printf ("PC Mismatch\n");
-        return 0;
-    }
-    else if (instr != instr_model) {
-        RUN_BIT = 0;
-        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
-        printf ("INSTR Mismatch\n");
-        return 0;
-    }
-    else if (rd != rd_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rd);
-        printf ("Expecting  X%d Register\n", rd_model);
-        return 0;
-    }
-    else if (rd_val != rd_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
-        printf ("RD Value Mismatch\n");
-        return 0;
-    }
-    prev_pc = CURRENT_STATE.PC;
-    return 1;
-}
-
-extern int compare_j (int pc, int instr, int rd, int rd_val) {
-    int instr_model  = (int) instr_opcode;
-    int rd_model     = (instr_model >> 7) & 0x1F;
-    int rd_val_model = CURRENT_STATE.REGS[rd_model];
-    printf ("[RTL]  \tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n", pc, instr,rd, rd_val);
-    printf ("[MODEL]\tPC:%.8x\tInstr:%.8x\tX%d:%.8x\n\n", prev_pc, instr_model, rd_model, rd_val_model);
-    if (prev_pc != pc) {
-        RUN_BIT = 0;
-        printf ("RTL PC: %x\t Model PC: %x\n", pc, prev_pc);
-        printf ("PC Mismatch\n");
-        return 0;
-    }
-    else if (instr != instr_model) {
-        RUN_BIT = 0;
-        printf ("RTL INSTR: %x\t Model INSTR: %x\n", instr, instr_model);
-        printf ("INSTR Mismatch\n");
-        return 0;
-    }
-    else if (rd != rd_model) {
-        RUN_BIT = 0;
-        printf ("Unexpected X%d Register\n", rd);
-        printf ("Expecting  X%d Register\n", rd_model);
-        return 0;
-    }
-    else if (rd_val != rd_val_model) {
-        RUN_BIT = 0;
-        printf ("RTL X%d VAL: %x\t Model X%d VAL: %x\n", rd, rd_val, rd_model, rd_val_model);
-        printf ("RD Value Mismatch\n");
-        return 0;
-    }
-    prev_pc = CURRENT_STATE.PC;
     return 1;
 }
